@@ -204,12 +204,11 @@
     %3$s    Modification date
     %4$s    Authors
     -->
-    <string name="pelican_header"><![CDATA[
-Title: %1$s\n
-Date: %2$s\n
-Modified: %3$s\n
-Author: %4$s\n
-\n]]>
+    <string name="pelican_header"><![CDATA["Title: %1$s
+Date: %2$s
+Modified: %3$s
+Author: %4$s
+]]>
     </string>
 
     <string name="ema_md_start">-----Start of Markdown-----</string>

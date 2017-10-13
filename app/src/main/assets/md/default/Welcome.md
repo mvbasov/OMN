@@ -38,3 +38,4 @@ Read page about common [Markdown syntax](/default/Markdown.html) and then about
 Any new pages can be created by editing current page and placing link to new page.
 
 Create [Own start page](/Start.html)
+

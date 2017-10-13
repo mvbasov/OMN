@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <CheckBoxPreference
+        android:title="Use VIEW_DIRECTORY"
+        android:summary="Yes for X-plore or ES, no for OI File Managers"
+        android:defaultValue="false"
+        android:key="@string/pk_use_view_directory" />
+    <EditTextPreference
+        android:key="@string/pk_notes_author"
+        android:singleLine="true"
+        android:title="Notes author" />
+</PreferenceScreen>

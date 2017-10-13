@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <title>Empty WebView application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+      
+    <link rel="stylesheet" href="../css/highlight.css">
+    <link rel="stylesheet" href="../fonts/google-material/material-icons.css"  />
+      
+    <script type="text/javascript" src="../js/highlight.pack.js"></script>
+    <script type="text/javascript" src="../js/marked.min.js"></script>
+    <script type="text/javascript" src="../js/marked_wrapper.js"></script>
+
+    <style>
+      .hBtn {
+        padding-left: 3px;
+        padding-right: 3px;
+      }
+    </style>
+
+</head>
+
+<body>
+
+  <div id="actions_header" style="display:none">
+    <button
+      id="btnEdit"
+      class="hBtn"
+      onclick="Android.editButtonCallback(PFN)">
+      <i class="material-icons">edit</i>
+    </button>
+    <button
+      id="btnHome"
+      class="hBtn"
+      onclick="Android.editButtonCallback(PFN)">
+      <i class="material-icons">home</i>
+    </button>
+    <button
+      id="btnLink"
+      class="hBtn"
+      onclick="Android.linkButtonCallback(PFN, Title)">
+      <i class="material-icons">insert_link</i>
+    </button>
+    <button
+      disabled
+      id="btnShare"
+      class="hBtn"
+      onclick="Android.editButtonCallback(PFN)">
+      <i class="material-icons">share</i>
+    </button>
+    <button
+      id="btnEMail"
+      class="hBtn"
+      onclick="Android.emailButtonCallback(PFN)">
+      <i class="material-icons">email</i>
+    </button>
+    <button
+      disabled
+      id="btnTOC"
+      class="hBtn"
+      onclick="Android.editButtonCallback(PFN)">
+      <i class="material-icons">list</i>
+    </button>
+    <button
+      id="btnFolder"
+      class="hBtn"
+      onclick="Android.folderButtonCallback(PFN)">
+      <i class="material-icons">folder_open</i>
+    </button>
+    <button
+      disabled
+      id="btnHOLDER"
+      class="hBtn"
+      onclick="Android.editButtonCallback(PFN)">
+      <i class="material-icons">settings</i>
+    </button>
+    <button
+      id="btnSettings"
+      class="hBtn"
+      onclick="Android.prefButonCallback()">
+      <i class="material-icons">settings</i>
+    </button>
+    <br />
+    Page name:<span id="pname"></span>
+    <hr />
+  </div>
+
+  <h4 id="title" align ="center"></h4>
+
+  <xmp>
+
+#### This page doesn't exist
+
+<button id="btnCreate" onclick="Android.createButtonCallback(PFN)">Create</button>
+
+</xmp>
+
+</body>
+
+</html>

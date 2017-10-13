@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Application name -->
+    <string name="app_name">Open Markdown Note</string>
+
+    <!-- Page used to convert Markdown to HTML -->
+    <string name="anvil_file">anvil.html</string>
+
+    <!--
+    Top part of any html page
+        %1$s    Page title
+        %2$s    Reference level to top ("../" for 1-st level subdirectory)
+        %3$s    Tags
+        %4$s    Date
+        %5$s    Modified
+        %6$s    Category
+        %7$s    Authors
+        %8$s    Summary
+		℅9$s    Page name
+        %10$s    1-st page header (function as page title)
+    -->
+    <string name="html_top"><![CDATA["<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">
+<html xmlns=\"http://www.w3.org/1999/xhtml\">
+
+<head>
+
+  <title>%1$s</title>
+
+  <link rel=\"stylesheet\" type=\"text/css\" href=\"../%2$scss/common.css\" />
+  <link rel=\"stylesheet\" type=\"text/css\" href=\"../%2$scss/highlight.css\" />
+  <link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/icon?family=Material+Icons\" />
+  <link rel=\"stylesheet\" href=\"../%2$sfonts/google-material/material-icons.css\"  />
+      
+
+  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />
+  <meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\" />
+
+  <meta name=\"tags\" content=\"%3$s\" />
+  <meta name=\"date\" content=\"%4$s\" />
+  <meta name=\"modified\" content=\"%5$s\" />
+  <meta name=\"category\" content=\"%6$s\" />
+  <meta name=\"authors\" content=\"%7$s\" />
+  <meta name=\"summary\" content=\"%8$s\" />
+
+  <style>
+    .hBtn {
+      padding-left: 3px;
+      padding-right: 3px;
+    }
+    #pageTitle {
+      margin-top: 1px;
+      margin-bottom: 1em;
+    }
+  </style>
+  <script>
+    function toggleHdrBtnVis() {
+      element=document.getElementById(\'actions_header\'),
+      btn=document.getElementById(\'title_arrow\')
+
+      if (element.style.display !== \'none\' && btn.style.display === \'inline\') {
+        element.style.display = \'none\';
+        btn.innerHTML = \'<i class=\"material-icons\">arrow_drop_down</i>\';
+      } else {
+        element.style.display = \'block\'
+        btn.innerHTML = \'<i class=\"material-icons\">arrow_drop_up</i>\';
+      }
+    }
+  </script>
+  <script>
+    var Title = \'%10$s\';
+  </script>
+
+</head>
+
+<body>
+  <div id=\"actions_header\" style=\"display:none\">
+    <button
+      id=\"btnEdit\"
+      class=\"hBtn\"
+      onclick=\"Android.editButtonCallback(PFN)\">
+      <i class=\"material-icons\">edit</i>
+    </button>
+    <button
+      id=\"btnHome\"
+      class=\"hBtn\"
+      onclick=\"Android.homeButtonCallback()\">
+      <i class=\"material-icons\">home</i>
+    </button>
+    <button
+      id=\"btnLink\"
+      class=\"hBtn\"
+      onclick=\"Android.linkButtonCallback(PFN, Title)\">
+      <i class=\"material-icons\">insert_link</i>
+    </button>
+    <button
+      disabled
+      id=\"btnShare\"
+      class=\"hBtn\"
+      onclick=\"Android.editButtonCallback(PFN)\">
+      <i class=\"material-icons\">share</i>
+    </button>
+    <button
+      id=\"btnEMail\"
+      class=\"hBtn\"
+      onclick=\"Android.emailButtonCallback(PFN, Title)\">
+      <i class=\"material-icons\">email</i>
+    </button>
+    <button
+      disabled
+      id=\"btnTOC\"
+      class=\"hBtn\"
+      onclick=\"Android.editButtonCallback(PFN)\">
+      <i class=\"material-icons\">list</i>
+    </button>
+    <button
+      id=\"btnFolder\"
+      class=\"hBtn\"
+      onclick=\"Android.folderButtonCallback(PFN)\">
+      <i class=\"material-icons\">folder_open</i>
+    </button>
+    <button
+      disabled
+      id=\"btnHOLDER\"
+      class=\"hBtn\"
+      onclick=\"Android.editButtonCallback(PFN)\">
+      <i class=\"material-icons\">settings</i>
+    </button>
+    <button
+      id=\"btnSettings\"
+      class=\"hBtn\"
+      onclick=\"Android.prefButonCallback()\">
+      <i class=\"material-icons\">settings</i>
+    </button>
+    <br />
+    Page name:<span>%9$s</span>
+    <hr />
+  </div>
+
+  <a
+    onclick=\"toggleHdrBtnVis();\">
+    <h4 id=\"pageTitle\" align=\"center\">
+      %10$s
+      <span id=\"title_arrow\" style=\"display:none\">
+        <i class=\"material-icons\">arrow_drop_down</i>
+      </span>
+    </h4>
+  </a>
+
+  
+    "]]></string>
+
+    <!-- Bottom part of any html page -->
+    <string name="html_buttom"><![CDATA["
+</body>
+
+</html>
+    "]]></string>
+
+    <!--
+     Javascript called after load any html page
+        %1$s   Page name
+     -->
+    <string name="set_html_page_js">
+        javascript:
+        var PFN=\'%1$s\';
+        document.getElementById(\'title_arrow\').style.display=\'inline\';
+    </string>
+
+    <!--
+    JavaScript called at Markdown to HTML convertion time
+        %1$s    Page name
+        %2$s    Markdown content
+        %3$s    Enable code highlight (1|0)
+    -->
+    <string name="set_md_page_js_create">
+        javascript:
+        var PFN=\'%1$s\';
+        document.getElementById(\'pname\').innerHTML=\'%1$s\';
+        run_marked(\'%2$s\', \'%3$d\');
+    </string>
+
+    <!--
+    JavaScript called at Markdown to HTML convertion time
+        %1$s    Page name
+        %2$s    Page title
+        %3$s    Markdown content
+        %4$s    Enable code highlight (1|0)
+    -->
+    <string name="set_md_page_js">
+        javascript:
+        var PFN=\'%1$s\';
+        document.getElementById(\'pname\').innerHTML=\'%1$s\';
+        var Title = \'%2$s\';
+        document.getElementById(\'title\').innerHTML=\'%2$s\';
+        document.getElementById(\'actions_header\').style.display=\'block\';
+        run_marked(\'%3$s\', \'%4$d\');
+    </string>
+
+    <!--
+    New page pelican header
+    %1$s    Title
+    %2$s    Creation date
+    %3$s    Modification date
+    %4$s    Authors
+    -->
+    <string name="pelican_header"><![CDATA[
+Title: %1$s\n
+Date: %2$s\n
+Modified: %3$s\n
+Author: %4$s\n
+\n]]>
+    </string>
+
+    <string name="ema_md_start">-----Start of Markdown-----</string>
+    <string name="ema_md_end">-----End of Markdown-----</string>
+
+    <string name="pk_pref_version">prefVersion</string>
+    <string name="pk_use_view_directory">prefViewDirectory</string>
+    <string name="pk_notes_author">notesAuthor</string>
+
+</resources>

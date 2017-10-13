@@ -1,0 +1,75 @@
+apply plugin: 'com.android.application'
+
+android {
+    applicationVariants.all { variant ->
+        if (variant.buildType.name == 'debug') {
+            def rev = getGitRevParseInfo("describe --tags --abbrev=1")
+            variant.mergedFlavor.versionName = rev.reverse().take(rev.length()-1).reverse();
+        } else if (variant.buildType.name == 'betta') {
+           //   def rev = getGitRevParseInfo("describe --tags --abbrev=1")
+           //variant.mergedFlavor.versionName = versionName + getGitRevParseInfo("rev-parse --short");
+        }
+            variant.outputs.each { output ->
+                def outputFile = output.outputFile
+                if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                    def fileName = "OpenMarkdownNote." + versionName + ".apk"
+                    output.outputFile = new File(outputFile.parent, fileName)
+                }
+            }
+
+    }
+    compileSdkVersion 25
+    buildToolsVersion '25.0.0'
+    defaultConfig {
+        applicationId "net.basov.omn"
+        minSdkVersion 19
+        targetSdkVersion 21
+        versionCode 00100
+        versionName "00.01.00"
+    }
+    signingConfigs {
+        release {
+            keyAlias 'mvb_key'
+            storeFile file('../../.keys/mvb-release.keystore')
+        }
+        debug {
+            storeFile file('../../.keys/mvb-debug.keystore')
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+            storePassword 'android'
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            zipAlignEnabled true
+            applicationIdSuffix '.r'
+            versionNameSuffix 'r'
+            resValue "string", "git_describe", getGitRevParseInfo("describe --tags --abbrev=1")
+            signingConfig signingConfigs.release
+        }
+        betta {
+            applicationIdSuffix '.b'
+            versionNameSuffix '-b-' + getGitRevParseInfo("rev-parse --short")
+            debuggable true
+            resValue "string", "git_describe", getGitRevParseInfo("describe --tags --abbrev=1")
+            signingConfig signingConfigs.debug
+        }
+        debug {
+            debuggable true
+            resValue "string", "git_describe", getGitRevParseInfo("describe --tags --abbrev=1")
+            signingConfig signingConfigs.debug
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+}
+
+def getGitRevParseInfo (what) {
+    def cmd = "git " + what + " HEAD"
+    def proc = cmd.execute ()
+    proc.text.trim ()
+}

@@ -245,6 +245,7 @@ Author: %4$s
     <string name="ema_md_start">\n-----Start of Markdown-----\n</string>
     <string name="ema_md_end">\n-----End of Markdown-----\n</string>
 
+    <string name="pk_version_code">appVersionCode</string>
     <string name="pk_pref_version">prefVersion</string>
     <string name="pk_use_view_directory">prefViewDirectory</string>
     <string name="pk_notes_author">notesAuthor</string>

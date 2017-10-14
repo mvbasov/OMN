@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,9 +29,13 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        int versionCode = 0;
+        int oldVersion = 0;
+        
         /* Set default preferences at first run and after preferences version upgrade */
         SharedPreferences defSharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = defSharedPref.edit();
+        final int currePrefVersion = 2;
         switch (defSharedPref.getInt(getString(R.string.pk_pref_version), 0)) {
             case 0: // initial
                 editor.putBoolean(getString(R.string.pk_use_view_directory), false);
@@ -37,22 +43,38 @@ public class MainActivity extends Activity {
                 editor.putBoolean(getString(R.string.pk_btn_enable_link), true);
                 editor.putBoolean(getString(R.string.pk_btn_enable_email), true);
                 editor.putBoolean(getString(R.string.pk_btn_enable_filemanager), true);
-                editor.putInt(getString(R.string.pk_pref_version), 2);
+                editor.putInt(getString(R.string.pk_pref_version), currePrefVersion);
                 editor.commit();
                 break;
-            case 1:
+            case 1: //Upgrade to properties version 2
                 editor.putBoolean(getString(R.string.pk_btn_enable_home), true);
                 editor.putBoolean(getString(R.string.pk_btn_enable_link), true);
                 editor.putBoolean(getString(R.string.pk_btn_enable_email), true);
                 editor.putBoolean(getString(R.string.pk_btn_enable_filemanager), true);
-                editor.putInt(getString(R.string.pk_pref_version), 2);
+                editor.putInt(getString(R.string.pk_pref_version), currePrefVersion);
                 editor.commit();
                 break;                
-                    
+                
             default:
                 break;
         }
 
+        // Check version upgrade
+        try {
+            PackageInfo packageInfo = getPackageManager()
+                .getPackageInfo(getPackageName(), 0);
+            versionCode = packageInfo.versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            MyLog.LogE(e, "getPackageManager run problem");
+        }
+        oldVersion = defSharedPref.getInt(getString(R.string.pk_version_code), 0);
+        if (versionCode != 0 && versionCode > oldVersion) {
+            runAfterUpdate(oldVersion, versionCode);
+            editor.putInt(getString(R.string.pk_version_code), versionCode);
+            editor.commit();
+        }
+
+        
 
         setContentView(R.layout.webview_ui);
         mainUI_WV = (WebView) findViewById(R.id.webview);
@@ -82,6 +104,11 @@ public class MainActivity extends Activity {
         ui = UI.getInstance();
         UI.displayStartPage(ui, mainUI_WV);
 
+    }
+
+    private void runAfterUpdate(int oldVersion, int newVersion) {
+        // TODO: Implement this method
+        Toast.makeText(this, "version upgrade from " + oldVersion + " to " + newVersion, Toast.LENGTH_LONG).show();
     }
 
     @Override

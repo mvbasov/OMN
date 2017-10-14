@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.webkit.ConsoleMessage;
 import android.webkit.WebChromeClient;
@@ -17,6 +16,7 @@ import android.webkit.WebView;
 import android.widget.Toast;
 
 import net.basov.util.FileIO;
+import net.basov.util.MyLog;
 
 public class MainActivity extends Activity {
 
@@ -32,10 +32,23 @@ public class MainActivity extends Activity {
         SharedPreferences.Editor editor = defSharedPref.edit();
         switch (defSharedPref.getInt(getString(R.string.pk_pref_version), 0)) {
             case 0: // initial
-                editor.putInt(getString(R.string.pk_pref_version), 1);
                 editor.putBoolean(getString(R.string.pk_use_view_directory), false);
+                editor.putBoolean(getString(R.string.pk_btn_enable_home), true);
+                editor.putBoolean(getString(R.string.pk_btn_enable_link), true);
+                editor.putBoolean(getString(R.string.pk_btn_enable_email), true);
+                editor.putBoolean(getString(R.string.pk_btn_enable_filemanager), true);
+                editor.putInt(getString(R.string.pk_pref_version), 2);
                 editor.commit();
                 break;
+            case 1:
+                editor.putBoolean(getString(R.string.pk_btn_enable_home), true);
+                editor.putBoolean(getString(R.string.pk_btn_enable_link), true);
+                editor.putBoolean(getString(R.string.pk_btn_enable_email), true);
+                editor.putBoolean(getString(R.string.pk_btn_enable_filemanager), true);
+                editor.putInt(getString(R.string.pk_pref_version), 2);
+                editor.commit();
+                break;                
+                    
             default:
                 break;
         }
@@ -126,7 +139,7 @@ public class MainActivity extends Activity {
                 //Toast.makeText(this,"Result canceled", Toast.LENGTH_SHORT).show();
                 //TODO: Why this result code actual?
                 UI ui = UI.getInstance();
-                Log.d(Constants.TAG, "* Call DP from ma onActivityResult(CANCELED), PN: " + ui.getPageName());
+                MyLog.LogD("* Call DP from ma onActivityResult(CANCELED), PN: " + ui.getPageName());
                 ui.displayPage(mainUI_WV);
             }
         }
@@ -146,22 +159,22 @@ public class MainActivity extends Activity {
                     + cm.sourceId();
             switch (cm.messageLevel()) {
                 case DEBUG:
-                    Log.d(Constants.TAG, formattedMessage);
+                    MyLog.LogD(formattedMessage);
                     break;
                 case ERROR:
-                    Log.e(Constants.TAG, formattedMessage);
+                    MyLog.LogE(formattedMessage);
                     break;
                 case LOG:
-                    Log.i(Constants.TAG, formattedMessage);
+                    MyLog.LogI(formattedMessage);
                     break;
                 case TIP:
-                    Log.i(Constants.TAG, formattedMessage);
+                    MyLog.LogI(formattedMessage);
                     break;
                 case WARNING:
-                    Log.w(Constants.TAG, formattedMessage);
+                    MyLog.LogW(formattedMessage);
                     break;
                 default:
-                    Log.d(Constants.TAG, formattedMessage);
+                    MyLog.LogW(formattedMessage);
                     break;
             }
             return true;

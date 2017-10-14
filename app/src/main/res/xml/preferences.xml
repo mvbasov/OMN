@@ -1,13 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <CheckBoxPreference
-        android:title="Use VIEW_DIRECTORY"
-        android:summary="Yes for X-plore or ES, no for OI File Managers"
-        android:defaultValue="false"
-        android:key="@string/pk_use_view_directory" />
-    <EditTextPreference
-        android:key="@string/pk_notes_author"
-        android:singleLine="true"
-        android:title="Notes author" />
+    
+    <PreferenceCategory
+        android:title="General"
+        android:key="pref_general">
+        <EditTextPreference
+            android:key="@string/pk_notes_author"
+            android:singleLine="true"
+            android:title="Notes author" />
+        <CheckBoxPreference
+            android:title="Use VIEW_DIRECTORY"
+            android:summary="Yes for X-plore or ES, no for OI File Managers"
+            android:defaultValue="false"
+            android:key="@string/pk_use_view_directory" />
+    </PreferenceCategory>
+    
+    <PreferenceCategory
+        android:title="Actions buttons show/hide"
+        android:key="pref_key_storage_settings">
+        <CheckBoxPreference
+            android:title="Home"
+            android:defaultValue="true"
+            android:key="@string/pk_btn_enable_home" />
+        <CheckBoxPreference
+            android:title="Link to clipboard"
+            android:defaultValue="true"
+            android:key="@string/pk_btn_enable_link" />
+        <CheckBoxPreference
+            android:title="Send by E-Mail"
+            android:defaultValue="true"
+            android:key="@string/pk_btn_enable_email" />
+        <CheckBoxPreference
+            android:title="Open file manager"
+            android:defaultValue="true"
+            android:key="@string/pk_btn_enable_filemanager" />
+    </PreferenceCategory>
+    
 </PreferenceScreen>

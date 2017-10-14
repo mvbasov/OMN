@@ -1,7 +1,9 @@
 package net.basov.omn;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.webkit.WebView;
 
 import java.util.Stack;
@@ -72,27 +74,10 @@ public class UI {
 
     public String getPageName() {
         return pages.peek().getPageName();
-//        String str = pages.peek().getPageName();
-//        if (null != str && str.length() > 0 ) {
-//            int endIndex = str.lastIndexOf("#");
-//            if (endIndex != -1){
-//                return str.substring(0, endIndex);
-//            }
-//            return str;
-//        }
-//        return str;
     }
 
     public String getInPageReference(){
         return pages.peek().getmInPageReference();
-//        String str = pages.peek().getPageName();
-//        if (null != str && str.length() > 0 ) {
-//            int endIndex = str.lastIndexOf("#");
-//            if (endIndex != -1){
-//                return str.substring(endIndex);
-//            }
-//        }
-//        return "";
     }
 
     public String getPageTitle() {
@@ -115,10 +100,33 @@ public class UI {
         wv.setWebViewClient(new MyWebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(wv, url);
+                Context c = wv.getContext();
+                SharedPreferences defSharedPref = PreferenceManager.getDefaultSharedPreferences(c);
                 String setPageJS = view.getContext()
                         .getString(
                                 R.string.set_html_page_js,
-                                getPageName()
+                                getPageName(),
+                                //Enable Home button
+                                defSharedPref.getBoolean(
+                                    c.getString(R.string.pk_btn_enable_home),
+                                    true
+                                ),
+                                //Enable Link button
+                                defSharedPref.getBoolean(
+                                    c.getString(R.string.pk_btn_enable_link),
+                                    true
+                                ),
+                                //Enable E-Mail button
+                                defSharedPref.getBoolean(
+                                    c.getString(R.string.pk_btn_enable_email),
+                                    true
+                                ),
+                                //Enable File browser button
+                                defSharedPref.getBoolean(
+                                    c.getString(R.string.pk_btn_enable_filemanager),
+                                    true
+                                )
                         );
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                     view.evaluateJavascript(setPageJS, null);
@@ -159,6 +167,8 @@ public class UI {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(wv, url);
+                Context c = wv.getContext();
+                SharedPreferences defSharedPref = PreferenceManager.getDefaultSharedPreferences(c);
                 //Toast.makeText(wv.getContext(),mdContent,Toast.LENGTH_SHORT).show();
                 String setPageJS = "";
                 if (getMdContent().length() == 0) {
@@ -167,16 +177,40 @@ public class UI {
                                     R.string.set_md_page_js_create,
                                     getPageName(),
                                     TextTools.escapeCharsForJSON(getMdContent()),
-                                    1 //Enable highlight
+                                    //Enable highlight
+                                    1
                             );
                 } else {
                     setPageJS = view.getContext()
                             .getString(
-                                    R.string.set_md_page_js,
-                                    getPageName(),
-                                    getPageTitle(),
-                                    TextTools.escapeCharsForJSON(getMdContent()),
-                                    1 //Enable highlight
+                        
+                                R.string.set_md_page_js,
+                            
+                                getPageName(),
+                                getPageTitle(),
+                                TextTools.escapeCharsForJSON(getMdContent()),
+                                //Enable highlight
+                                1, 
+                                //Enable Home button
+                                defSharedPref.getBoolean(
+                                    c.getString(R.string.pk_btn_enable_home),
+                                    true
+                                ),
+                                //Enable Link button
+                                defSharedPref.getBoolean(
+                                    c.getString(R.string.pk_btn_enable_link),
+                                    true
+                                ),
+                                //Enable E-Mail button
+                                defSharedPref.getBoolean(
+                                    c.getString(R.string.pk_btn_enable_email),
+                                    true
+                                ),
+                                //Enable File browser button
+                                defSharedPref.getBoolean(
+                                    c.getString(R.string.pk_btn_enable_filemanager),
+                                    true
+                                )
                             );
 
                 }

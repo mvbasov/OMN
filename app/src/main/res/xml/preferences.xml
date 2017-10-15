@@ -35,6 +35,10 @@
             android:title="Open file manager"
             android:defaultValue="true"
             android:key="@string/pk_btn_enable_filemanager" />
+        <CheckBoxPreference
+            android:title="Create shortcut on home screen"
+            android:defaultValue="true"
+            android:key="@string/pk_btn_enable_shortcut" />
     </PreferenceCategory>
     
 </PreferenceScreen>

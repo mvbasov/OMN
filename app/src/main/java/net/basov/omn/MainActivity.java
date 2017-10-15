@@ -35,7 +35,7 @@ public class MainActivity extends Activity {
         /* Set default preferences at first run and after preferences version upgrade */
         SharedPreferences defSharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = defSharedPref.edit();
-        final int currePrefVersion = 2;
+        final int currePrefVersion = 3;
         switch (defSharedPref.getInt(getString(R.string.pk_pref_version), 0)) {
             case 0: // initial
                 editor.putBoolean(getString(R.string.pk_use_view_directory), false);
@@ -43,6 +43,7 @@ public class MainActivity extends Activity {
                 editor.putBoolean(getString(R.string.pk_btn_enable_link), true);
                 editor.putBoolean(getString(R.string.pk_btn_enable_email), true);
                 editor.putBoolean(getString(R.string.pk_btn_enable_filemanager), true);
+                editor.putBoolean(getString(R.string.pk_btn_enable_shortcut), true);
                 editor.putInt(getString(R.string.pk_pref_version), currePrefVersion);
                 editor.commit();
                 break;
@@ -51,9 +52,15 @@ public class MainActivity extends Activity {
                 editor.putBoolean(getString(R.string.pk_btn_enable_link), true);
                 editor.putBoolean(getString(R.string.pk_btn_enable_email), true);
                 editor.putBoolean(getString(R.string.pk_btn_enable_filemanager), true);
+                editor.putBoolean(getString(R.string.pk_btn_enable_shortcut), true);
                 editor.putInt(getString(R.string.pk_pref_version), currePrefVersion);
                 editor.commit();
-                break;                
+                break;
+            case 2:
+                editor.putBoolean(getString(R.string.pk_btn_enable_shortcut), true);
+                editor.putInt(getString(R.string.pk_pref_version), currePrefVersion);
+                editor.commit();
+                break;
                 
             default:
                 break;
@@ -73,8 +80,6 @@ public class MainActivity extends Activity {
             editor.putInt(getString(R.string.pk_version_code), versionCode);
             editor.commit();
         }
-
-        
 
         setContentView(R.layout.webview_ui);
         mainUI_WV = (WebView) findViewById(R.id.webview);
@@ -98,12 +103,12 @@ public class MainActivity extends Activity {
             { WebView.setWebContentsDebuggingEnabled(true); }
         } 
         
-        onNewIntent(getIntent());
-
         FileIO.creteHomePage(MainActivity.this);
         ui = UI.getInstance();
-        UI.displayStartPage(ui, mainUI_WV);
-
+        onNewIntent(getIntent());
+        
+        
+        
     }
 
     private void runAfterUpdate(int oldVersion, int newVersion) {
@@ -133,7 +138,19 @@ public class MainActivity extends Activity {
     @Override
     protected void onNewIntent(Intent intent) {
         //super.onNewIntent(intent);
-        if (intent != null && intent.getAction().equals(this.getPackageName()+".EDIT_PAGE")) {
+        if (intent != null && intent.getAction().equals(Intent.ACTION_MAIN)) {           
+            Bundle main_extras = intent.getExtras();
+            if(main_extras != null) {
+                String page_name = (String) main_extras.get("page_name");
+                //Toast.makeText(this, page_name,Toast.LENGTH_SHORT).show();
+                if(page_name != null && page_name.length() > 0) {
+                    ui.setPageName(page_name);
+                    ui.displayPage(mainUI_WV);
+                }
+            } else {
+                UI.displayStartPage(ui, mainUI_WV);
+            }          
+        } if (intent != null && intent.getAction().equals(this.getPackageName()+".EDIT_PAGE")) {
             Bundle extras = intent.getExtras();
             if(extras != null) {
                 String name = (String) extras.get("name");

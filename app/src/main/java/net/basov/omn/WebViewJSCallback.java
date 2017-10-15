@@ -170,4 +170,26 @@ public class WebViewJSCallback {
         ui.setHTML(htmlPage);
         ui.setmHTMLReady(true);
     }
+    
+    @JavascriptInterface
+    public void shortcutButtonCallback(String pn, String title) {
+        // Code from here: https://stackoverflow.com/a/16873257
+        Intent shortcutIntent = new Intent(mContext.getApplicationContext(),
+                                           MainActivity.class);
+        shortcutIntent.putExtra("page_name", pn);
+
+        shortcutIntent.setAction(Intent.ACTION_MAIN);
+
+        Intent addIntent = new Intent();
+        addIntent
+            .putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
+        addIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, title);
+        addIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE,
+                           Intent.ShortcutIconResource.fromContext(mContext.getApplicationContext(),
+                                                                   R.mipmap.omn_ic));
+        addIntent
+            .setAction("com.android.launcher.action.INSTALL_SHORTCUT");
+        addIntent.putExtra("duplicate", false);  //may it's already there so don't duplicate
+        mContext.getApplicationContext().sendBroadcast(addIntent);
+    }
 }

@@ -126,6 +126,11 @@ public class UI {
                                 defSharedPref.getBoolean(
                                     c.getString(R.string.pk_btn_enable_filemanager),
                                     true
+                                ),
+                                //Enable Create shortcut button
+                                defSharedPref.getBoolean(
+                                    c.getString(R.string.pk_btn_enable_shortcut),
+                                    true
                                 )
                         );
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -209,6 +214,11 @@ public class UI {
                                 //Enable File browser button
                                 defSharedPref.getBoolean(
                                     c.getString(R.string.pk_btn_enable_filemanager),
+                                    true
+                                ),
+                                //Enable Create shortcut button
+                                defSharedPref.getBoolean(
+                                    c.getString(R.string.pk_btn_enable_shortcut),
                                     true
                                 )
                             );

@@ -122,12 +122,10 @@
       <i class=\"material-icons\">folder_open</i>
     </button>
     <button
-      disabled
-      style=\"display:none\"
-      id=\"btnHOLDER\"
+      id=\"btnShortcut\"
       class=\"hBtn\"
-      onclick=\"Android.editButtonCallback(PFN)\">
-      <i class=\"material-icons\">settings</i>
+      onclick=\"Android.shortcutButtonCallback(PFN, Title)\">
+      <i class=\"material-icons\">screen_share</i>
     </button>
     <button
       id=\"btnSettings\"
@@ -167,6 +165,7 @@
         %3$s    Enable Link button
         %4$s    Enable E-Mail button
         %5$s    Enable File browser button
+        %6$s    Enable Create shortcut button
     -->
     <string name="set_html_page_js">
         javascript:
@@ -182,6 +181,7 @@
         enableButton(\'btnLink\', %3$s);
         enableButton(\'btnEMail\', %4$s);
         enableButton(\'btnFolder\', %5$s);
+        enableButton(\'btnShortcut\', %6$s);
     </string>
 
     <!--
@@ -207,6 +207,7 @@
         %6$s    Enable Link button
         %7$s    Enable E-Mail button
         %8$s    Enable File browser button
+        %9$s    Enable Create shortcut button
     -->
     <string name="set_md_page_js">
         javascript:
@@ -226,6 +227,7 @@
         enableButton(\'btnLink\', %6$s);
         enableButton(\'btnEMail\', %7$s);
         enableButton(\'btnFolder\', %8$s);
+        enableButton(\'btnShortcut\', %9$s);
     </string>
 
     <!--
@@ -253,5 +255,6 @@ Author: %4$s
     <string name="pk_btn_enable_link">btnEnableLink</string>
     <string name="pk_btn_enable_email">btnEnableEmail</string>
     <string name="pk_btn_enable_filemanager">btnEnableFilemanager</string>
+    <string name="pk_btn_enable_shortcut">btnEnableFilemanager</string>
     
     </resources>

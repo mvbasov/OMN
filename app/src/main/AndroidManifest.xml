@@ -33,8 +33,7 @@
 
         <activity
             android:name=".AppPreferencesActivity"
-            android:label="Preferences"
-            android:screenOrientation="nosensor">
+            android:label="Preferences">
             <intent-filter>
                 <action android:name=".Preferences" />
                 <category android:name="android.intent.category.PREFERENCE" />

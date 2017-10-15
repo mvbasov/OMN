@@ -7,7 +7,7 @@ package net.basov.omn;
 public class Constants {
 
     public final static int EDIT_PAGE_REQUEST = 333;
-    public static final String TAG = "OMN";
+    public static final String TAG = "#OMN#";
 
     public static final String WELCOME_PAGE = "default/Welcome";
     public static final String START_PAGE = "Start";

@@ -184,9 +184,13 @@ public class WebViewJSCallback {
         addIntent
             .putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
         addIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, title);
-        addIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE,
-                           Intent.ShortcutIconResource.fromContext(mContext.getApplicationContext(),
-                                                                   R.mipmap.omn_ic));
+        addIntent.putExtra(
+				Intent.EXTRA_SHORTCUT_ICON_RESOURCE,
+                Intent.ShortcutIconResource.fromContext(
+						mContext.getApplicationContext(),
+                        R.mipmap.omn_ic
+				)
+		);
         addIntent
             .setAction("com.android.launcher.action.INSTALL_SHORTCUT");
         addIntent.putExtra("duplicate", false);  //may it's already there so don't duplicate

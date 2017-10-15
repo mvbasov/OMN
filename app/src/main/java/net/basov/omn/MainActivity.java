@@ -141,12 +141,23 @@ public class MainActivity extends Activity {
         if (intent != null && intent.getAction().equals(Intent.ACTION_MAIN)) {           
             Bundle main_extras = intent.getExtras();
             if(main_extras != null) {
+				
+				// TODO: remove debug code
+				// Debug code from https://stackoverflow.com/a/15074150
+				//for (String key : main_extras.keySet()) {
+				//	Object value = main_extras.get(key);
+				//	MyLog.LogD(String.format("Extras(key::value (type): %s::%s (%s)", key,
+				//							 value.toString(), value.getClass().getName()));
+				//}
+				
                 String page_name = (String) main_extras.get("page_name");
                 //Toast.makeText(this, page_name,Toast.LENGTH_SHORT).show();
                 if(page_name != null && page_name.length() > 0) {
                     ui.setPageName(page_name);
                     ui.displayPage(mainUI_WV);
-                }
+                } else {
+					UI.displayStartPage(ui, mainUI_WV);
+				}
             } else {
                 UI.displayStartPage(ui, mainUI_WV);
             }          

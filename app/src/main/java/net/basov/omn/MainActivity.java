@@ -66,7 +66,7 @@ public class MainActivity extends Activity {
                 break;
         }
 
-        // Check version upgrade
+        // Check app version upgrade
         try {
             PackageInfo packageInfo = getPackageManager()
                 .getPackageInfo(getPackageName(), 0);
@@ -107,12 +107,11 @@ public class MainActivity extends Activity {
         ui = UI.getInstance();
         onNewIntent(getIntent());
         
-        
-        
     }
 
     private void runAfterUpdate(int oldVersion, int newVersion) {
         // TODO: Implement this method
+        FileIO.creteHomePage(MainActivity.this, true);
         Toast.makeText(this, "version upgrade from " + oldVersion + " to " + newVersion, Toast.LENGTH_LONG).show();
     }
 
@@ -128,7 +127,6 @@ public class MainActivity extends Activity {
         }
         return super.onKeyDown(keyCode, event);
     }
-    
     
     @Override
     public void onResume() {

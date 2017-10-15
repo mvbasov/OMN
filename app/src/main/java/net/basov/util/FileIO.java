@@ -84,24 +84,30 @@ public class FileIO {
         if(htmlFile.lastModified() < mdFile.lastModified()) return false;
         return true;
     }
-
+    
     public static boolean creteHomePage(Context c) {
+        return creteHomePage(c, false);
+    }
+
+    public static boolean creteHomePage(Context c, Boolean force) {
         String[] files = {
                 "md/" + Constants.WELCOME_PAGE + ".md",
                 "md/" + Constants.SYNTAX_PAGE + ".md",
                 "md/" + Constants.SYNTAX_EXT_PAGE + ".md",
+                "md/" + Constants.CHANGELOG + ".md",
+                //"md/" + Constants.BUILD + ".md",
                 Constants.COMON_CSS,
                 Constants.HIGHLIGHT_CSS,
-                "fonts/google-material/MaterialIcons-Regular.woff2",
-                "fonts/google-material/material-icons.css", "/"
+                Constants.ICONS_FONT,
+                Constants.ICONS_CSS
         };
 
-        copyFilesFromAssets(c, files);
+        copyFilesFromAssets(c, files, force);
         return true;
 
     }
 
-    private static void copyFilesFromAssets(Context c, String[] files) {
+    private static void copyFilesFromAssets(Context c, String[] files, Boolean force) {
         //for(Map.Entry<String,String> entry : files.entrySet()) {
         for(int i=0; i<files.length; i++) {
             URI uriPage = null;
@@ -114,7 +120,7 @@ public class FileIO {
             if (uriPage != null) {
                 filePage = new File(uriPage);
             }
-            if (null != filePage && !filePage.exists()) {
+            if (null != filePage && (!filePage.exists() || force)) {
                 creteParentDir(filePage);
                 copyFileFromAssets(c, files[i]);
             }

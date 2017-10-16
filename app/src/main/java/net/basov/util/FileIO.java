@@ -49,7 +49,7 @@ public class FileIO {
                 file.createNewFile();
 
                 String ts = DF.format(new Date());
-                MyLog.LogD("* Current time: "+ts);
+                //MyLog.LogD("* Current time: "+ts);
                 Writer writer = new BufferedWriter(new FileWriter(file));
                 writer.write(c.getString(
                         R.string.pelican_header,
@@ -193,7 +193,7 @@ public class FileIO {
         try {
             fin = new FileInputStream(fl);
         } catch (FileNotFoundException e) {
-            MyLog.LogD(e, "Page doesn't exists.");
+            MyLog.LogI(e, "Page doesn't exists.");
             return ret;
         }
         ret = convertStreamToString(fin);

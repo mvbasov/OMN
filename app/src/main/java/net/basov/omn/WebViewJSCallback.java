@@ -169,6 +169,10 @@ public class WebViewJSCallback {
             FileIO.saveHTML(mContext, ui.getPageName(), htmlPage);
         ui.setHTML(htmlPage);
         ui.setmHTMLReady(true);
+        Intent i = new Intent();
+        i.setAction(mContext.getPackageName()+".REDISPLAY_PAGE");
+
+        mContext.startActivity(i);
     }
     
     @JavascriptInterface

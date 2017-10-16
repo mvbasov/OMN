@@ -175,6 +175,8 @@ public class MainActivity extends Activity {
             }
         } if (intent != null && intent.getAction().equals(this.getPackageName()+".HOME_PAGE")) {
             UI.displayStartPage(ui, mainUI_WV);
+        }if (intent != null && intent.getAction().equals(this.getPackageName()+".REDISPLAY_PAGE")) {
+            ui.displayPage(mainUI_WV);
         }
     }
 
@@ -192,7 +194,7 @@ public class MainActivity extends Activity {
                 //Toast.makeText(this,"Result canceled", Toast.LENGTH_SHORT).show();
                 //TODO: Why this result code actual?
                 //UI ui = UI.getInstance();
-                MyLog.LogD("* Call DP from ma onActivityResult(CANCELED), PN: " + ui.getPageName());
+                //MyLog.LogD("* Call DP from ma onActivityResult(CANCELED), PN: " + ui.getPageName());
                 ui.displayPage(mainUI_WV);
             }
         }

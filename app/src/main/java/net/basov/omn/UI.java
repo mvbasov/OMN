@@ -89,7 +89,7 @@ public class UI {
         if (FileIO.isFileExists(wv.getContext(), "/md/" + Constants.START_PAGE + ".md"))
             goPage = "/" + Constants.START_PAGE;
         ui.setPageName(goPage);
-        MyLog.LogD("Call DSP from displayStartPage "+ ui.getPageName());
+        //MyLog.LogD("Call DSP from displayStartPage "+ ui.getPageName());
         ui.displayPage(wv);
     }
 

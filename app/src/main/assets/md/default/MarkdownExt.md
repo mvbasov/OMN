@@ -8,7 +8,7 @@ Lang: en
 Authors: Mikhail Basov
 Summary: Extended Markdown syntax of Open Markdown Note
 
-#### Google Material Design icons
+### Google Material Design icons
 
 You can use [Material design icons](https://material.io/icons/) anywhere as text.  
 (if name contain spece replace it to _)
@@ -17,19 +17,6 @@ You can use [Material design icons](https://material.io/icons/) anywhere as text
     
 Renders to: <i class="material-icons">check_circle</i>
 
+### Links
 
-### Application icon
-
-Insert this application icon anywhere as image
-
-    ![app icon](file:///android_res/mipmap/mvb_logo.png)
-
-Renders to: ![app icon](file:///android_res/mipmap/mvb_logo.png)
-    
-or another way with changing size:
-
-    <img width="24" height="24" src="file:///android_res/mipmap/mvb_logo.png" />
-
-
-Renders to: <img width="24" height="24" src="file:///android_res/mipmap/mvb_logo.png" />
-    
+To be described later ...

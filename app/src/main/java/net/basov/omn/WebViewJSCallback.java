@@ -173,6 +173,9 @@ public class WebViewJSCallback {
     
     @JavascriptInterface
     public void shortcutButtonCallback(String pn, String title) {
+
+        Toast.makeText(mContext, "Create shortcut to \"" + title + "\"", Toast.LENGTH_SHORT).show();
+
         // Code from here: https://stackoverflow.com/a/16873257
         Intent shortcutIntent = new Intent(mContext.getApplicationContext(),
                                            MainActivity.class);

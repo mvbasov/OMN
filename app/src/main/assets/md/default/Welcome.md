@@ -30,7 +30,7 @@ I would recommend install the following editor and file manager to use with this
 * [OI Notepad](https://f-droid.org/app/org.openintents.notepad)
 * [OI File Manager](https://f-droid.org/app/org.openintents.filemanager)
 
-**Hint**: Before creating own start page press on <button onclick="Android.linkButtonCallback(PFN, Title)"><i class="material-icons">insert_link</i></button> button to save link to this page in clipboard and then paste it on your new page.
+**Hint**: Before create own start page press <button onclick="Android.linkButtonCallback(PFN, Title)"><i class="material-icons">insert_link</i></button> button to save link to this page in clipboard and then paste it on your new page.
 
 Read page about common [Markdown syntax](/default/Markdown.html) and then about
 [Extended Markdown syntax](/default/MarkdownExt.html) specific for this application.

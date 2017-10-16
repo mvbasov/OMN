@@ -24,13 +24,14 @@ android {
         applicationId "net.basov.omn"
         minSdkVersion 19
         targetSdkVersion 21
-        versionCode 00300
+        versionCode 300
         versionName "00.03.00"
     }
     signingConfigs {
         release {
             keyAlias 'mvb_key'
             storeFile file('../../.keys/mvb-release.keystore')
+            v2SigningEnabled false
         }
         debug {
             storeFile file('../../.keys/mvb-debug.keystore')

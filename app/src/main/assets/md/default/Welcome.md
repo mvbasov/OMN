@@ -1,10 +1,10 @@
 Title: Welcome!
 Date: 2017-10-11 01:38:26
-Modified: 2017-10-16 14:17:19
+Modified: 2017-10-17 19:22:45
 Category: Index
 Tags: Markdown,
 Lang: en
-Authors: Mikhail Basov
+Author: Mikhail Basov
 Summary: Open Markdown Note start page
 
 ### General information.
@@ -80,6 +80,11 @@ Button code:
     </button>
 
 #### <button onclick="Android.folderButtonCallback(PFN)"> <i class="material-icons">folder_open</i> </button> "Open data folder in file manager"
+
+This application has no permission to write to storage.
+It store files in dedicated application private area.
+Press this button to show this area in file browser.
+**If you deinstall this application all data (pages) will be deleted automaticaly**
 
 Button code:
 

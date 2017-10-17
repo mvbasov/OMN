@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -136,7 +135,8 @@ public class MainActivity extends Activity {
     @Override
     protected void onNewIntent(Intent intent) {
         //super.onNewIntent(intent);
-        if (intent != null && intent.getAction().equals(Intent.ACTION_MAIN)) {           
+        if (intent != null && intent.getAction().equals(Intent.ACTION_MAIN)) {
+        /* Show page from shortcut */
             Bundle main_extras = intent.getExtras();
             if(main_extras != null) {
 				
@@ -158,24 +158,13 @@ public class MainActivity extends Activity {
 				}
             } else {
                 UI.displayStartPage(ui, mainUI_WV);
-            }          
-        } if (intent != null && intent.getAction().equals(this.getPackageName()+".EDIT_PAGE")) {
-            Bundle extras = intent.getExtras();
-            if(extras != null) {
-                String name = (String) extras.get("name");
-                //Toast.makeText(this,"Name from intent: "+name, Toast.LENGTH_SHORT).show();
-                Intent intentE = new Intent(Intent.ACTION_EDIT);
-                Uri uri = Uri.parse("file://" + FileIO.getFilesDir(this).getPath() + "/md/" + name + ".md");
-                intentE.setDataAndType(uri, "text/plain");
-                try {
-                    this.startActivityForResult(intentE, Constants.EDIT_PAGE_REQUEST);
-                } catch (android.content.ActivityNotFoundException e) {
-                    Toast.makeText(this, "No editor found. Please install one.", Toast.LENGTH_LONG).show();
-                }
             }
         } if (intent != null && intent.getAction().equals(this.getPackageName()+".HOME_PAGE")) {
+        /* Show home page */
             UI.displayStartPage(ui, mainUI_WV);
+
         }if (intent != null && intent.getAction().equals(this.getPackageName()+".REDISPLAY_PAGE")) {
+        /* Redisplay page after edit */
             ui.displayPage(mainUI_WV);
         }
     }
@@ -234,43 +223,5 @@ public class MainActivity extends Activity {
             }
             return true;
         }
-/*
-        @Override
-        public boolean onJsPrompt(
-            WebView view,
-            String url,
-            String message,
-            String defaultValue,
-            final JsPromptResult result) {
-
-            final EditText input = new EditText(MainActivity.this);
-
-            new AlertDialog.Builder(MainActivity.this)
-                .setView(input)
-                .setTitle(R.string.placeholder)
-                .setPositiveButton(android.R.string.ok,
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        String value = input.getText().toString();
-                        result.confirm(value);
-                    }
-                })
-                .setNegativeButton(android.R.string.cancel,
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        result.cancel();
-                    }
-                })
-                .setOnCancelListener(
-                new DialogInterface.OnCancelListener() {
-                    public void onCancel(DialogInterface dialog) {
-                        result.cancel();
-                    }
-                })
-                .show();
-
-            return true;
-        }  
-*/
     }
 }

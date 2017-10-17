@@ -62,13 +62,14 @@ public class WebViewJSCallback {
 
     @JavascriptInterface
     public void editButtonCallback(String pn) {
-        //Toast.makeText(mContext, "The BUTTON EDIT pressed!", Toast.LENGTH_SHORT).show();
-
-        Intent i = new Intent();
-        i.setAction(mContext.getPackageName()+".EDIT_PAGE");
-        i.putExtra("name", pn);
-
-        mContext.startActivity(i);
+        Intent i = new Intent(Intent.ACTION_EDIT);
+        Uri uri = Uri.parse("file://" + FileIO.getFilesDir(mContext).getPath() + "/md/" + pn + ".md");
+        i.setDataAndType(uri, "text/plain");
+        try {
+            mContext.startActivity(i);
+        } catch (android.content.ActivityNotFoundException e) {
+            Toast.makeText(mContext, "No editor found. Please install one.", Toast.LENGTH_LONG).show();
+        }
     }
 
     @JavascriptInterface

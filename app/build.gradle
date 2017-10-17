@@ -4,18 +4,18 @@ android {
     applicationVariants.all { variant ->
         if (variant.buildType.name == 'debug') {
             def rev = getGitRevParseInfo("describe --tags --abbrev=1")
-            variant.mergedFlavor.versionName = rev.reverse().take(rev.length()-1).reverse();
+            variant.mergedFlavor.versionName = rev.reverse().take(rev.length() - 1).reverse();
         } else if (variant.buildType.name == 'betta') {
-           //   def rev = getGitRevParseInfo("describe --tags --abbrev=1")
-           //variant.mergedFlavor.versionName = versionName + getGitRevParseInfo("rev-parse --short");
+            //   def rev = getGitRevParseInfo("describe --tags --abbrev=1")
+            //variant.mergedFlavor.versionName = versionName + getGitRevParseInfo("rev-parse --short");
         }
-            variant.outputs.each { output ->
-                def outputFile = output.outputFile
-                if (outputFile != null && outputFile.name.endsWith('.apk')) {
-                    def fileName = "OpenMarkdownNote." + versionName + ".apk"
-                    output.outputFile = new File(outputFile.parent, fileName)
-                }
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                def fileName = "OpenMarkdownNote." + versionName + ".apk"
+                output.outputFile = new File(outputFile.parent, fileName)
             }
+        }
 
     }
     compileSdkVersion 25
@@ -62,6 +62,8 @@ android {
             resValue "string", "git_describe", getGitRevParseInfo("describe --tags --abbrev=1")
             signingConfig signingConfigs.debug
         }
+    }
+    productFlavors {
     }
 }
 

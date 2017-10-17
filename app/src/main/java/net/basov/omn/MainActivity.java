@@ -169,26 +169,6 @@ public class MainActivity extends Activity {
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == Constants.EDIT_PAGE_REQUEST) {
-            //Toast.makeText(this,"Without result"+resultCode, Toast.LENGTH_SHORT).show();
-            if(resultCode == Activity.RESULT_OK){
-                //Toast.makeText(this,"Result OK: ", Toast.LENGTH_SHORT).show();
-                //UI ui = UI.getInstance();
-                //Log.d(TAG, "Call DP from ma onActivityResult(OK)");
-                ui.displayPage(mainUI_WV);
-            }
-            if (resultCode == Activity.RESULT_CANCELED) {
-                //Toast.makeText(this,"Result canceled", Toast.LENGTH_SHORT).show();
-                //TODO: Why this result code actual?
-                //UI ui = UI.getInstance();
-                //MyLog.LogD("* Call DP from ma onActivityResult(CANCELED), PN: " + ui.getPageName());
-                ui.displayPage(mainUI_WV);
-            }
-        }
-    }
-
     /**
      * Handle JavaScript prompt() dialogue
      */

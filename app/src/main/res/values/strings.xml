@@ -244,6 +244,11 @@ Author: %4$s
 
 "]]>
     </string>
+    <string name="build_info"><![CDATA["Build: %1$s
+
+**To get actual build information delete and recreate this file.**
+
+"]]></string>
 
     <string name="ema_md_start">\n-----Start of Markdown-----\n</string>
     <string name="ema_md_end">\n-----End of Markdown-----\n</string>

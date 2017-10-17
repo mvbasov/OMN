@@ -3,11 +3,14 @@ package net.basov.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import net.basov.omn.Constants;
+import net.basov.util.AppDetails;
 import net.basov.omn.R;
 
 import java.io.BufferedReader;
@@ -66,11 +69,23 @@ public class FileIO {
                                 c.getString(R.string.pk_notes_author),
                                 ""
                         )
-                    ));
+                ));
+                try {
+                    if(fileName.contains("default/Build")) {
+                        writer.write(c.getString(
+                                     R.string.build_info,                                   
+                                     AppDetails.getAppName(c)
+                        ));
+                    }
+                } catch (NameNotFoundException e) {
+                    MyLog.LogE(e, "Get application name problem.");
+                }
+                writer.flush();
                 writer.close();
 
             } catch (IOException e) {
                 MyLog.LogE(e, "Can't create new file " + fileName);
+                return false;
             }
         }
         return true;

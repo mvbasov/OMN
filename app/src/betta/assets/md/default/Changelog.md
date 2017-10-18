@@ -1,6 +1,7 @@
 Title: Betta version change log
 
 ##### V00.04.00b
+###### Date:   Wed Oct 18 21:01:31 2017 +0300, commit 26754608cd28b9a691a3b905bd2e37f3cc7315e7
 
 - Many fixes.
 

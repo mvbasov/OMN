@@ -1,7 +1,8 @@
 Title: Betta version change log
 
 ##### V00.03.00b
-###### Date:   Mon Oct 16 15:20:22 2017 +0300, commit 7957a05610552ce715a5ef6f40c8fc0cf017eb6d
+###### Date:   Mon Oct 16 15:20:22 2017 +0300, commit 832723cc5893e2327b196450d4671fe04e846bd3
+
 
 - Show/hide individual actions buttons according to preferences
 - Add "Create shortcut on home screen" button
@@ -9,12 +10,13 @@ Title: Betta version change log
 
 
 ##### V00.02.00b
-###### Date:   Sat Oct 14 02:06:08 2017 +0300, commit d7b07bc7c15b05ae0a5a97e25295dafffb8e804f
+###### Date:   Sat Oct 14 02:06:08 2017 +0300, commit 072ceb79e30dc07963531d6f595ef648a10e620c
+
 
 - Start betta testing
 
 ##### V00.01.00b
-###### Date:   Fri Oct 13 22:26:43 2017 +0300, commit dde3e859a0c0c1741535fbf818fb558163d27e1d
+###### Date:   Fri Oct 13 22:26:43 2017 +0300, commit 33ffc11bee4f193f4b60399a3bd98d0bcec9e0a2
 
 - Initial version
 

@@ -149,6 +149,7 @@ public class MainActivity extends Activity {
 				//}
 				
                 String page_name = (String) main_extras.get("page_name");
+                // TODO: remove debug
                 //Toast.makeText(this, page_name,Toast.LENGTH_SHORT).show();
                 if(page_name != null && page_name.length() > 0) {
                     ui.setPageName(page_name);

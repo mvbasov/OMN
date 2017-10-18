@@ -7,7 +7,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.Toast;
+//import android.widget.Toast;
 
 import net.basov.omn.Constants;
 import net.basov.util.AppDetails;
@@ -42,8 +42,9 @@ public class FileIO {
         return file.exists();
     }
 
-    public static boolean createIfNotExists(Context c, String fileName) {
+    public static boolean createPageIfNotExists(Context c, String pageName) {
         final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String fileName = "/md" + pageName + ".md";
         File file = new File(getFilesDir(c), fileName);
         SharedPreferences defSharedPref = PreferenceManager.getDefaultSharedPreferences(c);
         if(!file.exists()) {
@@ -57,9 +58,7 @@ public class FileIO {
                 writer.write(c.getString(
                         R.string.pelican_header,
                         //Title
-                        fileName
-                                .replace("md/","")
-                                .replace(".md",""),
+                        pageName,
                         //Creation date
                         ts,
                         //Modification date
@@ -71,7 +70,7 @@ public class FileIO {
                         )
                 ));
                 try {
-                    if(fileName.contains("default/Build")) {
+                    if(pageName.equals("/default/Build")) {
                         writer.write(c.getString(
                                      R.string.build_info,                                   
                                      AppDetails.getAppName(c)
@@ -84,7 +83,7 @@ public class FileIO {
                 writer.close();
 
             } catch (IOException e) {
-                MyLog.LogE(e, "Can't create new file " + fileName);
+                MyLog.LogE(e, "Can't create new file " + pageName);
                 return false;
             }
         }

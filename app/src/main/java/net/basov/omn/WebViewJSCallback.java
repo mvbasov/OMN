@@ -54,9 +54,10 @@ public class WebViewJSCallback {
 
     @JavascriptInterface
     public void createButtonCallback(String PFN) {
-        //Toast.makeText(mContext, "The BUTTON CREATE pressed!", Toast.LENGTH_SHORT).show();
+        // TODO: remove debug
+        Toast.makeText(mContext, "The BUTTON CREATE pressed! "+PFN, Toast.LENGTH_LONG).show();
        
-        FileIO.createIfNotExists(mContext, "md/"+PFN+".md");
+        FileIO.createPageIfNotExists(mContext, PFN);
         editButtonCallback(PFN);
     }
 
@@ -74,6 +75,7 @@ public class WebViewJSCallback {
 
     @JavascriptInterface
     public void homeButtonCallback() {
+        // TODO: remove debug
         //Toast.makeText(mContext, "The BUTTON EDIT pressed!", Toast.LENGTH_SHORT).show();
 
         Intent i = new Intent();

@@ -11,6 +11,7 @@ import java.util.Stack;
 import net.basov.util.FileIO;
 import net.basov.util.MyLog;
 import net.basov.util.TextTools;
+import android.widget.*;
 
 /**
  * Created by mvb on 8/1/17.
@@ -96,6 +97,7 @@ public class UI {
     public void displayPage(final WebView wv) {
 
         Context c = wv.getContext();
+        // TODO: remove debug
         //Toast.makeText(c, "Get page name: " + getPageName(), Toast.LENGTH_SHORT).show();
         wv.setWebViewClient(new MyWebViewClient() {
             @Override
@@ -144,14 +146,16 @@ public class UI {
         });
         setmHTMLReady(true);
         if(!FileIO.isPageActual(c, getPageName())) {
+            // TODO: remove debug
             //Toast.makeText(c, "Page not actual!", Toast.LENGTH_SHORT).show();
             setmHTMLReady(false);
             createHTML(wv);
         }
-        String delim = "";
-        if(getPageName().charAt(0) != '/') delim = "/";
+        //String delim = "";
+        //if(getPageName().charAt(0) != '/') delim = "/";
         if(ismHTMLReady() && FileIO.isFileExists(c, "md/" + getPageName() + ".md")) {
-            String htmlFileName = "file://" + FileIO.getFilesDir(c) + "/html" + delim +getPageName() + ".html" + getInPageReference();
+            String htmlFileName = "file://" + FileIO.getFilesDir(c) + "/html" + getPageName() + ".html" + getInPageReference();
+            // TODO: remove debug
             //Log.d(MainActivity.TAG,"DP file name: " + htmlFileName + ", PN: " + getPageName());
             //Toast.makeText(c, htmlFileName, Toast.LENGTH_SHORT).show();
             wv.clearCache(true);
@@ -163,17 +167,18 @@ public class UI {
     public boolean createHTML(final WebView wv) {
         Context c = wv.getContext();
         setMdContent("");
-        String delim = "";
-        if(getPageName().charAt(0) != '/') delim = "/";
         setMdContent( FileIO.getStringFromFile(
-                FileIO.getFilesDir(wv.getContext())+ "/md" + delim +getPageName() + ".md")
+                FileIO.getFilesDir(wv.getContext())+ "/md" +getPageName() + ".md")
         );
+        // TODO: remove debug
+        //Toast.makeText(wv.getContext(),"UI.createHTML getPageName:"+getPageName(), Toast.LENGTH_SHORT).show();
         wv.setWebViewClient(new MyWebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(wv, url);
                 Context c = wv.getContext();
                 SharedPreferences defSharedPref = PreferenceManager.getDefaultSharedPreferences(c);
+                // TODO: remove debug
                 //Toast.makeText(wv.getContext(),mdContent,Toast.LENGTH_SHORT).show();
                 String setPageJS = "";
                 if (getMdContent().length() == 0) {
@@ -232,7 +237,11 @@ public class UI {
                 }
                 wv.clearCache(true);
                 wv.clearHistory();
-                //Toast.makeText(wv.getContext(),"URL is: "+url,Toast.LENGTH_SHORT).show();
+                // TODO: remove debug
+                Toast.makeText(wv.getContext(),
+                        "UI.createHTML URL is: "+url + "\ngetPageName: " + getPageName(),
+                        Toast.LENGTH_SHORT
+                ).show();
             }
         });
         wv.clearCache(true);

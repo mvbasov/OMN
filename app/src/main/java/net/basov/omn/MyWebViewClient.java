@@ -10,6 +10,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import net.basov.util.FileIO;
+import android.widget.*;
 
 /**
  * Redirect external URLs to browser
@@ -34,9 +35,11 @@ public class MyWebViewClient extends WebViewClient {
 
     private boolean processUri(final Uri uri, WebView view) {
         Context c = view.getContext();
-        //Toast.makeText(c,uri.getScheme(),Toast.LENGTH_LONG).show();
+        // TODO: remove debug
+        //Toast.makeText(c,"URI sheme: "+uri.getScheme(),Toast.LENGTH_LONG).show();       
         switch(uri.getScheme()){
             case "file":
+                // TODO: remove debug
                 //Toast.makeText(c,"PROCESS URI: " + uri.toString(),Toast.LENGTH_SHORT).show();
                 String pageName = uri.toString()                       
                         .replace("file://","")
@@ -47,6 +50,9 @@ public class MyWebViewClient extends WebViewClient {
                         .replace("/android_asset","") //TODO: Why it is need?
                         .replace(".html","")
 						.replace(".md","");
+                        
+                /* For relative uri add / to begin because relative already translated to absolute */        
+                if(pageName.charAt(0) != '/') pageName = "/" + pageName;
                 
                 UI ui = UI.getInstance();
                 ui.setPageName(pageName);

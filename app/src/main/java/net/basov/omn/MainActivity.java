@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -109,7 +110,6 @@ public class MainActivity extends Activity {
     }
 
     private void runAfterUpdate(int oldVersion, int newVersion) {
-        // TODO: Implement this method
         FileIO.creteHomePage(MainActivity.this, true);
         Toast.makeText(this, "version upgrade from " + oldVersion + " to " + newVersion, Toast.LENGTH_LONG).show();
     }
@@ -160,13 +160,43 @@ public class MainActivity extends Activity {
             } else {
                 UI.displayStartPage(ui, mainUI_WV);
             }
+        } if (intent != null && intent.getAction().equals(this.getPackageName()+".EDIT_PAGE")) {
+            Bundle extras = intent.getExtras();
+            if(extras != null) {
+                String name = (String) extras.get("name");
+                // TODO: remove debug
+                //Toast.makeText(this,"Name from intent EDIT_PAGE: "+name, Toast.LENGTH_SHORT).show();
+                Intent intentE = new Intent(Intent.ACTION_EDIT);
+                Uri uri = Uri.parse("file://" + FileIO.getFilesDir(this).getPath() + "/md/" + name + ".md");
+                intentE.setDataAndType(uri, "text/plain");
+                try {
+                    this.startActivityForResult(intentE, Constants.EDIT_PAGE_REQUEST);
+                } catch (android.content.ActivityNotFoundException e) {
+                    Toast.makeText(this, "No editor found. Please install one.", Toast.LENGTH_LONG).show();
+                }
+            }
         } if (intent != null && intent.getAction().equals(this.getPackageName()+".HOME_PAGE")) {
         /* Show home page */
             UI.displayStartPage(ui, mainUI_WV);
 
         }if (intent != null && intent.getAction().equals(this.getPackageName()+".REDISPLAY_PAGE")) {
-        /* Redisplay page after edit */
+        /* Redisplay page after creation */
             ui.displayPage(mainUI_WV);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == Constants.EDIT_PAGE_REQUEST) {
+            if(resultCode == Activity.RESULT_OK){
+                //MyLog.LogD("Call DP from ma onActivityResult(OK), PN: " + ui.getPageName());
+                ui.displayPage(mainUI_WV);
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //TODO: Why this result code actual?
+                //MyLog.LogD("* Call DP from ma onActivityResult(CANCELED), PN: " + ui.getPageName());
+                ui.displayPage(mainUI_WV);
+            }
         }
     }
 

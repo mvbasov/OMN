@@ -19,7 +19,7 @@ android {
 
     }
     compileSdkVersion 25
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '26.0.0'
     defaultConfig {
         applicationId "net.basov.omn"
         minSdkVersion 19

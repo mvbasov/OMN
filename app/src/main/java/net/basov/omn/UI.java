@@ -238,10 +238,10 @@ public class UI {
                 wv.clearCache(true);
                 wv.clearHistory();
                 // TODO: remove debug
-                Toast.makeText(wv.getContext(),
-                        "UI.createHTML URL is: "+url + "\ngetPageName: " + getPageName(),
-                        Toast.LENGTH_SHORT
-                ).show();
+                //Toast.makeText(wv.getContext(),
+                //        "UI.createHTML URL is: "+url + "\ngetPageName: " + getPageName(),
+                //        Toast.LENGTH_SHORT
+                //).show();
             }
         });
         wv.clearCache(true);

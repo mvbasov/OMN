@@ -261,6 +261,6 @@ Author: %4$s
     <string name="pk_btn_enable_link">btnEnableLink</string>
     <string name="pk_btn_enable_email">btnEnableEmail</string>
     <string name="pk_btn_enable_filemanager">btnEnableFilemanager</string>
-    <string name="pk_btn_enable_shortcut">btnEnableFilemanager</string>
+    <string name="pk_btn_enable_shortcut">btnEnableShortcut</string>
     
     </resources>

@@ -5,7 +5,7 @@
     <string name="app_name">Open Markdown Note</string>
 
     <!-- Page used to convert Markdown to HTML -->
-    <string name="anvil_file">anvil.html</string>
+    <string name="anvil_file" translatable="false">anvil.html</string>
 
     <!--
     Top part of any html page
@@ -257,14 +257,14 @@ This page generated automaticaly.
     <string name="ema_md_start">\n-----Start of Markdown-----\n</string>
     <string name="ema_md_end">\n-----End of Markdown-----\n</string>
 
-    <string name="pk_version_code">appVersionCode</string>
-    <string name="pk_pref_version">prefVersion</string>
-    <string name="pk_use_view_directory">prefViewDirectory</string>
-    <string name="pk_notes_author">notesAuthor</string>
-    <string name="pk_btn_enable_home">btnEnableHome</string>
-    <string name="pk_btn_enable_link">btnEnableLink</string>
-    <string name="pk_btn_enable_email">btnEnableEmail</string>
-    <string name="pk_btn_enable_filemanager">btnEnableFilemanager</string>
-    <string name="pk_btn_enable_shortcut">btnEnableShortcut</string>
+    <string name="pk_version_code" translatable="false">appVersionCode</string>
+    <string name="pk_pref_version" translatable="false">prefVersion</string>
+    <string name="pk_use_view_directory" translatable="false">prefViewDirectory</string>
+    <string name="pk_notes_author" translatable="false">notesAuthor</string>
+    <string name="pk_btn_enable_home" translatable="false">btnEnableHome</string>
+    <string name="pk_btn_enable_link" translatable="false">btnEnableLink</string>
+    <string name="pk_btn_enable_email" translatable="false">btnEnableEmail</string>
+    <string name="pk_btn_enable_filemanager" translatable="false">btnEnableFilemanager</string>
+    <string name="pk_btn_enable_shortcut" translatable="false">btnEnableShortcut</string>
     
     </resources>

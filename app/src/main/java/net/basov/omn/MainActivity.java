@@ -111,6 +111,7 @@ public class MainActivity extends Activity {
 
     private void runAfterUpdate(int oldVersion, int newVersion) {
         FileIO.creteHomePage(MainActivity.this, true);
+        FileIO.deletePage(this, "/" + Constants.BUILD_PAGE);
         Toast.makeText(this, "version upgrade from " + oldVersion + " to " + newVersion, Toast.LENGTH_LONG).show();
     }
 

@@ -10,7 +10,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import net.basov.util.FileIO;
-import android.widget.*;
 
 /**
  * Redirect external URLs to browser

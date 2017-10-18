@@ -10,7 +10,6 @@ import android.util.Log;
 //import android.widget.Toast;
 
 import net.basov.omn.Constants;
-import net.basov.util.AppDetails;
 import net.basov.omn.R;
 
 import java.io.BufferedReader;
@@ -42,6 +41,17 @@ public class FileIO {
         return file.exists();
     }
 
+    public static void deletePage(Context c, String pageName) {
+        File mdFile = new File(getFilesDir(c), "/md" + pageName + ".md");
+        File htmlFile = new File(getFilesDir(c), "/html" + pageName + ".html");
+        // TODO: remove debug
+        //Toast.makeText(c, "Delete page "+ pageName, Toast.LENGTH_SHORT).show();
+        if(mdFile.exists())
+            mdFile.delete();
+        if(htmlFile.exists())
+            htmlFile.delete();
+    }
+
     public static boolean createPageIfNotExists(Context c, String pageName) {
         final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String fileName = "/md" + pageName + ".md";
@@ -53,6 +63,7 @@ public class FileIO {
                 file.createNewFile();
 
                 String ts = DF.format(new Date());
+                // TODO: remove debug
                 //MyLog.LogD("* Current time: "+ts);
                 Writer writer = new BufferedWriter(new FileWriter(file));
                 writer.write(c.getString(
@@ -109,7 +120,6 @@ public class FileIO {
                 "md/" + Constants.SYNTAX_PAGE + ".md",
                 "md/" + Constants.SYNTAX_EXT_PAGE + ".md",
                 "md/" + Constants.CHANGELOG + ".md",
-                //"md/" + Constants.BUILD + ".md",
                 Constants.COMON_CSS,
                 Constants.HIGHLIGHT_CSS,
                 Constants.ICONS_FONT,
@@ -122,7 +132,6 @@ public class FileIO {
     }
 
     private static void copyFilesFromAssets(Context c, String[] files, Boolean force) {
-        //for(Map.Entry<String,String> entry : files.entrySet()) {
         for(int i=0; i<files.length; i++) {
             URI uriPage = null;
             try {

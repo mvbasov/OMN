@@ -9,9 +9,8 @@ import android.webkit.WebView;
 import java.util.Stack;
 
 import net.basov.util.FileIO;
-import net.basov.util.MyLog;
+//import net.basov.util.MyLog;
 import net.basov.util.TextTools;
-import android.widget.*;
 
 /**
  * Created by mvb on 8/1/17.

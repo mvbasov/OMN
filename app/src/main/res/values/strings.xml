@@ -244,7 +244,11 @@ Author: %4$s
 
 "]]>
     </string>
-    <string name="build_info"><![CDATA["Build: %1$s
+    <string name="build_info"><![CDATA["Title: Build information
+
+Build: %1$s
+
+This page generated automaticaly.
 
 **To get actual build information delete and recreate this file.**
 

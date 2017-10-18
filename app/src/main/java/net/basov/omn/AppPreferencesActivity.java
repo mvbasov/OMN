@@ -14,6 +14,7 @@ import android.preference.PreferenceManager;
 public class AppPreferencesActivity extends PreferenceActivity implements
         SharedPreferences.OnSharedPreferenceChangeListener {
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -26,18 +27,29 @@ public class AppPreferencesActivity extends PreferenceActivity implements
 
     }
 
+    @Override
     protected void onResume() {
         super.onResume();
         getPreferenceScreen().getSharedPreferences()
                 .registerOnSharedPreferenceChangeListener(this);
     }
 
+    @Override
     protected void onPause() {
         super.onPause();
         getPreferenceScreen().getSharedPreferences()
                 .unregisterOnSharedPreferenceChangeListener(this);
     }
 
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        sharedPreferences.edit().putBoolean(getString(R.string.pk_pref_changed), true).apply();
+
+    }
+
+    @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
                                           String key) {
         Preference pref = findPreference(key);

@@ -259,6 +259,7 @@ This page generated automaticaly.
 
     <string name="pk_version_code" translatable="false">appVersionCode</string>
     <string name="pk_pref_version" translatable="false">prefVersion</string>
+    <string name="pk_pref_changed" translatable="false">prefChanged</string>
     <string name="pk_use_view_directory" translatable="false">prefViewDirectory</string>
     <string name="pk_notes_author" translatable="false">notesAuthor</string>
     <string name="pk_btn_enable_home" translatable="false">btnEnableHome</string>
@@ -266,5 +267,5 @@ This page generated automaticaly.
     <string name="pk_btn_enable_email" translatable="false">btnEnableEmail</string>
     <string name="pk_btn_enable_filemanager" translatable="false">btnEnableFilemanager</string>
     <string name="pk_btn_enable_shortcut" translatable="false">btnEnableShortcut</string>
-    
-    </resources>
+
+</resources>

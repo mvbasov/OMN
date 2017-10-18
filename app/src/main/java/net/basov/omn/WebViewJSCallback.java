@@ -47,7 +47,8 @@ public class WebViewJSCallback {
 
     @JavascriptInterface
     public void prefButonCallback() {
-        Intent i = new Intent(mContext, AppPreferencesActivity.class);
+        Intent i = new Intent();
+        i.setAction(mContext.getPackageName() + ".PREFERENCES");
         mContext.startActivity(i);
     }
 

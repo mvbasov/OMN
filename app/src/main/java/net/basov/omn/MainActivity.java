@@ -35,7 +35,7 @@ public class MainActivity extends Activity {
         /* Set default preferences at first run and after preferences version upgrade */
         SharedPreferences defSharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = defSharedPref.edit();
-        final int currePrefVersion = 3;
+        final int currePrefVersion = 4;
         switch (defSharedPref.getInt(getString(R.string.pk_pref_version), 0)) {
             case 0: // initial
                 editor.putBoolean(getString(R.string.pk_use_view_directory), false);
@@ -44,6 +44,7 @@ public class MainActivity extends Activity {
                 editor.putBoolean(getString(R.string.pk_btn_enable_email), true);
                 editor.putBoolean(getString(R.string.pk_btn_enable_filemanager), true);
                 editor.putBoolean(getString(R.string.pk_btn_enable_shortcut), true);
+                editor.putBoolean(getString(R.string.pk_pref_changed), false);
                 editor.putInt(getString(R.string.pk_pref_version), currePrefVersion);
                 editor.commit();
                 break;
@@ -53,15 +54,22 @@ public class MainActivity extends Activity {
                 editor.putBoolean(getString(R.string.pk_btn_enable_email), true);
                 editor.putBoolean(getString(R.string.pk_btn_enable_filemanager), true);
                 editor.putBoolean(getString(R.string.pk_btn_enable_shortcut), true);
+                editor.putBoolean(getString(R.string.pk_pref_changed), false);
                 editor.putInt(getString(R.string.pk_pref_version), currePrefVersion);
                 editor.commit();
                 break;
             case 2:
                 editor.putBoolean(getString(R.string.pk_btn_enable_shortcut), true);
+                editor.putBoolean(getString(R.string.pk_pref_changed), false);
                 editor.putInt(getString(R.string.pk_pref_version), currePrefVersion);
                 editor.commit();
                 break;
-                
+            case 3:
+                editor.putBoolean(getString(R.string.pk_pref_changed), false);
+                editor.putInt(getString(R.string.pk_pref_version), currePrefVersion);
+                editor.commit();
+                break;
+
             default:
                 break;
         }
@@ -183,13 +191,17 @@ public class MainActivity extends Activity {
         }if (intent != null && intent.getAction().equals(this.getPackageName()+".REDISPLAY_PAGE")) {
         /* Redisplay page after creation */
             ui.displayPage(mainUI_WV);
+        } if (intent != null && intent.getAction().equals(this.getPackageName()+".PREFERENCES")) {
+            /* Redisplay page after creation */
+            Intent i = new Intent(this, AppPreferencesActivity.class);
+            this.startActivityForResult(i, Constants.PREFERENCES_REQUEST);
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == Constants.EDIT_PAGE_REQUEST) {
-            if(resultCode == Activity.RESULT_OK){
+            if (resultCode == Activity.RESULT_OK) {
                 //MyLog.LogD("Call DP from ma onActivityResult(OK), PN: " + ui.getPageName());
                 ui.displayPage(mainUI_WV);
             }
@@ -197,6 +209,14 @@ public class MainActivity extends Activity {
                 //TODO: Why this result code actual?
                 //MyLog.LogD("* Call DP from ma onActivityResult(CANCELED), PN: " + ui.getPageName());
                 ui.displayPage(mainUI_WV);
+            }
+        } else if (requestCode == Constants.PREFERENCES_REQUEST) {
+            SharedPreferences defSharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+            if (defSharedPref.getBoolean(getString(R.string.pk_pref_changed), false)) {
+                SharedPreferences.Editor editor = defSharedPref.edit();
+                ui.displayPage(mainUI_WV);
+                editor.putBoolean(getString(R.string.pk_pref_changed), false);
+                editor.commit();
             }
         }
     }

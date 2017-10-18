@@ -160,12 +160,12 @@
 
     <!--
      Javascript called after load any html page
-        %1$s   Page name
-        %2$s    Enable Home button
-        %3$s    Enable Link button
-        %4$s    Enable E-Mail button
-        %5$s    Enable File browser button
-        %6$s    Enable Create shortcut button
+        %1$s    Page name
+        %2$b    Enable Home button
+        %3$b    Enable Link button
+        %4$b    Enable E-Mail button
+        %5$b    Enable File browser button
+        %6$b    Enable Create shortcut button
     -->
     <string name="set_html_page_js">
         javascript:
@@ -177,11 +177,11 @@
             else
                 document.getElementById(id).style.display=\'none\';
         }
-        enableButton(\'btnHome\', %2$s);
-        enableButton(\'btnLink\', %3$s);
-        enableButton(\'btnEMail\', %4$s);
-        enableButton(\'btnFolder\', %5$s);
-        enableButton(\'btnShortcut\', %6$s);
+        enableButton(\'btnHome\', %2$b);
+        enableButton(\'btnLink\', %3$b);
+        enableButton(\'btnEMail\', %4$b);
+        enableButton(\'btnFolder\', %5$b);
+        enableButton(\'btnShortcut\', %6$b);
     </string>
 
     <!--
@@ -223,11 +223,11 @@
             else
                 document.getElementById(id).style.display=\'none\';
         }
-        enableButton(\'btnHome\', %5$s);
-        enableButton(\'btnLink\', %6$s);
-        enableButton(\'btnEMail\', %7$s);
-        enableButton(\'btnFolder\', %8$s);
-        enableButton(\'btnShortcut\', %9$s);
+        enableButton(\'btnHome\', %5$b);
+        enableButton(\'btnLink\', %6$b);
+        enableButton(\'btnEMail\', %7$b);
+        enableButton(\'btnFolder\', %8$b);
+        enableButton(\'btnShortcut\', %9$b);
     </string>
 
     <!--

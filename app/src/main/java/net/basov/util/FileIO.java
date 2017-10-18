@@ -65,11 +65,13 @@ public class FileIO {
                 String ts = DF.format(new Date());
                 // TODO: remove debug
                 //MyLog.LogD("* Current time: "+ts);
+                String title = pageName;
+                if(pageName.equals("/default/Build")) title = "Build information";
                 Writer writer = new BufferedWriter(new FileWriter(file));
                 writer.write(c.getString(
                         R.string.pelican_header,
                         //Title
-                        pageName,
+                        title,
                         //Creation date
                         ts,
                         //Modification date

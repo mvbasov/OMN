@@ -185,7 +185,7 @@ public class UI {
                             .getString(
                                     R.string.set_md_page_js_create,
                                     getPageName(),
-                                    TextTools.escapeCharsForJSON(getMdContent()),
+                                    TextTools.escapeJavaScriptFunctionParameter(getMdContent()),
                                     //Enable highlight
                                     1
                             );
@@ -197,7 +197,7 @@ public class UI {
                             
                                 getPageName(),
                                 getPageTitle(),
-                                TextTools.escapeCharsForJSON(getMdContent()),
+                                TextTools.escapeJavaScriptFunctionParameter(getMdContent()),
                                 //Enable highlight
                                 1, 
                                 //Enable Home button

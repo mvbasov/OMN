@@ -1,6 +1,6 @@
 Title: Welcome!
 Date: 2017-10-11 01:38:26
-Modified: 2017-10-17 19:22:45
+Modified: 2017-10-20 15:37:01
 Category: Index
 Tags: Markdown,
 Lang: en
@@ -10,7 +10,7 @@ Summary: Open Markdown Note start page
 ### General information.
 
 This is simple, lightweight and open source application to create and organize everyday notes.
-Notes stored in [Markdown](/default/Markdown.html) format and shown as html. 
+Notes stored in [Markdown](Markdown.html) format and shown as html. 
 
 To see action buttons press on the page title.
 
@@ -32,12 +32,12 @@ I would recommend install the following editor and file manager to use with this
 
 **Hint**: Before create own start page press <button onclick="Android.linkButtonCallback(PFN, Title)"><i class="material-icons">insert_link</i></button> button to save link to this page in clipboard and then paste it on your new page.
 
-Read page about common [Markdown syntax](/default/Markdown.html) and then about
-[Extended Markdown syntax](/default/MarkdownExt.html) specific for this application.
+Read page about common [Markdown syntax](Markdown.html) and then about
+[Extended Markdown syntax](MarkdownExt.html) specific for this application.
 
 Any new pages can be created by editing current page and placing link to new page.
 
-Now, time to create [Own start page](/Start.html)
+Now, time to create [Own start page](../Start.html)
 
 ### Action buttons description
 
@@ -110,4 +110,5 @@ Button code:
         onclick="Android.prefButonCallback()">
         <i class="material-icons">settings</i>
     </button>
+
 

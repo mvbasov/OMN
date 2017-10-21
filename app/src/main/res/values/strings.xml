@@ -188,13 +188,13 @@
     JavaScript called at Markdown to HTML convertion time
         %1$s    Page name
         %2$s    Markdown content
-        %3$s    Enable code highlight (1|0)
+        %3$b    Enable code highlight
     -->
     <string name="set_md_page_js_create">
         javascript:
         var PFN=\'%1$s\';
         document.getElementById(\'pname\').innerHTML=\'%1$s\';
-        run_marked(\'%2$s\', \'%3$d\');
+        run_marked(\'%2$s\', \'%3$b\');
     </string>
 
     <!--
@@ -202,7 +202,7 @@
         %1$s    Page name
         %2$s    Page title
         %3$s    Markdown content
-        %4$s    Enable code highlight (1|0)
+        %4$b    Enable code highlight
         %5$s    Enable Home button
         %6$s    Enable Link button
         %7$s    Enable E-Mail button
@@ -216,7 +216,7 @@
         var Title = \'%2$s\';
         document.getElementById(\'title\').innerHTML=\'%2$s\';
         document.getElementById(\'actions_header\').style.display=\'block\';
-        run_marked(\'%3$s\', \'%4$d\');
+        run_marked(\'%3$s\', \'%4$b\');
         function enableButton(id, enable) {
             if (enable)
                 document.getElementById(id).style.display=\'inline\';
@@ -261,6 +261,7 @@ This page generated automaticaly.
     <string name="pk_pref_changed" translatable="false">prefChanged</string>
     <string name="pk_use_view_directory" translatable="false">prefViewDirectory</string>
     <string name="pk_notes_author" translatable="false">notesAuthor</string>
+    <string name="pk_enable_code_highlight" translatable="false">enableCodeHighlight</string>
     <string name="pk_btn_enable_home" translatable="false">btnEnableHome</string>
     <string name="pk_btn_enable_link" translatable="false">btnEnableLink</string>
     <string name="pk_btn_enable_email" translatable="false">btnEnableEmail</string>

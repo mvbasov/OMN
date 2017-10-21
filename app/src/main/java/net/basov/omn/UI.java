@@ -187,7 +187,10 @@ public class UI {
                                     getPageName(),
                                     TextTools.escapeJavaScriptFunctionParameter(getMdContent()),
                                     //Enable highlight
-                                    1
+                                    defSharedPref.getBoolean(
+                                        c.getString(R.string.pk_enable_code_highlight),
+                                        true
+                                    )
                             );
                 } else {
                     setPageJS = view.getContext()
@@ -199,7 +202,10 @@ public class UI {
                                 getPageTitle(),
                                 TextTools.escapeJavaScriptFunctionParameter(getMdContent()),
                                 //Enable highlight
-                                1, 
+                                defSharedPref.getBoolean(
+                                    c.getString(R.string.pk_enable_code_highlight),
+                                    true
+                                ),                              
                                 //Enable Home button
                                 defSharedPref.getBoolean(
                                     c.getString(R.string.pk_btn_enable_home),

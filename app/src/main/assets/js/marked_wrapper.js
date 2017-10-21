@@ -20,8 +20,8 @@ function run_marked(body, eHlJs){
   marked.setOptions({
     gfm: true,
   });
-
-  if (eHlJs == 1) {
+  
+  if ('true' == eHlJs) {
     marked.setOptions({
       highlight: function (code) {
         return hljs.highlightAuto(code).value;

@@ -2,7 +2,7 @@
 <resources>
 
     <!-- Application name -->
-    <string name="app_name">Open Markdown Note</string>
+    <string name="app_name">Open Markdown Notes</string>
 
     <!-- Page used to convert Markdown to HTML -->
     <string name="anvil_file" translatable="false">anvil.html</string>

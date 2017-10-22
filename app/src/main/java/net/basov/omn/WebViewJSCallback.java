@@ -142,8 +142,12 @@ public class WebViewJSCallback {
     public void linkButtonCallback(String pn, String title) {
         Toast.makeText(mContext, "Link to page in clipboard.", Toast.LENGTH_SHORT).show();
 
-        ClipboardManager clipboard = (ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
-        ClipData clip = ClipData.newPlainText(title, "["+title+"]("+pn+".html)");
+        ClipboardManager clipboard =
+                (ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText(
+                title,
+                "["+title+"]("+pn.substring(pn.lastIndexOf("/") + 1)+".html)"
+        );
         clipboard.setPrimaryClip(clip);
     }
 

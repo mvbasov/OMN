@@ -20,15 +20,15 @@ Suitable almost any editor.
 
 I would recommend install the following editor and file manager to use with this application:
 
+#### Recommended applications from F-Droid:
+
+* [Simple generic text editor](https://f-droid.org/app/org.billthefarmer.editor)
+* [OI File Manager](https://f-droid.org/app/org.openintents.filemanager)
+
 #### Recommended applications from Google Play Market:
 
 * [OI Notepad](market://details?id=org.openintents.notepad)
 * [X-plore File Manager](market://details?id=com.lonelycatgames.Xplore)
-
-#### Recommended applications from F-Droid:
-
-* [OI Notepad](https://f-droid.org/app/org.openintents.notepad)
-* [OI File Manager](https://f-droid.org/app/org.openintents.filemanager)
 
 **Hint**: Before create own start page press <button onclick="Android.linkButtonCallback(PFN, Title)"><i class="material-icons">insert_link</i></button> button to save link to this page in clipboard and then paste it on your new page.
 

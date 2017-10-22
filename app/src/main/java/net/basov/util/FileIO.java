@@ -125,6 +125,7 @@ public class FileIO {
     public static boolean creteHomePage(Context c, Boolean force) {
         String[] files = {
                 "md/" + Constants.WELCOME_PAGE + ".md",
+                "md/" + Constants.HELP_PAGE + ".md",
                 "md/" + Constants.SYNTAX_PAGE + ".md",
                 "md/" + Constants.SYNTAX_EXT_PAGE + ".md",
                 "md/" + Constants.CHANGELOG + ".md",

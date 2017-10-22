@@ -11,6 +11,7 @@ public class Constants {
     public static final String TAG = "#OMN#";
 
     public static final String WELCOME_PAGE = "default/Welcome";
+    public static final String HELP_PAGE = "default/Help";
     public static final String START_PAGE = "Start";
     public static final String SYNTAX_PAGE = "default/Markdown";
     public static final String SYNTAX_EXT_PAGE = "default/MarkdownExt";

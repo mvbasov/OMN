@@ -52,6 +52,21 @@ public class FileIO {
             htmlFile.delete();
     }
 
+    public static void writePageToFile(Context c, String pageName, String content) {
+        String fileName = "/md" + pageName + ".md";
+        File file = new File(getFilesDir(c), fileName);
+        if(!file.exists()) creteParentDir(file);
+        try {
+            file.createNewFile();
+            Writer writer = new BufferedWriter(new FileWriter(file));
+            writer.write(content);
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            MyLog.LogE(e, "Write page to file failed.");
+        }
+    }
+
     public static boolean createPageIfNotExists(Context c, String pageName) {
         final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String fileName = "/md" + pageName + ".md";
@@ -68,6 +83,7 @@ public class FileIO {
                 String title = pageName;
                 if(pageName.equals("/default/Build")) title = "Build information";
                 if(pageName.equals("/Start")) title = "My start page";
+                if(pageName.equals("/QuickNotes")) title = "My quick notes";
                 Writer writer = new BufferedWriter(new FileWriter(file));
                 writer.write(c.getString(
                         R.string.pelican_header,

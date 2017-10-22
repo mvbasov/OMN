@@ -1,6 +1,9 @@
 package net.basov.omn;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
@@ -15,10 +18,15 @@ import android.webkit.ConsoleMessage;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import net.basov.util.FileIO;
 import net.basov.util.MyLog;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainActivity extends Activity {
 
@@ -35,7 +43,7 @@ public class MainActivity extends Activity {
         /* Set default preferences at first run and after preferences version upgrade */
         SharedPreferences defSharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = defSharedPref.edit();
-        final int currePrefVersion = 5;
+        final int currePrefVersion = 6;
         switch (defSharedPref.getInt(getString(R.string.pk_pref_version), 0)) {
             case 0: // initial
                 editor.putBoolean(getString(R.string.pk_use_view_directory), false);
@@ -46,6 +54,7 @@ public class MainActivity extends Activity {
                 editor.putBoolean(getString(R.string.pk_btn_enable_shortcut), true);
                 editor.putBoolean(getString(R.string.pk_pref_changed), false);
                 editor.putBoolean(getString(R.string.pk_enable_code_highlight), true);
+                editor.putBoolean(getString(R.string.pk_btn_enable_quicknotes), true);
                 editor.putInt(getString(R.string.pk_pref_version), currePrefVersion);
                 editor.commit();
                 break;
@@ -57,6 +66,7 @@ public class MainActivity extends Activity {
                 editor.putBoolean(getString(R.string.pk_btn_enable_shortcut), true);
                 editor.putBoolean(getString(R.string.pk_pref_changed), false);
                 editor.putBoolean(getString(R.string.pk_enable_code_highlight), true);
+                editor.putBoolean(getString(R.string.pk_btn_enable_quicknotes), true);
                 editor.putInt(getString(R.string.pk_pref_version), currePrefVersion);
                 editor.commit();
                 break;
@@ -64,17 +74,25 @@ public class MainActivity extends Activity {
                 editor.putBoolean(getString(R.string.pk_btn_enable_shortcut), true);
                 editor.putBoolean(getString(R.string.pk_pref_changed), false);
                 editor.putBoolean(getString(R.string.pk_enable_code_highlight), true);
+                editor.putBoolean(getString(R.string.pk_btn_enable_quicknotes), true);
                 editor.putInt(getString(R.string.pk_pref_version), currePrefVersion);
                 editor.commit();
                 break;
             case 3:
                 editor.putBoolean(getString(R.string.pk_pref_changed), false);
                 editor.putBoolean(getString(R.string.pk_enable_code_highlight), true);
+                editor.putBoolean(getString(R.string.pk_btn_enable_quicknotes), true);
                 editor.putInt(getString(R.string.pk_pref_version), currePrefVersion);
                 editor.commit();
                 break;
             case 4:
                 editor.putBoolean(getString(R.string.pk_enable_code_highlight), true);
+                editor.putBoolean(getString(R.string.pk_btn_enable_quicknotes), true);
+                editor.putInt(getString(R.string.pk_pref_version), currePrefVersion);
+                editor.commit();
+                break;
+            case 5:
+                editor.putBoolean(getString(R.string.pk_btn_enable_quicknotes), true);
                 editor.putInt(getString(R.string.pk_pref_version), currePrefVersion);
                 editor.commit();
                 break;
@@ -196,14 +214,60 @@ public class MainActivity extends Activity {
         } if (intent != null && intent.getAction().equals(this.getPackageName()+".HOME_PAGE")) {
         /* Show home page */
             UI.displayStartPage(ui, mainUI_WV);
-
         }if (intent != null && intent.getAction().equals(this.getPackageName()+".REDISPLAY_PAGE")) {
         /* Redisplay page after creation */
             ui.displayPage(mainUI_WV);
         } if (intent != null && intent.getAction().equals(this.getPackageName()+".PREFERENCES")) {
-            /* Redisplay page after creation */
+        /* Redisplay page after creation */
             Intent i = new Intent(this, AppPreferencesActivity.class);
             this.startActivityForResult(i, Constants.PREFERENCES_REQUEST);
+        }if (intent != null && intent.getAction().equals(this.getPackageName()+".QUICK_NOTE")) {
+        /* QuickNotes creation */
+            ui.setPageName("/" + Constants.QUICKNOTES_PAGE);
+            ui.setMdContent(
+                    FileIO.getStringFromFile(
+                        FileIO.getFilesDir(this)
+                        + "/md"
+                        + "/" + Constants.QUICKNOTES_PAGE
+                        + ".md"
+                    )
+            );
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Create QuickNote");
+            final EditText input = new EditText(this);
+            builder.setView(input);
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    String newText =
+                            ui.getPage().getmHeaderMeta()
+                            + getString(
+                                R.string.template_quick_note,
+                                // Time stamp
+                                DF.format(new Date()),
+                                // Note text
+                                input.getText().toString()
+                            )
+                            + ui.getPage().getMdContent();
+                    FileIO.writePageToFile(
+                            MainActivity.this,
+                            "/" + Constants.QUICKNOTES_PAGE,
+                            newText
+                    );
+                    Intent i = new Intent();
+                    i.setAction(MainActivity.this.getPackageName() + ".REDISPLAY_PAGE");
+                    MainActivity.this.startActivity(i);
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            builder.show();
+            ui.displayPage(mainUI_WV);
         }
     }
 

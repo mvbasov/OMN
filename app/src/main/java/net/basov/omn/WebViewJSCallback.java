@@ -46,12 +46,18 @@ public class WebViewJSCallback {
     }
 
     @JavascriptInterface
-    public void prefButonCallback() {
+    public void prefButtonCallback() {
         Intent i = new Intent();
         i.setAction(mContext.getPackageName() + ".PREFERENCES");
         mContext.startActivity(i);
     }
 
+    @JavascriptInterface
+    public void quicknoteButtonCallback() {
+        Intent i = new Intent();
+        i.setAction(mContext.getPackageName() + ".QUICK_NOTE");
+        mContext.startActivity(i);
+    }
 
     @JavascriptInterface
     public void createButtonCallback(String PFN) {

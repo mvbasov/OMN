@@ -128,9 +128,15 @@
       <i class=\"material-icons\">screen_share</i>
     </button>
     <button
+      id=\"btnQuickNotes\"
+      class=\"hBtn\"
+      onclick=\"Android.quicknoteButtonCallback()\">
+      <i class=\"material-icons\">receipt</i>
+    </button>
+    <button
       id=\"btnSettings\"
       class=\"hBtn\"
-      onclick=\"Android.prefButonCallback()\">
+      onclick=\"Android.prefButtonCallback()\">
       <i class=\"material-icons\">settings</i>
     </button>
     <br />
@@ -261,6 +267,19 @@ This page generated automaticaly.
 
 "]]></string>
 
+    <!--
+    New page pelican header
+    %1$s    Time stamp
+    %2$s    Note text
+    -->
+    <string name="template_quick_note"><![CDATA["
+- - -
+##### %1$s
+
+%2$s
+
+"]]></string>
+
     <string name="ema_md_start">\n-----Start of Markdown-----\n</string>
     <string name="ema_md_end">\n-----End of Markdown-----\n</string>
 
@@ -275,5 +294,6 @@ This page generated automaticaly.
     <string name="pk_btn_enable_email" translatable="false">btnEnableEmail</string>
     <string name="pk_btn_enable_filemanager" translatable="false">btnEnableFilemanager</string>
     <string name="pk_btn_enable_shortcut" translatable="false">btnEnableShortcut</string>
+    <string name="pk_btn_enable_quicknotes">btnEnableQuicknotes</string>
 
 </resources>

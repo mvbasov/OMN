@@ -76,6 +76,10 @@ public class UI {
         return pages.peek().getPageName();
     }
 
+    public Page getPage() {
+        return pages.peek();
+    }
+
     public String getInPageReference(){
         return pages.peek().getmInPageReference();
     }

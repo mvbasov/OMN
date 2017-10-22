@@ -87,12 +87,21 @@ Button code:
         <i class="material-icons">screen_share</i>
     </button>
 
-#### <button onclick="Android.prefButonCallback()"> <i class="material-icons">settings</i> </button> "Edit appication settings"
+#### <button onclick="Android.quicknoteButtonCallback()"> <i class="material-icons">receipt</i> </button> "Quick note"
 
 Button code:
 
     <button id="btnSettings"
-        onclick="Android.prefButonCallback()">
+        onclick="Android.quicknoteButtonCallback()">
+        <i class="material-icons">receipt</i>
+    </button>
+
+#### <button onclick="Android.prefButtonCallback()"> <i class="material-icons">settings</i> </button> "Edit appication settings"
+
+Button code:
+
+    <button id="btnSettings"
+        onclick="Android.prefButtonCallback()">
         <i class="material-icons">settings</i>
     </button>
 

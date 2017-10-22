@@ -67,6 +67,7 @@ public class FileIO {
                 //MyLog.LogD("* Current time: "+ts);
                 String title = pageName;
                 if(pageName.equals("/default/Build")) title = "Build information";
+                if(pageName.equals("/Start")) title = "My start page";
                 Writer writer = new BufferedWriter(new FileWriter(file));
                 writer.write(c.getString(
                         R.string.pelican_header,
@@ -85,12 +86,17 @@ public class FileIO {
                 try {
                     if(pageName.equals("/default/Build")) {
                         writer.write(c.getString(
-                                     R.string.build_info,                                   
+                                     R.string.template_page_build,
                                      AppDetails.getAppName(c)
                         ));
                     }
                 } catch (NameNotFoundException e) {
                     MyLog.LogE(e, "Get application name problem.");
+                }
+                if(pageName.equals("/Start")) {
+                    writer.write(c.getString(
+                            R.string.template_page_start
+                    ));
                 }
                 writer.flush();
                 writer.close();

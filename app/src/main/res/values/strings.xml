@@ -244,12 +244,20 @@ Author: %4$s
 
 "]]>
     </string>
-    <string name="build_info"><![CDATA["
+    <string name="template_page_build"><![CDATA["
 Build: %1$s
 
 This page generated automaticaly.
 
 **To get actual build information delete and recreate this file.**
+
+"]]></string>
+
+    <string name="template_page_start"><![CDATA["
+**This page generated automaticaly.**
+
+* [Help](/default/Help.html)
+* [Quick notes](/QuickNotes.html)
 
 "]]></string>
 

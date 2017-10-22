@@ -7,6 +7,8 @@ Lang: en
 Author: Mikhail Basov
 Summary: Open Markdown Note Help
 
+### Recommended aditional software
+
 #### Recommended applications from F-Droid:
 
 * [Simple generic text editor](https://f-droid.org/app/org.billthefarmer.editor)
@@ -104,5 +106,39 @@ Button code:
         onclick="Android.prefButtonCallback()">
         <i class="material-icons">settings</i>
     </button>
+    
+### Highlight text
 
+You can change text background (like maker on paper text). See examples:
 
+Some <span class="bg-yellow">text</span> and another <span class="bg-aqua">text</span>
+
+Code:
+
+``` html
+Some <span class="bg-yellow">text</span> and another <span class="bg-aqua">text</span>
+```
+
+Some <span class="fg-red">text with another color</span>
+
+Code:
+
+``` html
+Some <span class="fg-red">text with another color</span>
+```
+
+Some <span class="fg-green">text with another color</span>
+
+Code:
+
+``` html
+Some <span class="fg-green">text with another color</span>
+```
+
+Some text <span class="bg-yellow fg-red">text with both attributes changed</span>
+
+Code:
+
+``` html
+Some text <span class="bg-yellow fg-red">text with both attributes changed</span>
+```

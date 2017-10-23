@@ -262,8 +262,10 @@ This page generated automaticaly.
     <string name="template_page_start"><![CDATA["
 **This page generated automaticaly.**
 
-* [Help](/default/Help.html)
-* [Quick notes](/QuickNotes.html)
+* [Welcome!](default/Welcome.html)
+* [Help](default/Help.html)
+* [Quick notes](QuickNotes.html)
+* [Build information](default/Build.html)
 
 "]]></string>
 

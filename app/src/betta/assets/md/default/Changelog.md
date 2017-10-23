@@ -1,6 +1,7 @@
 Title: Betta version change log
 
 ##### V00.05.00b
+###### Date:   Mon Oct 23 21:49:10 2017 +0300, commit 36c393881feb931637f4bb7245df2116dcccef39
 
 - Fix single quota character issue.
 - Enable/disable source code highlighting in preferences

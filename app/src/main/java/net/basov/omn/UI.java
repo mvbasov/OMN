@@ -58,7 +58,10 @@ public class UI {
     }
 
     public void setPageName(String pageName) {
-        pages.push(new Page(pageName));
+        if (pages.empty())
+            pages.push(new Page(pageName));
+        else if (!pageName.equals(pages.peek().getPageName()))
+            pages.push(new Page(pageName));
     }
     
     public boolean backPage(final WebView wv){

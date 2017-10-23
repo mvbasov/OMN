@@ -10,7 +10,7 @@ Summary: Open Markdown Note start page
 ### General information.
 
 This is simple, lightweight and open source application to create and organize everyday notes.
-Notes stored in [Markdown](Markdown.html) format and shown as html. 
+Notes stored in [Markdown](Markdown.html) format and shown as html. New html page create if it does not exists or corresponding markdown page has later modification timestamp.
 
 To see action buttons press on the page title.
 

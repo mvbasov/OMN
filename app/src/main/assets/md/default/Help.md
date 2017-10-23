@@ -7,9 +7,16 @@ Lang: en
 Author: Mikhail Basov
 Summary: Open Markdown Note Help
 
+* [Recommended aditional software](#rec-software)
+* [Action buttons description](#btn-desc)
+* [Application settings](#app-settings)
+* [Known issues](#issues)
+
+<a id="rec-software" />
+
 ### Recommended aditional software
 
-#### Recommended applications from F-Droid:
+#### Recommended applications from F-Droid <span class="fg-green">(Recommended)</span>:
 
 * [Simple generic text editor](https://f-droid.org/app/org.billthefarmer.editor)
 * [OI File Manager](https://f-droid.org/app/org.openintents.filemanager)
@@ -24,7 +31,8 @@ Read page about common [Markdown syntax](Markdown.html) and then about
 [Extended Markdown syntax](MarkdownExt.html) specific for this application.
 
 Any new pages can be created by editing current page and placing link to new page.
-
+ 
+<a id="btn-desc" />
 
 ### Action buttons description
 
@@ -106,39 +114,29 @@ Button code:
         onclick="Android.prefButtonCallback()">
         <i class="material-icons">settings</i>
     </button>
-    
-### Highlight text
 
-You can change text background (like maker on paper text). See examples:
+<a id="app-settings" />
 
-Some <span class="bg-yellow">text</span> and another <span class="bg-aqua">text</span>
+### Application settings
 
-Code:
+#### "Notes author"
+Default notes author name. Effective only at page creation time.
 
-``` html
-Some <span class="bg-yellow">text</span> and another <span class="bg-aqua">text</span>
-```
+#### "Use VIEW_DIRECTORY"
+Differnt File Managers <button onclick="Android.folderButtonCallback(PFN)"> <i class="material-icons">folder_open</i> </button> require different arguments to call.
+ 
+For X-plore or ES file managers this options need to be set to enable.
+For OI File Manager to disable.
 
-Some <span class="fg-red">text with another color</span>
+#### "Enable code highlight
+Enable/disable source code highlighting at html creation time.
+Disable this option speed up html page creation process.
 
-Code:
+#### "Actions buttons show/hide"
+Any of action buttons exclude <button id="btnSettings" onclick="Android.prefButtonCallback()"> <i class="material-icons">settings</i> </button> and <button onclick="Android.editButtonCallback(PFN)"> <i class="material-icons">edit</i> </button> can be disabled or enabled.
+This option effective only at html page creation time. If you want to add remove buttons on already created page you need to set option an regenerate (delete and the visit) html page.
 
-``` html
-Some <span class="fg-red">text with another color</span>
-```
+<a id="issues" />
 
-Some <span class="fg-green">text with another color</span>
-
-Code:
-
-``` html
-Some <span class="fg-green">text with another color</span>
-```
-
-Some text <span class="bg-yellow fg-red">text with both attributes changed</span>
-
-Code:
-
-``` html
-Some text <span class="bg-yellow fg-red">text with both attributes changed</span>
-```
+### Known issues
+* Can't return to original link when use in-page reference. Back key return to previous page. 

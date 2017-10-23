@@ -10,7 +10,10 @@ Summary: Open Markdown Note Help
 * [Recommended aditional software](#rec-software)
 * [Action buttons description](#btn-desc)
 * [Application settings](#app-settings)
+* [Markdown page header](#page-header)
 * [Known issues](#issues)
+
+- - -
 
 <a id="rec-software" />
 
@@ -32,6 +35,8 @@ Read page about common [Markdown syntax](Markdown.html) and then about
 
 Any new pages can be created by editing current page and placing link to new page.
  
+- - -
+
 <a id="btn-desc" />
 
 ### Action buttons description
@@ -115,6 +120,8 @@ Button code:
         <i class="material-icons">settings</i>
     </button>
 
+- - -
+
 <a id="app-settings" />
 
 ### Application settings
@@ -135,6 +142,63 @@ Disable this option speed up html page creation process.
 #### "Actions buttons show/hide"
 Any of action buttons exclude <button id="btnSettings" onclick="Android.prefButtonCallback()"> <i class="material-icons">settings</i> </button> and <button onclick="Android.editButtonCallback(PFN)"> <i class="material-icons">edit</i> </button> can be disabled or enabled.
 This option effective only at html page creation time. If you want to add remove buttons on already created page you need to set option an regenerate (delete and the visit) html page.
+
+- - -
+
+<a id="page-header" />
+
+### Markdown page header
+This application use [Pelican Content Management System (Pelican CMS)]() Markdown extension for page header.
+
+#### Header processing rules
+From the begin of file any string contains valid metadata name and value (empty valye is valid) treat as page header string.
+Page header processed till first empty line or not valid meta name.
+No one meta strings is mandatory for this application but header processing rules applied to any page.
+Recommended minimum header is `Title: Page title` followed by one empty line.
+
+New pages automatically create with Date: and Modified: meta set to current time also Author: meta set if defined in application settings.
+Title meta set to Page(file) name relative to application data storage directory. 
+
+#### Valid metadata names
+##### Title:
+This meta data display as page name in application and set as `<title>` tag value in html page.
+
+##### Tags:
+This metadata will write to html page `<meta>` tag
+
+##### Date:
+This metadata will write to html page `<meta>` tag  
+Automatically set to current time when page crete.
+
+##### Modified:
+This metadata will write to html page `<meta>` tag
+Automatically set to current time when page crete.
+
+##### Category:
+This metadata will write to html page `<meta>` tag
+
+##### Authors:
+This metadata will write to html page `<meta>` tag
+
+##### Author:
+This metadata will write to html page `<meta>` tag
+
+##### Summary:
+This metadata will write to html page `<meta>` tag
+
+##### Keywords:
+This metadata will write to html page `<meta>` tag
+
+##### Lang:
+This metadata affect Pelican CMS page processing logic. Does not write to html page.
+
+##### Status:
+This metadata affect Pelican CMS page processing logic. Does not write to html page
+
+##### Slug:
+This metadata affect Pelican CMS page processing logic. Does not write to html page
+
+- - -
 
 <a id="issues" />
 

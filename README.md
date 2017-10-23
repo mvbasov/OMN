@@ -1,7 +1,7 @@
 
 ### Build instructions
 
-I use several code components from another open source projects. You nee dto obtain their before building.
+I use several code components from another open source projects. You nee to obtain their before building.
 
 #### Markdown to html javascript (app/src/main/assets/js/marked.min.js)
 
@@ -11,7 +11,7 @@ I use several code components from another open source projects. You nee dto obt
 
 File (marked.min.js) in project root directory.
 
-#### Source code highlighter javascript (app/src/main/assets/js/highlight.pack.js)
+#### Source code highlighter javascript (app/src/main/assets/js/highlight.pack.js and app/src/main/assets/css/highlight.css)
 
 ##### download source:
 
@@ -24,6 +24,8 @@ File (marked.min.js) in project root directory.
 `nodejs tools/build.js browser :common`
 
 The result (highlight.pack.js) in the build/ subdirectory.
+Copy build/highlight.pack.js as app/src/main/assets/js/highlight.pack.js
+Copy build/demo/styles/github.css as app/src/main/assets/css/highlight.css
 
 #### Material Design icons (app/src/main/assets/fonts/google-material/MaterialIcons-Regular.woff2)
 

@@ -94,81 +94,60 @@ public class Page {
                             case "title":
                                 setMetaTitle(fContent);
                                 emptyHeader = false;
-                                mdHeader += str;
-                                mdHeader += "\n";
                                 break;
                             case "date":
                                 setMetaDate(fContent);
                                 emptyHeader = false;
-                                mdHeader += str;
-                                mdHeader += "\n";
                                 break;
                             case "modified":
                                 emptyHeader = false;
                                 setMetaModified(fContent);
-                                mdHeader += str;
-                                mdHeader += "\n";
                                 break;
                             case "category":
                                 emptyHeader = false;
                                 addMetaCategory(fContent);
-                                mdHeader += "\n";
-                                mdHeader += str;
                                 break;
                             case "tags":
                                 emptyHeader = false;
                                 setMetaTags(fContent.split(","));
-                                mdHeader += str;
-                                mdHeader += "\n";
                                 break;
                             case "slug":
                                 emptyHeader = false;
                                 setMetaSlug(fContent);
-                                mdHeader += str;
-                                mdHeader += "\n";
                                 break;
                             case "lang":
                                 emptyHeader = false;
                                 setMetaLang(fContent);
-                                mdHeader += str;
-                                mdHeader += "\n";
                                 break;
                             case "summary":
                                 emptyHeader = false;
                                 setMetaSummary(fContent);
-                                mdHeader += str;
-                                mdHeader += "\n";
                                 break;
                             case "authors":
                                 emptyHeader = false;
                                 setMetaAuthors(fContent.split(","));
-                                mdHeader += str;
-                                mdHeader += "\n";
                                 break;
                             case "author":
                                 emptyHeader = false;
                                 String[] s = new String[1];
                                 s[0] = fContent;
                                 setMetaAuthors(s);
-                                mdHeader += str;
-                                mdHeader += "\n";
                                 break;
                             case "status":
                                 emptyHeader = false;
                                 setMetaStatus(fContent);
-                                mdHeader += str;
-                                mdHeader += "\n";
                                 break;
                             case "keywords":
                                 emptyHeader = false;
                                 setMetaKeywords(fContent.split(","));
-                                mdHeader += str;
-                                mdHeader += "\n";
                                 break;
                             default:
                                 MyLog.LogE("Unknown pelican header string:>" + fName + "<");
                                 inHeader = false;
                                 sb.append(str).append("\n");
+                        }
+                        if(inHeader) {
+                            mdHeader += str + "\n";
                         }
                     }
                 } else {

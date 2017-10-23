@@ -2,8 +2,10 @@ package net.basov.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.Build;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -84,6 +86,7 @@ public class FileIO {
                 if(pageName.equals("/default/Build")) title = "Build information";
                 if(pageName.equals("/Start")) title = "My start page";
                 if(pageName.equals("/QuickNotes")) title = "My quick notes";
+
                 Writer writer = new BufferedWriter(new FileWriter(file));
                 writer.write(c.getString(
                         R.string.pelican_header,
@@ -99,17 +102,48 @@ public class FileIO {
                                 ""
                         )
                 ));
-                try {
-                    if(pageName.equals("/default/Build")) {
-                        writer.write(c.getString(
-                                     R.string.template_page_build,
-                                     AppDetails.getAppName(c)
-                        ));
+
+                if(pageName.equals("/default/Build")) {
+
+                    String cmVersionString = "";
+                    String cmVersion = AppDetails.getSystemProperty("ro.cm.version");
+                    if (cmVersion.length() != 0)
+                        cmVersionString = "* CyanogenMod version: "
+                                + cmVersion
+                                + "\n";
+
+                    String appInfo = c.getResources().getString(R.string.app_name);
+                    try {
+                        appInfo += " " + AppDetails.getAppName(c);
+                    } catch (PackageManager.NameNotFoundException e) {
+                        MyLog.LogE(e, "Get application name problem.");
                     }
-                } catch (NameNotFoundException e) {
-                    MyLog.LogE(e, "Get application name problem.");
-                }
-                if(pageName.equals("/Start")) {
+
+                    writer.write(c.getString(
+                                R.string.template_page_build,
+                                // %1$s    android.os.Build.MODEL
+                            android.os.Build.MODEL,
+                                // %2$s    Build.MANUFACTURER
+                            Build.MANUFACTURER,
+                                // %3$s    android.os.Build.PRODUCT
+                            android.os.Build.PRODUCT,
+                                // %4$s    android.os.Build.DEVICE
+                            android.os.Build.DEVICE,
+                                // %5$d    android.os.Build.VERSION.SDK_INT
+                            android.os.Build.VERSION.SDK_INT,
+                                // %6$s    android.os.Build.VERSION.RELEASE
+                            android.os.Build.VERSION.RELEASE,
+                                // %7$s    android.os.Build.DISPLAY
+                            android.os.Build.DISPLAY,
+                                // %8$s    ro.cm.version (with "* CyanogenMod version: %8$s\n" or "")
+                            cmVersionString,
+                                // %9$s    App name and build
+                            appInfo,
+                                // %10$s   Data directory
+                            FileIO.getFilesDir(c)
+                    ));
+
+                } if(pageName.equals("/Start")) {
                     writer.write(c.getString(
                             R.string.template_page_start
                     ));

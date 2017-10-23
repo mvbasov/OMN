@@ -250,8 +250,36 @@ Author: %4$s
 
 "]]>
     </string>
+    <!--
+    Build information template
+    %1$s    android.os.Build.MODEL
+    %2$s    Build.MANUFACTURER
+    %3$s    android.os.Build.PRODUCT
+    %4$s    android.os.Build.DEVICE
+    %5$d    android.os.Build.VERSION.SDK_INT
+    %6$s    android.os.Build.VERSION.RELEASE
+    %7$s    android.os.Build.DISPLAY
+    %8$s    ro.cm.version (with "* CyanogenMod version: %8$s\n" or "")
+    %9$s    App name and build
+    %10$s   Data directory
+    -->
     <string name="template_page_build"><![CDATA["
-Build: %1$s
+  * [%1$s](#%2$s-%3$s)
+<a name=\"%2$s-%3$s\" />
+##### Platform information #####
+* Manufacturer: %2$s
+* Device: %4$s
+* Model (and Product): %1$s (%3$s)
+* OS API Level: %5$d
+* Android version : %6$s
+* Build.DISPLAY: %7$s
+%8$s
+
+##### Application information #####
+* %9$s
+* Data directory: %10$s
+
+- - -
 
 This page generated automaticaly.
 

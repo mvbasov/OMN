@@ -69,7 +69,7 @@ public class FileIO {
         }
     }
 
-    public static boolean createPageIfNotExists(Context c, String pageName) {
+    public static boolean createPageIfNotExists(Context c, String pageName, String wvUserAgent) {
         final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String fileName = "/md" + pageName + ".md";
         File file = new File(getFilesDir(c), fileName);
@@ -140,6 +140,8 @@ public class FileIO {
                             cmVersionString,
                             // %9$s    Screen resolution
                             AppDetails.getScreenInfo(),
+                            // %10s    WebView UserAgent
+                            wvUserAgent,
                             // %10$s    App name and build
                             appInfo,
                             // %11$s   Data directory

@@ -60,10 +60,10 @@ public class WebViewJSCallback {
     }
 
     @JavascriptInterface
-    public void createButtonCallback(String PFN) {
+    public void createButtonCallback(String PFN, String wvUA) {
         // TODO: remove debug
         //Toast.makeText(mContext, "The BUTTON CREATE pressed! "+PFN, Toast.LENGTH_LONG).show();
-        FileIO.createPageIfNotExists(mContext, PFN);
+        FileIO.createPageIfNotExists(mContext, PFN, wvUA);
 
         if(PFN.equals("/" + Constants.BUILD_PAGE)) {
             Intent i = new Intent();

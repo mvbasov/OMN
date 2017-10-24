@@ -173,6 +173,7 @@
         %4$b    Enable E-Mail button
         %5$b    Enable File browser button
         %6$b    Enable Create shortcut button
+        %7$b    Enable QuickNotes button
     -->
     <string name="set_html_page_js">
         javascript:
@@ -189,6 +190,7 @@
         enableButton(\'btnEMail\', %4$b);
         enableButton(\'btnFolder\', %5$b);
         enableButton(\'btnShortcut\', %6$b);
+        enableButton(\'btnQuickNotes\', %7$b);
     </string>
 
     <!--
@@ -210,11 +212,12 @@
         %2$s    Page title
         %3$s    Markdown content
         %4$b    Enable code highlight
-        %5$s    Enable Home button
-        %6$s    Enable Link button
-        %7$s    Enable E-Mail button
-        %8$s    Enable File browser button
-        %9$s    Enable Create shortcut button
+        %5$b    Enable Home button
+        %6$b    Enable Link button
+        %7$b    Enable E-Mail button
+        %8$b    Enable File browser button
+        %9$b    Enable Create shortcut button
+        %10$b   Enable QuickNotes button
     -->
     <string name="set_md_page_js">
         javascript:
@@ -235,6 +238,7 @@
         enableButton(\'btnEMail\', %7$b);
         enableButton(\'btnFolder\', %8$b);
         enableButton(\'btnShortcut\', %9$b);
+        enableButton(\'btnQuickNotes\', %10$b);
     </string>
 
     <!--
@@ -328,6 +332,6 @@ This page generated automaticaly.
     <string name="pk_btn_enable_email" translatable="false">btnEnableEmail</string>
     <string name="pk_btn_enable_filemanager" translatable="false">btnEnableFilemanager</string>
     <string name="pk_btn_enable_shortcut" translatable="false">btnEnableShortcut</string>
-    <string name="pk_btn_enable_quicknotes">btnEnableQuicknotes</string>
+    <string name="pk_btn_enable_quicknotes" translatable="false">btnEnableQuicknotes</string>
 
 </resources>

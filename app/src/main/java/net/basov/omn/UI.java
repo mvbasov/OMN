@@ -139,7 +139,13 @@ public class UI {
                                 defSharedPref.getBoolean(
                                     c.getString(R.string.pk_btn_enable_shortcut),
                                     true
+                                ),
+                                //Enable QuickNotes button
+                                defSharedPref.getBoolean(
+                                        c.getString(R.string.pk_btn_enable_quicknotes),
+                                        true
                                 )
+
                         );
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                     view.evaluateJavascript(setPageJS, null);
@@ -236,6 +242,11 @@ public class UI {
                                 //Enable Create shortcut button
                                 defSharedPref.getBoolean(
                                     c.getString(R.string.pk_btn_enable_shortcut),
+                                    true
+                                ),
+                                //Enable QuickNotes button
+                                defSharedPref.getBoolean(
+                                    c.getString(R.string.pk_btn_enable_quicknotes),
                                     true
                                 )
                             );

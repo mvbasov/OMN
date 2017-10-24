@@ -55,8 +55,8 @@
   </style>
   <script>
     function toggleHdrBtnVis() {
-      element=document.getElementById(\'actions_header\'),
-      btn=document.getElementById(\'title_arrow\')
+      element=document.getElementById(\'actions_header\');
+      btn=document.getElementById(\'title_arrow\');
 
       if (element.style.display !== \'none\' && btn.style.display === \'inline\') {
         element.style.display = \'none\';
@@ -68,6 +68,7 @@
     }
   </script>
   <script>
+    var PageName = \'%9$s\'
     var Title = \'%10$s\';
   </script>
 

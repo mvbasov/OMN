@@ -265,8 +265,9 @@ Author: %4$s
     %10$s   Data directory
     -->
     <string name="template_page_build"><![CDATA["
-  * [%1$s](#%2$s-%3$s)
+* [%1$s](#%2$s-%3$s)
 <a name=\"%2$s-%3$s\" />
+
 ##### Platform information #####
 * Manufacturer: %2$s
 * Device: %4$s

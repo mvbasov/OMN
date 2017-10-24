@@ -112,6 +112,7 @@ public class FileIO {
                                 + cmVersion
                                 + "\n";
 
+                    // Get App. name and build
                     String appInfo = c.getResources().getString(R.string.app_name);
                     try {
                         appInfo += " " + AppDetails.getAppName(c);
@@ -121,25 +122,27 @@ public class FileIO {
 
                     writer.write(c.getString(
                                 R.string.template_page_build,
-                                // %1$s    android.os.Build.MODEL
+                            // %1$s    android.os.Build.MODEL
                             android.os.Build.MODEL,
-                                // %2$s    Build.MANUFACTURER
+                            // %2$s    Build.MANUFACTURER
                             Build.MANUFACTURER,
-                                // %3$s    android.os.Build.PRODUCT
+                            // %3$s    android.os.Build.PRODUCT
                             android.os.Build.PRODUCT,
-                                // %4$s    android.os.Build.DEVICE
+                            // %4$s    android.os.Build.DEVICE
                             android.os.Build.DEVICE,
-                                // %5$d    android.os.Build.VERSION.SDK_INT
+                            // %5$d    android.os.Build.VERSION.SDK_INT
                             android.os.Build.VERSION.SDK_INT,
-                                // %6$s    android.os.Build.VERSION.RELEASE
+                            // %6$s    android.os.Build.VERSION.RELEASE
                             android.os.Build.VERSION.RELEASE,
-                                // %7$s    android.os.Build.DISPLAY
+                            // %7$s    android.os.Build.DISPLAY
                             android.os.Build.DISPLAY,
-                                // %8$s    ro.cm.version (with "* CyanogenMod version: %8$s\n" or "")
+                            // %8$s    ro.cm.version (with "* CyanogenMod version: %8$s\n" or "")
                             cmVersionString,
-                                // %9$s    App name and build
+                            // %9$s    Screen resolution
+                            AppDetails.getScreenInfo(),
+                            // %10$s    App name and build
                             appInfo,
-                                // %10$s   Data directory
+                            // %11$s   Data directory
                             FileIO.getFilesDir(c)
                     ));
 

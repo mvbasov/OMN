@@ -26,6 +26,8 @@ package net.basov.util;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
+import android.util.DisplayMetrics;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -106,5 +108,24 @@ public class AppDetails {
             }
         }
         return line;
+    }
+
+    public static String getScreenInfo() {
+        DisplayMetrics dm = Resources.getSystem().getDisplayMetrics();
+        int width=dm.widthPixels;
+        int height=dm.heightPixels;
+        double wi=(double)width/(double)dm.xdpi;
+        double hi=(double)height/(double)dm.ydpi;
+        double x = Math.pow(wi,2);
+        double y = Math.pow(hi,2);
+        double screenInches = Math.sqrt(x+y);
+        return String.format(
+                "%d \\* %d [%.2f \\* %.2f] (%.2f \")",
+                width,
+                height,
+                dm.xdpi,
+                dm.ydpi,
+                screenInches);
+
     }
 }

@@ -261,8 +261,9 @@ Author: %4$s
     %6$s    android.os.Build.VERSION.RELEASE
     %7$s    android.os.Build.DISPLAY
     %8$s    ro.cm.version (with "* CyanogenMod version: %8$s\n" or "")
-    %9$s    App name and build
-    %10$s   Data directory
+    %9$s    Screen resolution
+    %10$s   App name and build
+    %11$s   Data directory
     -->
     <string name="template_page_build"><![CDATA["
 * [%1$s](#%2$s-%3$s)
@@ -276,10 +277,11 @@ Author: %4$s
 * Android version : %6$s
 * Build.DISPLAY: %7$s
 %8$s
+* Screen w\\*h [x\\*y dpi]: %9$s
 
 ##### Application information #####
-* %9$s
-* Data directory: %10$s
+* %10$s
+* Data directory: %11$s
 
 - - -
 

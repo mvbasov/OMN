@@ -213,7 +213,7 @@ public class WebViewJSCallback {
 				Intent.EXTRA_SHORTCUT_ICON_RESOURCE,
                 Intent.ShortcutIconResource.fromContext(
 						mContext.getApplicationContext(),
-                        R.mipmap.omn_ic
+                        R.mipmap.omn_ic_shortcut
 				)
 		);
         addIntent

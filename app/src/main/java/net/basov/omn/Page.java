@@ -79,6 +79,7 @@ public class Page {
             if (inHeader) {
                 if (trim.length() == 0) {
                     inHeader = false;
+                    sb.append("\n");
                     continue;
                 }
                 String[] filds = trim.split(":", 2);
@@ -157,7 +158,7 @@ public class Page {
                 sb.append(str).append("\n");
             }
         }
-        if(!emptyHeader) sb.append(" \n");
+        //if(!emptyHeader) sb.append(" \n");
         this.mMdContent = sb.toString();
         this.mHeaderMeta = mdHeader;
     }

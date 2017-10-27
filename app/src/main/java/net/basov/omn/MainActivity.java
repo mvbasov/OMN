@@ -2,7 +2,6 @@ package net.basov.omn;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -241,7 +240,7 @@ public class MainActivity extends Activity {
                 public void onClick(DialogInterface dialog, int which) {
                     final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     String newText =
-                            ui.getPage().getmHeaderMeta()
+                            ui.getPage().getHeaderMeta()
                             + getString(
                                 R.string.template_quick_note,
                                 // Time stamp

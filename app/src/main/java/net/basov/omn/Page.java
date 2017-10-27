@@ -30,7 +30,7 @@ public class Page {
     private String mMetaStatus;
     private String[] mMetaKeywords;
 
-    public String getmHeaderMeta() {
+    public String getHeaderMeta() {
         return mHeaderMeta;
     }
 
@@ -58,7 +58,7 @@ public class Page {
         }
 	}
 
-    public String getmInPageReference() {
+    public String getInPageReference() {
         return mInPageReference;
     }
 

@@ -84,7 +84,7 @@ public class UI {
     }
 
     public String getInPageReference(){
-        return pages.peek().getmInPageReference();
+        return pages.peek().getInPageReference();
     }
 
     public String getPageTitle() {

@@ -46,6 +46,16 @@ public class PageTest {
                 mdContent,
                 this.realPage.getMdContent()
         );
+
+        Assert.assertEquals(
+                mdHeader,
+                this.realPage.getHeaderMeta()
+        );
+
+        Assert.assertEquals(
+                "title",
+                this.realPage.getMetaTitle()
+        );
     }
 
 }

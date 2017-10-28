@@ -52,13 +52,30 @@ public class PageTest {
     }
 
     @Test
-    public void testSetMdContent() throws Exception {
+    public void testParseTitle() throws Exception {
         String mdHeader =
                 "Title: title\n"
-                + "Date: 2017-10-10 10:10:10\n";
+                        + "Date: 2017-10-10 10:10:10\n";
         String mdContent =
                 "\n"
-                + "Note text.\n";
+                        + "Note text.\n";
+
+        this.realPage.setMdContent(mdHeader + mdContent);
+
+        Assert.assertEquals(
+                "title",
+                this.realPage.getMetaTitle()
+        );
+    }
+
+    @Test
+    public void testOrdinaryPage() throws Exception {
+        String mdHeader =
+                "Title: title\n"
+                + "Date: 2017-10-10 10:10:10\n"
+                + "Author: Mikhail Basov\n"
+                + "Keywords: test, test2\n\n";
+        String mdContent = "Note text.\n";
         this.realPage.setMdContent(mdHeader + mdContent);
 
         Assert.assertEquals(
@@ -70,10 +87,75 @@ public class PageTest {
                 mdHeader,
                 this.realPage.getHeaderMeta()
         );
+    }
+
+    @Test
+    public void testEmptyHeaderPage() throws Exception {
+        String mdContent = "Note text.\n";
+        this.realPage.setMdContent(mdContent);
 
         Assert.assertEquals(
-                "title",
-                this.realPage.getMetaTitle()
+                mdContent,
+                this.realPage.getMdContent()
+        );
+
+        Assert.assertEquals(
+                "",
+                this.realPage.getHeaderMeta()
+        );
+    }
+
+    @Test
+    public void testEmptyHeaderAndFirstLinePage() throws Exception {
+        String mdContent = "\nNote text.\n";
+        this.realPage.setMdContent(mdContent);
+
+        Assert.assertEquals(
+                mdContent,
+                this.realPage.getMdContent()
+        );
+
+        Assert.assertEquals(
+                "",
+                this.realPage.getHeaderMeta()
+        );
+    }
+
+    @Test
+    public void testPageWithoutEndCR() throws Exception {
+        String mdContent = "Note text.";
+        this.realPage.setMdContent(mdContent);
+
+        Assert.assertEquals(
+                mdContent + "\n",
+                this.realPage.getMdContent()
+        );
+
+        Assert.assertEquals(
+                "",
+                this.realPage.getHeaderMeta()
+        );
+    }
+
+    @Test
+    public void testPageWithBrokenHeader() throws Exception {
+        String mdHeader =
+                "Title: title\n"
+                + "Unknown: test\n"
+                + "Date: 2017-10-10 10:10:10\n\n";
+        String mdContent = "Note text.\n";
+        this.realPage.setMdContent(mdHeader + mdContent);
+
+        Assert.assertEquals(
+                 "Unknown: test\n"
+                + "Date: 2017-10-10 10:10:10\n\n"
+                + mdContent,
+                this.realPage.getMdContent()
+        );
+
+        Assert.assertEquals(
+                "Title: title\n",
+                this.realPage.getHeaderMeta()
         );
     }
 

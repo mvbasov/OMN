@@ -198,97 +198,72 @@ public class UI {
     public boolean createHTML(final WebView wv) {
         Context c = wv.getContext();
         setMdContent("");
-        setMdContent( FileIO.getStringFromFile(
-                FileIO.getFilesDir(wv.getContext())+ "/md" +getPageName() + ".md")
+        String mdContent = FileIO.getStringFromFile(
+                FileIO.getFilesDir(wv.getContext())+ "/md" +getPageName() + ".md"
         );
-        // TODO: remove debug
-        //Toast.makeText(wv.getContext(),"UI.createHTML getPageName:"+getPageName(), Toast.LENGTH_SHORT).show();
-        wv.setWebViewClient(new MyWebViewClient() {
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(wv, url);
-                Context c = wv.getContext();
-                SharedPreferences defSharedPref = PreferenceManager.getDefaultSharedPreferences(c);
-                // TODO: remove debug
-                //Toast.makeText(wv.getContext(),mdContent,Toast.LENGTH_SHORT).show();
-                String setPageJS = "";
-                if (getMdContent().length() == 0) {
+        if (mdContent.length() == 0 ) {
+            wv.setWebViewClient(new MyWebViewClient() {
+                @Override
+                public void onPageFinished(WebView view, String url) {
+                    super.onPageFinished(wv, url);
+                    Context c = wv.getContext();
+                    SharedPreferences defSharedPref = PreferenceManager.getDefaultSharedPreferences(c);
+                    String setPageJS = "";
                     setPageJS = view.getContext()
                             .getString(
                                     R.string.set_md_page_js_create,
+
+                                    getPageName()
+                            );
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                        view.evaluateJavascript(setPageJS, null);
+
+                    } else {
+                        view.loadUrl(setPageJS);
+                    }
+                    wv.clearCache(true);
+                    wv.clearHistory();
+                }
+            });
+            wv.clearCache(true);
+            wv.loadUrl("file:///android_asset/html/" + c.getString(R.string.create_file));
+        } else {
+            setMdContent(mdContent);
+
+            wv.setWebViewClient(new MyWebViewClient() {
+                @Override
+                public void onPageFinished(WebView view, String url) {
+                    super.onPageFinished(wv, url);
+                    Context c = wv.getContext();
+                    SharedPreferences defSharedPref = PreferenceManager.getDefaultSharedPreferences(c);
+                    String setPageJS = "";
+                    setPageJS = view.getContext()
+                            .getString(
+                                    R.string.set_md_page_js,
+
                                     getPageName(),
+                                    getPageTitle(),
                                     TextTools.escapeJavaScriptFunctionParameter(getMdContent()),
                                     //Enable highlight
                                     defSharedPref.getBoolean(
-                                        c.getString(R.string.pk_enable_code_highlight),
-                                        true
+                                            c.getString(R.string.pk_enable_code_highlight),
+                                            true
                                     )
                             );
-                } else {
-                    setPageJS = view.getContext()
-                            .getString(
-                        
-                                R.string.set_md_page_js,
-                            
-                                getPageName(),
-                                getPageTitle(),
-                                TextTools.escapeJavaScriptFunctionParameter(getMdContent()),
-                                //Enable highlight
-                                defSharedPref.getBoolean(
-                                    c.getString(R.string.pk_enable_code_highlight),
-                                    true
-                                ),                              
-                                //Enable Home button
-                                defSharedPref.getBoolean(
-                                    c.getString(R.string.pk_btn_enable_home),
-                                    true
-                                ),
-                                //Enable Link button
-                                defSharedPref.getBoolean(
-                                    c.getString(R.string.pk_btn_enable_link),
-                                    true
-                                ),
-                                //Enable E-Mail button
-                                defSharedPref.getBoolean(
-                                    c.getString(R.string.pk_btn_enable_email),
-                                    true
-                                ),
-                                //Enable File browser button
-                                defSharedPref.getBoolean(
-                                    c.getString(R.string.pk_btn_enable_filemanager),
-                                    true
-                                ),
-                                //Enable Create shortcut button
-                                defSharedPref.getBoolean(
-                                    c.getString(R.string.pk_btn_enable_shortcut),
-                                    true
-                                ),
-                                //Enable QuickNotes button
-                                defSharedPref.getBoolean(
-                                    c.getString(R.string.pk_btn_enable_quicknotes),
-                                    true
-                                )
-                            );
 
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                        view.evaluateJavascript(setPageJS, null);
+
+                    } else {
+                        view.loadUrl(setPageJS);
+                    }
+                    wv.clearCache(true);
+                    wv.clearHistory();
                 }
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    view.evaluateJavascript(setPageJS, null);
-
-                } else {
-                    view.loadUrl(setPageJS);
-                }
-                wv.clearCache(true);
-                wv.clearHistory();
-                // TODO: remove debug
-                //Toast.makeText(wv.getContext(),
-                //        "UI.createHTML URL is: "+url + "\ngetPageName: " + getPageName(),
-                //        Toast.LENGTH_SHORT
-                //).show();
-            }
-        });
-        wv.clearCache(true);
-        wv.loadUrl("file:///android_asset/html/" + c.getString(R.string.anvil_file));
-
+            });
+            wv.clearCache(true);
+            wv.loadUrl("file:///android_asset/html/" + c.getString(R.string.anvil_file));
+        }
         return true;
 
     }

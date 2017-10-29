@@ -1,21 +1,9 @@
 /*
   Minimal wrapper for marked.js
-  inspired by Strapdown.js
+  For set marked.js options
 */
 
 function run_marked(body, eHlJs){
-
-  var markdownEl = document.getElementsByTagName('xmp')[0];
-
-  var markdown = "";
-  if (body.length == 0)
-    markdown = markdownEl.textContent;
-  else
-    markdown = body;
-
-
-  var newNode = document.createElement('div');
-  document.body.replaceChild(newNode, markdownEl);
 
   marked.setOptions({
     gfm: true,
@@ -29,8 +17,5 @@ function run_marked(body, eHlJs){
     });
   }
 
-  content = marked(markdown);
-
-  newNode.innerHTML = content;
-  if (body.length != 0) Android.saveHTML(content, PFN, Title);
+  Android.saveHTML(marked(body), PFN, Title);
 }

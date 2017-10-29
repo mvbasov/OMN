@@ -7,6 +7,9 @@
     <!-- Page used to convert Markdown to HTML -->
     <string name="anvil_file" translatable="false">anvil.html</string>
 
+    <!-- Page used to ask creation Page -->
+    <string name="create_file" translatable="false">create.html</string>
+
     <!--
     Top part of any html page
         %1$s    Page title
@@ -196,14 +199,11 @@
     <!--
     JavaScript called at Markdown to HTML convertion time
         %1$s    Page name
-        %2$s    Markdown content
-        %3$b    Enable code highlight
     -->
     <string name="set_md_page_js_create">
         javascript:
         var PFN=\'%1$s\';
         document.getElementById(\'pname\').innerHTML=\'%1$s\';
-        run_marked(\'%2$s\', \'%3$b\');
     </string>
 
     <!--
@@ -212,33 +212,12 @@
         %2$s    Page title
         %3$s    Markdown content
         %4$b    Enable code highlight
-        %5$b    Enable Home button
-        %6$b    Enable Link button
-        %7$b    Enable E-Mail button
-        %8$b    Enable File browser button
-        %9$b    Enable Create shortcut button
-        %10$b   Enable QuickNotes button
     -->
     <string name="set_md_page_js">
         javascript:
         var PFN=\'%1$s\';
-        document.getElementById(\'pname\').innerHTML=\'%1$s\';
         var Title = \'%2$s\';
-        document.getElementById(\'title\').innerHTML=\'%2$s\';
-        document.getElementById(\'actions_header\').style.display=\'block\';
         run_marked(\'%3$s\', \'%4$b\');
-        function enableButton(id, enable) {
-            if (enable)
-                document.getElementById(id).style.display=\'inline\';
-            else
-                document.getElementById(id).style.display=\'none\';
-        }
-        enableButton(\'btnHome\', %5$b);
-        enableButton(\'btnLink\', %6$b);
-        enableButton(\'btnEMail\', %7$b);
-        enableButton(\'btnFolder\', %8$b);
-        enableButton(\'btnShortcut\', %9$b);
-        enableButton(\'btnQuickNotes\', %10$b);
     </string>
 
     <!--
@@ -255,6 +234,7 @@ Author: %4$s
 
 "]]>
     </string>
+
     <!--
     Build information template
     %1$s    android.os.Build.MODEL

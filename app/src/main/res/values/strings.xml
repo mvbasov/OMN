@@ -294,8 +294,7 @@ This page generated automaticaly.
     %1$s    Time stamp
     %2$s    Note text
     -->
-    <string name="template_quick_note"><![CDATA["
-- - -
+    <string name="template_quick_note"><![CDATA["- - -
 ##### %1$s
 
 %2$s

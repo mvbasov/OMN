@@ -19,9 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 package net.basov.omn;
 
-import net.basov.util.MyLog;
-
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 /**
  * Created by mvb on 10/10/17.
@@ -29,31 +28,31 @@ import java.util.ArrayList;
 
 public class Page {
 
-    public Page(String mPageName) {
-        setPageName(mPageName);
-        mMetaCategory = new ArrayList<String>();
-    }
-
+    private LinkedHashMap<String, Object> mMeta;
     private String mPageName;
     private String mInPageReference;
     private String mMdContent;
-    private String mMetaTitle;
-    private String mMetaDate;
-    private String mMetaModified;
-    private ArrayList<String> mMetaCategory;
-    private String[] mMetaTags;
-    private String mMetaSlug;
-    private String mMetaLang;
-    private String[] mMetaAuthors;
-    private String mMetaSummary;
-    private String mMetaStatus;
-    private String[] mMetaKeywords;
+    private String mHeaderMeta;
+    private String mLog;
+
+
+    public String getLog() {
+        return mLog;
+    }
+
+    public void addLog(String mLog) {
+        this.mLog = this.mLog + mLog + "\n";
+    }
+
+    public Page(String mPageName) {
+        setPageName(mPageName);
+        mMeta = new LinkedHashMap<>();
+        mLog = "";
+    }
 
     public String getHeaderMeta() {
         return mHeaderMeta;
     }
-
-    private String mHeaderMeta;
 
     public boolean appendOnNoteTop(String mPageName, String header) {
         setMdContent(header + getMdContent());
@@ -163,7 +162,7 @@ public class Page {
                                 setMetaKeywords(fContent.split(","));
                                 break;
                             default:
-                                MyLog.LogE("Unknown pelican header string:>" + fName + "<");
+                                addLog("Unknown pelican header string:>" + fName + "<");
                                 inHeader = false;
                                 sb.append(str).append("\n");
                         }
@@ -185,39 +184,40 @@ public class Page {
     }
 
     public String getMetaTitle() {
-        return mMetaTitle != null ? mMetaTitle : mPageName;
+        return this.mMeta.get("title") != null ? (String) this.mMeta.get("title") : mPageName;
     }
 
     public void setMetaTitle(String mMetaTitle) {
-        this.mMetaTitle = mMetaTitle;
+        this.mMeta.put("title", mMetaTitle);
+        //this.mMetaTitle = mMetaTitle;
     }
 
     public String getMetaDate() {
-        return mMetaDate;
+        return (String) this.mMeta.get("date");
     }
 
     public void setMetaDate(String mMetaDate) {
-        this.mMetaDate = mMetaDate;
+        this.mMeta.put("date", mMetaDate);
     }
 
     public String getMetaModified() {
-        return mMetaModified;
+        return (String) this.mMeta.get("modified");
     }
 
     public void setMetaModified(String mMetaModified) {
-        this.mMetaModified = mMetaModified;
+        this.mMeta.put("modified",mMetaModified);
     }
 
-    public String[] getMetaCategory() {
-        return mMetaCategory.toArray(new String[mMetaCategory.size()]);
+    public String getMetaCategory() {
+        return (String) this.mMeta.get("category");
     }
 
     public void addMetaCategory(String mMetaCategory) {
-        this.mMetaCategory.add(mMetaCategory);
+        this.mMeta.put("category", mMetaCategory);
     }
 
     public String[] getMetaTags() {
-        return mMetaTags;
+        return (String[]) this.mMeta.get("tags");
     }
 
     public void setMetaTags(String[] mMetaTags) {
@@ -229,54 +229,54 @@ public class Page {
             }
 
         }
-        this.mMetaTags = tags.toArray(new String[tags.size()]);
+        this.mMeta.put("tags", tags.toArray(new String[tags.size()]));
     }
 
     public String getMetaSlug() {
-        return mMetaSlug;
+        return (String) mMeta.get("slug");
     }
 
     public void setMetaSlug(String mMetaSlug) {
-        this.mMetaSlug = mMetaSlug;
+        this.mMeta.put("slug", mMetaSlug);
     }
 
     public String getMetaLang() {
-        return mMetaLang;
+        return (String) mMeta.get("lang");
     }
 
     public void setMetaLang(String mMetaLang) {
-        this.mMetaLang = mMetaLang;
+        this.mMeta.put("lang", mMetaLang);
     }
 
     public String[] getMetaAuthors() {
-        return mMetaAuthors;
+        return (String[]) mMeta.get("authors");
     }
 
     public void setMetaAuthors(String[] mMetaAuthors) {
-        this.mMetaAuthors = mMetaAuthors;
+        this.mMeta.put("authors", mMetaAuthors);
     }
 
     public String getMetaSummary() {
-        return mMetaSummary;
+        return (String) this.mMeta.get("summary");
     }
 
     public void setMetaSummary(String mMetaSummary) {
-        this.mMetaSummary = mMetaSummary;
+        this.mMeta.put("summary", mMetaSummary);
     }
 
     public String getMetaStatus() {
-        return mMetaStatus;
+        return (String) this.mMeta.get("status");
     }
 
     public void setMetaStatus(String mMetaStatus) {
-        this.mMetaStatus = mMetaStatus;
+        this.mMeta.put("status", mMetaStatus);
     }
 
     public String[] getMetaKeywords() {
-        return mMetaKeywords;
+        return (String[]) this.mMeta.get("keywords");
     }
 
     public void setMetaKeywords(String[] mMetaKeywords) {
-        this.mMetaKeywords = mMetaKeywords;
+        this.mMeta.put("keywords", mMetaKeywords);
     }
 }

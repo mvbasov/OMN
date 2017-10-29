@@ -68,6 +68,10 @@ public class Page {
         return sb.toString();
     }
 
+    public LinkedHashMap<String,String> getPageMeta() {
+        return mMeta;
+    }
+
     public boolean appendOnNoteTop(String mPageName, String header) {
         setMdContent(header + getMdContent());
         return true;

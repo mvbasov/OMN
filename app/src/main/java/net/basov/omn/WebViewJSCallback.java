@@ -30,6 +30,8 @@ import android.text.Html;
 import android.webkit.JavascriptInterface;
 import android.widget.Toast;
 
+import java.util.LinkedHashMap;
+
 import net.basov.util.FileIO;
 
 public class WebViewJSCallback {
@@ -163,16 +165,34 @@ public class WebViewJSCallback {
         if(PFN.charAt(0) == '/') dirCount--;
         for(int i=0; i < dirCount; i++) dirPrefix += "../";
 
+        String[] htmlMetaNames = {
+                "date",
+                "modified",
+                "authors",
+                "tags",
+                "keywords",
+                "summary"
+        };
+        LinkedHashMap<String, String> pageMeta = ui.getPage().getPageMeta();
+        String htmlMeta = "";
+        for (String metaName: htmlMetaNames) {
+            if (pageMeta.containsKey(metaName)) {
+                String metaRealName = metaName;
+                if(metaName.equals("authors") && !pageMeta.get(metaName).contains(","))
+                    metaRealName = "author";
+                htmlMeta += mContext.getString(
+                        R.string.html_meta_trmplate,
+                        metaRealName,
+                        pageMeta.get(metaName)
+                );
+            }
+        }
+
         String htmlTop = mContext.getString(
                 R.string.html_top,
                 Title,      //Page title
                 dirPrefix,  //Reference to top (../*[0..n])
-                "",         //Tags
-                "",         //Date
-                "",         //Modified
-                "",         //Category
-                "",         //Authors
-                "",         //Summary
+                htmlMeta,         //Summary
 				PFN,		//Page name in top control bock
                 Title       //1-st page header as Title and top buttons block controll
         );

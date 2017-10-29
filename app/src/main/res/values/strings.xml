@@ -14,14 +14,9 @@
     Top part of any html page
         %1$s    Page title
         %2$s    Reference level to top ("../" for 1-st level subdirectory)
-        %3$s    Tags
-        %4$s    Date
-        %5$s    Modified
-        %6$s    Category
-        %7$s    Authors
-        %8$s    Summary
-		℅9$s    Page name
-        %10$s    1-st page header (function as page title)
+        %3$s    Meta information
+        %4$s    Page name
+        %5$s    1-st page header (function as page title)
     -->
     <string name="html_top"><![CDATA["<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">
 <html xmlns=\"http://www.w3.org/1999/xhtml\">
@@ -34,18 +29,10 @@
   <link rel=\"stylesheet\" type=\"text/css\" href=\"../%2$scss/highlight.css\" />
   <link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/icon?family=Material+Icons\" />
   <link rel=\"stylesheet\" href=\"../%2$sfonts/google-material/material-icons.css\"  />
-      
 
   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />
   <meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\" />
-
-  <meta name=\"tags\" content=\"%3$s\" />
-  <meta name=\"date\" content=\"%4$s\" />
-  <meta name=\"modified\" content=\"%5$s\" />
-  <meta name=\"category\" content=\"%6$s\" />
-  <meta name=\"authors\" content=\"%7$s\" />
-  <meta name=\"summary\" content=\"%8$s\" />
-
+%3$s
   <style>
     .hBtn {
       padding-left: 3px;
@@ -71,8 +58,8 @@
     }
   </script>
   <script>
-    var PageName = \'%9$s\'
-    var Title = \'%10$s\';
+    var PageName = \'%4$s\'
+    var Title = \'%5$s\';
   </script>
 
 </head>
@@ -144,14 +131,14 @@
       <i class=\"material-icons\">settings</i>
     </button>
     <br />
-    Absolute page name:<span>%9$s</span>
+    Absolute page name:<span>%4$s</span>
     <hr />
   </div>
 
   <a
     onclick=\"toggleHdrBtnVis();\">
     <h4 id=\"pageTitle\" align=\"center\">
-      %10$s
+      %5$s
       <span id=\"title_arrow\" style=\"display:none\">
         <i class=\"material-icons\">arrow_drop_down</i>
       </span>
@@ -160,6 +147,9 @@
 
   
     "]]></string>
+
+    <string name="html_meta_trmplate"><![CDATA["  <meta name=\"%1$s\" content=\"%2$s\" />
+"]]></string>
 
     <!-- Bottom part of any html page -->
     <string name="html_buttom"><![CDATA["

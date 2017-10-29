@@ -82,7 +82,9 @@ public class UI {
         else if (!pageName.equals(pages.peek().getPageName()))
             pages.push(new Page(pageName));
     }
-    
+
+    public void setModified(String ts) { pages.peek().setMetaModified(ts);}
+
     public boolean backPage(final WebView wv){
         if(pages.empty()) return false;
         pages.pop();

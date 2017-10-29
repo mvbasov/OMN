@@ -258,12 +258,14 @@ public class MainActivity extends Activity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    String timeStamp = DF.format(new Date());
+                    ui.setModified(timeStamp);
                     String newText =
                             ui.getPage().getHeaderMeta()
                             + getString(
                                 R.string.template_quick_note,
                                 // Time stamp
-                                DF.format(new Date()),
+                                timeStamp,
                                 // Note text
                                 input.getText().toString()
                             )

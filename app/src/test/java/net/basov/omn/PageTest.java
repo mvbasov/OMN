@@ -79,13 +79,13 @@ public class PageTest {
         this.realPage.setMdContent(mdHeader + mdContent);
 
         Assert.assertEquals(
-                mdContent,
-                this.realPage.getMdContent()
+                mdHeader,
+                this.realPage.getHeaderMeta()
         );
 
         Assert.assertEquals(
-                mdHeader,
-                this.realPage.getHeaderMeta()
+                mdContent,
+                this.realPage.getMdContent()
         );
     }
 
@@ -154,7 +154,7 @@ public class PageTest {
         );
 
         Assert.assertEquals(
-                "Title: title\n",
+                "Title: title\n\n",
                 this.realPage.getHeaderMeta()
         );
     }

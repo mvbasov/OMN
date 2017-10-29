@@ -28,7 +28,7 @@ import java.util.LinkedHashMap;
 
 public class Page {
 
-    private LinkedHashMap<String, Object> mMeta;
+    private LinkedHashMap<String, String> mMeta;
     private String mPageName;
     private String mInPageReference;
     private String mMdContent;
@@ -51,7 +51,21 @@ public class Page {
     }
 
     public String getHeaderMeta() {
-        return mHeaderMeta;
+        StringBuilder sb = new StringBuilder();
+        for (String key: mMeta.keySet()){
+            String metaName;
+            if (key.equals("authors") && ! key.contains(","))
+                metaName = "Author";
+            else
+                metaName = key.substring(0,1).toUpperCase() + key.substring(1);
+            sb.append(metaName);
+            sb.append(": ");
+            sb.append(mMeta.get(key));
+            sb.append("\n");
+        }
+        if(!this.mMeta.isEmpty())
+            sb.append("\n");
+        return sb.toString();
     }
 
     public boolean appendOnNoteTop(String mPageName, String header) {
@@ -89,6 +103,7 @@ public class Page {
         Boolean inHeader = true;
         Boolean emptyHeader = true;
         String mdHeader = "";
+        Boolean firstPage = true;
         String[] splitMd = mMdContent.split("\\n");
         for(String str: splitMd) {
             String trim = str.trim();
@@ -97,8 +112,7 @@ public class Page {
             if (inHeader) {
                 if (trim.length() == 0) {
                     inHeader = false;
-                    // TODO: *** (part 1 of 2)the following string is workarround to fix endless loop at new page creation
-                    //sb.append("\n");
+                    if (firstPage) sb.append("\n");
                     continue;
                 }
                 String[] filds = trim.split(":", 2);
@@ -129,7 +143,7 @@ public class Page {
                                 break;
                             case "tags":
                                 emptyHeader = false;
-                                setMetaTags(fContent.split(","));
+                                setMetaTags(fContent);
                                 break;
                             case "slug":
                                 emptyHeader = false;
@@ -145,13 +159,10 @@ public class Page {
                                 break;
                             case "authors":
                                 emptyHeader = false;
-                                setMetaAuthors(fContent.split(","));
+                                setMetaAuthors(fContent);
                                 break;
                             case "author":
-                                emptyHeader = false;
-                                String[] s = new String[1];
-                                s[0] = fContent;
-                                setMetaAuthors(s);
+                                setMetaAuthors(fContent);
                                 break;
                             case "status":
                                 emptyHeader = false;
@@ -159,15 +170,12 @@ public class Page {
                                 break;
                             case "keywords":
                                 emptyHeader = false;
-                                setMetaKeywords(fContent.split(","));
+                                setMetaKeywords(fContent);
                                 break;
                             default:
                                 addLog("Unknown pelican header string:>" + fName + "<");
                                 inHeader = false;
                                 sb.append(str).append("\n");
-                        }
-                        if(inHeader) {
-                            mdHeader += str + "\n";
                         }
                     }
                 } else {
@@ -176,9 +184,8 @@ public class Page {
             } else {
                 sb.append(str).append("\n");
             }
+            firstPage = false;
         }
-        // TODO: *** (part 2 of 2)the following string is workarround to fix endless loop at new page creation
-        if(!emptyHeader) sb.append(" \n");
         this.mMdContent = sb.toString();
         this.mHeaderMeta = mdHeader;
     }
@@ -216,20 +223,12 @@ public class Page {
         this.mMeta.put("category", mMetaCategory);
     }
 
-    public String[] getMetaTags() {
-        return (String[]) this.mMeta.get("tags");
+    public String getMetaTags() {
+        return this.mMeta.get("tags");
     }
 
-    public void setMetaTags(String[] mMetaTags) {
-        ArrayList<String> tags = new ArrayList<String>();
-        for(String s : mMetaTags) {
-            String s1 = s.trim();
-            if (s1.length() > 0) {
-                tags.add(s1);
-            }
-
-        }
-        this.mMeta.put("tags", tags.toArray(new String[tags.size()]));
+    public void setMetaTags(String mMetaTags) {
+        this.mMeta.put("tags", mMetaTags);
     }
 
     public String getMetaSlug() {
@@ -248,11 +247,11 @@ public class Page {
         this.mMeta.put("lang", mMetaLang);
     }
 
-    public String[] getMetaAuthors() {
-        return (String[]) mMeta.get("authors");
+    public String getMetaAuthors() {
+        return mMeta.get("authors");
     }
 
-    public void setMetaAuthors(String[] mMetaAuthors) {
+    public void setMetaAuthors(String mMetaAuthors) {
         this.mMeta.put("authors", mMetaAuthors);
     }
 
@@ -272,11 +271,11 @@ public class Page {
         this.mMeta.put("status", mMetaStatus);
     }
 
-    public String[] getMetaKeywords() {
-        return (String[]) this.mMeta.get("keywords");
+    public String getMetaKeywords() {
+        return this.mMeta.get("keywords");
     }
 
-    public void setMetaKeywords(String[] mMetaKeywords) {
+    public void setMetaKeywords(String mMetaKeywords) {
         this.mMeta.put("keywords", mMetaKeywords);
     }
 }

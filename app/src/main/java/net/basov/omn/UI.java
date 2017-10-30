@@ -131,11 +131,16 @@ public class UI {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(wv, url);
                 Context c = wv.getContext();
+                String actionButtons = TextTools.escapeJavaScriptFunctionParameter(c.getString(
+                        R.string.html_action_button_header,
+                        getPageName()
+                ));
                 SharedPreferences defSharedPref = PreferenceManager.getDefaultSharedPreferences(c);
                 String setPageJS = view.getContext()
                         .getString(
                                 R.string.set_html_page_js,
                                 getPageName(),
+                                actionButtons,
                                 //Enable Home button
                                 defSharedPref.getBoolean(
                                     c.getString(R.string.pk_btn_enable_home),

@@ -72,6 +72,8 @@ Button code:
 
 #### <button onclick="Android.emailButtonCallback(PFN, Title)"> <i class="material-icons">email</i> </button> "Send page by E-Mail"
 
+You can send current page by E-Mail. If you press this button on /default/Build page my special address to collect platform statistic will be substituted automaticaly.
+
 Button code:
 
     <button

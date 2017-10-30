@@ -98,6 +98,12 @@ public class WebViewJSCallback {
         Intent i = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"));
         i.putExtra(android.content.Intent.EXTRA_SUBJECT, title);
 //        i.setType("text/html");
+
+        // Help user send platform statistic to correct dev. address
+        if (pn.equals("/default/Build"))
+            // Simplest defence from spamer - put e-mail address in different part of code
+            i.putExtra(Intent.EXTRA_EMAIL, new String[]{Constants.EMA + "@" + Constants.EMA_DOM});
+
         i.putExtra(
                 Intent.EXTRA_HTML_TEXT,
                 Html.fromHtml(

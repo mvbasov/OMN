@@ -43,6 +43,10 @@
                 <action android:name="${applicationId}.QUICK_NOTE" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="${applicationId}.NEW_PAGE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
 
         <activity

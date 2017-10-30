@@ -88,7 +88,7 @@ public class FileIO {
         }
     }
 
-    public static boolean createPageIfNotExists(Context c, String pageName, String wvUserAgent) {
+    public static boolean createPageIfNotExists(Context c, String pageName, String mtitle, String wvUserAgent) {
         final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String fileName = "/md" + pageName + ".md";
         File file = new File(getFilesDir(c), fileName);
@@ -101,7 +101,12 @@ public class FileIO {
                 String ts = DF.format(new Date());
                 // TODO: remove debug
                 //MyLog.LogD("* Current time: "+ts);
-                String title = pageName;
+                String title = "";
+
+                if (mtitle.length() == 0)
+                    title = pageName;
+                else
+                    title = mtitle;
                 if(pageName.equals("/default/Build")) title = "Build information";
                 if(pageName.equals("/Start")) title = "My start page";
                 if(pageName.equals("/QuickNotes")) title = "My quick notes";

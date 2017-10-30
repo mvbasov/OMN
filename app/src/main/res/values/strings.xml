@@ -103,6 +103,12 @@
       <i class=\"material-icons\">home</i>
     </button>
     <button
+      id=\"btnAdd\"
+      class=\"hBtn\"
+      onclick=\"Android.newPageButtonCallback()\">
+      <i class=\"material-icons\">add_box</i>
+    </button>
+    <button
       id=\"btnLink\"
       class=\"hBtn\"
       onclick=\"Android.linkButtonCallback(PageName, Title)\">

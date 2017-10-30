@@ -30,6 +30,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.DialogPreference;
 import android.preference.PreferenceManager;
 import android.view.KeyEvent;
 import android.webkit.ConsoleMessage;
@@ -287,6 +288,79 @@ public class MainActivity extends Activity {
                 }
             });
             builder.show();
+            ui.displayPage(mainUI_WV);
+        }if (intent != null && intent.getAction().equals(this.getPackageName()+".NEW_PAGE")) {
+        /* Create new page and put link to it on top of current page */
+
+            final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            final String timeStamp = DF.format(new Date());
+            ui.setModified(timeStamp);
+            final String currentPageName = ui.getPage().getPageName();
+            final String currentMeta = ui.getPage().getHeaderMeta();
+            final String currentContent =  ui.getPage().getMdContent();
+
+
+            AlertDialog.Builder builderName = new AlertDialog.Builder(this);
+            builderName.setTitle("New page (file) name");
+            final EditText inputName = new EditText(this);
+            builderName.setView(inputName);
+            builderName.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    final String newPageNameEntered = inputName.getText().toString();
+                    final String newPageName = currentPageName.substring(0,currentPageName.lastIndexOf("/") + 1) + newPageNameEntered;
+                    if (FileIO.isFileExists(MainActivity.this, "/md/" + newPageName + ".md")) {
+                        Toast.makeText(MainActivity.this, "Page already exists", Toast.LENGTH_SHORT).show();
+                        //TODO: implement add link to current page if page exists
+                    } else {
+                        AlertDialog.Builder builderTitle = new AlertDialog.Builder(MainActivity.this);
+                        builderTitle.setTitle("New page title");
+                        final EditText inputTitle = new EditText(MainActivity.this);
+                        builderTitle.setView(inputTitle);
+                        builderTitle.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String newPageTitle = inputTitle.getText().toString();
+                                String linkToNewPage = String.format("* [%s](%s.html)\n", newPageTitle, newPageNameEntered);
+                                //Toast.makeText(MainActivity.this, linkToNewPage, Toast.LENGTH_SHORT).show();
+                                String newText =
+                                        currentMeta
+                                        + linkToNewPage
+                                        + currentContent;
+                                FileIO.writePageToFile(
+                                        MainActivity.this,
+                                        currentPageName,
+                                        newText
+                                );
+
+                                FileIO.createPageIfNotExists(MainActivity.this, newPageName,newPageTitle, "");
+
+                                Intent i = new Intent();
+                                i.setAction(MainActivity.this.getPackageName()+".EDIT_PAGE");
+                                i.putExtra("name", "/"+newPageName);
+                                MainActivity.this.startActivity(i);
+
+                            }
+
+                        });
+                        builderTitle.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                        builderTitle.show();
+                    }
+                }
+            });
+            builderName.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            builderName.show();
+
             ui.displayPage(mainUI_WV);
         }
     }

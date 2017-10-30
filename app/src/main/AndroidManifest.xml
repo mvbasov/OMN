@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="net.basov.omn">
+    package="net.basov.omn"
+    android:sharedUserId="@string/shared_user_id"
+    android:sharedUserLabel="@string/shared_user_label" >
     
     <uses-permission
         android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />

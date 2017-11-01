@@ -132,10 +132,8 @@ public class FileIO {
                     String cmVersionString = "";
                     String cmVersion = AppDetails.getSystemProperty("ro.cm.version");
                     if (cmVersion.length() != 0)
-                        cmVersionString = "* CyanogenMod version: "
-                                + cmVersion
-                                + "\n";
-
+                        cmVersionString = "\n* CyanogenMod version: "
+                                + cmVersion;
                     // Get App. name and build
                     String appInfo = c.getResources().getString(R.string.app_name);
                     try {

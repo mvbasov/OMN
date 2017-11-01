@@ -80,12 +80,12 @@ public class AppDetails {
 
     /* From cmupdaterapp code. Original source deleted from code.google.com */
     public static String getSystemProperty(String propName){
-        String line;
+        String line = "";
         BufferedReader input = null;
         try {
             Process p = Runtime.getRuntime().exec("getprop " + propName);
             input = new BufferedReader(new InputStreamReader(p.getInputStream()), 1024);
-            line = input.readLine();
+            line = input.readLine().trim();
             input.close();
         }
         catch (IOException ex) {

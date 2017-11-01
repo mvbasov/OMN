@@ -255,7 +255,7 @@ Author: %4$s
     %5$d    android.os.Build.VERSION.SDK_INT
     %6$s    android.os.Build.VERSION.RELEASE
     %7$s    android.os.Build.DISPLAY
-    %8$s    ro.cm.version (with "* CyanogenMod version: %8$s\n" or "")
+    %8$s    ro.cm.version (with "\n* CyanogenMod version: %8$s" or "")
     %9$s    Screen resolution
     %10s    UserAgent
     %11$s   App name and build
@@ -273,8 +273,7 @@ Author: %4$s
 * Model (and Product): %1$s (%3$s)
 * OS API Level: %5$d
 * Android version : %6$s
-* Build.DISPLAY: %7$s
-%8$s
+* Build.DISPLAY: %7$s%8$s
 * Screen w\\*h [x\\*y dpi]: %9$s
 * User Agent: \"%10$s\"
 

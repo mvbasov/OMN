@@ -28,6 +28,10 @@
             android:defaultValue="true"
             android:key="@string/pk_btn_enable_home" />
         <CheckBoxPreference
+            android:title="Add new page"
+            android:defaultValue="true"
+            android:key="@string/pk_btn_enable_add_page" />
+        <CheckBoxPreference
             android:title="Link to clipboard"
             android:defaultValue="true"
             android:key="@string/pk_btn_enable_link" />

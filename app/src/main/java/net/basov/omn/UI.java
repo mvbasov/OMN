@@ -45,12 +45,16 @@ public class UI {
         ));
     }
     
+    /**
+     * Display start page
+     * If /Start exists display it else display /default/Welcome
+     * return name of displayed page
+     */
     public static String displayStartPage(WebView wv) {
         String goPage = "/" + Constants.WELCOME_PAGE;
         if (FileIO.isFileExists(wv.getContext(), "/md/" + Constants.START_PAGE + ".md"))
             goPage = "/" + Constants.START_PAGE;
         Page page = new Page(goPage);
-        //MyLog.LogD("Call DSP from displayStartPage "+ ui.getPageName());
         displayPage(wv, page);
         return page.getPageName();
     }
@@ -71,6 +75,11 @@ public class UI {
                         //Enable Home button
                         defSharedPref.getBoolean(
                                 c.getString(R.string.pk_btn_enable_home),
+                                true
+                        ),
+                        //Enable Add page button
+                        defSharedPref.getBoolean(
+                                c.getString(R.string.pk_btn_enable_add_page),
                                 true
                         ),
                         //Enable Link button

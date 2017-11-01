@@ -180,11 +180,12 @@
         %1$s    Page name
         %2$b    Inject action button header
         %3$b    Enable Home button
-        %4$b    Enable Link button
-        %5$b    Enable E-Mail button
-        %6$b    Enable File browser button
-        %7$b    Enable Create shortcut button
-        %8$b    Enable QuickNotes button
+        %4$b    Enable Add new page button
+        %5$b    Enable Link button
+        %6$b    Enable E-Mail button
+        %7$b    Enable File browser button
+        %8$b    Enable Create shortcut button
+        %9$b    Enable QuickNotes button
     -->
     <string name="set_html_page_js">
         javascript:
@@ -198,11 +199,12 @@
                 document.getElementById(id).style.display=\'none\';
         };
         enableButton(\'btnHome\', %3$b);
-        enableButton(\'btnLink\', %4$b);
-        enableButton(\'btnEMail\', %5$b);
-        enableButton(\'btnFolder\', %6$b);
-        enableButton(\'btnShortcut\', %7$b);
-        enableButton(\'btnQuickNotes\', %8$b);
+        enableButton(\'btnAdd\', %4$b);
+        enableButton(\'btnLink\', %5$b);
+        enableButton(\'btnEMail\', %6$b);
+        enableButton(\'btnFolder\', %7$b);
+        enableButton(\'btnShortcut\', %8$b);
+        enableButton(\'btnQuickNotes\', %9$b);
     </string>
 
     <!--
@@ -320,6 +322,7 @@ This page generated automaticaly.
     <string name="pk_notes_author" translatable="false">notesAuthor</string>
     <string name="pk_enable_code_highlight" translatable="false">enableCodeHighlight</string>
     <string name="pk_btn_enable_home" translatable="false">btnEnableHome</string>
+    <string name="pk_btn_enable_add_page" translatable="false">btnEnableAddPage</string>
     <string name="pk_btn_enable_link" translatable="false">btnEnableLink</string>
     <string name="pk_btn_enable_email" translatable="false">btnEnableEmail</string>
     <string name="pk_btn_enable_filemanager" translatable="false">btnEnableFilemanager</string>

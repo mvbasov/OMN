@@ -170,6 +170,7 @@ public class WebViewJSCallback {
     @JavascriptInterface
     public void saveHTML(String html, String PFN, String Title) {
         Toast.makeText(mContext, "Save HTML.", Toast.LENGTH_SHORT).show();
+        //UI ui = ((UI) mContext.getApplicationContext()).getInstance();
         UI ui = UI.getInstance();
 
         /* Make directory prefix for right css reference */
@@ -211,12 +212,12 @@ public class WebViewJSCallback {
         );
         String htmlBottom = mContext.getString(R.string.html_buttom);
         String htmlPage = htmlTop + html + htmlBottom;
-        if(FileIO.isFileExists(mContext, "md/"+ui.getPageName()+".md"))
-            FileIO.saveHTML(mContext, ui.getPageName(), htmlPage);
-        ui.setHTML(htmlPage);
-        ui.setmHTMLReady(true);
+        if(FileIO.isFileExists(mContext, "md"+PFN+".md"))
+            FileIO.saveHTML(mContext, PFN, htmlPage);
+        //ui.setHTML(htmlPage);
+        //ui.setmHTMLReady(true);
         Intent i = new Intent();
-        i.setAction(mContext.getPackageName()+".REDISPLAY_PAGE");
+        i.setAction(mContext.getPackageName()+".HTML_READY_REDISPLAY");
 
         mContext.startActivity(i);
     }

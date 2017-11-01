@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 package net.basov.omn;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -28,16 +29,33 @@ import android.webkit.WebView;
 import java.util.Stack;
 
 import net.basov.util.FileIO;
-//import net.basov.util.MyLog;
+import net.basov.util.MyLog;
 import net.basov.util.TextTools;
 
 /**
  * Created by mvb on 8/1/17.
  */
 
-public class UI {
+public class UI extends Application{
 
-    private String mHTML;
+    // TODO: workaround. Singleton is sucks onAndroid.
+    // TODO: Add new page operate sometime. Another functionality operate...
+    // TODO: Page need to be stateless...
+    private Stack<Page> pages = new Stack<Page>();
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        MyLog.LogI("UI onCreate");
+        mInstance = this.getInstance();
+        //dataClean();
+        if (pages == null) {
+            MyLog.LogI("pages empy at onCreate call. Initialize.");
+            pages = new Stack<Page>();
+        }
+    }
+
+    //private String mHTML;
 
     public boolean ismHTMLReady() {
         return mHTMLReady;
@@ -49,17 +67,16 @@ public class UI {
 
     private boolean mHTMLReady;
 
-    private Stack<Page> pages = null;
+    private static UI mInstance;
 
-    private static UI mInstance = null;
-
-    private UI() { dataClean(); }
+    //private UI() { }
 
     public static UI getInstance(){
-        if(mInstance == null)
-        {
+        if(mInstance == null) {
+            MyLog.LogI("Init new UI instance");
             mInstance = new UI();
         }
+        MyLog.LogI("Get UI instance");
         return mInstance;
     }
 
@@ -67,10 +84,10 @@ public class UI {
         pages = new Stack<Page>();
     }
     
-    public void setHTML(String html){
-        mHTML = html;
-        setmHTMLReady(true);
-    }
+//    public void setHTML(String html){
+//        mHTML = html;
+//        setmHTMLReady(true);
+//    }
 
     public void setMdContent (String content) {
         pages.peek().setMdContent(content);
@@ -96,7 +113,7 @@ public class UI {
 
     public String getMdContent () {return pages.peek().getMdContent();}
 
-    public String getPageName() {
+    private String getPageName() {
         return pages.peek().getPageName();
     }
 
@@ -205,7 +222,7 @@ public class UI {
     public boolean createHTML(final WebView wv) {
         Context c = wv.getContext();
         setMdContent("");
-        String mdContent = FileIO.getStringFromFile(
+        final String mdContent = FileIO.getStringFromFile(
                 FileIO.getFilesDir(wv.getContext())+ "/md" +getPageName() + ".md"
         );
         if (mdContent.length() == 0 ) {
@@ -250,7 +267,7 @@ public class UI {
 
                                     getPageName(),
                                     getPageTitle(),
-                                    TextTools.escapeJavaScriptFunctionParameter(getMdContent()),
+                                    TextTools.escapeJavaScriptFunctionParameter(mdContent),
                                     //Enable highlight
                                     defSharedPref.getBoolean(
                                             c.getString(R.string.pk_enable_code_highlight),

@@ -72,10 +72,18 @@ public class MyWebViewClient extends WebViewClient {
                 /* For relative uri add / to begin because relative already translated to absolute */        
                 if(pageName.charAt(0) != '/') pageName = "/" + pageName;
                 
-                UI ui = UI.getInstance();
-                ui.setPageName(pageName);
+                //UI ui = ((UI) view.getContext().getApplicationContext()).getInstance();
+                //UI ui = UI.getInstance();
+
+                //ui.setPageName(pageName);
                 //Log.d(MainActivity.TAG, "Call DP from myWvCl processUri " + uri.toString() + ", \nPage name: " + pageName);
-                ui.displayPage(view);
+                //ui.displayPage(view);
+
+                Intent intentDisplayPage = new Intent(view.getContext().getApplicationContext(),
+                        MainActivity.class);
+                intentDisplayPage.putExtra("page_name", pageName);
+                intentDisplayPage.setAction(Intent.ACTION_MAIN);
+                view.getContext().getApplicationContext().startActivity(intentDisplayPage);
 
                 return false;
             case "http":

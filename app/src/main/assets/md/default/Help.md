@@ -1,9 +1,10 @@
 Title: Help
 Date: 2017-10-22 19:31:15
-Modified: 2017-10-22 19:31:15
+Modified: 2017-11-01 22:06:43
 Category: Index
 Tags: Markdown,
 Lang: en
+Slug: omn-help
 Author: Mikhail Basov
 Summary: Open Markdown Note Help
 
@@ -59,6 +60,17 @@ Button code:
     <button
         onclick="Android.homeButtonCallback()">
         <i class="material-icons">home</i>
+    </button>
+
+#### <button onclick="Android.newPageButtonCallback()"> <i class="material-icons">add_box</i> </button> "Add new page"
+
+Create new page and add link to it on top of current page. Input new page (file) name and title of new page. New page file name relative to current page name directory. As title automaticaly substitute page name which can be edited. Curent page modification time set automaticaly.
+
+Button code:
+
+    <button
+        onclick="Android.newPageButtonCallback()">
+        <i class="material-icons">add_box</i>
     </button>
 
 #### <button onclick="Android.linkButtonCallback(PFN, Title)"> <i class="material-icons">insert_link</i> </button> "Copy link to page to clipboard"

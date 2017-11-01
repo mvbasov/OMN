@@ -1,6 +1,6 @@
 Title: Extended Markdown syntax
 Date: 2017-10-11 01:40:42
-Modified: 2017-10-11 01:40:42
+Modified: 2017-11-01 22:08:15
 Category: Markdown
 Category: Documentation
 Tags: Markdown,
@@ -8,9 +8,25 @@ Lang: en
 Authors: Mikhail Basov
 Summary: Extended Markdown syntax of Open Markdown Note
 
+* [Links](#links)
+  * [Inline links](#links-inline)
+  * [Reference-style links](#links-reference)
+* [Supported URI schemas](#uri)
+  * [geo:](#uri-geo)
+  * [tel:](#uri-tel)
+  * [mailto:](#uri-mailto)
+  * [sms:](#uri-sms)
+  * [market:](#uri-market)
+* [Highlight text](#highlight-text)
+* [Google Material Design icons](#google-icons)
+
+<a name="links" />
+
 ### Links
 
 Markdown supports two style of links: *inline* and *reference*.
+
+<a name="links-inline" />
 
 #### Inline links
 
@@ -36,6 +52,8 @@ Will produce:
 If you're referring to a local page, you must use relative paths:
 
     [My start page](../Start.html)
+
+<a name="links-reference" />
 
 #### Reference-style links
 
@@ -63,12 +81,16 @@ That is:
 *   optionally followed by a title attribute for the link, enclosed
     in double or single quotes, or enclosed in parentheses.
 
+<a name="uri" />
+
 #### Supported URI schemas
 
 URI schema is protocol which will be used to follow link.
 http:// or https:// uri schemas open web pages, usually.
 
 This program also support the following uri:
+
+<a name="uri-geo" />
 
 ##### "geo:"
 
@@ -78,6 +100,8 @@ Open map or navigation application and point it to geographical coordinates
 
 Renders to:
 [Some place I don't know where it is](geo:55.55,11.11)
+
+<a name="uri-tel" />
 
 ##### "tel:"
 
@@ -96,6 +120,8 @@ If you wish to place USSD code as number use aditional rules:
 
 Renders to: [Balance \*100#](tel:*100 %23)
 
+<a name="uri-mailto" />
+
 ##### "mailto:"
 
 Call E-Mail application.
@@ -106,6 +132,8 @@ Renders to: [E-Mail predefined letter](mailto:someone@example.com?subject=Subjec
 
 Subject an body parts optional
 
+<a name="uri-sms" />
+
 ##### "sms:"
 
 Call SMS application.
@@ -113,6 +141,8 @@ Call SMS application.
     [Predefined SMS](sms:+8765?body=SMS text)
 
 Renders to: [Predefined SMS](sms:+8765?body=SMS text)
+
+<a name="uri-market" />
 
 ##### "market:"
 
@@ -125,6 +155,8 @@ Renders to: [Google Maps](market://details?id=com.google.android.apps.maps)
 This type of link work only inside Android. Equivalent links operates on pages exported html pages are
 
     [Google Maps](http://play.google.com/store/apps/details?id=com.google.android.apps.maps)
+
+<a name="highlight-text" />
 
 ### Highlight text 
 
@@ -161,6 +193,8 @@ Code:
 ``` html
 Some text <span class="bg-yellow fg-red">text with both attributes changed</span>
 ```
+
+<a name="google-icons" />
 
 ### Google Material Design icons
 

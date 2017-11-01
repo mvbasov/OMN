@@ -20,15 +20,17 @@ Summary: Extended Markdown syntax of Open Markdown Note
 * [Highlight text](#highlight-text)
 * [Google Material Design icons](#google-icons)
 
+- - -
+
 <a name="links" />
 
-### Links
+#### Links
 
 Markdown supports two style of links: *inline* and *reference*.
 
 <a name="links-inline" />
 
-#### Inline links
+##### Inline links
 
 In both styles, the link text is delimited by [square brackets].
 
@@ -55,7 +57,7 @@ If you're referring to a local page, you must use relative paths:
 
 <a name="links-reference" />
 
-#### Reference-style links
+##### Reference-style links
 
 Reference-style links use a second set of square brackets, inside
 which you place a label of your choosing to identify the link:
@@ -81,9 +83,11 @@ That is:
 *   optionally followed by a title attribute for the link, enclosed
     in double or single quotes, or enclosed in parentheses.
 
+- - -
+
 <a name="uri" />
 
-#### Supported URI schemas
+### Supported URI schemas
 
 URI schema is protocol which will be used to follow link.
 http:// or https:// uri schemas open web pages, usually.
@@ -92,7 +96,7 @@ This program also support the following uri:
 
 <a name="uri-geo" />
 
-##### "geo:"
+#### "geo:"
 
 Open map or navigation application and point it to geographical coordinates
 
@@ -103,7 +107,7 @@ Renders to:
 
 <a name="uri-tel" />
 
-##### "tel:"
+#### "tel:"
 
 Open telephony application an place provided number
 
@@ -122,7 +126,7 @@ Renders to: [Balance \*100#](tel:*100 %23)
 
 <a name="uri-mailto" />
 
-##### "mailto:"
+#### "mailto:"
 
 Call E-Mail application.
 
@@ -134,7 +138,7 @@ Subject an body parts optional
 
 <a name="uri-sms" />
 
-##### "sms:"
+#### "sms:"
 
 Call SMS application.
 
@@ -144,7 +148,7 @@ Renders to: [Predefined SMS](sms:+8765?body=SMS text)
 
 <a name="uri-market" />
 
-##### "market:"
+#### "market:"
 
 Call Google Play Market application and open some application page.
 
@@ -155,6 +159,8 @@ Renders to: [Google Maps](market://details?id=com.google.android.apps.maps)
 This type of link work only inside Android. Equivalent links operates on pages exported html pages are
 
     [Google Maps](http://play.google.com/store/apps/details?id=com.google.android.apps.maps)
+
+- - -
 
 <a name="highlight-text" />
 
@@ -193,6 +199,8 @@ Code:
 ``` html
 Some text <span class="bg-yellow fg-red">text with both attributes changed</span>
 ```
+
+- - -
 
 <a name="google-icons" />
 

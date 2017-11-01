@@ -65,7 +65,7 @@ public class MainActivity extends Activity {
         /* Set default preferences at first run and after preferences version upgrade */
         SharedPreferences defSharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = defSharedPref.edit();
-        final int currePrefVersion = 6;
+        final int currePrefVersion = 7;
         switch (defSharedPref.getInt(getString(R.string.pk_pref_version), 0)) {
             case 0: // initial
                 editor.putBoolean(getString(R.string.pk_use_view_directory), false);
@@ -77,6 +77,7 @@ public class MainActivity extends Activity {
                 editor.putBoolean(getString(R.string.pk_pref_changed), false);
                 editor.putBoolean(getString(R.string.pk_enable_code_highlight), true);
                 editor.putBoolean(getString(R.string.pk_btn_enable_quicknotes), true);
+                editor.putBoolean(getString(R.string.pk_btn_enable_add_page), true);
                 editor.putInt(getString(R.string.pk_pref_version), currePrefVersion);
                 editor.commit();
                 break;
@@ -89,6 +90,7 @@ public class MainActivity extends Activity {
                 editor.putBoolean(getString(R.string.pk_pref_changed), false);
                 editor.putBoolean(getString(R.string.pk_enable_code_highlight), true);
                 editor.putBoolean(getString(R.string.pk_btn_enable_quicknotes), true);
+                editor.putBoolean(getString(R.string.pk_btn_enable_add_page), true);
                 editor.putInt(getString(R.string.pk_pref_version), currePrefVersion);
                 editor.commit();
                 break;
@@ -97,6 +99,7 @@ public class MainActivity extends Activity {
                 editor.putBoolean(getString(R.string.pk_pref_changed), false);
                 editor.putBoolean(getString(R.string.pk_enable_code_highlight), true);
                 editor.putBoolean(getString(R.string.pk_btn_enable_quicknotes), true);
+                editor.putBoolean(getString(R.string.pk_btn_enable_add_page), true);
                 editor.putInt(getString(R.string.pk_pref_version), currePrefVersion);
                 editor.commit();
                 break;
@@ -104,17 +107,25 @@ public class MainActivity extends Activity {
                 editor.putBoolean(getString(R.string.pk_pref_changed), false);
                 editor.putBoolean(getString(R.string.pk_enable_code_highlight), true);
                 editor.putBoolean(getString(R.string.pk_btn_enable_quicknotes), true);
+                editor.putBoolean(getString(R.string.pk_btn_enable_add_page), true);
                 editor.putInt(getString(R.string.pk_pref_version), currePrefVersion);
                 editor.commit();
                 break;
             case 4:
                 editor.putBoolean(getString(R.string.pk_enable_code_highlight), true);
                 editor.putBoolean(getString(R.string.pk_btn_enable_quicknotes), true);
+                editor.putBoolean(getString(R.string.pk_btn_enable_add_page), true);
                 editor.putInt(getString(R.string.pk_pref_version), currePrefVersion);
                 editor.commit();
                 break;
             case 5:
                 editor.putBoolean(getString(R.string.pk_btn_enable_quicknotes), true);
+                editor.putBoolean(getString(R.string.pk_btn_enable_add_page), true);
+                editor.putInt(getString(R.string.pk_pref_version), currePrefVersion);
+                editor.commit();
+                break;
+            case 6:
+                editor.putBoolean(getString(R.string.pk_btn_enable_add_page), true);
                 editor.putInt(getString(R.string.pk_pref_version), currePrefVersion);
                 editor.commit();
                 break;

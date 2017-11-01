@@ -64,7 +64,7 @@ public class PageTest {
 
         Assert.assertEquals(
                 "title",
-                this.realPage.getMetaTitle()
+                this.realPage.getPageTitleOrName()
         );
     }
 
@@ -80,7 +80,7 @@ public class PageTest {
 
         Assert.assertEquals(
                 mdHeader,
-                this.realPage.getHeaderMeta()
+                this.realPage.getMetaHeaderAsString()
         );
 
         Assert.assertEquals(
@@ -101,7 +101,7 @@ public class PageTest {
 
         Assert.assertEquals(
                 "",
-                this.realPage.getHeaderMeta()
+                this.realPage.getMetaHeaderAsString()
         );
     }
 
@@ -117,7 +117,7 @@ public class PageTest {
 
         Assert.assertEquals(
                 "",
-                this.realPage.getHeaderMeta()
+                this.realPage.getMetaHeaderAsString()
         );
     }
 
@@ -133,7 +133,7 @@ public class PageTest {
 
         Assert.assertEquals(
                 "",
-                this.realPage.getHeaderMeta()
+                this.realPage.getMetaHeaderAsString()
         );
     }
 
@@ -155,7 +155,7 @@ public class PageTest {
 
         Assert.assertEquals(
                 "Title: title\n\n",
-                this.realPage.getHeaderMeta()
+                this.realPage.getMetaHeaderAsString()
         );
     }
 

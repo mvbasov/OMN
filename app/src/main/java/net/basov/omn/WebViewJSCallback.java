@@ -171,7 +171,7 @@ public class WebViewJSCallback {
     public void saveHTML(String html, String PFN, String Title) {
         Toast.makeText(mContext, "Save HTML.", Toast.LENGTH_SHORT).show();
         //UI ui = ((UI) mContext.getApplicationContext()).getInstance();
-        UI ui = UI.getInstance();
+        //UI ui = UI.getInstance();
 
         /* Make directory prefix for right css reference */
         int dirCount = PFN.length() - PFN.replaceAll("/","").length();
@@ -187,7 +187,16 @@ public class WebViewJSCallback {
                 "keywords",
                 "summary"
         };
-        LinkedHashMap<String, String> pageMeta = ui.getPage().getPageMeta();
+        Page page = new Page(PFN);
+        page.setMdContent(
+                FileIO.getStringFromFile(
+                        FileIO.getFilesDir(mContext)
+                                + "/md"
+                                + PFN
+                                + ".md"
+                )
+        );
+        LinkedHashMap<String, String> pageMeta = page.getPageMeta();
         String htmlMeta = "";
         for (String metaName: htmlMetaNames) {
             if (pageMeta.containsKey(metaName)) {
@@ -217,7 +226,7 @@ public class WebViewJSCallback {
         //ui.setHTML(htmlPage);
         //ui.setmHTMLReady(true);
         Intent i = new Intent();
-        i.setAction(mContext.getPackageName()+".HTML_READY_REDISPLAY");
+        i.setAction(mContext.getPackageName()+".REDISPLAY_PAGE");
 
         mContext.startActivity(i);
     }

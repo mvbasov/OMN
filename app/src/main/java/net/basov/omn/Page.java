@@ -19,7 +19,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 package net.basov.omn;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 /**
@@ -32,7 +31,6 @@ public class Page {
     private String mPageName;
     private String mInPageReference;
     private String mMdContent;
-    private String mHeaderMeta;
     private String mLog;
 
 
@@ -50,7 +48,7 @@ public class Page {
         mLog = "";
     }
 
-    public String getHeaderMeta() {
+    public String getMetaHeaderAsString() {
         StringBuilder sb = new StringBuilder();
         for (String key: mMeta.keySet()){
             String metaName;
@@ -106,7 +104,6 @@ public class Page {
         StringBuilder sb = new StringBuilder();
         Boolean inHeader = true;
         Boolean emptyHeader = true;
-        String mdHeader = "";
         Boolean firstPage = true;
         String[] splitMd = mMdContent.split("\\n");
         for(String str: splitMd) {
@@ -130,51 +127,19 @@ public class Page {
                             ) {
                         switch (fName) {
                             case "title":
-                                setMetaTitle(fContent);
-                                emptyHeader = false;
-                                break;
                             case "date":
-                                setMetaDate(fContent);
-                                emptyHeader = false;
-                                break;
                             case "modified":
-                                emptyHeader = false;
-                                setMetaModified(fContent);
-                                break;
                             case "category":
-                                emptyHeader = false;
-                                addMetaCategory(fContent);
-                                break;
                             case "tags":
-                                emptyHeader = false;
-                                setMetaTags(fContent);
-                                break;
                             case "slug":
-                                emptyHeader = false;
-                                setMetaSlug(fContent);
-                                break;
                             case "lang":
-                                emptyHeader = false;
-                                setMetaLang(fContent);
-                                break;
                             case "summary":
-                                emptyHeader = false;
-                                setMetaSummary(fContent);
-                                break;
                             case "authors":
-                                emptyHeader = false;
-                                setMetaAuthors(fContent);
-                                break;
                             case "author":
-                                setMetaAuthors(fContent);
-                                break;
                             case "status":
-                                emptyHeader = false;
-                                setMetaStatus(fContent);
-                                break;
                             case "keywords":
                                 emptyHeader = false;
-                                setMetaKeywords(fContent);
+                                this.mMeta.put(fName, fContent);
                                 break;
                             default:
                                 addLog("Unknown pelican header string:>" + fName + "<");
@@ -191,95 +156,14 @@ public class Page {
             firstPage = false;
         }
         this.mMdContent = sb.toString();
-        this.mHeaderMeta = mdHeader;
     }
 
-    public String getMetaTitle() {
+    public String getPageTitleOrName() {
         return this.mMeta.get("title") != null ? (String) this.mMeta.get("title") : mPageName;
-    }
-
-    public void setMetaTitle(String mMetaTitle) {
-        this.mMeta.put("title", mMetaTitle);
-        //this.mMetaTitle = mMetaTitle;
-    }
-
-    public String getMetaDate() {
-        return (String) this.mMeta.get("date");
-    }
-
-    public void setMetaDate(String mMetaDate) {
-        this.mMeta.put("date", mMetaDate);
-    }
-
-    public String getMetaModified() {
-        return (String) this.mMeta.get("modified");
     }
 
     public void setMetaModified(String mMetaModified) {
         this.mMeta.put("modified",mMetaModified);
     }
 
-    public String getMetaCategory() {
-        return (String) this.mMeta.get("category");
-    }
-
-    public void addMetaCategory(String mMetaCategory) {
-        this.mMeta.put("category", mMetaCategory);
-    }
-
-    public String getMetaTags() {
-        return this.mMeta.get("tags");
-    }
-
-    public void setMetaTags(String mMetaTags) {
-        this.mMeta.put("tags", mMetaTags);
-    }
-
-    public String getMetaSlug() {
-        return (String) mMeta.get("slug");
-    }
-
-    public void setMetaSlug(String mMetaSlug) {
-        this.mMeta.put("slug", mMetaSlug);
-    }
-
-    public String getMetaLang() {
-        return (String) mMeta.get("lang");
-    }
-
-    public void setMetaLang(String mMetaLang) {
-        this.mMeta.put("lang", mMetaLang);
-    }
-
-    public String getMetaAuthors() {
-        return mMeta.get("authors");
-    }
-
-    public void setMetaAuthors(String mMetaAuthors) {
-        this.mMeta.put("authors", mMetaAuthors);
-    }
-
-    public String getMetaSummary() {
-        return (String) this.mMeta.get("summary");
-    }
-
-    public void setMetaSummary(String mMetaSummary) {
-        this.mMeta.put("summary", mMetaSummary);
-    }
-
-    public String getMetaStatus() {
-        return (String) this.mMeta.get("status");
-    }
-
-    public void setMetaStatus(String mMetaStatus) {
-        this.mMeta.put("status", mMetaStatus);
-    }
-
-    public String getMetaKeywords() {
-        return this.mMeta.get("keywords");
-    }
-
-    public void setMetaKeywords(String mMetaKeywords) {
-        this.mMeta.put("keywords", mMetaKeywords);
-    }
 }

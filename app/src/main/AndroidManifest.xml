@@ -8,7 +8,6 @@
         android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
     
     <application
-        android:name=".UI"
         android:allowBackup="true"
         android:icon="@mipmap/omn_ic"
         android:label="@string/app_name"
@@ -30,10 +29,6 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="${applicationId}.HOME_PAGE" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="${applicationId}.HTML_READY_REDISPLAY" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter>

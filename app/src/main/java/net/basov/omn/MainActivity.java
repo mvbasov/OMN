@@ -30,7 +30,6 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.DialogPreference;
 import android.preference.PreferenceManager;
 import android.view.KeyEvent;
 import android.webkit.ConsoleMessage;
@@ -38,6 +37,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import net.basov.util.FileIO;
@@ -45,14 +45,12 @@ import net.basov.util.MyLog;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Stack;
 
 public class MainActivity extends Activity {
 
     private WebView mainUI_WV;
-    private UI ui;
     private Page page;
     private String pageName;
     private Stack<String> pages;
@@ -167,9 +165,7 @@ public class MainActivity extends Activity {
         }
 
         FileIO.creteHomePage(MainActivity.this);
-        //ui = ((UI) getApplicationContext()).getInstance();
-        ui = UI.getInstance();
-        //page = ui.getPage();
+
         onNewIntent(getIntent());
         
     }
@@ -187,7 +183,7 @@ public class MainActivity extends Activity {
         if(savedInstanceState != null) {
             pageName = savedInstanceState.getString("pageName");
             String[] pagesArray = savedInstanceState.getStringArray("pages");
-            if(pagesArray.length != 0) {
+            if(pagesArray != null && pagesArray.length != 0) {
                 pages.clear();
                 for (String str : pagesArray) {
                     pages.push(str);
@@ -207,9 +203,7 @@ public class MainActivity extends Activity {
         if (event.getAction() == KeyEvent.ACTION_DOWN) {
             switch (keyCode) {
                 case KeyEvent.KEYCODE_BACK:
-                    //UI ui = ((UI) getApplicationContext()).getInstance();
-                    UI ui = UI.getInstance();
-                    if(!ui.backPage(mainUI_WV)) finish();                
+                    if(!pageBack()) finish();
                     return true;
             }
         }
@@ -238,32 +232,19 @@ public class MainActivity extends Activity {
 				//}
 				
                 String page_name = (String) main_extras.get("page_name");
-                // TODO: remove debug
-                //Toast.makeText(this, page_name,Toast.LENGTH_SHORT).show();
                 if(page_name != null && page_name.length() > 0) {
-                    ui.setPageName(page_name);
-                    page = ui.getPage();
-
-                    pageName = page_name;
-                    if(pages == null) pages = new Stack<String>();
-                    if(pages.empty())
-                        pages.push(pageName);
-                    else if(!pages.peek().equals(pageName))
-                        pages.push(pageName);
-
-                    ui.displayPage(mainUI_WV);
+                    pageAdd(page_name);
+                    UI.displayPage(mainUI_WV, page);
                 } else {
-					UI.displayStartPage(ui, mainUI_WV);
+					pageAdd(UI.displayStartPage(mainUI_WV));
 				}
             } else {
-                UI.displayStartPage(ui, mainUI_WV);
+                pageAdd(UI.displayStartPage(mainUI_WV));
             }
         } if (intent != null && intent.getAction().equals(this.getPackageName()+".EDIT_PAGE")) {
             Bundle extras = intent.getExtras();
             if(extras != null) {
                 String name = (String) extras.get("name");
-                // TODO: remove debug
-                //Toast.makeText(this,"Name from intent EDIT_PAGE: "+name, Toast.LENGTH_SHORT).show();
                 Intent intentE = new Intent(Intent.ACTION_EDIT);
                 Uri uri = Uri.parse("file://" + FileIO.getFilesDir(this).getPath() + "/md/" + name + ".md");
                 intentE.setDataAndType(uri, "text/plain");
@@ -275,37 +256,18 @@ public class MainActivity extends Activity {
             }
         } if (intent != null && intent.getAction().equals(this.getPackageName()+".HOME_PAGE")) {
         /* Show home page */
-            UI.displayStartPage(ui, mainUI_WV);
-        } if (intent != null && intent.getAction().equals(this.getPackageName()+".HTML_READY_REDISPLAY")) {
-        /* Redisplay page after creation */
-            ui.setmHTMLReady(true);
-            ui.displayPage(mainUI_WV);
+            pageAdd(UI.displayStartPage(mainUI_WV));
         } if (intent != null && intent.getAction().equals(this.getPackageName()+".REDISPLAY_PAGE")) {
         /* Redisplay page after creation */
-            ui.displayPage(mainUI_WV);
+            UI.displayPage(mainUI_WV, page);
         } if (intent != null && intent.getAction().equals(this.getPackageName()+".PREFERENCES")) {
         /* Redisplay page after creation */
             Intent i = new Intent(this, AppPreferencesActivity.class);
             this.startActivityForResult(i, Constants.PREFERENCES_REQUEST);
         } if (intent != null && intent.getAction().equals(this.getPackageName()+".QUICK_NOTE")) {
         /* QuickNotes creation */
-            ui.setPageName("/" + Constants.QUICKNOTES_PAGE);
-            ui.setMdContent(
-                    FileIO.getStringFromFile(
-                        FileIO.getFilesDir(this)
-                        + "/md"
-                        + "/" + Constants.QUICKNOTES_PAGE
-                        + ".md"
-                    )
-            );
-            page = ui.getPage();
-
-            pageName = "/" + Constants.QUICKNOTES_PAGE;
-            if(pages == null) pages = new Stack<String>();
-            if(pages.empty())
-                pages.push(pageName);
-            else if(!pages.peek().equals(pageName))
-                pages.push(pageName);
+            pageAdd("/" + Constants.QUICKNOTES_PAGE);
+            UI.setMdContentFromFile(this, page);
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Create QuickNote");
@@ -316,9 +278,9 @@ public class MainActivity extends Activity {
                 public void onClick(DialogInterface dialog, int which) {
                     final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     String timeStamp = DF.format(new Date());
-                    ui.setModified(timeStamp);
+                    page.setMetaModified(timeStamp);
                     String newText =
-                            ui.getPage().getHeaderMeta()
+                            page.getMetaHeaderAsString()
                             + getString(
                                 R.string.template_quick_note,
                                 // Time stamp
@@ -326,7 +288,7 @@ public class MainActivity extends Activity {
                                 // Note text
                                 input.getText().toString()
                             )
-                            + ui.getPage().getMdContent();
+                            + page.getMdContent();
                     FileIO.writePageToFile(
                             MainActivity.this,
                             "/" + Constants.QUICKNOTES_PAGE,
@@ -344,10 +306,10 @@ public class MainActivity extends Activity {
                 }
             });
             builder.show();
-            ui.displayPage(mainUI_WV);
+            UI.displayPage(mainUI_WV, page);
         } if (intent != null && intent.getAction().equals(this.getPackageName()+".NEW_PAGE")) {
         /* Create new page and put link to it on top of current page */
-            final String currentPageName = ui.getPage().getPageName();
+            final String currentPageName = page.getPageName();
 
             AlertDialog.Builder builderName = new AlertDialog.Builder(this);
             builderName.setTitle("New page (file) name");
@@ -365,24 +327,20 @@ public class MainActivity extends Activity {
                         AlertDialog.Builder builderTitle = new AlertDialog.Builder(MainActivity.this);
                         builderTitle.setTitle("New page title");
                         final EditText inputTitle = new EditText(MainActivity.this);
+                        inputTitle.setText(newPageNameEntered, TextView.BufferType.EDITABLE);
                         builderTitle.setView(inputTitle);
                         builderTitle.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                                 final String timeStamp = DF.format(new Date());
-                                //ui = ((UI)getApplicationContext()).getInstance();
-                                //ui = UI.getInstance();
-                                //ui.setModified(timeStamp);
-                                //final String currentMeta = ui.getPage().getHeaderMeta();
-                                //final String currentContent =  ui.getPage().getMdContent();
+                                UI.setMdContentFromFile(MainActivity.this, page);
                                 page.setMetaModified(timeStamp);
-                                final String currentMeta = page.getHeaderMeta();
+                                final String currentMeta = page.getMetaHeaderAsString();
                                 final String currentContent =  page.getMdContent();
 
                                 String newPageTitle = inputTitle.getText().toString().trim();
                                 String linkToNewPage = String.format("* [%s](%s.html)\n", newPageTitle, newPageNameEntered);
-                                //Toast.makeText(MainActivity.this, linkToNewPage, Toast.LENGTH_SHORT).show();
                                 if (currentMeta != null && currentContent != null) {
                                     String newText =
                                             currentMeta
@@ -406,15 +364,7 @@ public class MainActivity extends Activity {
 
                                 FileIO.createPageIfNotExists(MainActivity.this, newPageName,newPageTitle, "");
 
-                                ui.setPageName(newPageName);
-                                page = ui.getPage();
-
-                                pageName = newPageName;
-                                if(pages == null) pages = new Stack<String>();
-                                if(pages.empty())
-                                    pages.push(pageName);
-                                else if(!pages.peek().equals(pageName))
-                                    pages.push(pageName);
+                                pageAdd(newPageName);
 
                                 Intent i = new Intent();
                                 i.setAction(MainActivity.this.getPackageName()+".EDIT_PAGE");
@@ -442,7 +392,7 @@ public class MainActivity extends Activity {
             });
             builderName.show();
 
-            ui.displayPage(mainUI_WV);
+            UI.displayPage(mainUI_WV, page);
         }
     }
 
@@ -450,19 +400,18 @@ public class MainActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == Constants.EDIT_PAGE_REQUEST) {
             if (resultCode == Activity.RESULT_OK) {
-                //MyLog.LogD("Call DP from ma onActivityResult(OK), PN: " + ui.getPageName());
-                ui.displayPage(mainUI_WV);
+                UI.displayPage(mainUI_WV, page);
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //TODO: Why this result code actual?
                 //MyLog.LogD("* Call DP from ma onActivityResult(CANCELED), PN: " + ui.getPageName());
-                ui.displayPage(mainUI_WV);
+                UI.displayPage(mainUI_WV, page);
             }
         } else if (requestCode == Constants.PREFERENCES_REQUEST) {
             SharedPreferences defSharedPref = PreferenceManager.getDefaultSharedPreferences(this);
             if (defSharedPref.getBoolean(getString(R.string.pk_pref_changed), false)) {
                 SharedPreferences.Editor editor = defSharedPref.edit();
-                ui.displayPage(mainUI_WV);
+                UI.displayPage(mainUI_WV, page);
                 editor.putBoolean(getString(R.string.pk_pref_changed), false);
                 editor.commit();
             }
@@ -470,7 +419,33 @@ public class MainActivity extends Activity {
     }
 
     /**
-     * Handle JavaScript prompt() dialogue
+     * Page stack controll functions
+     */
+
+    private void pageAdd(String pageName) {
+        this.pageName = pageName;
+        if (pages == null) pages = new Stack<String>();
+        if (pages.empty()) {
+            pages.push(pageName);
+            page = new Page(pageName);
+        } else if (!pages.peek().equals(pageName)) {
+            pages.push(pageName);
+            page = new Page(pageName);
+        }
+    }
+
+    public boolean pageBack(){
+        if(pages.empty()) return false;
+        pages.pop();
+        if(pages.empty()) return false;
+        //Log.d(MainActivity.TAG, "Call DP from UI backPage");
+        page = new Page(pages.peek());
+        UI.displayPage(mainUI_WV, page);
+        return true;
+    }
+
+    /**
+     * Handle JavaScript console log
      */
     private class myWebChromeClient extends WebChromeClient {
 

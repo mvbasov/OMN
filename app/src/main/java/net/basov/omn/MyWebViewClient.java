@@ -83,7 +83,7 @@ public class MyWebViewClient extends WebViewClient {
                         MainActivity.class);
                 intentDisplayPage.putExtra("page_name", pageName);
                 intentDisplayPage.setAction(Intent.ACTION_MAIN);
-                view.getContext().getApplicationContext().startActivity(intentDisplayPage);
+                view.getContext().startActivity(intentDisplayPage);
 
                 return false;
             case "http":

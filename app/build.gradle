@@ -22,7 +22,7 @@ android {
     buildToolsVersion '26.0.0'
     defaultConfig {
         applicationId "net.basov.omn"
-        minSdkVersion 19
+        minSdkVersion 17
         targetSdkVersion 21
         versionCode 500
         versionName "00.05.00"

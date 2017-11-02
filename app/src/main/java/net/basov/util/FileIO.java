@@ -320,7 +320,14 @@ public class FileIO {
     public static File getFilesDir(Context c) {
         File filesDir;
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-            filesDir = c.getExternalFilesDir(null);
+            if (Build.VERSION.SDK_INT <= 18)
+                filesDir = new File(Environment.getExternalStorageDirectory()
+                        + "/Android/data/"
+                        + c.getPackageName()
+                        +"/files"
+                );
+            else
+                filesDir = c.getExternalFilesDir(null);
         } else {
             filesDir = c.getFilesDir();
         }

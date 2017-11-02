@@ -1,5 +1,15 @@
 Title: Betta version change log
 
+##### V00.06.00b
+
+- Improove Welcome and Help page.
+- Enable run on SDK 17 devices. At divices with SDK less then 21 icons not displayed.
+- Add button to crate new page and put link to it on current page
+- Use sharedUserId sharedUserLabel. *It require to reinstall application*
+- Put page meta information to html page
+- Create Shortcut icon
+- Fix QuickNotes button enable/disable
+
 ##### V00.05.00b
 ###### Date:   Mon Oct 23 21:49:10 2017 +0300, commit 36c393881feb931637f4bb7245df2116dcccef39
 

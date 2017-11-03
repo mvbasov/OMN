@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- sharedUserId for use with plugins -->
+    <string name="shared_user_id">net.basov.omn</string>
+    <string name="shared_user_label">Open Markdown Notes Software (debug)</string>
+
+    <!-- Application name -->
+    <string name="app_name">Open Markdown Notes</string>
+
+    <!-- Page used to convert Markdown to HTML -->
+    <string name="anvil_file" translatable="false">anvil.html</string>
+
+    <!-- Page used to ask creation Page -->
+    <string name="create_file" translatable="false">create.html</string>
+
+    <!--
+    Top part of any html page
+        %1$s    Page title
+        %2$s    Reference level to top ("../" for 1-st level subdirectory)
+        %3$s    Meta information
+        %4$s    Page name
+        %5$s    1-st page header (function as page title)
+    -->
+    <string name="html_top"><![CDATA["<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">
+<html xmlns=\"http://www.w3.org/1999/xhtml\">
+
+<head>
+
+  <title>%1$s</title>
+
+  <link rel=\"stylesheet\" type=\"text/css\" href=\"../%2$scss/common.css\" />
+  <link rel=\"stylesheet\" type=\"text/css\" href=\"../%2$scss/highlight.css\" />
+  <link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/icon?family=Material+Icons\" />
+  <link rel=\"stylesheet\" href=\"../%2$sfonts/google-material/material-icons.css\"  />
+
+  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />
+  <meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\" />
+%3$s
+  <style>
+    .hBtn {
+      padding-left: 3px;
+      padding-right: 3px;
+    }
+    #pageTitle {
+      margin-top: 1px;
+      margin-bottom: 1em;
+    }
+  </style>
+  <script>
+    function toggleHdrBtnVis() {
+      element=document.getElementById(\'actions_header\');
+      btn=document.getElementById(\'title_arrow\');
+      if (btn.style.display === \'none\') return;
+      if (element.style.display !== \'none\') {
+        element.style.display = \'none\';
+        btn.innerHTML = \'+\';
+      } else {
+        element.style.display = \'block\'
+        btn.innerHTML = \'-';
+      }
+    }
+  </script>
+  <script>
+    var PageName = \'%4$s\'
+    var Title = \'%5$s\';
+  </script>
+
+</head>
+
+<body>
+  <div id=\"actions_header\" style=\"display:none\">
+  </div>
+
+  <a
+    onclick=\"toggleHdrBtnVis();\">
+    <h4 id=\"pageTitle\" align=\"center\">
+      %5$s
+      <span id=\"title_arrow\" style=\"display:none\">
++
+      </span>
+    </h4>
+  </a>
+
+  
+    "]]></string>
+
+    <!--
+    Action buttons header
+        %1$s    Page name
+    -->
+    <string name="html_action_button_header"><![CDATA["
+    <button
+      id=\"btnEdit\"
+      class=\"hBtn\"
+      onclick=\"Android.editButtonCallback(PageName)\">
+&#x270e;
+    </button>
+    <button
+      id=\"btnHome\"
+      class=\"hBtn\"
+      onclick=\"Android.homeButtonCallback()\">
+&#x1f3e0;
+    </button>
+    <button
+      id=\"btnAdd\"
+      class=\"hBtn\"
+      onclick=\"Android.newPageButtonCallback()\">
+&#x2795;
+    </button>
+    <button
+      id=\"btnLink\"
+      class=\"hBtn\"
+      onclick=\"Android.linkButtonCallback(PageName, Title)\">
+&#x1f517;
+    </button>
+    <button
+      id=\"btnEMail\"
+      class=\"hBtn\"
+      onclick=\"Android.emailButtonCallback(PageName, Title)\">
+&#x2709;
+    </button>
+    <button
+      id=\"btnFolder\"
+      class=\"hBtn\"
+      onclick=\"Android.folderButtonCallback(PageName)\">
+&#x1f4c2;
+    </button>
+    <button
+      id=\"btnShortcut\"
+      class=\"hBtn\"
+      onclick=\"Android.shortcutButtonCallback(PageName, Title)\">
+&#x2197;
+    </button>
+    <button
+      id=\"btnQuickNotes\"
+      class=\"hBtn\"
+      onclick=\"Android.quicknoteButtonCallback()\">
+&#x1f3c3;
+    </button>
+    <button
+      id=\"btnSettings\"
+      class=\"hBtn\"
+      onclick=\"Android.prefButtonCallback()\">
+&#x1f527;
+    </button>
+    <br />
+    Absolute page name:<span>%1$s</span>
+    <hr />
+"]]></string>
+
+    <string name="html_meta_trmplate"><![CDATA["  <meta name=\"%1$s\" content=\"%2$s\" />
+"]]></string>
+
+    <!-- Bottom part of any html page -->
+    <string name="html_buttom"><![CDATA["
+</body>
+
+</html>
+    "]]></string>
+
+    <!--
+     Javascript called after load any html page
+        %1$s    Page name
+        %2$b    Inject action button header
+        %3$b    Enable Home button
+        %4$b    Enable Add new page button
+        %5$b    Enable Link button
+        %6$b    Enable E-Mail button
+        %7$b    Enable File browser button
+        %8$b    Enable Create shortcut button
+        %9$b    Enable QuickNotes button
+    -->
+    <string name="set_html_page_js">
+        javascript:
+        var PFN=\'%1$s\';
+        document.getElementById(\'actions_header\').innerHTML=\'%2$s\';
+        document.getElementById(\'title_arrow\').style.display=\'inline\';
+        function enableButton(id, enable) {
+            if (enable)
+                document.getElementById(id).style.display=\'inline\';
+            else
+                document.getElementById(id).style.display=\'none\';
+        };
+        enableButton(\'btnHome\', %3$b);
+        enableButton(\'btnAdd\', %4$b);
+        enableButton(\'btnLink\', %5$b);
+        enableButton(\'btnEMail\', %6$b);
+        enableButton(\'btnFolder\', %7$b);
+        enableButton(\'btnShortcut\', %8$b);
+        enableButton(\'btnQuickNotes\', %9$b);
+    </string>
+
+    <!--
+    JavaScript called at Markdown to HTML convertion time
+        %1$s    Page name
+    -->
+    <string name="set_md_page_js_create">
+        javascript:
+        var PFN=\'%1$s\';
+        document.getElementById(\'pname\').innerHTML=\'%1$s\';
+    </string>
+
+    <!--
+    JavaScript called at Markdown to HTML convertion time
+        %1$s    Page name
+        %2$s    Page title
+        %3$s    Markdown content
+        %4$b    Enable code highlight
+    -->
+    <string name="set_md_page_js">
+        javascript:
+        var PFN=\'%1$s\';
+        var Title = \'%2$s\';
+        run_marked(\'%3$s\', \'%4$b\');
+    </string>
+
+    <!--
+    New page pelican header
+    %1$s    Title
+    %2$s    Creation date
+    %3$s    Modification date
+    %4$s    Authors
+    -->
+    <string name="pelican_header"><![CDATA["Title: %1$s
+Date: %2$s
+Modified: %3$s
+Author: %4$s
+
+"]]>
+    </string>
+
+    <!--
+    Build information template
+    %1$s    android.os.Build.MODEL
+    %2$s    Build.MANUFACTURER
+    %3$s    android.os.Build.PRODUCT
+    %4$s    android.os.Build.DEVICE
+    %5$d    android.os.Build.VERSION.SDK_INT
+    %6$s    android.os.Build.VERSION.RELEASE
+    %7$s    android.os.Build.DISPLAY
+    %8$s    ro.cm.version (with "\n* CyanogenMod version: %8$s" or "")
+    %9$s    Screen resolution
+    %10s    UserAgent
+    %11$s   App name and build
+    %12$s   Data directory
+    -->
+    <string name="template_page_build"><![CDATA["
+#### %11$s
+
+* [%1$s](#%2$s-%3$s)
+
+<a name=\"%2$s-%3$s\" />
+##### Platform information #####
+* Manufacturer: %2$s
+* Device: %4$s
+* Model (and Product): %1$s (%3$s)
+* OS API Level: %5$d
+* Android version : %6$s
+* Build.DISPLAY: %7$s%8$s
+* Screen w\\*h [x\\*y dpi]: %9$s
+* User Agent: \"%10$s\"
+
+##### Application information #####
+* %11$s
+* Data directory: %12$s
+
+- - -
+
+This page generated automaticaly.
+
+**To get actual build information delete and recreate this file.**
+
+"]]></string>
+
+    <string name="template_page_start"><![CDATA["
+**This page generated automaticaly.**
+
+* [Welcome!](default/Welcome.html)
+* [Help](default/Help.html)
+* [Quick notes](QuickNotes.html)
+* [Build information](default/Build.html)
+
+"]]></string>
+
+    <!--
+    New page pelican header
+    %1$s    Time stamp
+    %2$s    Note text
+    -->
+    <string name="template_quick_note"><![CDATA["- - -
+##### %1$s
+
+%2$s
+
+"]]></string>
+
+    <string name="ema_md_start">\n-----Start of Markdown-----\n</string>
+    <string name="ema_md_end">\n-----End of Markdown-----\n</string>
+
+    <string name="pk_version_code" translatable="false">appVersionCode</string>
+    <string name="pk_pref_version" translatable="false">prefVersion</string>
+    <string name="pk_pref_changed" translatable="false">prefChanged</string>
+    <string name="pk_use_view_directory" translatable="false">prefViewDirectory</string>
+    <string name="pk_notes_author" translatable="false">notesAuthor</string>
+    <string name="pk_enable_code_highlight" translatable="false">enableCodeHighlight</string>
+    <string name="pk_btn_enable_home" translatable="false">btnEnableHome</string>
+    <string name="pk_btn_enable_add_page" translatable="false">btnEnableAddPage</string>
+    <string name="pk_btn_enable_link" translatable="false">btnEnableLink</string>
+    <string name="pk_btn_enable_email" translatable="false">btnEnableEmail</string>
+    <string name="pk_btn_enable_filemanager" translatable="false">btnEnableFilemanager</string>
+    <string name="pk_btn_enable_shortcut" translatable="false">btnEnableShortcut</string>
+    <string name="pk_btn_enable_quicknotes" translatable="false">btnEnableQuicknotes</string>
+
+</resources>

@@ -64,6 +64,12 @@ android {
         }
     }
     productFlavors {
+        main {
+        }
+        legacy {
+            minSdkVersion 17
+            targetSdkVersion 20
+        }
     }
 }
 

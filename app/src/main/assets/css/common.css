@@ -1,3 +1,11 @@
+.hBtn {
+  padding-left: 3px;
+  padding-right: 3px;
+}
+#pageTitle {
+  margin-top: 1px;
+  margin-bottom: 1em;
+}
 pre {
   font-size:12pt
 }

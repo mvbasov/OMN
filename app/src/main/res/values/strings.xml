@@ -37,52 +37,32 @@
   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />
   <meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\" />
 %3$s
-  <style>
-    .hBtn {
-      padding-left: 3px;
-      padding-right: 3px;
-    }
-    #pageTitle {
-      margin-top: 1px;
-      margin-bottom: 1em;
-    }
-  </style>
   <script>
-    function toggleHdrBtnVis() {
-      element=document.getElementById(\'actions_header\');
-      btn=document.getElementById(\'title_arrow\');
-
-      if (element.style.display !== \'none\' && btn.style.display === \'inline\') {
-        element.style.display = \'none\';
-        btn.innerHTML = \'<i class=\"material-icons\">arrow_drop_down</i>\';
-      } else {
-        element.style.display = \'block\'
-        btn.innerHTML = \'<i class=\"material-icons\">arrow_drop_up</i>\';
-      }
-    }
-  </script>
-  <script>
-    var PageName = \'%4$s\'
+    var PageName = \'%4$s\';
     var Title = \'%5$s\';
   </script>
 
 </head>
 
-<body>
-  <div id=\"actions_header\" style=\"display:none\">
+<body style=\"height:100%%; width:100%%\">
+
+  <div id=\"actions_header\" style=\"display:none; background-color:lightgray;\">
   </div>
 
-  <a
-    onclick=\"toggleHdrBtnVis();\">
-    <h4 id=\"pageTitle\" align=\"center\">
-      %5$s
-      <span id=\"title_arrow\" style=\"display:none\">
-        <i class=\"material-icons\">arrow_drop_down</i>
-      </span>
-    </h4>
-  </a>
+  <div id=\"ptitle\" style=\"position:absolute; height:2em; top:0px; left:0; right:0; overflow:hidden; background-color:lightgray\">
+    <a
+      onclick=\"toggleHdrBtnVis();\">
+      <h4 id=\"pageTitle\" align=\"center\">
+        %5$s
+        <span id=\"title_arrow\" style=\"display:none\">
+          <i class=\"material-icons\">arrow_drop_down</i>
+        </span>
+      </h4>
+    </a>
+  </div>
 
-  
+  <div id=\"content\" style=\"position:absolute; top:2em; left:0px; bottom: 1px; right:0px; overflow:auto;\">
+
     "]]></string>
 
     <!--
@@ -170,6 +150,8 @@
 
     <!-- Bottom part of any html page -->
     <string name="html_buttom"><![CDATA["
+  </div>
+
 </body>
 
 </html>
@@ -187,11 +169,31 @@
         %8$b    Enable Create shortcut button
         %9$b    Enable QuickNotes button
     -->
-    <string name="set_html_page_js">
+    <string name="set_html_page_js"><![CDATA["
         javascript:
         var PFN=\'%1$s\';
         document.getElementById(\'actions_header\').innerHTML=\'%2$s\';
         document.getElementById(\'title_arrow\').style.display=\'inline\';
+
+        function toggleHdrBtnVis() {
+          aheader=document.getElementById(\'actions_header\');
+          btn=document.getElementById(\'title_arrow\');
+          ptitle=document.getElementById(\'ptitle\');
+          content=document.getElementById(\'content\');
+          if (btn.style.display === \'none\') return;
+          if (aheader.style.display !== \'none\') {
+            aheader.style.display = \'none\';
+            ptitle.style.top = \'0px\';
+            btn.innerHTML = \'<i class=\"material-icons\">arrow_drop_down</i>\';
+            content.style.top = \'2em\';
+          } else {
+            aheader.style.display = \'block\';
+            ptitle.style.top = \'4em\';
+            btn.innerHTML = \'<i class=\"material-icons\">arrow_drop_up</i>\';
+            content.style.top = \'6em\';
+          }
+        }
+
         function enableButton(id, enable) {
             if (enable)
                 document.getElementById(id).style.display=\'inline\';
@@ -205,7 +207,7 @@
         enableButton(\'btnFolder\', %7$b);
         enableButton(\'btnShortcut\', %8$b);
         enableButton(\'btnQuickNotes\', %9$b);
-    </string>
+    "]]></string>
 
     <!--
     JavaScript called at Markdown to HTML convertion time

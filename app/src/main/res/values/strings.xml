@@ -44,9 +44,9 @@
 
 </head>
 
-<body style=\"height:100%%; width:100%%\">
+<body style=\"height:100%%; width:100%%; margin:0\">
 
-  <div id=\"actions_header\" style=\"display:none; background-color:lightgray;\">
+  <div id=\"actions_header\" style=\"display:none; background-color:lightgray; width:100%%; padding-top:0.5em; padding-left:0.5em\">
   </div>
 
   <div id=\"ptitle\" style=\"position:absolute; height:2em; top:0px; left:0; right:0; overflow:hidden; background-color:lightgray\">
@@ -188,7 +188,7 @@
             content.style.top = \'2em\';
           } else {
             aheader.style.display = \'block\';
-            ptitle.style.top = \'4em\';
+            ptitle.style.top = \'4.2em\';
             btn.innerHTML = \'<i class=\"material-icons\">arrow_drop_up</i>\';
             content.style.top = \'6em\';
           }

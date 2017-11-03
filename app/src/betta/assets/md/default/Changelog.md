@@ -1,6 +1,7 @@
 Title: Betta version change log
 
 ##### V00.06.00b
+###### Date:   Thu Nov 2 22:16:50 2017 +0300, commit d36a7c8b9a1aea396a8986ce4b56bab3346c72d0
 
 - Improove Welcome and Help page.
 - Enable run on SDK 17 devices. At divices with SDK less then 21 icons not displayed.

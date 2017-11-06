@@ -274,7 +274,7 @@ Author: %4$s
 * Device: %4$s
 * Model (and Product): %1$s (%3$s)
 * OS API Level: %5$d
-* Android version : %6$s
+* Android version: %6$s
 * Build.DISPLAY: %7$s%8$s
 * Screen w\\*h [x\\*y dpi]: %9$s
 * User Agent: \"%10$s\"

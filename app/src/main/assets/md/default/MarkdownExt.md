@@ -213,3 +213,33 @@ You can use [Material design icons](https://material.io/icons/) anywhere as text
     
 Renders to: <i class="material-icons">check_circle</i>
 
+- - -
+
+<a name="unicode-symbols" />
+
+### Unicode symbols collection
+
+Any pages can contain Unicode symbols. Legasy version use such symbols instead of Google Material Design icons.
+There is collection of funny or usefull Unicode symbols.
+
+|          |           |          |           |
+|:--------:|:---------:|:--------:|:---------:|
+| &#x270e; | &#x1f3e0; | &#x2795; | &#x1f517;
+|`&#x270e;`|`&#x1f3e0;`|`&#x2795;`|`&#x1f517;`
+| &#x2709; | &#x1f4c2; | &#x2197; | &#x1f3c3;
+|`&#x2709;`|`&#x1f4c2;`|`&#x2197;`|`&#x1f3c3;`
+| &#x1f527;| &#x2103;  | &#x1f514; |&#x1f515;
+|`&#x1f527;`|`&#x2103;`|`&#x1f514;`|`&#x1f514;`
+|  &#x3b1; |  &#x3b2;  |  &#x3a9; |  &#x3bc;
+|`&#x3b1;` | `&#x3b2;` | `&#x3a9;`|`&#x3bc;`
+| &#x2713; |  &#xb0;   |&#x1f529; | &#x1f427;
+|`&#x2713;`| `&#xb0;`  |`&#x1f529;`|`&#x1f427;`
+|  &#xb2;  |  &#xb5;   | &#x23f3; |&#x23f0;
+| `&#xb2;` | `&#xb5;`  |`&#x23f3;`|`&#x23f0;`
+| &#x2300; | &#x2328;  | &#x231b;  | &#x231a;
+|`&#x2300;`|`&#x2328;` |`&#x231b;` |`&#x231a;`
+| &#x238c; | &#x2393;  | &#x23f1; | &#x23f2;
+|`&#x238c;`|`&#x2393;` |`&#x23f1;`|`&#x23f2;`
+|  &#xae;  |  &#xa9;   | &#x2122; | &#x23f2;
+| `&#xae;` | `&#xa9;`  |`&#x2122;`|`&#x23f2;`
+

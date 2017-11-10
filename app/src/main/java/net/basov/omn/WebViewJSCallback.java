@@ -24,6 +24,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.text.Html;
@@ -32,7 +33,9 @@ import android.widget.Toast;
 
 import java.util.LinkedHashMap;
 
+import net.basov.util.AppDetails;
 import net.basov.util.FileIO;
+import net.basov.util.MyLog;
 
 public class WebViewJSCallback {
 
@@ -204,11 +207,20 @@ public class WebViewJSCallback {
                 if(metaName.equals("authors") && !pageMeta.get(metaName).contains(","))
                     metaRealName = "author";
                 htmlMeta += mContext.getString(
-                        R.string.html_meta_trmplate,
+                        R.string.html_meta_template,
                         metaRealName,
                         pageMeta.get(metaName)
                 );
             }
+        }
+        try {
+            htmlMeta += mContext.getString(
+                    R.string.html_meta_template,
+                    "generator",
+                    AppDetails.getAppName(mContext)
+            );
+        } catch (PackageManager.NameNotFoundException e) {
+            MyLog.LogE("Get application version error");
         }
 
         String htmlTop = mContext.getString(

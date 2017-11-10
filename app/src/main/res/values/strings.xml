@@ -145,7 +145,7 @@
     <hr />
 "]]></string>
 
-    <string name="html_meta_trmplate"><![CDATA["  <meta name=\"%1$s\" content=\"%2$s\" />
+    <string name="html_meta_template"><![CDATA["  <meta name=\"%1$s\" content=\"%2$s\" />
 "]]></string>
 
     <!-- Bottom part of any html page -->

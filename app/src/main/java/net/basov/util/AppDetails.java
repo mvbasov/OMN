@@ -40,6 +40,7 @@ public class AppDetails {
 
     public static String getAppName(Context c) throws PackageManager.NameNotFoundException {
         /*
+         * TODO: Old version form palgorithm. Remove and describe new.
          * - This function require the following in the app/build.gradle:
          *
          *  buildTypes {
@@ -64,14 +65,16 @@ public class AppDetails {
                 c.getPackageManager().getPackageInfo(c.getPackageName(), 0);
         int git_describe_id =
                 c.getResources().getIdentifier("git_describe", "string", c.getPackageName());
+        // TODO: Rewrite. git_describe string resource used as AIDE compilation flag. It is not elegant solution
         if (git_describe_id == 0)
             appName += pInfo.versionName + "-AIDE";
         else {
-            String git_describe = c.getResources().getString(git_describe_id);
-            if (!git_describe.isEmpty())
-                appName += git_describe;
-            else
-                appName += pInfo.versionName;
+//            String git_describe = c.getResources().getString(git_describe_id);
+//            if (!git_describe.isEmpty())
+//                appName += git_describe;
+//            else
+//                appName += pInfo.versionName;
+            appName += pInfo.versionName;
         }
 
         return appName;

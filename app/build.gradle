@@ -1,32 +1,32 @@
 apply plugin: 'com.android.application'
 
 android {
+
+    def last_tag = getGitRevParseInfo("describe --tags --abbrev=0")
+    def commit_count = getGitRevParseInfo("rev-list --count ${last_tag}..")
+    def current_commit = getGitRevParseInfo("rev-parse --short")
+
     applicationVariants.all { variant ->
-        if (variant.buildType.name == 'debug') {
-            def rev = getGitRevParseInfo("describe --tags --abbrev=1")
-            variant.mergedFlavor.versionName = rev.reverse().take(rev.length() - 1).reverse();
-        } else if (variant.buildType.name == 'betta') {
-            //   def rev = getGitRevParseInfo("describe --tags --abbrev=1")
-            //variant.mergedFlavor.versionName = versionName + getGitRevParseInfo("rev-parse --short");
-        }
         variant.outputs.each { output ->
             def outputFile = output.outputFile
             if (outputFile != null && outputFile.name.endsWith('.apk')) {
-                def fileName = "OpenMarkdownNote." + versionName + ".apk"
+                def fileName = "OpenMarkdownNotes." + versionName + ".apk"
                 output.outputFile = new File(outputFile.parent, fileName)
             }
         }
 
     }
+
     compileSdkVersion 25
     buildToolsVersion '26.0.0'
     defaultConfig {
         applicationId "net.basov.omn"
-        minSdkVersion 17
+        minSdkVersion 21
         targetSdkVersion 21
         versionCode 600
         versionName "00.06.00"
     }
+
     signingConfigs {
         release {
             keyAlias 'mvb_key'
@@ -40,36 +40,40 @@ android {
             storePassword 'android'
         }
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
             zipAlignEnabled true
             applicationIdSuffix '.r'
-            versionNameSuffix 'r'
+            versionNameSuffix "r-g" + current_commit
             resValue "string", "git_describe", getGitRevParseInfo("describe --tags --abbrev=1")
             signingConfig signingConfigs.release
         }
         betta {
             applicationIdSuffix '.b'
-            versionNameSuffix '-b-' + getGitRevParseInfo("rev-parse --short")
+            versionNameSuffix "b-g" + current_commit
             debuggable true
             resValue "string", "git_describe", getGitRevParseInfo("describe --tags --abbrev=1")
             signingConfig signingConfigs.debug
         }
         debug {
             debuggable true
+            versionNameSuffix 'a-' + commit_count + "-g" + current_commit
             resValue "string", "git_describe", getGitRevParseInfo("describe --tags --abbrev=1")
             signingConfig signingConfigs.debug
         }
     }
+
     productFlavors {
         main {
+            minSdkVersion 21
         }
         legacy {
             minSdkVersion 17
             targetSdkVersion 20
-            versionNameSuffix '-legacy'
+            versionName "legacy." + defaultConfig.versionName
         }
     }
 }

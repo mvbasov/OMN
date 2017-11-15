@@ -213,15 +213,19 @@ public class WebViewJSCallback {
                 );
             }
         }
+        String appNameAndVersion = mContext.getResources().getString(R.string.app_name);
         try {
-            htmlMeta += mContext.getString(
-                    R.string.html_meta_template,
-                    "generator",
-                    AppDetails.getAppName(mContext)
-            );
+            appNameAndVersion += " "
+                    + AppDetails.getAppName(mContext);
         } catch (PackageManager.NameNotFoundException e) {
             MyLog.LogE("Get application version error");
         }
+        htmlMeta += mContext.getString(
+                R.string.html_meta_template,
+                "generator",
+                appNameAndVersion
+        );
+
 
         String htmlTop = mContext.getString(
                 R.string.html_top,

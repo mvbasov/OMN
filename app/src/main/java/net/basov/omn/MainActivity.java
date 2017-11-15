@@ -14,6 +14,7 @@ package net.basov.omn;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -270,9 +271,6 @@ public class MainActivity extends Activity {
             this.startActivityForResult(i, Constants.PREFERENCES_REQUEST);
         } if (intent != null && intent.getAction().equals(this.getPackageName()+".QUICK_NOTE")) {
         /* QuickNotes creation */
-            pageAdd("/" + Constants.QUICKNOTES_PAGE);
-            UI.setMdContentFromFile(this, page);
-
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Create QuickNote");
             final EditText input = new EditText(this);
@@ -280,6 +278,10 @@ public class MainActivity extends Activity {
             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
+                    Context c = MainActivity.this;
+                    pageAdd("/" + Constants.QUICKNOTES_PAGE);
+                    FileIO.createPageIfNotExists(c, "/" + Constants.QUICKNOTES_PAGE, "", "");
+                    UI.setMdContentFromFile(c, page);                 
                     final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     String timeStamp = DF.format(new Date());
                     page.setMetaModified(timeStamp);
@@ -294,13 +296,13 @@ public class MainActivity extends Activity {
                             )
                             + page.getMdContent();
                     FileIO.writePageToFile(
-                            MainActivity.this,
+                            c,
                             "/" + Constants.QUICKNOTES_PAGE,
                             newText
                     );
                     Intent i = new Intent();
-                    i.setAction(MainActivity.this.getPackageName() + ".REDISPLAY_PAGE");
-                    MainActivity.this.startActivity(i);
+                    i.setAction(c.getPackageName() + ".REDISPLAY_PAGE");
+                    c.startActivity(i);
                 }
             });
             builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

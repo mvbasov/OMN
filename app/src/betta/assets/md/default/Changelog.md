@@ -1,5 +1,11 @@
 Title: Betta version change log
 
+##### V00.07.00b
+
+- Fixed header and scrollable page body.
+- Version for legacy devices. Android 4.2.x - 4.4.x.
+- Continue write help pages.
+
 ##### V00.06.00b
 ###### Date:   Thu Nov 2 22:16:50 2017 +0300, commit d36a7c8b9a1aea396a8986ce4b56bab3346c72d0
 

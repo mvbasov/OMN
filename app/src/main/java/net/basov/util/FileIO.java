@@ -204,8 +204,13 @@ public class FileIO {
                 Constants.ICONS_FONT,
                 Constants.ICONS_CSS
         };
-
         copyFilesFromAssets(c, files, force);
+
+        String[] optionalFiles = {
+                Constants.CUSTOM_CSS
+        };
+        copyFilesFromAssets(c, optionalFiles, false);
+
         return true;
 
     }

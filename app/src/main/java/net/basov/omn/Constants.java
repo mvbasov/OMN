@@ -31,6 +31,7 @@ public class Constants {
     public static final String BUILD_PAGE = "default/Build";
     public static final String QUICKNOTES_PAGE = "QuickNotes";
     public static final String COMON_CSS = "css/common.css";
+    public static final String CUSTOM_CSS = "css/custom.css";
     public static final String HIGHLIGHT_CSS = "css/highlight.css";
     public static final String ICONS_FONT = "fonts/google-material/MaterialIcons-Regular.woff2";
     public static final String ICONS_CSS = "fonts/google-material/material-icons.css";

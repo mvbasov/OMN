@@ -9,9 +9,11 @@ Author: Mikhail Basov
 Summary: Open Markdown Note Help
 
 * [Recommended aditional software](#rec-software)
+* [Automaticaly modified pages](#auto-pages)
 * [Action buttons description](#btn-desc)
 * [Application settings](#app-settings)
 * [Markdown page header](#page-header)
+* [Images](#images)
 * [Known issues](#issues)
 
 - - -
@@ -36,6 +38,26 @@ Read page about common [Markdown syntax](Markdown.html) and then about
 
 Any new pages can be created by editing current page and placing link to new page.
  
+- - -
+
+<a id="auto-pages" />
+
+### Automaticaly modified pages and files
+
+All pages in the directory md/default/i\* can be totaly rewrite by application automaticaly. At version update time, usualy.
+The same is true for thr following files:
+
+```
+css/common.css
+css/highlight.css
+fonts/google-material/MaterialIcons-Regular.woff2
+fonts/google-material/material-icons.css
+```
+All other pages and files are you own files and never been touched by programm without your intention.
+
+** The following feature will be implemented in the next betta release: **
+If Pelican CMS header support is switched on (switched on by default at programm installation time) meta information 'modified' updated automaticaly after editor call and page modified.
+
 - - -
 
 <a id="btn-desc" />
@@ -215,7 +237,21 @@ This metadata affect Pelican CMS page processing logic. Does not write to html p
 
 - - -
 
+<a id="images" />
+
+### Images
+Technicaly this programm suport image display. It can be done by the following code:
+
+``` markdown
+![Image alternateve name](../img/Image.jpg)
+```
+In this case you need to put image file to `/storage/emulated/0/Android/data/net.basov.omn.b/files/img/Image.jpg` but I don't know convenient way to do this and don't treat this feature as supported for this programm. Images need too be not upper then /storage/emulated/0/Android/data/net.basov.omn.b/files/ directory because this application has only permission to read files only from thos directory and below.
+
+- - -
+
 <a id="issues" />
 
 ### Known issues
 * Can't return to original link when use in-page reference. Back key return to previous page. 
+* Pages file name case sensitive but due to Android and VFat file system limitations 'FileName' and 'filename' may be the same file but may not to be ^)
+* Page with zerro file size is not normal for this application. 

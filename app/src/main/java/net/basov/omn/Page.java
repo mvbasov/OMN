@@ -118,6 +118,8 @@ public class Page {
                             && fName.length() != 0
                             && fContent.length() != 0
                             ) {
+                        if (fName.equals("author"))
+                            fName = "authors";
                         switch (fName) {
                             case "title":
                             case "date":
@@ -128,7 +130,6 @@ public class Page {
                             case "lang":
                             case "summary":
                             case "authors":
-                            case "author":
                             case "status":
                             case "keywords":
                                 emptyHeader = false;

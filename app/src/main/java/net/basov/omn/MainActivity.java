@@ -147,6 +147,10 @@ public class MainActivity extends Activity {
         mainUI_WV = (WebView) findViewById(R.id.webview);
         WebSettings webSettings = mainUI_WV.getSettings();
 
+        /* Disable using cache */
+        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+        webSettings.setAppCacheEnabled(false);
+        webSettings.setSaveFormData(false);
         /* Enable JavaScript */
         webSettings.setJavaScriptEnabled(true);
         mainUI_WV.addJavascriptInterface(new WebViewJSCallback(this), "Android");
@@ -154,9 +158,6 @@ public class MainActivity extends Activity {
         mainUI_WV.setWebViewClient(new MyWebViewClient());
         /* Handle JavaScript prompt dialog */
         mainUI_WV.setWebChromeClient(new myWebChromeClient());
-        /* Disable using cache */
-        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
-        webSettings.setAppCacheEnabled(false);
 
 
         /* Enable chome remote debuging for WebView (Ctrl-Shift-I) */

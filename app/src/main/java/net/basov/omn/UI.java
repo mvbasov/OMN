@@ -106,13 +106,13 @@ public class UI {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(wv, url);
+                wv.clearCache(true);
+                wv.clearHistory();
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                     view.evaluateJavascript(setPageJS, null);
                 } else {
                     view.loadUrl(setPageJS);
                 }
-                wv.clearCache(true);
-                wv.clearHistory();
             }
         });
 
@@ -121,6 +121,7 @@ public class UI {
         } else if(FileIO.isFileExists(c, "md/" + page.getPageName() + ".md")) {
             String htmlFileName = "file://" + FileIO.getFilesDir(c) + "/html" + page.getPageName() + ".html" + page.getInPageReference();
             wv.clearCache(true);
+            wv.clearHistory();
             wv.loadUrl(htmlFileName);
         }
 

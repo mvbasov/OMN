@@ -1,6 +1,11 @@
 Title: Betta version change log
 
+##### V00.07.01b
+
+- Fix. Add missing commit with QuickNotes creation
+
 ##### V00.07.00b
+###### Date:   Fri Nov 17 20:01:07 2017 +0300, commit 8e9e15ead472b77bf4b1cb9f76a45ca396f21e1b
 
 - Fixed header and scrollable page body.
 - Version for legacy devices. Android 4.2.x - 4.4.x.

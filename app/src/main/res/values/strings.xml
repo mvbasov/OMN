@@ -142,7 +142,7 @@
       <i class=\"material-icons\">settings</i>
     </button>
     <br />
-    Absolute page name:<span>%1$s</span>
+    Name:<span>%1$s</span>
     <hr />
 "]]></string>
 

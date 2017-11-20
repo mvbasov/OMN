@@ -19,6 +19,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.text.Html;
 import android.webkit.JavascriptInterface;
@@ -99,13 +100,29 @@ public class WebViewJSCallback {
     public void emailButtonCallback(String pn, String title) {
 
         Intent i = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"));
-        i.putExtra(android.content.Intent.EXTRA_SUBJECT, title);
 //        i.setType("text/html");
 
         // Help user send platform statistic to correct dev. address
-        if (pn.equals("/default/Build"))
+        if (pn.equals("/default/Build")) {
             // Simplest defence from spamer - put e-mail address in different part of code
             i.putExtra(Intent.EXTRA_EMAIL, new String[]{Constants.EMA + "@" + Constants.EMA_DOM});
+            // Get build information
+            String appInfo = "";
+            try {
+                appInfo += " " + AppDetails.getAppName(mContext);
+            } catch (PackageManager.NameNotFoundException e) {
+                MyLog.LogE(e, "Get application name problem.");
+            }
+            String subject = "["
+                    + Build.MANUFACTURER
+                    + " - "
+                    + Build.MODEL
+                    + "] "
+                    + appInfo;
+            i.putExtra(android.content.Intent.EXTRA_SUBJECT, subject);
+        } else {
+            i.putExtra(android.content.Intent.EXTRA_SUBJECT, title);
+        }
 
         i.putExtra(
                 Intent.EXTRA_HTML_TEXT,

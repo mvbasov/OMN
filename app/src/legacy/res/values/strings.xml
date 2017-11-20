@@ -248,15 +248,15 @@ Author: %4$s
     <string name="template_page_build"><![CDATA["
 #### %11$s
 
+<a name=\"%2$s-%3$s\" />
 * [%1$s](#%2$s-%3$s)
 
-<a name=\"%2$s-%3$s\" />
 ##### Platform information #####
 * Manufacturer: %2$s
 * Device: %4$s
 * Model (and Product): %1$s (%3$s)
 * OS API Level: %5$d
-* Android version : %6$s
+* Android version: %6$s
 * Build.DISPLAY: %7$s%8$s
 * Screen w\\*h [x\\*y dpi]: %9$s
 * User Agent: \"%10$s\"
@@ -295,8 +295,8 @@ This page generated automaticaly.
 
 "]]></string>
 
-    <string name="ema_md_start">\n-----Start of Markdown-----\n</string>
-    <string name="ema_md_end">\n-----End of Markdown-----\n</string>
+    <string name="ema_md_start">\n``` markdown\n</string>
+    <string name="ema_md_end">\n```\n</string>
 
     <string name="pk_version_code" translatable="false">appVersionCode</string>
     <string name="pk_pref_version" translatable="false">prefVersion</string>

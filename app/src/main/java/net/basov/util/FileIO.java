@@ -104,21 +104,36 @@ public class FileIO {
                 if(pageName.equals("/Start")) title = "My start page";
                 if(pageName.equals("/QuickNotes")) title = "My quick notes";
 
+                String pageHeader = "";
+                if (defSharedPref.getBoolean(
+                        c.getString(R.string.pk_enable_pelican_meta), true)){
+
+                    pageHeader += c.getString(
+                            R.string.pelican_header,
+                            //Title
+                            title,
+                            //Creation date
+                            ts,
+                            //Modification date
+                            ts,
+                            //Authors
+                            defSharedPref.getString(
+                                    c.getString(R.string.pk_notes_author),
+                                    ""
+                            )
+                    );
+
+                } else {
+
+                    pageHeader += c.getString(
+                            R.string.no_pelican_header,
+                            title
+                    );
+
+                }
+
                 Writer writer = new BufferedWriter(new FileWriter(file));
-                writer.write(c.getString(
-                        R.string.pelican_header,
-                        //Title
-                        title,
-                        //Creation date
-                        ts,
-                        //Modification date
-                        ts,
-                        //Authors
-                        defSharedPref.getString(
-                                c.getString(R.string.pk_notes_author),
-                                ""
-                        )
-                ));
+                writer.write(pageHeader);
 
                 if(pageName.equals("/default/Build")) {
 

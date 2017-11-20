@@ -216,7 +216,7 @@
     </string>
 
     <!--
-    New page pelican header
+    New page header with Pelican CMS meta
     %1$s    Title
     %2$s    Creation date
     %3$s    Modification date
@@ -226,6 +226,15 @@
 Date: %2$s
 Modified: %3$s
 Author: %4$s
+
+"]]>
+    </string>
+
+    <!--
+    New page header without Pelican CMS meta
+    %1$s    Title
+    -->
+    <string name="no_pelican_header"><![CDATA["#### %1$s
 
 "]]>
     </string>
@@ -245,8 +254,7 @@ Author: %4$s
     %11$s   App name and build
     %12$s   Data directory
     -->
-    <string name="template_page_build"><![CDATA["
-#### %11$s
+    <string name="template_page_build"><![CDATA["#### %11$s
 
 <a name=\"%2$s-%3$s\" />
 * [%1$s](#%2$s-%3$s)

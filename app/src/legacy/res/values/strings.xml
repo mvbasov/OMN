@@ -301,6 +301,7 @@ This page generated automaticaly.
     <string name="pk_version_code" translatable="false">appVersionCode</string>
     <string name="pk_pref_version" translatable="false">prefVersion</string>
     <string name="pk_pref_changed" translatable="false">prefChanged</string>
+    <string name="pk_enable_pelican_meta" translatable="false">enablePelicanMeta</string>
     <string name="pk_use_view_directory" translatable="false">prefViewDirectory</string>
     <string name="pk_notes_author" translatable="false">notesAuthor</string>
     <string name="pk_enable_code_highlight" translatable="false">enableCodeHighlight</string>

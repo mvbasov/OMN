@@ -18,6 +18,10 @@
             android:title="Enable code highlight"
             android:defaultValue="true"
             android:key="@string/pk_enable_code_highlight" />
+        <CheckBoxPreference
+            android:title="Enable Pelican CMS meta"
+            android:defaultValue="true"
+            android:key="@string/pk_enable_pelican_meta" />
     </PreferenceCategory>
     
     <PreferenceCategory

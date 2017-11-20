@@ -141,6 +141,8 @@ public class Page {
                                 sb.append(str).append("\n");
                         }
                     }
+                } else if (trim.startsWith("#### ")) {
+                    this.mMeta.put("title", trim.split(" ", 2)[1].trim());
                 } else {
                     sb.append(str).append("\n");
                 }

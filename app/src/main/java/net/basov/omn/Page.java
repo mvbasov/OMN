@@ -22,10 +22,14 @@ public class Page {
 
     private LinkedHashMap<String, String> mMeta;
     private String mPageName;
+    private Boolean mHasPelicanMeta;
     private String mInPageReference;
     private String mMdContent;
     private String mLog;
-
+ 
+    public Boolean hasPelicanMeta() {
+        return mHasPelicanMeta;
+    }
 
     public String getLog() {
         return mLog;
@@ -95,10 +99,10 @@ public class Page {
 
     public void setMdContent(String mMdContent) {
         StringBuilder sb = new StringBuilder();
-        Boolean inHeader = true;
-        Boolean emptyHeader = true;
+        Boolean inHeader = true;       
         Boolean firstPage = true;
         String[] splitMd = mMdContent.split("\\n");
+        mHasPelicanMeta = false;
         for(String str: splitMd) {
             String trim = str.trim();
             String fName;
@@ -132,7 +136,7 @@ public class Page {
                             case "authors":
                             case "status":
                             case "keywords":
-                                emptyHeader = false;
+                                mHasPelicanMeta = true;                               
                                 this.mMeta.put(fName, fContent);
                                 break;
                             default:

@@ -254,6 +254,8 @@ Author: %4$s
     %1$s    Title
     -->
     <string name="no_pelican_header"><![CDATA["#### %1$s
+
+
 "]]>
     </string>
 

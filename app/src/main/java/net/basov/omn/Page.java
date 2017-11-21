@@ -67,7 +67,7 @@ public class Page {
                 && this.getMetaByKey("title").length() != 0) {
             newText += "#### "
                     + this.getMetaByKey("title")
-                    + "\n";
+                    + "\n\n";
         }
         newText += textToAdd;
         mMdContent = newText

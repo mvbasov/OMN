@@ -30,12 +30,14 @@ import net.basov.util.TextTools;
 public class UI {
 
     public static void setMdContentFromFile(Context c, Page page) {
+        String pageFileName = FileIO.getFilesDir(c)
+                + "/md"
+                + page.getPageName()
+                + ".md";
         page.setMdContent(FileIO.getStringFromFile(
-                FileIO.getFilesDir(c)
-                        + "/md"
-                        + page.getPageName()
-                        + ".md"
+                pageFileName
         ));
+        page.setFileTS(FileIO.getPageFileTS(c, page.getPageName()));
     }
     
     /**

@@ -262,13 +262,22 @@ public class MainActivity extends Activity {
             Bundle extras = intent.getExtras();
             if(extras != null) {
                 String name = (String) extras.get("name");
+                UI.setMdContentFromFile(MainActivity.this, page); //to set current file TS
                 Intent intentE = new Intent(Intent.ACTION_EDIT);
-                Uri uri = Uri.parse("file://" + FileIO.getFilesDir(this).getPath() + "/md/" + name + ".md");
+                Uri uri = Uri.parse("file://"
+                        + FileIO.getFilesDir(MainActivity.this).getPath()
+                        + "/md/"
+                        + name
+                        + ".md"
+                );
                 intentE.setDataAndType(uri, "text/plain");
                 try {
                     this.startActivityForResult(intentE, Constants.EDIT_PAGE_REQUEST);
                 } catch (android.content.ActivityNotFoundException e) {
-                    Toast.makeText(this, "No editor found. Please install one.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this,
+                            "No editor found. Please install one.",
+                            Toast.LENGTH_LONG
+                    ).show();
                 }
             }
         } if (intent != null && intent.getAction().equals(this.getPackageName()+".HOME_PAGE")) {
@@ -292,25 +301,27 @@ public class MainActivity extends Activity {
                 public void onClick(DialogInterface dialog, int which) {
                     Context c = MainActivity.this;
                     pageAdd("/" + Constants.QUICKNOTES_PAGE);
-                    FileIO.createPageIfNotExists(c, "/" + Constants.QUICKNOTES_PAGE, "", "");
-                    UI.setMdContentFromFile(c, page);                 
+                    FileIO.createPageIfNotExists(c,
+                            "/" + Constants.QUICKNOTES_PAGE,
+                            "",
+                            ""
+                    );
+                    UI.setMdContentFromFile(c, page);
+
                     final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                    String timeStamp = DF.format(new Date());
-                    page.setMetaModified(timeStamp);
-                    String newText =
-                            page.getMetaHeaderAsString()
-                            + getString(
-                                R.string.template_quick_note,
-                                // Time stamp
-                                timeStamp,
-                                // Note text
-                                input.getText().toString()
-                            )
-                            + page.getMdContent();
+                    String newText = getString(
+                            R.string.template_quick_note,
+                            // Time stamp
+                            DF.format(new Date()),
+                            // Note text
+                            input.getText().toString()
+                    );
+                    page.addAtTopOfPage(newText);
+
                     FileIO.writePageToFile(
                             c,
                             "/" + Constants.QUICKNOTES_PAGE,
-                            newText
+                            page.getMdContent()
                     );
                     Intent i = new Intent();
                     i.setAction(c.getPackageName() + ".REDISPLAY_PAGE");
@@ -360,14 +371,11 @@ public class MainActivity extends Activity {
                                 String newPageTitle = inputTitle.getText().toString().trim();
                                 String linkToNewPage = String.format("* [%s](%s.html)\n", newPageTitle, newPageNameEntered);
                                 if (currentMeta != null && currentContent != null) {
-                                    String newText =
-                                            currentMeta
-                                                    + linkToNewPage
-                                                    + currentContent;
+                                    page.addAtTopOfPage(linkToNewPage);
                                     FileIO.writePageToFile(
                                             MainActivity.this,
                                             currentPageName,
-                                            newText
+                                            page.getMdContent()
                                     );
                                 } else {
                                     String stackState;
@@ -421,8 +429,19 @@ public class MainActivity extends Activity {
                 UI.displayPage(mainUI_WV, page);
             }
             if (resultCode == Activity.RESULT_CANCELED) {
+                Context c = MainActivity.this;
                 //TODO: Why this result code actual?
                 //MyLog.LogD("* Call DP from ma onActivityResult(CANCELED), PN: " + ui.getPageName());
+                Date tsBefore = page.getFileTS();
+                UI.setMdContentFromFile(c, page);
+                if (page.getFileTS().after(tsBefore)) {
+                    page.addAtTopOfPage(""); //To set modified meta
+                    FileIO.writePageToFile(
+                            c,
+                            "/" + page.getPageName(),
+                            page.getMdContent()
+                    );
+                }
                 UI.displayPage(mainUI_WV, page);
             }
         } else if (requestCode == Constants.PREFERENCES_REQUEST) {

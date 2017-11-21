@@ -12,6 +12,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 package net.basov.omn;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedHashMap;
 
 /**
@@ -26,9 +29,49 @@ public class Page {
     private String mInPageReference;
     private String mMdContent;
     private String mLog;
- 
+    private Date mFileTS;
+
+    public Date getFileTS() {
+        return mFileTS;
+    }
+
+    public void setFileTS(Date fileTS) {
+        this.mFileTS = fileTS;
+    }
+
+
     public Boolean hasPelicanMeta() {
         return mHasPelicanMeta;
+    }
+
+    public String getMetaByKey(String key) {
+        if (mMeta.containsKey(key))
+            return mMeta.get(key);
+        else
+            return null;
+    }
+
+    public Boolean hasMetaWithKey(String key) {
+        return mMeta.containsKey(key);
+    }
+
+    public void addAtTopOfPage(String textToAdd) {
+        final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String newText = "";
+        if (this.hasPelicanMeta()) {
+            if (this.hasMetaWithKey("modified"))
+                this.setMetaModified(DF.format(new Date()));
+            newText +=
+                    this.getMetaHeaderAsString();
+        } else if (this.getMetaByKey("title") != null
+                && this.getMetaByKey("title").length() != 0) {
+            newText += "#### "
+                    + this.getMetaByKey("title")
+                    + "\n";
+        }
+        newText += textToAdd;
+        mMdContent = newText
+                + mMdContent;
     }
 
     public String getLog() {

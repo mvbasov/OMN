@@ -202,6 +202,14 @@ public class FileIO {
         if(htmlFile.lastModified() < mdFile.lastModified()) return false;
         return true;
     }
+
+    public static Date getPageFileTS(Context c, String pageName) {
+        File pageFile = new File(FileIO.getFilesDir(c) + "/md/" + pageName + ".md");
+        if (pageFile.exists())
+            return new Date(pageFile.lastModified());
+        else
+            return null;
+    }
     
     public static boolean creteHomePage(Context c) {
         return creteHomePage(c, false);

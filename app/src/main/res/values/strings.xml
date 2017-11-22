@@ -255,7 +255,6 @@ Author: %4$s
     -->
     <string name="no_pelican_header"><![CDATA["#### %1$s
 
-
 "]]>
     </string>
 
@@ -274,8 +273,7 @@ Author: %4$s
     %11$s   App name and build
     %12$s   Data directory
     -->
-    <string name="template_page_build"><![CDATA["
-#### %11$s
+    <string name="template_page_build"><![CDATA["#### %11$s
 
 <a name=\"%2$s-%3$s\" />
 * [%1$s](#%2$s-%3$s)
@@ -302,8 +300,7 @@ This page generated automaticaly.
 
 "]]></string>
 
-    <string name="template_page_start"><![CDATA["
-**This page generated automaticaly.**
+    <string name="template_page_start"><![CDATA["**This page generated automaticaly.**
 
 * [Welcome!](default/Welcome.html)
 * [Help](default/Help.html)

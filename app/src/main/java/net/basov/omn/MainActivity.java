@@ -221,7 +221,7 @@ public class MainActivity extends Activity {
             Bundle extras = intent.getExtras();
             if(extras != null) {
                 String name = (String) extras.get("name");
-                UI.setMdContentFromFile(MainActivity.this, page); //to set current file TS
+                UI.setTSFromFile(MainActivity.this, page);
                 Intent intentE = new Intent(Intent.ACTION_EDIT);
                 Uri uri = Uri.parse("file://"
                         + FileIO.getFilesDir(MainActivity.this).getPath()
@@ -392,8 +392,9 @@ public class MainActivity extends Activity {
                 //TODO: Why this result code actual instead of RESULT_OK?
                 //MyLog.LogD("* Call DP from ma onActivityResult(CANCELED), PN: " + ui.getPageName());
                 Date tsBefore = page.getFileTS();
-                UI.setMdContentFromFile(c, page);
+                UI.setTSFromFile(c, page);
                 if (page.getFileTS().after(tsBefore)) {
+                    UI.setMdContentFromFile(c, page);
                     page.addAtTopOfPage(""); //To set 'modified' meta
                     FileIO.writePageToFile(
                             c,

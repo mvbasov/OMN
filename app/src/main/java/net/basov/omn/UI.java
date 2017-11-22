@@ -29,17 +29,6 @@ import net.basov.util.TextTools;
 
 public class UI {
 
-    public static void setMdContentFromFile(Context c, Page page) {
-        String pageFileName = FileIO.getFilesDir(c)
-                + "/md"
-                + page.getPageName()
-                + ".md";
-        page.setMdContent(FileIO.getStringFromFile(
-                pageFileName
-        ));
-        page.setFileTS(FileIO.getPageFileTS(c, page.getPageName()));
-    }
-    
     /**
      * Display start page
      * If /Start exists display it else display /default/Welcome
@@ -197,7 +186,29 @@ public class UI {
             wv.loadUrl("file:///android_asset/html/" + c.getString(R.string.anvil_file));
         }
         return true;
+    }
 
+    /**
+     * In addition to main function UI class is some "isolation layer" to make Page class pure Java code.
+     * "Isolation" methods are:
+     *      setMdContentFromFile
+     *      setTSFromFile
+     * And may be:
+     *      createHTML
+     */
+
+    public static void setMdContentFromFile(Context c, Page page) {
+        String pageFileName = FileIO.getFilesDir(c)
+                + "/md"
+                + page.getPageName()
+                + ".md";
+        page.setMdContent(FileIO.getStringFromFile(
+                pageFileName
+        ));
+    }
+
+    public static void setTSFromFile(Context c, Page page) {
+        page.setFileTS(FileIO.getPageFileTS(c, page.getPageName()));
     }
 
 }

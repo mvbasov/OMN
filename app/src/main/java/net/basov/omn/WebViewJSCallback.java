@@ -62,8 +62,6 @@ public class WebViewJSCallback {
 
     @JavascriptInterface
     public void createButtonCallback(String PFN, String wvUA) {
-        // TODO: remove debug
-        //Toast.makeText(mContext, "The BUTTON CREATE pressed! "+PFN, Toast.LENGTH_LONG).show();
         FileIO.createPageIfNotExists(mContext, PFN,"", wvUA);
 
         if(PFN.equals("/" + Constants.BUILD_PAGE)) {
@@ -87,8 +85,6 @@ public class WebViewJSCallback {
 
     @JavascriptInterface
     public void homeButtonCallback() {
-        // TODO: remove debug
-        //Toast.makeText(mContext, "The BUTTON EDIT pressed!", Toast.LENGTH_SHORT).show();
 
         Intent i = new Intent();
         i.setAction(mContext.getPackageName()+".HOME_PAGE");
@@ -100,7 +96,8 @@ public class WebViewJSCallback {
     public void emailButtonCallback(String pn, String title) {
 
         Intent i = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"));
-//        i.setType("text/html");
+        // TODO: send HTML E-Mail body.
+        //i.setType("text/html");
 
         // Help user send platform statistic to correct dev. address
         if (pn.equals("/default/Build")) {
@@ -163,8 +160,11 @@ public class WebViewJSCallback {
 
         Uri uri = Uri.parse("file://" + FileIO.getFilesDir(mContext).getAbsolutePath());
         intent.setData(uri);
-        mContext.startActivity(Intent.createChooser(intent, "Open pages folder"));
-        //mContext.startActivity(intent);
+        try {
+            mContext.startActivity(Intent.createChooser(intent, "Open pages folder"));
+        } catch (android.content.ActivityNotFoundException e) {
+            Toast.makeText(mContext, "No File Manager found. Please install one.", Toast.LENGTH_LONG).show();
+        }
     }
 
     @JavascriptInterface
@@ -183,8 +183,6 @@ public class WebViewJSCallback {
     @JavascriptInterface
     public void saveHTML(String html, String PFN, String Title) {
         Toast.makeText(mContext, "Save HTML.", Toast.LENGTH_SHORT).show();
-        //UI ui = ((UI) mContext.getApplicationContext()).getInstance();
-        //UI ui = UI.getInstance();
 
         /* Make directory prefix for right css reference */
         int dirCount = PFN.length() - PFN.replaceAll("/","").length();
@@ -249,8 +247,6 @@ public class WebViewJSCallback {
         String htmlPage = htmlTop + html + htmlBottom;
         if(FileIO.isFileExists(mContext, "md"+PFN+".md"))
             FileIO.saveHTML(mContext, PFN, htmlPage);
-        //ui.setHTML(htmlPage);
-        //ui.setmHTMLReady(true);
         Intent i = new Intent();
         i.setAction(mContext.getPackageName()+".REDISPLAY_PAGE");
 

@@ -46,18 +46,13 @@ public class MyWebViewClient extends WebViewClient {
 
     private boolean processUri(final Uri uri, WebView view) {
         Context c = view.getContext();
-        // TODO: remove debug
-        //Toast.makeText(c,"URI sheme: "+uri.getScheme(),Toast.LENGTH_LONG).show();       
         switch(uri.getScheme()){
             case "file":
-                // TODO: remove debug
-                //Toast.makeText(c,"PROCESS URI: " + uri.toString(),Toast.LENGTH_SHORT).show();
-                String pageName = uri.toString()                       
+                String pageName = uri.toString()
                         .replace("file://","")
                         .replace("//","/")
                         .replace(FileIO.getFilesDir(c).getPath(),"")
                         .replace("/html/","")
-                        //.replace("/android_asset/","") //TODO: Why it is need?
                         .replace("/android_asset","") //TODO: Why it is need?
                         .replace(".html","")
 						.replace(".md","");
@@ -65,13 +60,6 @@ public class MyWebViewClient extends WebViewClient {
                 /* For relative uri add / to begin because relative already translated to absolute */        
                 if(pageName.charAt(0) != '/') pageName = "/" + pageName;
                 
-                //UI ui = ((UI) view.getContext().getApplicationContext()).getInstance();
-                //UI ui = UI.getInstance();
-
-                //ui.setPageName(pageName);
-                //Log.d(MainActivity.TAG, "Call DP from myWvCl processUri " + uri.toString() + ", \nPage name: " + pageName);
-                //ui.displayPage(view);
-
                 Intent intentDisplayPage = new Intent(view.getContext().getApplicationContext(),
                         MainActivity.class);
                 intentDisplayPage.putExtra("page_name", pageName);

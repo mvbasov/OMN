@@ -56,82 +56,40 @@ public class MainActivity extends Activity {
         int versionCode = 0;
         int oldVersion = 0;
         
-        /* Set default preferences at first run and after preferences version upgrade */
+        /*
+        Set default preferences at first run and after preferences version upgrade
+
+        For change preferences increase currentPrefVersion
+
+        break; line not missing in switch/case and all statements need to run
+        from previous currentPrefVersion value
+
+        Yes, I know about PreferenceManager.setDefaultValues(...
+         */
         SharedPreferences defSharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = defSharedPref.edit();
-        final int currePrefVersion = 8;
+        final int currentPrefVersion = 8;
         switch (defSharedPref.getInt(getString(R.string.pk_pref_version), 0)) {
             case 0: // initial
                 editor.putBoolean(getString(R.string.pk_use_view_directory), false);
-                editor.putBoolean(getString(R.string.pk_btn_enable_home), true);
-                editor.putBoolean(getString(R.string.pk_btn_enable_link), true);
-                editor.putBoolean(getString(R.string.pk_btn_enable_email), true);
-                editor.putBoolean(getString(R.string.pk_btn_enable_filemanager), true);
-                editor.putBoolean(getString(R.string.pk_btn_enable_shortcut), true);
-                editor.putBoolean(getString(R.string.pk_pref_changed), false);
-                editor.putBoolean(getString(R.string.pk_enable_code_highlight), true);
-                editor.putBoolean(getString(R.string.pk_btn_enable_quicknotes), true);
-                editor.putBoolean(getString(R.string.pk_btn_enable_add_page), true);
-                editor.putBoolean(getString(R.string.pk_enable_pelican_meta), true);
-                editor.putInt(getString(R.string.pk_pref_version), currePrefVersion);
-                editor.commit();
-                break;
             case 1: //Upgrade to properties version 2
                 editor.putBoolean(getString(R.string.pk_btn_enable_home), true);
                 editor.putBoolean(getString(R.string.pk_btn_enable_link), true);
                 editor.putBoolean(getString(R.string.pk_btn_enable_email), true);
                 editor.putBoolean(getString(R.string.pk_btn_enable_filemanager), true);
-                editor.putBoolean(getString(R.string.pk_btn_enable_shortcut), true);
-                editor.putBoolean(getString(R.string.pk_pref_changed), false);
-                editor.putBoolean(getString(R.string.pk_enable_code_highlight), true);
-                editor.putBoolean(getString(R.string.pk_btn_enable_quicknotes), true);
-                editor.putBoolean(getString(R.string.pk_btn_enable_add_page), true);
-                editor.putBoolean(getString(R.string.pk_enable_pelican_meta), true);
-                editor.putInt(getString(R.string.pk_pref_version), currePrefVersion);
-                editor.commit();
-                break;
             case 2:
                 editor.putBoolean(getString(R.string.pk_btn_enable_shortcut), true);
-                editor.putBoolean(getString(R.string.pk_pref_changed), false);
-                editor.putBoolean(getString(R.string.pk_enable_code_highlight), true);
-                editor.putBoolean(getString(R.string.pk_btn_enable_quicknotes), true);
-                editor.putBoolean(getString(R.string.pk_btn_enable_add_page), true);
-                editor.putBoolean(getString(R.string.pk_enable_pelican_meta), true);
-                editor.putInt(getString(R.string.pk_pref_version), currePrefVersion);
-                editor.commit();
-                break;
             case 3:
                 editor.putBoolean(getString(R.string.pk_pref_changed), false);
-                editor.putBoolean(getString(R.string.pk_enable_code_highlight), true);
-                editor.putBoolean(getString(R.string.pk_btn_enable_quicknotes), true);
-                editor.putBoolean(getString(R.string.pk_btn_enable_add_page), true);
-                editor.putBoolean(getString(R.string.pk_enable_pelican_meta), true);
-                editor.putInt(getString(R.string.pk_pref_version), currePrefVersion);
-                editor.commit();
-                break;
             case 4:
                 editor.putBoolean(getString(R.string.pk_enable_code_highlight), true);
-                editor.putBoolean(getString(R.string.pk_btn_enable_quicknotes), true);
-                editor.putBoolean(getString(R.string.pk_btn_enable_add_page), true);
-                editor.putBoolean(getString(R.string.pk_enable_pelican_meta), true);
-                editor.putInt(getString(R.string.pk_pref_version), currePrefVersion);
-                editor.commit();
-                break;
             case 5:
                 editor.putBoolean(getString(R.string.pk_btn_enable_quicknotes), true);
-                editor.putBoolean(getString(R.string.pk_btn_enable_add_page), true);
-                editor.putBoolean(getString(R.string.pk_enable_pelican_meta), true);
-                editor.putInt(getString(R.string.pk_pref_version), currePrefVersion);
-                editor.commit();
-                break;
             case 6:
                 editor.putBoolean(getString(R.string.pk_btn_enable_add_page), true);
-                editor.putBoolean(getString(R.string.pk_enable_pelican_meta), true);
-                editor.putInt(getString(R.string.pk_pref_version), currePrefVersion);
-                editor.commit();
             case 7:
                 editor.putBoolean(getString(R.string.pk_enable_pelican_meta), true);
-                editor.putInt(getString(R.string.pk_pref_version), currePrefVersion);
+                editor.putInt(getString(R.string.pk_pref_version), currentPrefVersion);
                 editor.commit();
                 break;
 
@@ -259,6 +217,7 @@ public class MainActivity extends Activity {
                 pageAdd(UI.displayStartPage(mainUI_WV));
             }
         } if (intent != null && intent.getAction().equals(this.getPackageName()+".EDIT_PAGE")) {
+        /* Call external editor to edit page */
             Bundle extras = intent.getExtras();
             if(extras != null) {
                 String name = (String) extras.get("name");
@@ -430,12 +389,12 @@ public class MainActivity extends Activity {
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 Context c = MainActivity.this;
-                //TODO: Why this result code actual?
+                //TODO: Why this result code actual instead of RESULT_OK?
                 //MyLog.LogD("* Call DP from ma onActivityResult(CANCELED), PN: " + ui.getPageName());
                 Date tsBefore = page.getFileTS();
                 UI.setMdContentFromFile(c, page);
                 if (page.getFileTS().after(tsBefore)) {
-                    page.addAtTopOfPage(""); //To set modified meta
+                    page.addAtTopOfPage(""); //To set 'modified' meta
                     FileIO.writePageToFile(
                             c,
                             "/" + page.getPageName(),
@@ -456,7 +415,7 @@ public class MainActivity extends Activity {
     }
 
     /**
-     * Page stack controll functions
+     * Page stack control functions
      */
 
     private void pageAdd(String pageName) {
@@ -475,7 +434,6 @@ public class MainActivity extends Activity {
         if(pages.empty()) return false;
         pages.pop();
         if(pages.empty()) return false;
-        //Log.d(MainActivity.TAG, "Call DP from UI backPage");
         page = new Page(pages.peek());
         UI.displayPage(mainUI_WV, page);
         return true;

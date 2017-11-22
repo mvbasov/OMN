@@ -16,7 +16,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 import android.os.Environment;
 import android.preference.PreferenceManager;
@@ -58,8 +57,6 @@ public class FileIO {
     public static void deletePage(Context c, String pageName) {
         File mdFile = new File(getFilesDir(c), "/md" + pageName + ".md");
         File htmlFile = new File(getFilesDir(c), "/html" + pageName + ".html");
-        // TODO: remove debug
-        //Toast.makeText(c, "Delete page "+ pageName, Toast.LENGTH_SHORT).show();
         if(mdFile.exists())
             mdFile.delete();
         if(htmlFile.exists())
@@ -92,8 +89,6 @@ public class FileIO {
                 file.createNewFile();
 
                 String ts = DF.format(new Date());
-                // TODO: remove debug
-                //MyLog.LogD("* Current time: "+ts);
                 String title = "";
 
                 if (mtitle.length() == 0)

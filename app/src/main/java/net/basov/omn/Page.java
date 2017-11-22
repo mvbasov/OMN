@@ -110,11 +110,6 @@ public class Page {
         return mMeta;
     }
 
-    public boolean appendOnNoteTop(String mPageName, String header) {
-        setMdContent(header + getMdContent());
-        return true;
-    }
-
     public String getPageName() {
         return mPageName;
     }

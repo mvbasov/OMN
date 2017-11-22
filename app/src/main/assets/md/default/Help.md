@@ -1,6 +1,6 @@
 Title: Help
 Date: 2017-10-22 19:31:15
-Modified: 2017-11-01 22:06:43
+Modified: 2017-11-22 22:57:50
 Category: Index
 Tags: Markdown,
 Lang: en
@@ -172,9 +172,13 @@ Differnt File Managers <button onclick="Android.folderButtonCallback(PFN)"> <i c
 For X-plore or ES file managers this options need to be set to enable.
 For OI File Manager to disable.
 
-#### "Enable code highlight
+#### "Enable code highlight"
 Enable/disable source code highlighting at html creation time.
 Disable this option speed up html page creation process.
+
+#### "Enable Pelican CMS meta"
+Enable/disable creation of Pelican CMS page metadata header.
+Effective only at page creation time. If disabled at first line of page title placed as 4-th level header.
 
 #### "Actions buttons show/hide"
 Any of action buttons exclude <button id="btnSettings" onclick="Android.prefButtonCallback()"> <i class="material-icons">settings</i> </button> and <button onclick="Android.editButtonCallback(PFN)"> <i class="material-icons">edit</i> </button> can be disabled or enabled.
@@ -191,10 +195,14 @@ This application use [Pelican Content Management System (Pelican CMS)]() Markdow
 From the begin of file any string contains valid metadata name and value (empty valye is valid) treat as page header string.
 Page header processed till first empty line or not valid meta name.
 No one meta strings is mandatory for this application but header processing rules applied to any page.
-Recommended minimum header is `Title: Page title` followed by one empty line.
+Recommended minimum meta header is `Title: Page title` or "#### Page title", if meta not used, followed by one empty line.
+4-th level header at 1-st line af file always treat as page title.
 
-New pages automatically create with Date: and Modified: meta set to current time also Author: meta set if defined in application settings.
-Title meta set to Page(file) name relative to application data storage directory. 
+If "Enable Pelican CMS meta" option is enabled new pages automatically created with Date: and Modified: meta set to current time also Author: meta set if defined in application settings.
+
+If "Enable Pelican CMS meta" option is disabled new page automaticaly created with 4-th level header and the following empty line.
+
+Title meta set to Page(file) name relative to application data storage directory if title is empty.
 
 #### Valid metadata names
 ##### Title:
@@ -210,6 +218,7 @@ Automatically set to current time when page crete.
 ##### Modified:
 This metadata will write to html page `<meta>` tag
 Automatically set to current time when page crete.
+Automaticaly changed (if present on page) after external editor called and file timestamp changed.
 
 ##### Category:
 This metadata will write to html page `<meta>` tag
@@ -218,6 +227,7 @@ This metadata will write to html page `<meta>` tag
 This metadata will write to html page `<meta>` tag
 
 ##### Author:
+Same as previout but can't contain ','
 This metadata will write to html page `<meta>` tag
 
 ##### Summary:

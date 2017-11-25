@@ -55,8 +55,7 @@ fonts/google-material/material-icons.css
 ```
 All other pages and files are you own files and never been touched by programm without your intention.
 
-** The following feature will be implemented in the next betta release: **
-If Pelican CMS header support is switched on (switched on by default at programm installation time) meta information 'modified' updated automaticaly after editor call and page modified.
+If Pelican CMS header meta information 'modified' exists on page it updated automaticaly after editor call and page modified.
 
 - - -
 

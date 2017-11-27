@@ -1,6 +1,7 @@
 Title: Betta version change log
 
 ##### V00.08.00b
+###### commit 8491b729105848ba293b8ddc588877c6e5f0a450, Date:   Sat Nov 25 17:43:35 2017 +0300
 
 - Creation Pelican CMS header on new pages can be enabled/disabled by preferences
 - If exists on page modified meta updated automaticaly if exists on page

@@ -62,7 +62,7 @@
     </a>
   </div>
 
-  <div id=\"content\" style=\"position:absolute; top:2em; left:0px; bottom: 1px; right:0px; overflow:auto;\">
+  <div id=\"content\" style=\"position:absolute; top:2em; left:0.5em; bottom: 1px; right:0.3em; overflow:auto;\">
 
     "]]></string>
 

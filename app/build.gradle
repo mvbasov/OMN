@@ -23,8 +23,8 @@ android {
         applicationId "net.basov.omn"
         minSdkVersion 21
         targetSdkVersion 21
-        versionCode 900
-        versionName "00.09.00"
+        versionCode 903
+        versionName "00.09.03"
     }
 
     signingConfigs {
@@ -71,6 +71,7 @@ android {
         }
         legacy {
             minSdkVersion 17
+            maxSdkVersion 20
             targetSdkVersion 20
             versionName "legacy." + defaultConfig.versionName
         }

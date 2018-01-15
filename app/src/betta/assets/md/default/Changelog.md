@@ -1,10 +1,16 @@
 Title: Betta version change log
+Author: Mikhail Basov
+
+##### V00.09.00b
+
+- Prepare to Google Play betta testing
+- Small UI tweaks
 
 ##### V00.08.00b
-###### commit 8491b729105848ba293b8ddc588877c6e5f0a450, Date:   Sat Nov 25 17:43:35 2017 +0300
+###### Date:   Sat Nov 25 17:43:35 2017 +0300, commit 8491b729105848ba293b8ddc588877c6e5f0a450
 
 - Creation Pelican CMS header on new pages can be enabled/disabled by preferences
-- If exists on page modified meta updated automaticaly if exists on page
+- If exists on page modified meta updated automatically if exists on page
 
 ##### V00.07.01b
 ###### Date:   Sat Nov 18 19:39:06 2017 +0300, commit d9badf813122dada672f3198b676ff99d93797d3
@@ -21,8 +27,8 @@ Title: Betta version change log
 ##### V00.06.00b
 ###### Date:   Thu Nov 2 22:16:50 2017 +0300, commit d36a7c8b9a1aea396a8986ce4b56bab3346c72d0
 
-- Improove Welcome and Help page.
-- Enable run on SDK 17 devices. At divices with SDK less then 21 icons not displayed.
+- Improve Welcome and Help page.
+- Enable run on SDK 17 devices. At devices with SDK less then 21 icons not displayed.
 - Add button to crate new page and put link to it on current page
 - Use sharedUserId sharedUserLabel. *It require to reinstall application*
 - Put page meta information to html page

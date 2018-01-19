@@ -1,6 +1,6 @@
 Title: Help
 Date: 2017-10-22 19:31:15
-Modified: 2017-11-22 22:57:50
+Modified: 2018-01-19 03:02:57
 Category: Index
 Tags: Markdown,
 Lang: en
@@ -44,7 +44,7 @@ Any new pages can be created by editing current page and placing link to new pag
 
 ### Automaticaly modified pages and files
 
-All pages in the directory md/default/i\* can be totaly rewrite by application automaticaly. At version update time, usualy.
+All pages in the directory ```md/default/*``` can be totaly rewrite by application automaticaly. At version update time, usualy.
 The same is true for thr following files:
 
 ```
@@ -55,7 +55,7 @@ fonts/google-material/material-icons.css
 ```
 All other pages and files are you own files and never been touched by programm without your intention.
 
-If Pelican CMS header meta information 'modified' exists on page it updated automaticaly after editor call and page modified.
+If Pelican CMS header meta information ```modified``` exists on page it updated automaticaly after editor call and page modified.
 
 - - -
 
@@ -105,7 +105,7 @@ Button code:
 
 #### <button onclick="Android.emailButtonCallback(PFN, Title)"> <i class="material-icons">email</i> </button> "Send page by E-Mail"
 
-You can send current page by E-Mail. If you press this button on /default/Build page my special address to collect platform statistic will be substituted automaticaly.
+You can send current page by E-Mail. If you press this button on ```/default/Build``` page my special address to collect platform statistic will be substituted automaticaly.
 
 Button code:
 

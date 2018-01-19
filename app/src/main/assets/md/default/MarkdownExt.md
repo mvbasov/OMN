@@ -1,11 +1,10 @@
 Title: Extended Markdown syntax
 Date: 2017-10-11 01:40:42
-Modified: 2017-11-01 22:08:15
-Category: Markdown
+Modified: 2018-01-19 03:36:21
 Category: Documentation
 Tags: Markdown,
 Lang: en
-Authors: Mikhail Basov
+Author: Mikhail Basov
 Summary: Extended Markdown syntax of Open Markdown Note
 
 * [Links](#links)
@@ -19,17 +18,16 @@ Summary: Extended Markdown syntax of Open Markdown Note
   * [market:](#uri-market)
 * [Highlight text](#highlight-text)
 * [Google Material Design icons](#google-icons)
+* [Custom CSS](#custom-css)
 
 - - -
 
 <a name="links" />
-
 #### Links
 
 Markdown supports two style of links: *inline* and *reference*.
 
 <a name="links-inline" />
-
 ##### Inline links
 
 In both styles, the link text is delimited by [square brackets].
@@ -56,7 +54,6 @@ If you're referring to a local page, you must use relative paths:
     [My start page](../Start.html)
 
 <a name="links-reference" />
-
 ##### Reference-style links
 
 Reference-style links use a second set of square brackets, inside
@@ -86,7 +83,6 @@ That is:
 - - -
 
 <a name="uri" />
-
 ### Supported URI schemas
 
 URI schema is protocol which will be used to follow link.
@@ -95,75 +91,75 @@ http:// or https:// uri schemas open web pages, usually.
 This program also support the following uri:
 
 <a name="uri-geo" />
-
 #### "geo:"
 
 Open map or navigation application and point it to geographical coordinates
-
-    [Some place I don't know where it is](geo:55.55,11.11)
-
+``` markdown
+[Some place I don't know where it is](geo:55.55,11.11)
+```
 Renders to:
 [Some place I don't know where it is](geo:55.55,11.11)
 
 <a name="uri-tel" />
-
 #### "tel:"
 
 Open telephony application an place provided number
-
-    [call phone +87654](tel:+8765)
-
-Renders to: [call phone +87654](tel:+8765)
+``` markdown
+[call phone +87654](tel:+87654)
+```
+Renders to:
+[call phone +87654](tel:+87654)
 
 If you wish to place USSD code as number use aditional rules:
 
 * Escape \* by \\ in link name
-* Replace \# with %23
+* Replace \# with %23 in phone number
 
-    [Balance \*100#](tel:*100 %23)
-
-Renders to: [Balance \*100#](tel:*100 %23)
+``` markdown
+[Balance \*100#](tel:*100 %23)
+```
+Renders to:
+[Balance \*100#](tel:*100 %23)
 
 <a name="uri-mailto" />
-
 #### "mailto:"
 
 Call E-Mail application.
-
-    [E-Mail predefined letter](mailto:someone@example.com?subject=Subject text&body=E-Mail body)
-
-Renders to: [E-Mail predefined letter](mailto:someone@example.com?subject=Subject text&body=E-Mail body)
+``` markdown
+[E-Mail predefined letter](mailto:someone@example.com?subject=Subject text&body=E-Mail body)
+```
+Renders to:
+[E-Mail predefined letter](mailto:someone@example.com?subject=Subject text&body=E-Mail body)
 
 Subject an body parts optional
 
 <a name="uri-sms" />
-
 #### "sms:"
 
 Call SMS application.
-
-    [Predefined SMS](sms:+8765?body=SMS text)
-
-Renders to: [Predefined SMS](sms:+8765?body=SMS text)
+``` markdown
+[Predefined SMS](sms:+8765?body=SMS text)
+```
+Renders to:
+[Predefined SMS](sms:+8765?body=SMS text)
 
 <a name="uri-market" />
-
 #### "market:"
 
 Call Google Play Market application and open some application page.
-
-    [Google Maps](market://details?id=com.google.android.apps.maps)
-
-Renders to: [Google Maps](market://details?id=com.google.android.apps.maps)
+``` markdown
+[Google Maps](market://details?id=com.google.android.apps.maps)
+```
+Renders to:
+[Google Maps](market://details?id=com.google.android.apps.maps)
 
 This type of link work only inside Android. Equivalent links operates on pages exported html pages are
-
-    [Google Maps](http://play.google.com/store/apps/details?id=com.google.android.apps.maps)
-
+``` markdown
+[Google Maps](http://play.google.com/store/apps/details?id=com.google.android.apps.maps)
+```
 - - -
 
 <a name="highlight-text" />
-
 ### Highlight text 
 
 You can change text background (like maker on paper text). See examples:
@@ -202,8 +198,15 @@ Some text <span class="bg-yellow fg-red">text with both attributes changed</span
 
 - - -
 
-<a name="google-icons" />
+<a name="custom-css" />
+### Custom CSS
 
+You can customize global CSS used on all pages by creating and editing ```css/custom.css``` file.
+This CSS referenced at the end of header on any generated HTML page. You can extend [text highlight](#highlight-text) combinations, for example
+
+- - -
+
+<a name="google-icons" />
 ### Google Material Design icons
 
 You can use [Material design icons](https://material.io/icons/) anywhere as text.  
@@ -216,7 +219,6 @@ Renders to: <i class="material-icons">check_circle</i>
 - - -
 
 <a name="unicode-symbols" />
-
 ### Unicode symbols collection
 
 Any pages can contain Unicode symbols. Legasy version use such symbols instead of Google Material Design icons.
@@ -242,4 +244,3 @@ There is collection of funny or usefull Unicode symbols.
 |`&#x238c;`|`&#x2393;` |`&#x23f1;`|`&#x23f2;`
 |  &#xae;  |  &#xa9;   | &#x2122; | &#x23f2;
 | `&#xae;` | `&#xa9;`  |`&#x2122;`|`&#x23f2;`
-

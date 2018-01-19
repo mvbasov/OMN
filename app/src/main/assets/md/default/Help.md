@@ -56,7 +56,6 @@ It was specially designed as companion application for these notes. To configure
 - - -
 
 <a id="auto-pages" />
-
 ### Automaticaly modified pages and files
 
 All pages in the directory ```md/default/*``` can be totaly rewrite by application automaticaly. At version update time, usualy.
@@ -75,7 +74,6 @@ If Pelican CMS header meta information ```modified``` exists on page it updated 
 - - -
 
 <a id="btn-desc" />
-
 ### Action buttons description
 
 You can place any button buttons on any place of your pages by copy/paste button code. _At default pages buttons able to modify pages not function but you able to do it from page header if you wish._
@@ -98,6 +96,7 @@ Button code:
         <i class="material-icons">home</i>
     </button>
 
+<a name="aad-new-page" />
 #### <button onclick="BLOCK_Android.newPageButtonCallback()"> <i class="material-icons">add_box</i> </button> "Add new page"
 
 Create new page and add link to it on top of current page. Input new page (file) name and title of new page. New page file name relative to current page name directory. As title automaticaly substitute page name which can be edited. Curent page modification time set automaticaly.
@@ -174,38 +173,43 @@ Button code:
 - - -
 
 <a id="app-settings" />
-
 ### Application settings
 
 #### "Notes author"
+
 Default notes author name. Effective only at page creation time.
 
 #### "Use VIEW_DIRECTORY"
+
 Differnt File Managers <button onclick="Android.folderButtonCallback(PFN)"> <i class="material-icons">folder_open</i> </button> require different arguments to call.
  
 For X-plore or ES file managers this options need to be set to enable.
 For OI File Manager to disable.
 
 #### "Enable code highlight"
+
 Enable/disable source code highlighting at html creation time.
 Disable this option speed up html page creation process.
 
 #### "Enable Pelican CMS meta"
+
 Enable/disable creation of Pelican CMS page metadata header.
 Effective only at page creation time. If disabled at first line of page title placed as 4-th level header.
 
 #### "Actions buttons show/hide"
-Any of action buttons exclude <button id="btnSettings" onclick="Android.prefButtonCallback()"> <i class="material-icons">settings</i> </button> and <button onclick="Android.editButtonCallback(PFN)"> <i class="material-icons">edit</i> </button> can be disabled or enabled.
+
+Any of action buttons exclude <button id="btnSettings" onclick="Android.prefButtonCallback()"> <i class="material-icons">settings</i> </button> and <button onclick="BLOCK_Android.editButtonCallback(PFN)"> <i class="material-icons">edit</i> </button> can be disabled or enabled.
 This option effective only at html page creation time. If you want to add remove buttons on already created page you need to set option an regenerate (delete and the visit) html page.
 
 - - -
 
 <a id="page-header" />
-
 ### Markdown page header
+
 This application use [Pelican Content Management System (Pelican CMS)]() Markdown extension for page header.
 
 #### Header processing rules
+
 From the begin of file any string contains valid metadata name and value (empty valye is valid) treat as page header string.
 Page header processed till first empty line or not valid meta name.
 No one meta strings is mandatory for this application but header processing rules applied to any page.
@@ -219,51 +223,64 @@ If "Enable Pelican CMS meta" option is disabled new page automaticaly created wi
 Title meta set to Page(file) name relative to application data storage directory if title is empty.
 
 #### Valid metadata names
+
 ##### Title:
+
 This meta data display as page name in application and set as `<title>` tag value in html page.
 
 ##### Tags:
+
 This metadata will write to html page `<meta>` tag
 
 ##### Date:
+
 This metadata will write to html page `<meta>` tag  
 Automatically set to current time when page crete.
 
 ##### Modified:
+
 This metadata will write to html page `<meta>` tag
 Automatically set to current time when page crete.
 Automaticaly changed (if present on page) after external editor called and file timestamp changed.
 
 ##### Category:
+
 This metadata will write to html page `<meta>` tag
 
 ##### Authors:
+
 This metadata will write to html page `<meta>` tag
 
 ##### Author:
+
 Same as previout but can't contain ','
 This metadata will write to html page `<meta>` tag
 
 ##### Summary:
+
 This metadata will write to html page `<meta>` tag
 
 ##### Keywords:
+
 This metadata will write to html page `<meta>` tag
 
 ##### Lang:
+
 This metadata affect Pelican CMS page processing logic. Does not write to html page.
 
 ##### Status:
+
 This metadata affect Pelican CMS page processing logic. Does not write to html page
 
 ##### Slug:
+
 This metadata affect Pelican CMS page processing logic. Does not write to html page
 
 - - -
 
 <a id="images" />
-
 ### Images
+
 Technicaly this programm suport image display. It can be done by the following code:
 
 ``` markdown
@@ -274,8 +291,8 @@ In this case you need to put image file to `/storage/emulated/0/Android/data/net
 - - -
 
 <a id="issues" />
-
 ### Known issues
+
 * Can't return to original link when use in-page reference. Back key return to previous page. 
 * Pages file name case sensitive but due to Android and VFat file system limitations 'FileName' and 'filename' may be the same file but may not to be ^)
 * Page with zerro file size is not normal for this application. 

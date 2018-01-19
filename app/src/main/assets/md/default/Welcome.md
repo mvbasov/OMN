@@ -34,6 +34,6 @@ I would recommend install the following editor and file manager to use with this
 Read page about [using this application](Help.html)
 
 Any new pages can be created by editing current page and placing link to new page. 
-[Another way](Help.html#-button-onclick-android-newpagebuttoncallback-i-class-material-icons-add_box-i-button-add-new-page-) is to press <button onclick="BLOCK_Android.newPageButtonCallback()"> <i class="material-icons">add_box</i> </button> at any page header.
+Another way to add new page is to press 'add new page' button on any page header. See help about it [here](Help.html#add-new-page).
 
-Now, time to create [Own start page](../Start.html) which will be created with useful links inside automatically if it doesn't exists.
+Now, time to create [own start page](../Start.html). Which will be created with useful links inside automatically if it doesn't exists.

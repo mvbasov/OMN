@@ -1,6 +1,6 @@
 Title: Help (legacy version)
 Date: 2017-10-22 19:31:15
-Modified: 2017-11-22 22:49:40
+Modified: 2018-01-19 17:37:56
 Category: Index
 Tags: Markdown,
 Lang: en
@@ -8,7 +8,9 @@ Slug: omn-help-legacy
 Author: Mikhail Basov
 Summary: Open Markdown Note Help
 
+* [Syntax](#syntax)
 * [Recommended aditional software](#rec-software)
+* [Access notes from other device](#remote-acces)
 * [Automaticaly modified pages](#auto-pages)
 * [Action buttons description](#btn-desc)
 * [Application settings](#app-settings)
@@ -18,8 +20,15 @@ Summary: Open Markdown Note Help
 
 - - -
 
-<a id="rec-software" />
+<a id="syntax" />
+### Syntax
 
+Read page about common [Markdown syntax](Markdown.html) and then about
+[Extended Markdown syntax](MarkdownExt.html) specific for this application.
+
+- - -
+
+<a id="rec-software" />
 ### Recommended aditional software
 
 #### Recommended applications from F-Droid <span class="fg-green">(Recommended)</span>:
@@ -29,15 +38,21 @@ Summary: Open Markdown Note Help
 
 #### Recommended applications from Google Play Market:
 
+* [920 Text Editor](https://play.google.com/store/apps/details?id=com.jecelyin.editor.v2)
 * [OI Notepad](market://details?id=org.openintents.notepad)
 * [X-plore File Manager](market://details?id=com.lonelycatgames.Xplore)
 
+- - -
 
-Read page about common [Markdown syntax](Markdown.html) and then about
-[Extended Markdown syntax](MarkdownExt.html) specific for this application.
+<a id="remote-acces" />
+### Access notes from other device
 
-Any new pages can be created by editing current page and placing link to new page.
- 
+To see this application notes on another device (desktop or tablet, for example) I would recommend my small lightweight and simple web server for Android:
+
+* [lightweight Web Server (lWS)](http://play.google.com/store/apps/details?id=net.basov.lws.r)
+
+It was specially designed as companion application for these notes. To configure lWS go to its settings and set as document root OMN data directory. Data directory can be found at the bottom of [this page](Build.html).
+
 - - -
 
 <a id="auto-pages" />
@@ -65,7 +80,7 @@ If Pelican CMS header meta information 'modified' exists on page it updated auto
 
 You can place any button buttons on any place of your pages by copy/paste button code.
 
-#### <button onclick="Android.editButtonCallback(PFN)"> &#x270e; </button> "Edit"
+#### <button onclick="BLOCK_Android.editButtonCallback(PFN)"> &#x270e; </button> "Edit"
 
 Button code:
 
@@ -83,7 +98,7 @@ Button code:
         &#x1f3e0;
     </button>
 
-#### <button onclick="Android.newPageButtonCallback()"> &#x2795; </button> "Add new page"
+#### <button onclick="BLOCK_Android.newPageButtonCallback()"> &#x2795; </button> "Add new page"
 
 Create new page and add link to it on top of current page. Input new page (file) name and title of new page. New page file name relative to current page name directory. As title automaticaly substitute page name which can be edited. Curent page modification time set automaticaly.
 
@@ -116,9 +131,10 @@ Button code:
 
 #### <button onclick="Android.folderButtonCallback(PFN)"> &#x1f4c2; </button> "Open data folder in file manager"
 
-This application store files in dedicated application private area.
+This application has no permission to write to storage.
+It store files in dedicated application private area.
 Press this button to show this area in file browser.
-**If you deinstall this application all data (pages) will be deleted automaticaly**
+*If you deinstall this application all data (pages) will be deleted automaticaly*
 
 Button code:
 
@@ -179,7 +195,7 @@ Enable/disable creation of Pelican CMS page metadata header.
 Effective only at page creation time. If disabled at first line of page title placed as 4-th level header.
 
 #### "Actions buttons show/hide"
-Any of action buttons exclude <button id="btnSettings" onclick="Android.prefButtonCallback()"> <i class="material-icons">settings</i> </button> and <button onclick="Android.editButtonCallback(PFN)"> <i class="material-icons">edit</i> </button> can be disabled or enabled.
+Any of action buttons exclude <button id="btnSettings" onclick="Android.prefButtonCallback()"> &#x1f527; </button> and <button onclick="BLOCK_Android.editButtonCallback(PFN)"> &#x270e; </button> can be disabled or enabled.
 This option effective only at html page creation time. If you want to add remove buttons on already created page you need to set option an regenerate (delete and the visit) html page.
 
 - - -

@@ -209,6 +209,7 @@ This CSS referenced at the end of header on any generated HTML page. You can ext
 <a name="google-icons" />
 ### Google Material Design icons
 
+*Doesn't available in legacy version*
 You can use [Material design icons](https://material.io/icons/) anywhere as text.  
 (if name contain spece replace it to _)
 

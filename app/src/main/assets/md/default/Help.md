@@ -1,6 +1,6 @@
 Title: Help
 Date: 2017-10-22 19:31:15
-Modified: 2018-01-19 03:02:57
+Modified: 2018-01-19 04:06:30
 Category: Index
 Tags: Markdown,
 Lang: en
@@ -8,6 +8,7 @@ Slug: omn-help
 Author: Mikhail Basov
 Summary: Open Markdown Note Help
 
+* [Syntax](#syntax)
 * [Recommended aditional software](#rec-software)
 * [Automaticaly modified pages](#auto-pages)
 * [Action buttons description](#btn-desc)
@@ -18,8 +19,15 @@ Summary: Open Markdown Note Help
 
 - - -
 
-<a id="rec-software" />
+<a id="syntax" />
+### Syntax
 
+Read page about common [Markdown syntax](Markdown.html) and then about
+[Extended Markdown syntax](MarkdownExt.html) specific for this application.
+
+- - -
+
+<a id="rec-software" />
 ### Recommended aditional software
 
 #### Recommended applications from F-Droid <span class="fg-green">(Recommended)</span>:
@@ -32,12 +40,8 @@ Summary: Open Markdown Note Help
 * [OI Notepad](market://details?id=org.openintents.notepad)
 * [X-plore File Manager](market://details?id=com.lonelycatgames.Xplore)
 
+To see this application notes on another device (desktop or tablet, for example) I would recommend my small lightweight and simple web server for Android: [lWS](http://play.google.com/store/apps/details?id=net.basov.lws.r) Ii was specially designed as companion application for these notes.
 
-Read page about common [Markdown syntax](Markdown.html) and then about
-[Extended Markdown syntax](MarkdownExt.html) specific for this application.
-
-Any new pages can be created by editing current page and placing link to new page.
- 
 - - -
 
 <a id="auto-pages" />

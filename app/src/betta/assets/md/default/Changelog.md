@@ -1,7 +1,14 @@
 Title: Betta version change log
 Author: Mikhail Basov
 
+##### V00.10.00b
+
+- Update 'Welcome' and 'Help' page
+- Small fixes
+- Tune build environment for Google Play betta testing
+
 ##### V00.09.00b
+###### Date:   Mon Jan 15 16:49:36 2018 +0300, commit 9bb93e8cd75033500187be8a45140f410071e76d
 
 - Prepare to Google Play betta testing
 - Small UI tweaks

@@ -225,7 +225,7 @@ public class MainActivity extends Activity {
                 Intent intentE = new Intent(Intent.ACTION_EDIT);
                 Uri uri = Uri.parse("file://"
                         + FileIO.getFilesDir(MainActivity.this).getPath()
-                        + "/md/"
+                        + "/md"
                         + name
                         + ".md"
                 );

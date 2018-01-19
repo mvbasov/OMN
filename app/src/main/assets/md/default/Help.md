@@ -1,6 +1,6 @@
 Title: Help
 Date: 2017-10-22 19:31:15
-Modified: 2018-01-19 04:06:30
+Modified: 2018-01-19 14:14:26
 Category: Index
 Tags: Markdown,
 Lang: en
@@ -10,6 +10,7 @@ Summary: Open Markdown Note Help
 
 * [Syntax](#syntax)
 * [Recommended aditional software](#rec-software)
+* [Access notes from other device](#remote-acces)
 * [Automaticaly modified pages](#auto-pages)
 * [Action buttons description](#btn-desc)
 * [Application settings](#app-settings)
@@ -37,10 +38,20 @@ Read page about common [Markdown syntax](Markdown.html) and then about
 
 #### Recommended applications from Google Play Market:
 
+* [920 Text Editor](https://play.google.com/store/apps/details?id=com.jecelyin.editor.v2)
 * [OI Notepad](market://details?id=org.openintents.notepad)
 * [X-plore File Manager](market://details?id=com.lonelycatgames.Xplore)
 
-To see this application notes on another device (desktop or tablet, for example) I would recommend my small lightweight and simple web server for Android: [lWS](http://play.google.com/store/apps/details?id=net.basov.lws.r) Ii was specially designed as companion application for these notes.
+- - -
+
+<a id="remote-acces" />
+### Access notes from other device
+
+To see this application notes on another device (desktop or tablet, for example) I would recommend my small lightweight and simple web server for Android:
+
+* [lightweight Web Server (lWS)](http://play.google.com/store/apps/details?id=net.basov.lws.r)
+
+It was specially designed as companion application for these notes. To configure lWS go to its settings and set as document root OMN data directory. Data directory can be found at the bottom of [this page](Build.html).
 
 - - -
 
@@ -67,9 +78,9 @@ If Pelican CMS header meta information ```modified``` exists on page it updated 
 
 ### Action buttons description
 
-You can place any button buttons on any place of your pages by copy/paste button code.
+You can place any button buttons on any place of your pages by copy/paste button code. _At default pages buttons able to modify pages not function but you able to do it from page header if you wish._
 
-#### <button onclick="Android.editButtonCallback(PFN)"> <i class="material-icons">edit</i> </button> "Edit"
+#### <button onclick="BLOCK_Android.editButtonCallback(PFN)"> <i class="material-icons">edit</i> </button> "Edit"
 
 Button code:
 
@@ -87,7 +98,7 @@ Button code:
         <i class="material-icons">home</i>
     </button>
 
-#### <button onclick="Android.newPageButtonCallback()"> <i class="material-icons">add_box</i> </button> "Add new page"
+#### <button onclick="BLOCK_Android.newPageButtonCallback()"> <i class="material-icons">add_box</i> </button> "Add new page"
 
 Create new page and add link to it on top of current page. Input new page (file) name and title of new page. New page file name relative to current page name directory. As title automaticaly substitute page name which can be edited. Curent page modification time set automaticaly.
 
@@ -123,7 +134,7 @@ Button code:
 This application has no permission to write to storage.
 It store files in dedicated application private area.
 Press this button to show this area in file browser.
-**If you deinstall this application all data (pages) will be deleted automaticaly**
+*If you deinstall this application all data (pages) will be deleted automaticaly*
 
 Button code:
 

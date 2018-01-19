@@ -1,6 +1,6 @@
 Title: Welcome!
 Date: 2017-10-11 01:38:26
-Modified: 2018-01-19 03:49:32
+Modified: 2018-01-19 13:52:42
 Category: Index
 Tags: Markdown,
 Lang: en
@@ -27,12 +27,13 @@ I would recommend install the following editor and file manager to use with this
 
 #### Recommended applications from Google Play Market:
 
+* [920 Text Editor](https://play.google.com/store/apps/details?id=com.jecelyin.editor.v2)
 * [OI Notepad](market://details?id=org.openintents.notepad)
 * [X-plore File Manager](market://details?id=com.lonelycatgames.Xplore)
 
 Read page about [using this application](Help.html)
 
 Any new pages can be created by editing current page and placing link to new page. 
-[Another way](Help.html#-button-onclick-android-newpagebuttoncallback-i-class-material-icons-add_box-i-button-add-new-page-) is to press <button onclick="Android.newPageButtonCallback()"> <i class="material-icons">add_box</i> </button> at any page header.
+[Another way](Help.html#-button-onclick-android-newpagebuttoncallback-i-class-material-icons-add_box-i-button-add-new-page-) is to press <button onclick="BLOCK_Android.newPageButtonCallback()"> <i class="material-icons">add_box</i> </button> at any page header.
 
 Now, time to create [Own start page](../Start.html) which will be created with useful links inside automatically if it doesn't exists.

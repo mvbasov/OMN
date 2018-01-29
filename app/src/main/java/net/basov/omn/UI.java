@@ -20,7 +20,7 @@ import android.webkit.WebView;
 //import android.widget.Toast;
 
 import net.basov.util.FileIO;
-//import net.basov.util.MyLog;
+import net.basov.util.MyLog;
 import net.basov.util.TextTools;
 
 /**
@@ -48,7 +48,7 @@ public class UI {
         Context c = wv.getContext();
         String actionButtons = TextTools.escapeJavaScriptFunctionParameter(c.getString(
                 R.string.html_action_button_header,
-                page.getPageName()
+                page.getPageName()==null ? "Strange... NULL" : page.getPageName();
         ));
         SharedPreferences defSharedPref = PreferenceManager.getDefaultSharedPreferences(c);
         final String setPageJS =

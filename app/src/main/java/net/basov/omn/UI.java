@@ -48,7 +48,7 @@ public class UI {
         Context c = wv.getContext();
         String actionButtons = TextTools.escapeJavaScriptFunctionParameter(c.getString(
                 R.string.html_action_button_header,
-                page.getPageName()==null ? "Strange... NULL" : page.getPageName();
+                page.getPageName()==null ? "Strange... NULL" : page.getPageName()
         ));
         SharedPreferences defSharedPref = PreferenceManager.getDefaultSharedPreferences(c);
         final String setPageJS =

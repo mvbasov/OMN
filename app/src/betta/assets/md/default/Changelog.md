@@ -1,7 +1,13 @@
 Title: Betta version change log
 Author: Mikhail Basov
 
+##### V00.11.00b
+###### Date:   Mon Jan 29 22:47:12 2018 +0300, commit c35f1b6df95404ad0be6105d6be7dd7e0fafe4e3
+
+- Workaround for very strange NPE
+
 ##### V00.10.00b
+###### Date:   Fri Jan 19 16:23:33 2018 +0300, commit c537f69daaaa6f9e857e5ae22fb01d09c0953d49
 
 - Update 'Welcome' and 'Help' page
 - Small fixes

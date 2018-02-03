@@ -24,6 +24,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.view.KeyEvent;
 import android.webkit.ConsoleMessage;
@@ -48,6 +49,7 @@ public class MainActivity extends Activity {
     private Page page;
     private String pageName;
     private Stack<String> pages;
+    boolean backPressedRecently = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -178,6 +180,25 @@ public class MainActivity extends Activity {
         if (event.getAction() == KeyEvent.ACTION_DOWN) {
             switch (keyCode) {
                 case KeyEvent.KEYCODE_BACK:
+                    if (backPressedRecently) {
+                        Toast.makeText(
+                                this, 
+                                "'Back' quickly pressed twice.\nExit application.", 
+                                Toast.LENGTH_SHORT
+                        ).show();
+                        finish();
+                    }
+                    this.backPressedRecently = true;     
+
+                    new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                backPressedRecently = false;                       
+                            }
+                        },
+                        500 // milliseconds to treat Back pressed twice
+                    );
+                        
                     if(!pageBack()) finish();
                     return true;
             }

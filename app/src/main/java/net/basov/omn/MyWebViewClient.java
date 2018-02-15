@@ -15,11 +15,15 @@ package net.basov.omn;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+import java.net.URISyntaxException;
 
 import net.basov.util.FileIO;
 
@@ -32,6 +36,36 @@ public class MyWebViewClient extends WebViewClient {
     @SuppressWarnings("deprecation")
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
+        // from https://stackoverflow.com/questions/33151246/how-to-handle-intent-on-a-webview-url/34022490#34022490
+        if (url.startsWith("intent://")) {
+            try {
+                Context context = view.getContext();
+                Intent intent = new Intent().parseUri(url, Intent.URI_INTENT_SCHEME);
+
+                if (intent != null) {
+                    view.stopLoading();
+
+                    PackageManager packageManager = context.getPackageManager();
+                    ResolveInfo info = packageManager.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
+                    if (info != null) {
+                        context.startActivity(intent);
+                    } else {
+                        String fallbackUrl = intent.getStringExtra("browser_fallback_url");
+                        view.loadUrl(fallbackUrl);
+
+                        // or call external broswer
+//                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(fallbackUrl));
+//                    context.startActivity(browserIntent);
+                    }
+
+                    return true;
+                }
+            } catch (URISyntaxException e) {
+//                if (GeneralData.DEBUG) {
+//                    Log.e(TAG, "Can't resolve intent://", e);
+//                }
+            }
+        }
         
         final Uri uri = Uri.parse(url);
         return processUri(uri, view);

@@ -36,37 +36,6 @@ public class MyWebViewClient extends WebViewClient {
     @SuppressWarnings("deprecation")
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
-        // from https://stackoverflow.com/questions/33151246/how-to-handle-intent-on-a-webview-url/34022490#34022490
-        if (url.startsWith("intent://")) {
-            try {
-                Context context = view.getContext();
-                Intent intent = new Intent().parseUri(url, Intent.URI_INTENT_SCHEME);
-
-                if (intent != null) {
-                    view.stopLoading();
-
-                    PackageManager packageManager = context.getPackageManager();
-                    ResolveInfo info = packageManager.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
-                    if (info != null) {
-                        context.startActivity(intent);
-                    } else {
-                        String fallbackUrl = intent.getStringExtra("browser_fallback_url");
-                        view.loadUrl(fallbackUrl);
-
-                        // or call external broswer
-//                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(fallbackUrl));
-//                    context.startActivity(browserIntent);
-                    }
-
-                    return true;
-                }
-            } catch (URISyntaxException e) {
-//                if (GeneralData.DEBUG) {
-//                    Log.e(TAG, "Can't resolve intent://", e);
-//                }
-            }
-        }
-        
         final Uri uri = Uri.parse(url);
         return processUri(uri, view);
     }
@@ -108,10 +77,27 @@ public class MyWebViewClient extends WebViewClient {
 			case "mailto":
 			case "sms":
 			case "market":
-                final Intent intent = new Intent(Intent.ACTION_VIEW, uri);	
-                c.startActivity(intent);
+                final Intent intentMarket = new Intent(Intent.ACTION_VIEW, uri);
+                c.startActivity(intentMarket);
                 return true;
-            
+            case "intent":
+                try {
+                    // TODO: remove double translation string - uri - string
+                    final Intent intentApp = new Intent().parseUri(uri.toString(), Intent.URI_INTENT_SCHEME);
+                    if (intentApp != null) {
+                        view.stopLoading();
+                        PackageManager packageManager = c.getPackageManager();
+                        ResolveInfo info = packageManager.resolveActivity(intentApp, PackageManager.MATCH_DEFAULT_ONLY);
+                        if (info != null) {
+                            c.startActivity(intentApp);
+                        } else {
+                            String fallbackUrl = intentApp.getStringExtra("browser_fallback_url");
+                            view.loadUrl(fallbackUrl);
+
+                        }
+                        return true;
+                    }
+                } catch (URISyntaxException e) {}
             default:
                 return true;
                 

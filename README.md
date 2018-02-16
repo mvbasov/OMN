@@ -19,8 +19,9 @@ File (marked.min.js) in project root directory.
 
 ##### [build instructions](http://highlightjs.readthedocs.io/en/latest/building-testing.html#building)
 
-##### my build command:
+##### my build commands:
 
+`npm install`
 `nodejs tools/build.js browser :common`
 
 The result (highlight.pack.js) in the build/ subdirectory.

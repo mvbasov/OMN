@@ -2,6 +2,10 @@ Title: Betta version change log
 Author: Mikhail Basov
 
 ##### V00.12.00b
+
+- Add highlight.js source as git submodule
+
+##### V00.12.00b
 ###### Date:   Thu Feb 15 20:31:32 2018 +0300, commit 4234ee242162412385753380dcf11caffb32468e
 
 - Add intent:// uri scheme

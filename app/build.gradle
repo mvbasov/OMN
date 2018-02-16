@@ -77,6 +77,29 @@ android {
         }
     }
 }
+task makeHighlightJS(type: Exec) {
+    inputs.files("highlight.js/src")
+    outputs.dir("src/main/assets/js")
+    buildJS()
+    println "Create js"
+}
+
+void buildJS() {
+    exec {
+        workingDir 'highlight.js'
+        commandLine "npm", "install"
+    }
+    exec {
+        workingDir 'highlight.js'
+        commandLine "nodejs", "tools/build.js", ":common"
+    }
+    exec {
+        workingDir 'highlight.js'
+        commandLine "cp", "build/highlight.pack.js", "../src/main/assets/js/highlight.pack.js"
+    }
+}
+
+build.dependsOn makeHighlightJS
 
 dependencies {
     testCompile 'junit:junit:4.12'

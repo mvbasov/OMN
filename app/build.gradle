@@ -97,6 +97,30 @@ void buildJS() {
         workingDir 'highlight.js'
         commandLine "cp", "build/highlight.pack.js", "../src/main/assets/js/highlight.pack.js"
     }
+    exec {
+        workingDir 'highlight.js'
+        commandLine "cp", "src/styles/github.css", "../src/main/assets/css/highlight.css"
+    }
+    exec {
+        workingDir 'marked'
+        commandLine "make"
+    }
+    exec {
+        workingDir 'marked'
+        commandLine "cp", "marked.min.js", "../src/main/assets/js/marked.min.js"
+    }
+    exec {
+        workingDir 'marked'
+        commandLine "make", "clean"
+    }
+    exec {
+        workingDir 'marked'
+        commandLine "git", "checkout", "marked.min.js"
+    }
+    exec {
+        workingDir 'src/main/assets/fonts/google-material'
+        commandLine "wget", "https://github.com/google/material-design-icons/raw/master/iconfont/MaterialIcons-Regular.woff2", "-O", "MaterialIcons-Regular.woff2"
+    }
 }
 
 build.dependsOn makeHighlightJS

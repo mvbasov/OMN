@@ -77,14 +77,14 @@ android {
         }
     }
 }
+
 task makeHighlightJS(type: Exec) {
-    inputs.files("highlight.js/src")
-    outputs.dir("src/main/assets/js")
-    buildJS()
-    println "Create js"
+    inputs.file file("ghlight.js/src/highligt.js")
+    outputs.file file("src/main/assets/js/highlight.pack.js")
+    buildHighlightJS()
 }
 
-void buildJS() {
+void buildHighlightJS() {
     exec {
         workingDir 'highlight.js'
         commandLine "npm", "install"
@@ -101,6 +101,15 @@ void buildJS() {
         workingDir 'highlight.js'
         commandLine "cp", "src/styles/github.css", "../src/main/assets/css/highlight.css"
     }
+    println "*-*-* ghlight.js generated *-*-*"
+}
+
+task makeMarkedJS(type: Exec) {
+    inputs.file file("marked/lib/marked.js")
+    outputs.file file("src/main/assets/js/marked.min.js")
+    buildMarkedJS()
+}
+void buildMarkedJS() {
     exec {
         workingDir 'marked'
         commandLine "make"
@@ -117,13 +126,24 @@ void buildJS() {
         workingDir 'marked'
         commandLine "git", "checkout", "marked.min.js"
     }
+    println "*-*-* marked.js generated *-*-*"
+}
+
+task makeIconFont(type: Exec) {
+    outputs.file file("src/main/assets/fonts/google-material/MaterialIcons-Regular.woff2")
+    buildIconFont()
+}
+void buildIconFont() {
     exec {
         workingDir 'src/main/assets/fonts/google-material'
-        commandLine "wget", "https://github.com/google/material-design-icons/raw/master/iconfont/MaterialIcons-Regular.woff2", "-O", "MaterialIcons-Regular.woff2"
+        commandLine "wget", "-q", "https://github.com/google/material-design-icons/raw/master/iconfont/MaterialIcons-Regular.woff2", "-O", "MaterialIcons-Regular.woff2"
     }
+    println "*-*-* icon font copied *-*-*"
 }
 
 build.dependsOn makeHighlightJS
+build.dependsOn makeMarkedJS
+build.dependsOn makeIconFont
 
 dependencies {
     testCompile 'junit:junit:4.12'

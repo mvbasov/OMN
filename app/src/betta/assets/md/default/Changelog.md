@@ -2,6 +2,7 @@ Title: Betta version change log
 Author: Mikhail Basov
 
 ##### V00.14.00b
+###### Date:   Sat Feb 17 17:28:23 2018 +0300, commit 7b6f49a7d51f315441a4d199bc9d1eff63cdaece
 
 - All external sources included as git submodules
 

@@ -1,7 +1,12 @@
 Title: Betta version change log
 Author: Mikhail Basov
 
-##### V00.12.00b
+##### V00.14.00b
+
+- All external sources included as git submodules
+
+##### V00.13.00b
+###### Date:   Fri Feb 16 22:39:41 2018 +0300, commit 552e5e9d78a52a7370824659b680787c660ea8cf
 
 - Add highlight.js source as git submodule
 

@@ -36,6 +36,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -76,6 +77,7 @@ public class FileIO {
         } catch (IOException e) {
             MyLog.LogE(e, "Write page to file failed.");
         }
+        saveTS(c);
     }
 
     public static boolean createPageIfNotExists(Context c, String pageName, String mtitle, String wvUserAgent) {
@@ -186,6 +188,7 @@ public class FileIO {
                 return false;
             }
         }
+        saveTS(c);
         return true;
     }
 
@@ -372,4 +375,21 @@ public class FileIO {
         return true;
     }
 
+    /**
+     * Save last write operation timestamp (UNIX time) to file
+     * @param c Application context
+     */
+    private static void saveTS(Context c) {
+        String dts = String.format("%d", System.currentTimeMillis() / 1000L);
+        try {
+            File dtsFile = new File(getFilesDir(c) + "/.ts");
+            FileOutputStream is = new FileOutputStream(dtsFile);
+            OutputStreamWriter osw = new OutputStreamWriter(is);
+            Writer w = new BufferedWriter(osw);
+            w.write(dts);
+            w.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -22,7 +22,7 @@ android {
     defaultConfig {
         applicationId "net.basov.omn"
         minSdkVersion 21
-        targetSdkVersion 21
+        targetSdkVersion 26
         versionCode 1501
         versionName "00.15.01"
     }

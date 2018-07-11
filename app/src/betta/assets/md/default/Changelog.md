@@ -1,7 +1,14 @@
 Title: Betta version change log
 Author: Mikhail Basov
 
+
+##### V00.16.00b
+
+- Update marked.js from 0.3.14 to 0.4.0
+- Increase target API from 21 to 26
+
 ##### V00.15.00b
+###### Date:   Wed Mar 7 20:10:43 2018 +0300, commit d749821358ec145456c18d857096d845b1a1710b
 
 - Save last write operation timestamp to file
 

@@ -1,0 +1,39 @@
+--- FileProvider.java	2018-07-14 14:44:48.000000000 +0300
++++ FileProvider.java_my	2018-07-15 00:37:47.509604911 +0300
+@@ -29,6 +29,7 @@
+ import android.database.Cursor;
+ import android.database.MatrixCursor;
+ import android.net.Uri;
++import android.os.Build;
+ import android.os.Environment;
+ import android.os.ParcelFileDescriptor;
+ import android.provider.OpenableColumns;
+@@ -613,14 +614,22 @@
+                 } else if (TAG_EXTERNAL.equals(tag)) {
+                     target = Environment.getExternalStorageDirectory();
+                 } else if (TAG_EXTERNAL_FILES.equals(tag)) {
+-                    File[] externalFilesDirs = ContextCompat.getExternalFilesDirs(context, null);
+-                    if (externalFilesDirs.length > 0) {
+-                        target = externalFilesDirs[0];
++                    if (Build.VERSION.SDK_INT <= 18) {
++                        target = Environment.getExternalStorageDirectory();
++                    } else {
++                        File[] externalFilesDirs = context.getExternalFilesDirs(null);
++                        if (externalFilesDirs.length > 0) {
++                            target = externalFilesDirs[0];
++                        }
+                     }
+                 } else if (TAG_EXTERNAL_CACHE.equals(tag)) {
+-                    File[] externalCacheDirs = ContextCompat.getExternalCacheDirs(context);
+-                    if (externalCacheDirs.length > 0) {
+-                        target = externalCacheDirs[0];
++                    if (Build.VERSION.SDK_INT <= 18) {
++                        target = Environment.getExternalStorageDirectory();
++                    } else {
++                        File[] externalCacheDirs = context.getExternalCacheDirs();
++                        if (externalCacheDirs.length > 0) {
++                            target = externalCacheDirs[0];
++                        }
+                     }
+                 }
+ 

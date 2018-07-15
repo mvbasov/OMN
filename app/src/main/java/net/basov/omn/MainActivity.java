@@ -21,6 +21,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -38,10 +39,13 @@ import android.widget.Toast;
 import net.basov.util.FileIO;
 import net.basov.util.MyLog;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Stack;
+import android.support.v4.content.FileProvider;
 
 public class MainActivity extends Activity {
 
@@ -241,16 +245,31 @@ public class MainActivity extends Activity {
         /* Call external editor to edit page */
             Bundle extras = intent.getExtras();
             if(extras != null) {
+                Uri uri = null;
                 String name = (String) extras.get("name");
                 UI.setTSFromFile(MainActivity.this, page);
                 Intent intentE = new Intent(Intent.ACTION_EDIT);
-                Uri uri = Uri.parse("file://"
-                        + FileIO.getFilesDir(MainActivity.this).getPath()
-                        + "/md"
-                        + name
-                        + ".md"
-                );
-                intentE.setDataAndType(uri, "text/plain");
+                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) {
+                    uri = Uri.parse("file://"
+                            + FileIO.getFilesDir(MainActivity.this).getPath()
+                            + "/md"
+                            + name
+                            + ".md"
+                    );
+                    intentE.setDataAndType(uri, "text/plain");
+                } else {
+                    File pageDir = new File(FileIO.getFilesDir(MainActivity.this), "md");
+                    File pageFile = new File(pageDir, name + ".md");
+                    uri = FileProvider.getUriForFile(this, this.getPackageName(), pageFile);
+                    intentE.setDataAndType(uri, "text/plain");
+                    intentE.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                }
+//                List<ResolveInfo> resInfoList = this.getPackageManager().queryIntentActivities(intentE, PackageManager.MATCH_DEFAULT_ONLY);
+//                for (ResolveInfo resolveInfo : resInfoList) {
+//                    String packageName = resolveInfo.activityInfo.packageName;
+//                    this.grantUriPermission(packageName, uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//                    MyLog.LogD(packageName);
+//                }
                 try {
                     this.startActivityForResult(intentE, Constants.EDIT_PAGE_REQUEST);
                 } catch (android.content.ActivityNotFoundException e) {

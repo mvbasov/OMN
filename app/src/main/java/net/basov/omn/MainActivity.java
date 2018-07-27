@@ -25,6 +25,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.view.KeyEvent;
 import android.webkit.ConsoleMessage;
@@ -54,6 +55,12 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // API 26 workarround https://stackoverflow.com/a/48275478/1464939
+        if(Build.VERSION.SDK_INT>=24) {
+            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+            StrictMode.setVmPolicy(builder.build());
+        }
 
         int versionCode = 0;
         int oldVersion = 0;

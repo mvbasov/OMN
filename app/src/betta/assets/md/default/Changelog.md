@@ -1,8 +1,15 @@
 Title: Betta version change log
 Author: Mikhail Basov
 
+##### V00.17.00b
+
+- Fix homescreen shortcut creation
+- Add dynamic shaortcut (contexm menu of home screen icon) for Android 8.0 and newer
+- Go to more stable marked.js version 0.3.19
+- Use FileProvider (content:// instead of file://)
 
 ##### V00.16.00b
+###### Date:   Thu Jul 12 01:06:36 2018 +0300, commit 480490dc07c8b09fb9c839c107cc2625d504fb4e
 
 - Update marked.js from 0.3.14 to 0.4.0
 - Increase target API from 21 to 26

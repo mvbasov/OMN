@@ -12,12 +12,16 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 package net.basov.omn;
 
+import android.app.PendingIntent;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.pm.ShortcutInfo;
+import android.content.pm.ShortcutManager;
+import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
@@ -252,33 +256,54 @@ public class WebViewJSCallback {
 
         mContext.startActivity(i);
     }
-    
+
     @JavascriptInterface
     public void shortcutButtonCallback(String pn, String title) {
 
         Toast.makeText(mContext, "Create shortcut to \"" + title + "\"", Toast.LENGTH_SHORT).show();
 
-        // Code from here: https://stackoverflow.com/a/16873257
         Intent shortcutIntent = new Intent(mContext.getApplicationContext(),
-                                           MainActivity.class);
+                MainActivity.class);
         shortcutIntent.putExtra("page_name", pn);
-
         shortcutIntent.setAction(Intent.ACTION_MAIN);
 
-        Intent addIntent = new Intent();
-        addIntent
-            .putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
-        addIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, title);
-        addIntent.putExtra(
-				Intent.EXTRA_SHORTCUT_ICON_RESOURCE,
-                Intent.ShortcutIconResource.fromContext(
-						mContext.getApplicationContext(),
-                        R.mipmap.omn_ic_shortcut
-				)
-		);
-        addIntent
-            .setAction("com.android.launcher.action.INSTALL_SHORTCUT");
-        addIntent.putExtra("duplicate", false);  //may it's already there so don't duplicate
-        mContext.getApplicationContext().sendBroadcast(addIntent);
+
+        if(Build.VERSION.SDK_INT >= 26) {
+            ShortcutManager mShortcutManager =
+                    mContext.getSystemService(ShortcutManager.class);
+            ShortcutInfo shortcut = new ShortcutInfo.Builder(mContext, pn)
+                    .setShortLabel(title)
+                    .setLongLabel(title)
+                    .setIcon(Icon.createWithResource(mContext, R.mipmap.omn_ic_shortcut))
+                    .setIntent(shortcutIntent)
+                    .build();
+            if (mShortcutManager.isRequestPinShortcutSupported()) {
+                Intent pinnedShortcutCallbackIntent =
+                        mShortcutManager.createShortcutResultIntent(shortcut);
+                PendingIntent successCallback = PendingIntent.getBroadcast(mContext, 0,
+                        pinnedShortcutCallbackIntent, 0);
+
+                mShortcutManager.requestPinShortcut(shortcut,
+                        successCallback.getIntentSender());
+            }
+
+        } else {
+            // Code from here: https://stackoverflow.com/a/16873257
+            Intent addIntent = new Intent();
+            addIntent
+                    .putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
+            addIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, title);
+            addIntent.putExtra(
+                    Intent.EXTRA_SHORTCUT_ICON_RESOURCE,
+                    Intent.ShortcutIconResource.fromContext(
+                            mContext.getApplicationContext(),
+                            R.mipmap.omn_ic_shortcut
+                    )
+            );
+            addIntent
+                    .setAction("com.android.launcher.action.INSTALL_SHORTCUT");
+            addIntent.putExtra("duplicate", false);  //may it's already there so don't duplicate
+            mContext.getApplicationContext().sendBroadcast(addIntent);
+        }
     }
 }

@@ -21,7 +21,9 @@ import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
+import android.content.pm.ShortcutInfo;
+import android.content.pm.ShortcutManager;
+import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -42,8 +44,8 @@ import net.basov.util.MyLog;
 import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 import java.util.Stack;
 import android.support.v4.content.FileProvider;
 
@@ -147,6 +149,22 @@ public class MainActivity extends Activity {
 
         FileIO.creteHomePage(MainActivity.this);
 
+        //Add pined shortcut for Android 8.0 and later
+        if(Build.VERSION.SDK_INT >= 25) {
+            Intent shortcutIntent = new Intent(this.getApplicationContext(),
+                    MainActivity.class);
+            shortcutIntent.setAction(this.getPackageName() + ".QUICK_NOTE");
+            ShortcutManager shortcutManager = this.getSystemService(ShortcutManager.class);
+            ShortcutInfo shortcut = new ShortcutInfo.Builder(this, "QuickNote")
+                    .setShortLabel("QuickNote")
+                    .setLongLabel("Take QuickNote")
+                    .setIcon(Icon.createWithResource(this, R.mipmap.omn_ic_shortcut))
+                    .setIntent(shortcutIntent)
+                    .build();
+            // Dynamic shortcut
+            shortcutManager.setDynamicShortcuts(Arrays.asList(shortcut));
+        }
+
         onNewIntent(getIntent());
         
     }
@@ -219,7 +237,7 @@ public class MainActivity extends Activity {
     protected void onNewIntent(Intent intent) {
         //super.onNewIntent(intent);
         if (intent != null && intent.getAction().equals(Intent.ACTION_MAIN)) {
-        /* Show page from shortcut */
+        /* Show page from old shortcut or start from launcher */
             Bundle main_extras = intent.getExtras();
             if(main_extras != null) {
 				
@@ -334,7 +352,12 @@ public class MainActivity extends Activity {
                 }
             });
             builder.show();
+
+            //Set start page before display if called from dynamic shortcut
+            if (page == null)
+                pageAdd(UI.displayStartPage(mainUI_WV));
             UI.displayPage(mainUI_WV, page);
+
         } if (intent != null && intent.getAction().equals(this.getPackageName()+".NEW_PAGE")) {
         /* Create new page and put link to it on top of current page */
             final String currentPageName = page.getPageName();

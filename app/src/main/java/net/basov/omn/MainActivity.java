@@ -158,7 +158,7 @@ public class MainActivity extends Activity {
             ShortcutInfo shortcut = new ShortcutInfo.Builder(this, "QuickNote")
                     .setShortLabel("QuickNote")
                     .setLongLabel("Take QuickNote")
-                    .setIcon(Icon.createWithResource(this, R.mipmap.omn_ic_shortcut))
+                    .setIcon(Icon.createWithResource(this, R.drawable.ic_baseline_comment_24px))
                     .setIntent(shortcutIntent)
                     .build();
             // Dynamic shortcut

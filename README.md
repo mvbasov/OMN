@@ -109,4 +109,4 @@ Copy build/demo/styles/github.css as app/src/main/assets/css/highlight.css
 `git clone http://github.com/google/material-design-icons/`
 
 Font file (MaterialIcons-Regular.woff2) in the iconfont/ subdirectory.
-
+Dynamic chortcut (drawable/ic_baseline_comment_24px.xml)for QuickNote based on communication/svg/production/ic_comment_24px.svg

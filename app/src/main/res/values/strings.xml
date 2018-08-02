@@ -133,7 +133,7 @@
       id=\"btnQuickNotes\"
       class=\"hBtn\"
       onclick=\"Android.quicknoteButtonCallback()\">
-      <i class=\"material-icons\">receipt</i>
+      <i class=\"material-icons\">comment</i>
     </button>
     <button
       id=\"btnSettings\"

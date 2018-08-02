@@ -9,6 +9,25 @@ Pelican CMS meta information support can be enabled in preferences screen.
 
 I design this application to my needs and use it everyday. I will be glad if this application meets anybody needs also.
 
+### Version scheme
+
+v**RR**.**BB**.**FF**[r|b|a]
+
+* **RR** - minor version
+* **BB** - beta version (00 for release)
+* **FF** - fix for minor release
+
+if application has legacy version:
+
+**FF**=01 mark release legacy release build
+
+**FF**=02,04... mark fix for normal version
+**FF**=03,05... mark fix for legacy version
+
+r - release
+b - beta
+a or empty - alpha
+
 ### Note about source under android/support directory
 
 I dont want to add whole Android support library to my project because it will increase application size to more then 600 kB. For application with original size about 200 kB it is wasting of resource. To solve this problem required fragments of source from Android support library included to my source directly.

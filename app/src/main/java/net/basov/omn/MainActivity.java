@@ -322,13 +322,21 @@ public class MainActivity extends Activity {
                 final EditText input = new EditText(this);
 
                 // Get shared text
+                String noteText = "";
                 String sharedText = intent.getStringExtra(Intent.EXTRA_TEXT);
+                String sharedSubject = intent.getStringExtra(Intent.EXTRA_SUBJECT);
                 String sharedHTML = intent.getStringExtra(Intent.EXTRA_HTML_TEXT);
                 if (sharedHTML != null) {
-                    input.setText(sharedHTML);
-                } else if (sharedText != null) {
-                    input.setText(sharedText);
+                    noteText += sharedHTML;
+                } else {
+                    if (sharedSubject != null) {
+                        noteText += "#### " + sharedSubject + "\n";
+                    }
+                    if (sharedText != null) {
+                        noteText += sharedText;
+                    }
                 }
+                input.setText(noteText);
                 builder.setView(input);
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override

@@ -313,11 +313,22 @@ public class MainActivity extends Activity {
                 Intent i = new Intent(this, AppPreferencesActivity.class);
                 this.startActivityForResult(i, Constants.PREFERENCES_REQUEST);
             }
-            if (intent.getAction().equals(this.getPackageName() + ".QUICK_NOTE")) {
+            if (intent.getAction().equals(this.getPackageName() + ".QUICK_NOTE")
+                    || intent.getAction().equals(Intent.ACTION_SEND)
+                    || intent.getAction().equals(Intent.ACTION_SENDTO)) {
                 /* QuickNotes creation */
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Create QuickNote");
                 final EditText input = new EditText(this);
+
+                // Get shared text
+                String sharedText = intent.getStringExtra(Intent.EXTRA_TEXT);
+                String sharedHTML = intent.getStringExtra(Intent.EXTRA_HTML_TEXT);
+                if (sharedHTML != null) {
+                    input.setText(sharedHTML);
+                } else if (sharedText != null) {
+                    input.setText(sharedText);
+                }
                 builder.setView(input);
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override

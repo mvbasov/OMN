@@ -236,212 +236,221 @@ public class MainActivity extends Activity {
     @Override
     protected void onNewIntent(Intent intent) {
         //super.onNewIntent(intent);
-        if (intent != null && intent.getAction().equals(Intent.ACTION_MAIN)) {
-        /* Show page from old shortcut or start from launcher */
-            Bundle main_extras = intent.getExtras();
-            if(main_extras != null) {
-				
-				// TODO: remove debug code
-				// Debug code from https://stackoverflow.com/a/15074150
-				//for (String key : main_extras.keySet()) {
-				//	Object value = main_extras.get(key);
-				//	MyLog.LogD(String.format("Extras(key::value (type): %s::%s (%s)", key,
-				//							 value.toString(), value.getClass().getName()));
-				//}
-				
-                String page_name = (String) main_extras.get("page_name");
-                if(page_name != null && page_name.length() > 0) {
-                    pageAdd(page_name);
-                    UI.displayPage(mainUI_WV, page);
+        if (intent != null) {
+            if (intent.getAction().equals(Intent.ACTION_MAIN)) {
+                /* Show page from old shortcut or start from launcher */
+                Bundle main_extras = intent.getExtras();
+                if (main_extras != null) {
+
+                    // TODO: remove debug code
+                    // Debug code from https://stackoverflow.com/a/15074150
+                    //for (String key : main_extras.keySet()) {
+                    //	Object value = main_extras.get(key);
+                    //	MyLog.LogD(String.format("Extras(key::value (type): %s::%s (%s)", key,
+                    //							 value.toString(), value.getClass().getName()));
+                    //}
+
+                    String page_name = (String) main_extras.get("page_name");
+                    if (page_name != null && page_name.length() > 0) {
+                        pageAdd(page_name);
+                        UI.displayPage(mainUI_WV, page);
+                    } else {
+                        pageAdd(UI.displayStartPage(mainUI_WV));
+                    }
                 } else {
-					pageAdd(UI.displayStartPage(mainUI_WV));
-				}
-            } else {
-                pageAdd(UI.displayStartPage(mainUI_WV));
-            }
-        } if (intent != null && intent.getAction().equals(this.getPackageName()+".EDIT_PAGE")) {
-        /* Call external editor to edit page */
-            Bundle extras = intent.getExtras();
-            if(extras != null) {
-                Uri uri = null;
-                String name = (String) extras.get("name");
-                UI.setTSFromFile(MainActivity.this, page);
-                Intent intentE = new Intent(Intent.ACTION_EDIT);
-                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) {
-                    uri = Uri.parse("file://"
-                            + FileIO.getFilesDir(MainActivity.this).getPath()
-                            + "/md"
-                            + name
-                            + ".md"
-                    );
-                    intentE.setDataAndType(uri, "text/plain");
-                } else {
-                    File pageDir = new File(FileIO.getFilesDir(MainActivity.this), "md");
-                    File pageFile = new File(pageDir, name + ".md");
-                    uri = FileProvider.getUriForFile(this, this.getPackageName(), pageFile);
-                    intentE.setDataAndType(uri, "text/plain");
-                    intentE.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                    pageAdd(UI.displayStartPage(mainUI_WV));
                 }
+            }
+            if (intent.getAction().equals(this.getPackageName() + ".EDIT_PAGE")) {
+                /* Call external editor to edit page */
+                Bundle extras = intent.getExtras();
+                if (extras != null) {
+                    Uri uri = null;
+                    String name = (String) extras.get("name");
+                    UI.setTSFromFile(MainActivity.this, page);
+                    Intent intentE = new Intent(Intent.ACTION_EDIT);
+                    if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) {
+                        uri = Uri.parse("file://"
+                                + FileIO.getFilesDir(MainActivity.this).getPath()
+                                + "/md"
+                                + name
+                                + ".md"
+                        );
+                        intentE.setDataAndType(uri, "text/plain");
+                    } else {
+                        File pageDir = new File(FileIO.getFilesDir(MainActivity.this), "md");
+                        File pageFile = new File(pageDir, name + ".md");
+                        uri = FileProvider.getUriForFile(this, this.getPackageName(), pageFile);
+                        intentE.setDataAndType(uri, "text/plain");
+                        intentE.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                    }
 //                List<ResolveInfo> resInfoList = this.getPackageManager().queryIntentActivities(intentE, PackageManager.MATCH_DEFAULT_ONLY);
 //                for (ResolveInfo resolveInfo : resInfoList) {
 //                    String packageName = resolveInfo.activityInfo.packageName;
 //                    this.grantUriPermission(packageName, uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
 //                    MyLog.LogD(packageName);
 //                }
-                try {
-                    this.startActivityForResult(intentE, Constants.EDIT_PAGE_REQUEST);
-                } catch (android.content.ActivityNotFoundException e) {
-                    Toast.makeText(this,
-                            "No editor found. Please install one.",
-                            Toast.LENGTH_LONG
-                    ).show();
-                }
-            }
-        } if (intent != null && intent.getAction().equals(this.getPackageName()+".HOME_PAGE")) {
-        /* Show home page */
-            pageAdd(UI.displayStartPage(mainUI_WV));
-        } if (intent != null && intent.getAction().equals(this.getPackageName()+".REDISPLAY_PAGE")) {
-        /* Redisplay page after creation */
-            UI.displayPage(mainUI_WV, page);
-        } if (intent != null && intent.getAction().equals(this.getPackageName()+".PREFERENCES")) {
-        /* Redisplay page after creation */
-            Intent i = new Intent(this, AppPreferencesActivity.class);
-            this.startActivityForResult(i, Constants.PREFERENCES_REQUEST);
-        } if (intent != null && intent.getAction().equals(this.getPackageName()+".QUICK_NOTE")) {
-        /* QuickNotes creation */
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Create QuickNote");
-            final EditText input = new EditText(this);
-            builder.setView(input);
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Context c = MainActivity.this;
-                    pageAdd("/" + Constants.QUICKNOTES_PAGE);
-                    FileIO.createPageIfNotExists(c,
-                            "/" + Constants.QUICKNOTES_PAGE,
-                            "",
-                            ""
-                    );
-                    UI.setMdContentFromFile(c, page);
-
-                    final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                    String newText = getString(
-                            R.string.template_quick_note,
-                            // Time stamp
-                            DF.format(new Date()),
-                            // Note text
-                            input.getText().toString()
-                    );
-                    page.addAtTopOfPage(newText);
-
-                    FileIO.writePageToFile(
-                            c,
-                            "/" + Constants.QUICKNOTES_PAGE,
-                            page.getMdContent()
-                    );
-                    Intent i = new Intent();
-                    i.setAction(c.getPackageName() + ".REDISPLAY_PAGE");
-                    c.startActivity(i);
-                }
-            });
-            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-            });
-            builder.show();
-
-            //Set start page before display if called from dynamic shortcut
-            if (page == null)
-                pageAdd(UI.displayStartPage(mainUI_WV));
-            UI.displayPage(mainUI_WV, page);
-
-        } if (intent != null && intent.getAction().equals(this.getPackageName()+".NEW_PAGE")) {
-        /* Create new page and put link to it on top of current page */
-            final String currentPageName = page.getPageName();
-
-            AlertDialog.Builder builderName = new AlertDialog.Builder(this);
-            builderName.setTitle("New page (file) name");
-            final EditText inputName = new EditText(this);
-            builderName.setView(inputName);
-            builderName.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    final String newPageNameEntered = inputName.getText().toString().trim();
-                    final String newPageName = currentPageName.substring(0,currentPageName.lastIndexOf("/") + 1) + newPageNameEntered;
-                    if (FileIO.isFileExists(MainActivity.this, "/md/" + newPageName + ".md")) {
-                        Toast.makeText(MainActivity.this, "Page already exists", Toast.LENGTH_SHORT).show();
-                        //TODO: implement add link to current page if page exists
-                    } else {
-                        AlertDialog.Builder builderTitle = new AlertDialog.Builder(MainActivity.this);
-                        builderTitle.setTitle("New page title");
-                        final EditText inputTitle = new EditText(MainActivity.this);
-                        inputTitle.setText(newPageNameEntered, TextView.BufferType.EDITABLE);
-                        builderTitle.setView(inputTitle);
-                        builderTitle.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                                final String timeStamp = DF.format(new Date());
-                                UI.setMdContentFromFile(MainActivity.this, page);
-                                page.setMetaModified(timeStamp);
-                                final String currentMeta = page.getMetaHeaderAsString();
-                                final String currentContent =  page.getMdContent();
-
-                                String newPageTitle = inputTitle.getText().toString().trim();
-                                String linkToNewPage = String.format("* [%s](%s.html)\n", newPageTitle, newPageNameEntered);
-                                if (currentMeta != null && currentContent != null) {
-                                    page.addAtTopOfPage(linkToNewPage);
-                                    FileIO.writePageToFile(
-                                            MainActivity.this,
-                                            currentPageName,
-                                            page.getMdContent()
-                                    );
-                                } else {
-                                    String stackState;
-                                    if (pages == null)
-                                        stackState = "null";
-                                    else if (pages.empty())
-                                        stackState = "empty";
-                                    else
-                                        stackState = pages.peek();
-                                    Toast.makeText(MainActivity.this, "Internal programm error. Link to page didn't created\n * page = " + pageName + "\n * pages.peek = " + stackState , Toast.LENGTH_SHORT).show();
-                                }
-
-                                FileIO.createPageIfNotExists(MainActivity.this, newPageName,newPageTitle, "");
-
-                                pageAdd(newPageName);
-
-                                Intent i = new Intent();
-                                i.setAction(MainActivity.this.getPackageName()+".EDIT_PAGE");
-                                i.putExtra("name", "/"+newPageName);
-                                MainActivity.this.startActivity(i);
-
-                            }
-
-                        });
-                        builderTitle.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        });
-                        builderTitle.show();
+                    try {
+                        this.startActivityForResult(intentE, Constants.EDIT_PAGE_REQUEST);
+                    } catch (android.content.ActivityNotFoundException e) {
+                        Toast.makeText(this,
+                                "No editor found. Please install one.",
+                                Toast.LENGTH_LONG
+                        ).show();
                     }
                 }
-            });
-            builderName.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-            });
-            builderName.show();
+            }
+            if (intent.getAction().equals(this.getPackageName() + ".HOME_PAGE")) {
+                /* Show home page */
+                pageAdd(UI.displayStartPage(mainUI_WV));
+            }
+            if (intent.getAction().equals(this.getPackageName() + ".REDISPLAY_PAGE")) {
+                /* Redisplay page after creation */
+                UI.displayPage(mainUI_WV, page);
+            }
+            if (intent.getAction().equals(this.getPackageName() + ".PREFERENCES")) {
+                /* Redisplay page after creation */
+                Intent i = new Intent(this, AppPreferencesActivity.class);
+                this.startActivityForResult(i, Constants.PREFERENCES_REQUEST);
+            }
+            if (intent.getAction().equals(this.getPackageName() + ".QUICK_NOTE")) {
+                /* QuickNotes creation */
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Create QuickNote");
+                final EditText input = new EditText(this);
+                builder.setView(input);
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Context c = MainActivity.this;
+                        pageAdd("/" + Constants.QUICKNOTES_PAGE);
+                        FileIO.createPageIfNotExists(c,
+                                "/" + Constants.QUICKNOTES_PAGE,
+                                "",
+                                ""
+                        );
+                        UI.setMdContentFromFile(c, page);
 
-            UI.displayPage(mainUI_WV, page);
+                        final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        String newText = getString(
+                                R.string.template_quick_note,
+                                // Time stamp
+                                DF.format(new Date()),
+                                // Note text
+                                input.getText().toString()
+                        );
+                        page.addAtTopOfPage(newText);
+
+                        FileIO.writePageToFile(
+                                c,
+                                "/" + Constants.QUICKNOTES_PAGE,
+                                page.getMdContent()
+                        );
+                        Intent i = new Intent();
+                        i.setAction(c.getPackageName() + ".REDISPLAY_PAGE");
+                        c.startActivity(i);
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                builder.show();
+
+                //Set start page before display if called from dynamic shortcut
+                if (page == null)
+                    pageAdd(UI.displayStartPage(mainUI_WV));
+                UI.displayPage(mainUI_WV, page);
+
+            }
+            if (intent.getAction().equals(this.getPackageName() + ".NEW_PAGE")) {
+                /* Create new page and put link to it on top of current page */
+                final String currentPageName = page.getPageName();
+
+                AlertDialog.Builder builderName = new AlertDialog.Builder(this);
+                builderName.setTitle("New page (file) name");
+                final EditText inputName = new EditText(this);
+                builderName.setView(inputName);
+                builderName.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        final String newPageNameEntered = inputName.getText().toString().trim();
+                        final String newPageName = currentPageName.substring(0, currentPageName.lastIndexOf("/") + 1) + newPageNameEntered;
+                        if (FileIO.isFileExists(MainActivity.this, "/md/" + newPageName + ".md")) {
+                            Toast.makeText(MainActivity.this, "Page already exists", Toast.LENGTH_SHORT).show();
+                            //TODO: implement add link to current page if page exists
+                        } else {
+                            AlertDialog.Builder builderTitle = new AlertDialog.Builder(MainActivity.this);
+                            builderTitle.setTitle("New page title");
+                            final EditText inputTitle = new EditText(MainActivity.this);
+                            inputTitle.setText(newPageNameEntered, TextView.BufferType.EDITABLE);
+                            builderTitle.setView(inputTitle);
+                            builderTitle.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                    final String timeStamp = DF.format(new Date());
+                                    UI.setMdContentFromFile(MainActivity.this, page);
+                                    page.setMetaModified(timeStamp);
+                                    final String currentMeta = page.getMetaHeaderAsString();
+                                    final String currentContent = page.getMdContent();
+
+                                    String newPageTitle = inputTitle.getText().toString().trim();
+                                    String linkToNewPage = String.format("* [%s](%s.html)\n", newPageTitle, newPageNameEntered);
+                                    if (currentMeta != null && currentContent != null) {
+                                        page.addAtTopOfPage(linkToNewPage);
+                                        FileIO.writePageToFile(
+                                                MainActivity.this,
+                                                currentPageName,
+                                                page.getMdContent()
+                                        );
+                                    } else {
+                                        String stackState;
+                                        if (pages == null)
+                                            stackState = "null";
+                                        else if (pages.empty())
+                                            stackState = "empty";
+                                        else
+                                            stackState = pages.peek();
+                                        Toast.makeText(MainActivity.this, "Internal programm error. Link to page didn't created\n * page = " + pageName + "\n * pages.peek = " + stackState, Toast.LENGTH_SHORT).show();
+                                    }
+
+                                    FileIO.createPageIfNotExists(MainActivity.this, newPageName, newPageTitle, "");
+
+                                    pageAdd(newPageName);
+
+                                    Intent i = new Intent();
+                                    i.setAction(MainActivity.this.getPackageName() + ".EDIT_PAGE");
+                                    i.putExtra("name", "/" + newPageName);
+                                    MainActivity.this.startActivity(i);
+
+                                }
+
+                            });
+                            builderTitle.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            });
+                            builderTitle.show();
+                        }
+                    }
+                });
+                builderName.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                builderName.show();
+
+                UI.displayPage(mainUI_WV, page);
+            }
         }
+
     }
 
     @Override

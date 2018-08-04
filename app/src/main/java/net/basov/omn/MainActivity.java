@@ -322,18 +322,36 @@ public class MainActivity extends Activity {
                 final EditText input = new EditText(this);
 
                 // Get shared text
+				String link = "";
                 String noteText = "";
                 String sharedText = intent.getStringExtra(Intent.EXTRA_TEXT);
                 String sharedSubject = intent.getStringExtra(Intent.EXTRA_SUBJECT);
                 String sharedHTML = intent.getStringExtra(Intent.EXTRA_HTML_TEXT);
+                Integer endOfFirstLine = 0;
                 if (sharedHTML != null) {
                     noteText += sharedHTML;
                 } else {
                     if (sharedSubject != null) {
                         noteText += "#### " + sharedSubject + "\n";
+						link += "* [" + sharedSubject + "]";
                     }
-                    if (sharedText != null) {
-                        noteText += sharedText;
+                    if (sharedText != null) {               
+						if (sharedText.startsWith("http")) {
+							if (sharedText.contains("\n")) {
+                                endOfFirstLine = sharedText.indexOf("\n");
+							    link += sharedText.substring(0, endOfFirstLine);
+							} else
+						        link += "(" + sharedText +")\n";
+                            link += "\n";
+                            if (endOfFirstLine != 0)
+                                noteText = sharedText.substring(sharedText.length() - endOfFirstLine);
+                            else
+                                noteText = "";
+						} else {
+							link = "";
+                            noteText = sharedText;
+						}                     
+						noteText = link + noteText;
                     }
                 }
                 input.setText(noteText);

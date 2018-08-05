@@ -24,6 +24,7 @@ import android.content.pm.ShortcutManager;
 import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.os.Build;
+import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.text.Html;
 import android.webkit.JavascriptInterface;
@@ -165,7 +166,14 @@ public class WebViewJSCallback {
         Uri uri = Uri.parse("file://" + FileIO.getFilesDir(mContext).getAbsolutePath());
         intent.setData(uri);
         try {
+            // Dirty hack to enable file:// URI
+            StrictMode.VmPolicy old = StrictMode.getVmPolicy();
+            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder(old)
+                                       .detectFileUriExposure()
+                                       //.penaltyLog()
+                                       .build());          
             mContext.startActivity(Intent.createChooser(intent, "Open pages folder"));
+            StrictMode.setVmPolicy(old);
         } catch (android.content.ActivityNotFoundException e) {
             Toast.makeText(mContext, "No File Manager found. Please install one.", Toast.LENGTH_LONG).show();
         }

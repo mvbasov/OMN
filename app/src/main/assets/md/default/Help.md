@@ -141,6 +141,17 @@ Button code:
         onclick="Android.folderButtonCallback(PFN)">
         <i class="material-icons">folder_open</i>
     </button>
+    
+#### <button onclick="Android.refreshHtmlButtonCallback()"> <i class="material-icons">cached</i> </button> "Refresh HTML page"
+
+Force create HTML page from Markdown source. Disabled by defsult.
+
+Button code:
+
+    <button
+        onclick="Android.refreshHtmlButtonCallback()">
+        <i class="material-icons">cached</i>
+    </button>
 
 #### <button onclick="Android.shortcutButtonCallback(PFN, Title)"> <i class="material-icons">screen_share</i> </button> "Create shortcut to page in home screen"
 

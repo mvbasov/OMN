@@ -143,6 +143,17 @@ Button code:
         &#x1f4c2;
     </button>
 
+#### <button onclick="Android.refreshHtmlButtonCallback()"> &#8634; </button> "Refresh HTML page"
+
+Force create HTML page from Markdown source. Disabled by defsult.
+
+Button code:
+
+    <button
+        onclick="Android.refreshHtmlButtonCallback()">
+        &#8634;
+    </button>
+
 #### <button onclick="Android.shortcutButtonCallback(PFN, Title)"> &#x2197; </button> "Create shortcut to page in home screen"
 
 Button code:

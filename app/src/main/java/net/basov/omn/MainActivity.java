@@ -76,7 +76,7 @@ public class MainActivity extends Activity {
          */
         SharedPreferences defSharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = defSharedPref.edit();
-        final int currentPrefVersion = 8;
+        final int currentPrefVersion = 9;
         switch (defSharedPref.getInt(getString(R.string.pk_pref_version), 0)) {
             case 0: // initial
                 editor.putBoolean(getString(R.string.pk_use_view_directory), false);
@@ -97,6 +97,8 @@ public class MainActivity extends Activity {
                 editor.putBoolean(getString(R.string.pk_btn_enable_add_page), true);
             case 7:
                 editor.putBoolean(getString(R.string.pk_enable_pelican_meta), true);
+            case 8:
+                editor.putBoolean(getString(R.string.pk_btn_enable_refresh_html), false);
                 editor.putInt(getString(R.string.pk_pref_version), currentPrefVersion);
                 editor.commit();
                 break;
@@ -306,6 +308,7 @@ public class MainActivity extends Activity {
             }
             if (intent.getAction().equals(this.getPackageName() + ".REDISPLAY_PAGE")) {
                 /* Redisplay page after creation */
+                if(intent.getBooleanExtra("RECREATE_HTML", false)) page.setHtmlActual(false);
                 UI.displayPage(mainUI_WV, page);
             }
             if (intent.getAction().equals(this.getPackageName() + ".PREFERENCES")) {

@@ -30,6 +30,11 @@ public class Page {
     private String mMdContent;
     private String mLog;
     private Date mFileTS;
+    private Boolean mHmlActual;
+
+    public Boolean isHtmlActual() { return mHmlActual; }
+
+    public void setHtmlActual(Boolean actual) { mHmlActual =  actual; }
 
     public Date getFileTS() {
         return mFileTS;
@@ -86,6 +91,7 @@ public class Page {
         setPageName(mPageName);
         mMeta = new LinkedHashMap<>();
         mLog = "";
+        mHmlActual = true;
     }
 
     public String getMetaHeaderAsString() {

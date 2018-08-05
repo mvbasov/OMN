@@ -189,9 +189,17 @@ public class WebViewJSCallback {
                 title,
                 "["+title+"]("+pn.substring(pn.lastIndexOf("/") + 1)+".html)"
         );
-        clipboard.setPrimaryClip(clip);
+        clipboard.setPrimaryClip(clip);      
     }
 
+    @JavascriptInterface
+    public void refreshHtmlButtonCallback() {
+        Intent i = new Intent();
+        i.setAction(mContext.getPackageName() + ".REDISPLAY_PAGE");
+        i.putExtra("RECREATE_HTML", true);
+        mContext.startActivity(i);
+    }
+    
     @JavascriptInterface
     public void saveHTML(String html, String PFN, String Title) {
         Toast.makeText(mContext, "Save HTML.", Toast.LENGTH_SHORT).show();

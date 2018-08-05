@@ -81,6 +81,12 @@ public class UI {
                                 c.getString(R.string.pk_btn_enable_filemanager),
                                 true
                         ),
+
+            //Enable Refresh HYML button
+            defSharedPref.getBoolean(
+                c.getString(R.string.pk_btn_enable_refresh_html),
+                true
+            ),
                         //Enable Create shortcut button
                         defSharedPref.getBoolean(
                                 c.getString(R.string.pk_btn_enable_shortcut),
@@ -107,8 +113,9 @@ public class UI {
             }
         });
 
-        if(!FileIO.isPageActual(c, page.getPageName())) {
+        if(!FileIO.isPageActual(c, page.getPageName()) || !page.isHtmlActual()) {
             createHTML(wv, page.getPageName());
+            page.setHtmlActual(true);
         } else if(FileIO.isFileExists(c, "md/" + page.getPageName() + ".md")) {
             String htmlFileName = "file://" + FileIO.getFilesDir(c) + "/html" + page.getPageName() + ".html" + page.getInPageReference();
             wv.clearCache(true);

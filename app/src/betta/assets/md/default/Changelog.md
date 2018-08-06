@@ -3,7 +3,14 @@ Date: 2017-10-13 22:26:43
 Modified: 2018-08-03 22:52:40
 Author: Mikhail Basov
 
+##### v00.19.00b
+
+- Add refresh HTML page
+- Get shared text as link
+- Fix call file manager
+
 ##### v00.18.00b
+###### Date:   Fri Aug 3 22:53:52 2018 +0300, commit 61ca9f5098bebf5be8ee46710cae9f9b54c87a4e
 
 - Receive shared text to QuickNote
 - Change QuickNote icon

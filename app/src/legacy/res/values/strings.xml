@@ -127,6 +127,12 @@
 &#x1f4c2;
     </button>
     <button
+      id=\"btnRefresh\"
+      class=\"hBtn\"
+      onclick=\"Android.refreshHtmlButtonCallback()\">
+&#8634;      
+    </button>
+    <button
       id=\"btnShortcut\"
       class=\"hBtn\"
       onclick=\"Android.shortcutButtonCallback(PageName, Title)\">

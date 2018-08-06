@@ -174,8 +174,9 @@
         %5$b    Enable Link button
         %6$b    Enable E-Mail button
         %7$b    Enable File browser button
-        %8$b    Enable Create shortcut button
-        %9$b    Enable QuickNotes button
+        %8$b    Enable Rfresh HTML button
+        %9$b    Enable Create shortcut button
+        %10$b    Enable QuickNotes button
     -->
     <string name="set_html_page_js">
         javascript:
@@ -193,8 +194,9 @@
         enableButton(\'btnLink\', %5$b);
         enableButton(\'btnEMail\', %6$b);
         enableButton(\'btnFolder\', %7$b);
-        enableButton(\'btnShortcut\', %8$b);
-        enableButton(\'btnQuickNotes\', %9$b);
+        enableButton(\'btnRefresh\', %8$b);
+        enableButton(\'btnShortcut\', %9$b);
+        enableButton(\'btnQuickNotes\', %10$b);
     </string>
 
     <!--
@@ -324,6 +326,7 @@ This page generated automaticaly.
     <string name="pk_btn_enable_link" translatable="false">btnEnableLink</string>
     <string name="pk_btn_enable_email" translatable="false">btnEnableEmail</string>
     <string name="pk_btn_enable_filemanager" translatable="false">btnEnableFilemanager</string>
+    <string name="pk_btn_enable_refresh_html" translatable="false">btnRefreshHtml</string>
     <string name="pk_btn_enable_shortcut" translatable="false">btnEnableShortcut</string>
     <string name="pk_btn_enable_quicknotes" translatable="false">btnEnableQuicknotes</string>
 

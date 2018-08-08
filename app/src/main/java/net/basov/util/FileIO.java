@@ -223,7 +223,8 @@ public class FileIO {
                 Constants.COMON_CSS,
                 Constants.HIGHLIGHT_CSS,
                 Constants.ICONS_FONT,
-                Constants.ICONS_CSS
+                Constants.ICONS_CSS,
+                Constants.FUNCTIONS_JS
         };
         copyFilesFromAssets(c, files, force);
 

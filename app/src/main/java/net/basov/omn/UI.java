@@ -48,17 +48,8 @@ public class UI {
         Context c = wv.getContext();
         // TODO: Only tags display dosn't shown without the following string. But add this decrease performance (may be)
         setMdContentFromFile(c, page);
-        String tagsMarks = "";
-        if (page.hasMetaWithKey("tags")) {      
-            for (String tg: page.getMetaByKey("tags").split(",")) {
-                if (tg.trim().length() >0)
-                    tagsMarks += "<span class=\"tagmark\">" + tg.trim() + "</span>";
-            }
-        }
         String actionButtons = TextTools.escapeJavaScriptFunctionParameter(c.getString(
-                R.string.html_action_button_header,
-                page.getPageName()==null ? "Strange... NULL" : page.getPageName(),
-                tagsMarks
+                R.string.html_action_button_header
         ));
         SharedPreferences defSharedPref = PreferenceManager.getDefaultSharedPreferences(c);
         final String setPageJS =

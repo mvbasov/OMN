@@ -21,6 +21,7 @@
         %3$s    Meta information
         %4$s    Page name
         %5$s    1-st page header (function as page title)
+        %6$s    Tags
     -->
     <string name="html_top"><![CDATA["<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">
 <html xmlns=\"http://www.w3.org/1999/xhtml\">
@@ -41,21 +42,42 @@
   <script>
     var PageName = \'%4$s\';
     var Title = \'%5$s\';
+    function toggleHdrBtnVis() {
+      hheader=document.getElementById(\'hidable_header\');
+      btn=document.getElementById(\'title_arrow\');
+      ptitle=document.getElementById(\'ptitle\');
+      content=document.getElementById(\'content\');
+      //if (btn.style.display === \'none\') return;
+      if (hheader.style.display !== \'none\') {
+        hheader.style.display = \'none\';
+        //ptitle.style.top = \'0px\';
+        btn.innerHTML = \'<i class=\"material-icons\">arrow_drop_down</i>\';
+        //content.style.top = \'2em\';
+      } else {
+        hheader.style.display = \'block\';
+        //ptitle.style.top = \'4.2em\';
+        btn.innerHTML = \'<i class=\"material-icons\">arrow_drop_up</i>\';
+        //content.style.top = \'6em\';
+      }
+    }
   </script>
 
 </head>
 
 <body style=\"height:100%%; width:100%%; margin:0\">
 
-  <div id=\"actions_header\" style=\"display:none; background-color:lightgray; width:100%%; padding-top:0.5em; padding-left:0.5em\">
+  <div id=\"hidable_header\" style=\"display:none; background-color:lightgray; width:100%%; padding-top:0.5em; padding-left:0.5em\" >
+    <div id=\"actions_header\">
+    </div>
+    Name:<span>%4$s</span>%6$s
   </div>
 
-  <div id=\"ptitle\" style=\"height:2em; top:0px; left:0; right:0; overflow:hidden; background-color:lightgray\">
+  <div id=\"ptitle\" style=\"overflow:hidden; background-color:lightgray\">
     <a
       onclick=\"toggleHdrBtnVis();\">
       <h4 id=\"pageTitle\" align=\"center\">
         %5$s
-        <span id=\"title_arrow\" style=\"display:none\">
+        <span id=\"title_arrow\">
           <i class=\"material-icons\">arrow_drop_down</i>
         </span>
       </h4>
@@ -68,8 +90,6 @@
 
     <!--
     Action buttons header
-        %1$s    Page name
-        ℅2$s    Tags
     -->
     <string name="html_action_button_header"><![CDATA["
     <button
@@ -149,14 +169,28 @@
       <i class=\"material-icons\">settings</i>
     </button>
     <br />
-    Name:<span>%1$s</span>
-    <div id=\"tags\" style=\"padding-top: 0.3em;\">
-        %2$s
-    </div>
 "]]></string>
 
     <string name="html_meta_template"><![CDATA["  <meta name=\"%1$s\" content=\"%2$s\" />
 "]]></string>
+
+    <!--
+    Note tags block template
+        %1$s    tags (each in span)
+    -->
+    <string name="html_tags_template"><![CDATA["
+    <div id=\"tags\" style=\"margin-top:5px;\">
+%1$s    </div>
+"]]></string>
+
+    <!--
+    One note tag template
+        %1$s    tag
+    -->
+    <string name="html_one_tag_template"><![CDATA["      <span class=\"tagmark\">%1$s</span>
+"]]></string>
+
+
 
     <!-- Bottom part of any html page -->
     <string name="html_buttom"><![CDATA["
@@ -186,31 +220,13 @@
         document.getElementById(\'actions_header\').innerHTML=\'%2$s\';
         document.getElementById(\'title_arrow\').style.display=\'inline\';
 
-        function toggleHdrBtnVis() {
-          aheader=document.getElementById(\'actions_header\');
-          btn=document.getElementById(\'title_arrow\');
-          ptitle=document.getElementById(\'ptitle\');
-          content=document.getElementById(\'content\');
-          if (btn.style.display === \'none\') return;
-          if (aheader.style.display !== \'none\') {
-            aheader.style.display = \'none\';
-            ptitle.style.top = \'0px\';
-            btn.innerHTML = \'<i class=\"material-icons\">arrow_drop_down</i>\';
-            content.style.top = \'2em\';
-          } else {
-            aheader.style.display = \'block\';
-            ptitle.style.top = \'4.2em\';
-            btn.innerHTML = \'<i class=\"material-icons\">arrow_drop_up</i>\';
-            content.style.top = \'6em\';
-          }
-        }
-
         function enableButton(id, enable) {
             if (enable)
                 document.getElementById(id).style.display=\'inline\';
             else
                 document.getElementById(id).style.display=\'none\';
         };
+
         enableButton(\'btnHome\', %3$b);
         enableButton(\'btnAdd\', %4$b);
         enableButton(\'btnLink\', %5$b);

@@ -254,14 +254,28 @@ public class WebViewJSCallback {
                 appNameAndVersion
         );
 
+        String tagsMarks = "";
+        if (page.hasMetaWithKey("tags")) {
+            for (String tg: page.getMetaByKey("tags").split(",")) {
+                if (tg.trim().length() >0)
+                    tagsMarks += mContext.getString(
+                            R.string.html_one_tag_template,
+                            tg.trim());
+            }
+            tagsMarks = mContext.getString(
+                    R.string.html_tags_template,
+                    tagsMarks);
+        }
+
 
         String htmlTop = mContext.getString(
                 R.string.html_top,
                 Title,      //Page title
                 dirPrefix,  //Reference to top (../*[0..n])
-                htmlMeta,         //Summary
+                htmlMeta,   //Summary
 				PFN,		//Page name in top control bock
-                Title       //1-st page header as Title and top buttons block controll
+                Title,      //1-st page header as Title and top buttons block controll
+                tagsMarks   //Tags
         );
         String htmlBottom = mContext.getString(R.string.html_buttom);
         String htmlPage = htmlTop + html + htmlBottom;

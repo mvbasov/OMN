@@ -57,7 +57,7 @@ public class Page {
     }
 
     public Boolean hasMetaWithKey(String key) {
-        return mMeta.containsKey(key);
+        return mMeta.containsKey(key.toLowerCase());
     }
 
     public void addAtTopOfPage(String textToAdd) {

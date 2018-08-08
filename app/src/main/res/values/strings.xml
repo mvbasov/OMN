@@ -50,7 +50,7 @@
   <div id=\"actions_header\" style=\"display:none; background-color:lightgray; width:100%%; padding-top:0.5em; padding-left:0.5em\">
   </div>
 
-  <div id=\"ptitle\" style=\"position:absolute; height:2em; top:0px; left:0; right:0; overflow:hidden; background-color:lightgray\">
+  <div id=\"ptitle\" style=\"height:2em; top:0px; left:0; right:0; overflow:hidden; background-color:lightgray\">
     <a
       onclick=\"toggleHdrBtnVis();\">
       <h4 id=\"pageTitle\" align=\"center\">
@@ -62,13 +62,14 @@
     </a>
   </div>
 
-  <div id=\"content\" style=\"position:absolute; top:2em; left:0.5em; bottom: 1px; right:0.3em; overflow:auto;\">
+  <div id=\"content\" style=\"padding:0.5em; overflow:auto;\">
 
     "]]></string>
 
     <!--
     Action buttons header
         %1$s    Page name
+        ℅2$s    Tags
     -->
     <string name="html_action_button_header"><![CDATA["
     <button
@@ -149,7 +150,9 @@
     </button>
     <br />
     Name:<span>%1$s</span>
-    <hr />
+    <div id=\"tags\" style=\"padding-top: 0.3em;\">
+        %2$s
+    </div>
 "]]></string>
 
     <string name="html_meta_template"><![CDATA["  <meta name=\"%1$s\" content=\"%2$s\" />

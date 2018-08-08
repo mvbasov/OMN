@@ -46,16 +46,26 @@ public class UI {
     public static void displayPage(final WebView wv, final Page page) {
 
         Context c = wv.getContext();
+        // TODO: Only tags display dosn't shown without the following string. But add this decrease performance (may be)
+        setMdContentFromFile(c, page);
+        String tagsMarks = "";
+        if (page.hasMetaWithKey("tags")) {      
+            for (String tg: page.getMetaByKey("tags").split(",")) {
+                if (tg.trim().length() >0)
+                    tagsMarks += "<span class=\"tagmark\">" + tg.trim() + "</span>";
+            }
+        }
         String actionButtons = TextTools.escapeJavaScriptFunctionParameter(c.getString(
                 R.string.html_action_button_header,
-                page.getPageName()==null ? "Strange... NULL" : page.getPageName()
+                page.getPageName()==null ? "Strange... NULL" : page.getPageName(),
+                tagsMarks
         ));
         SharedPreferences defSharedPref = PreferenceManager.getDefaultSharedPreferences(c);
         final String setPageJS =
                 c.getString(
                         R.string.set_html_page_js,
                         page.getPageName(),
-                        actionButtons,
+                        actionButtons,            
                         //Enable Home button
                         defSharedPref.getBoolean(
                                 c.getString(R.string.pk_btn_enable_home),
@@ -82,11 +92,11 @@ public class UI {
                                 true
                         ),
 
-            //Enable Refresh HYML button
-            defSharedPref.getBoolean(
-                c.getString(R.string.pk_btn_enable_refresh_html),
-                true
-            ),
+                        //Enable Refresh HYML button
+                        defSharedPref.getBoolean(
+                            c.getString(R.string.pk_btn_enable_refresh_html),
+                            true
+                        ),
                         //Enable Create shortcut button
                         defSharedPref.getBoolean(
                                 c.getString(R.string.pk_btn_enable_shortcut),

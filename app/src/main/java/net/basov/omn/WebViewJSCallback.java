@@ -268,7 +268,9 @@ public class WebViewJSCallback {
                             // Trim edge spaces and replace
                             // internal spaces to &nbsp;
                             // to prevent split tag when wrap to next line
-                            tg.trim().replace(" ", "&nbsp;"));
+                            tg.trim().replace(" ", "&nbsp;"),
+                            "/default/Tags.html#some-tag"
+                    );
             }
             tagsMarks = mContext.getString(
                     R.string.html_tags_template,

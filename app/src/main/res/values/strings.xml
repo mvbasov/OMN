@@ -170,8 +170,9 @@
     <!--
     One note tag template
         %1$s    tag
+        %2$s    tag page href
     -->
-    <string name="html_one_tag_template"><![CDATA["      <span class=\"tagmark\">%1$s</span>
+    <string name="html_one_tag_template"><![CDATA["      <a href=\"%2$s\"><span class=\"tagmark\">%1$s</span></a>
 "]]></string>
 
     <!-- Bottom part of any html page -->

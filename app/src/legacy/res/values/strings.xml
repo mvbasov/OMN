@@ -35,7 +35,7 @@
   <link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/icon?family=Material+Icons\" />
   <link rel=\"stylesheet\" href=\"../%2$sfonts/google-material/material-icons.css\"  />
 
-  <script type="text/javascript" src="../js/functions.js"></script>
+  <script type="text/javascript" src="../%2$sjs/functions.js"></script>
 
   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />
   <meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\" />
@@ -59,8 +59,8 @@
 
 <body>
 
-  <div id=\"hidable_header\">
-    <div id=\"actions_header\" style=\"display:none\">
+  <div id=\"hidable_header\" style=\"display:none; background-color:lightgray\">
+    <div id=\"actions_header\">
     </div>
     Name:<span>%4$s</span>%6$s
   </div>

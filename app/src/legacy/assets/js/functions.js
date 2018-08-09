@@ -3,14 +3,14 @@
 */
 
 function toggleHdrBtnVis() {
-	hheader=document.getElementById(\'hidable_header\');
-    btn=document.getElementById(\'title_arrow\');
-    if (hheader.style.display !== \'none\') {
-        hheader.style.display = \'none\';
-        btn.innerHTML = \'+\';
+	hheader=document.getElementById('hidable_header');
+    btn=document.getElementById('title_arrow');
+    if (hheader.style.display !== 'none') {
+        hheader.style.display = 'none';
+        btn.innerHTML = '+';
     } else {
-        hheader.style.display = \'block\';
-        btn.innerHTML = \'-\';
+        hheader.style.display = 'block';
+        btn.innerHTML = '-';
     }
 }
 

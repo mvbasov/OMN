@@ -63,6 +63,8 @@
     <div id=\"actions_header\" style=\"display:none\">
     </div>
     Name:<span>%4$s</span>%6$s
+  </div>
+  <div id=\"ptitle\" style=\"overflow:hidden; background-color:lightgray\">
     <a
       onclick=\"toggleHdrBtnVis();\">
       <h4 id=\"pageTitle\" align=\"center\">

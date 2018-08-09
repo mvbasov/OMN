@@ -13,6 +13,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 package net.basov.omn;
 
 import android.app.PendingIntent;
+import android.content.ActivityNotFoundException;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -168,13 +169,17 @@ public class WebViewJSCallback {
         try {
             // Dirty hack to enable file:// URI
             StrictMode.VmPolicy old = StrictMode.getVmPolicy();
-            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder(old)
-                                       .detectFileUriExposure()
-                                       //.penaltyLog()
-                                       .build());          
-            mContext.startActivity(Intent.createChooser(intent, "Open pages folder"));
-            StrictMode.setVmPolicy(old);
-        } catch (android.content.ActivityNotFoundException e) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder(old)
+                                           .detectFileUriExposure()
+                                           //.penaltyLog()
+                                           .build());
+                mContext.startActivity(Intent.createChooser(intent, "Open pages folder"));
+                StrictMode.setVmPolicy(old);
+            } else {
+                mContext.startActivity(Intent.createChooser(intent, "Open pages folder"));
+            }
+        } catch (ActivityNotFoundException e) {
             Toast.makeText(mContext, "No File Manager found. Please install one.", Toast.LENGTH_LONG).show();
         }
     }

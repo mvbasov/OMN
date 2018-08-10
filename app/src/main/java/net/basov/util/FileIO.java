@@ -25,6 +25,10 @@ import android.util.Log;
 import net.basov.omn.Constants;
 import net.basov.omn.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -404,8 +408,39 @@ public class FileIO {
      */
     public static void savePageTags(Context c, String pfn, String title, ArrayList<String> tags) {
         //String getStringFromFile (getFilesDir(c)+ "/md/Tags.md")
-        String tagJSON = "";
-        String tagFileContent = c.getString(R.string.md_tag_file_template, tagJSON);
+
+        String tagJSONStr = "" +
+                "{" +
+                "  'Start': {" +
+                "    'title': 'Welcome!'," +
+                "    'tags': [" +
+                "       'Index'" +
+                "     ]" +
+                "   }"+
+                "}";
+
+
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = new JSONObject(tagJSONStr);
+
+            JSONArray jsaTags = new JSONArray();
+            for(String t : tags) jsaTags.put(t);
+
+            JSONObject pageJsonObject = new JSONObject();
+            pageJsonObject.put("tags",jsaTags);
+            pageJsonObject.put("title", title);
+            jsonObject.put(pfn.substring(1), pageJsonObject);
+
+
+            tagJSONStr = jsonObject.toString(2);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        if(jsonObject == null)
+            tagJSONStr = "{}";
+
+        String tagFileContent = c.getString(R.string.md_tag_file_template, tagJSONStr);
         writePageToFile(c, "/Tags", tagFileContent);
     }
 }

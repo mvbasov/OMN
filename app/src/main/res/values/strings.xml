@@ -191,12 +191,11 @@
 
 <div id=\"main\" style=\"margin-top: 1em;\"></div>
 
-<!-- Start of Tags DB -->
 <script>
+// Start of Tags DB
 var pageDb = %1$s
-
+// End of Tags DB
 </script>
-<!-- End of Tags DB -->
 
 <script>
 var tagDb = {};
@@ -213,18 +212,23 @@ for ( i in pageDb ) {
 var mm = '';
 for ( t in tagDb ) {
   mm += '<span id=\"'
-    + t
+    + t.trim()
+       .replace(' ', '-')
+       .replace('#', '')
+       .replace('<', '')
+       .replace('>', '')
+       .replace('/','')
     + '\" class=\"tagmark\">'
     + t
     + '</span><br />'
-    + '<ul>\n';
+    + '<ul>\\n';
   for ( p in tagDb[t] ) {
     pn = tagDb[t][p];
     mm += '<li><a href=\"'
       + pn
       + '.html\">'
       + pageDb[pn]['title']
-      + '</a></li>\n';
+      + '</a></li>\\n';
   }
   mm += '</ul>';
 }

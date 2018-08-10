@@ -183,6 +183,55 @@
 
 </html>
     "]]></string>
+    <!--
+     Tag page template
+        %1$s    Page name
+    -->
+    <string name="md_tag_template"><![CDATA["Title: Tags
+
+<div id=\"main\" style=\"margin-top: 1em;\"></div>
+
+<!-- Start of Tags DB -->
+<script>
+var pageDb = %1$s
+
+</script>
+<!-- End of Tags DB -->
+
+<script>
+var tagDb = {};
+for ( i in pageDb ) {
+  for ( j in pageDb[i]['tags'] ){
+    var ctag = pageDb[i]['tags'][j];
+    if (!tagDb.hasOwnProperty(ctag))
+      tagDb[ctag] = [];
+    //tagDb[ctag].push({ 'name': i, 'title': pageDb[i]['title']});
+    tagDb[ctag].push(i);
+  }
+}
+
+var mm = '';
+for ( t in tagDb ) {
+  mm += '<span id=\"'
+    + t
+    + '\" class=\"tagmark\">'
+    + t
+    + '</span><br />'
+    + '<ul>\n';
+  for ( p in tagDb[t] ) {
+    pn = tagDb[t][p];
+    mm += '<li><a href=\"'
+      + pn
+      + '.html\">'
+      + pageDb[pn]['title']
+      + '</a></li>\n';
+  }
+  mm += '</ul>';
+}
+document.getElementById('main').innerHTML = mm;
+
+</script>
+"]]></string>
 
     <!--
      Javascript called after load any html page

@@ -275,6 +275,7 @@ public class WebViewJSCallback {
             tagsMarks = mContext.getString(
                     R.string.html_tags_template,
                     tagsMarks);
+            //TODO: Write to tag page here
         }
 
 

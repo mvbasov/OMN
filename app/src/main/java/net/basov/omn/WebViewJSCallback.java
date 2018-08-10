@@ -269,7 +269,11 @@ public class WebViewJSCallback {
                             // internal spaces to &nbsp;
                             // to prevent split tag when wrap to next line
                             tg.trim().replace(" ", "&nbsp;"),
-                            "/default/Tags.html#some-tag"
+                            "/Tasg.html#" + tg.trim()
+                                    .replace(" ", "-")
+                                    .replace("#", "")
+                                    .replace("<", "")
+                                    .replace(">", "")
                     );
             }
             tagsMarks = mContext.getString(

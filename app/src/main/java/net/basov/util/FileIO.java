@@ -409,16 +409,18 @@ public class FileIO {
     public static void savePageTags(Context c, String pfn, String title, ArrayList<String> tags) {
         //String getStringFromFile (getFilesDir(c)+ "/md/Tags.md")
 
-        String tagJSONStr = "" +
-                "{" +
-                "  'Start': {" +
-                "    'title': 'Welcome!'," +
-                "    'tags': [" +
-                "       'Index'" +
-                "     ]" +
-                "   }"+
-                "}";
-
+        String[] splitMd = getStringFromFile(getFilesDir(c)+ "/md/Tags.md").split("\\n");
+        String tagJSONStr = "";
+        Boolean inJSON = false;
+        for(String str: splitMd) {
+            if(str.startsWith("// Start of Tags DB")) {
+                inJSON = true;
+                continue;
+            } else if (!inJSON) continue;
+            if(str.startsWith("// End of Tags DB")) break;
+            tagJSONStr += str;
+        }
+        tagJSONStr = tagJSONStr.replaceFirst("^var pageDb = ", "");
 
         JSONObject jsonObject = null;
         try {

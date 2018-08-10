@@ -187,7 +187,7 @@
      Tag page template
         %1$s    Page name
     -->
-    <string name="md_tag_template"><![CDATA["Title: Tags
+    <string name="md_tag_file_template"><![CDATA["Title: Tags
 
 <div id=\"main\" style=\"margin-top: 1em;\"></div>
 

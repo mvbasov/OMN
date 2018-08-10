@@ -42,6 +42,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -392,5 +393,19 @@ public class FileIO {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Save page tags to special (like DB) file
+     * @param c     Application context
+     * @param pfn   page file name (without extension)
+     * @param title page title
+     * @param tags  list of tags
+     */
+    public static void savePageTags(Context c, String pfn, String title, ArrayList<String> tags) {
+        //String getStringFromFile (getFilesDir(c)+ "/md/Tags.md")
+        String tagJSON = "";
+        String tagFileContent = c.getString(R.string.md_tag_file_template, tagJSON);
+        writePageToFile(c, "/Tags", tagFileContent);
     }
 }

@@ -31,6 +31,7 @@ import android.text.Html;
 import android.webkit.JavascriptInterface;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 import net.basov.util.AppDetails;
@@ -260,9 +261,11 @@ public class WebViewJSCallback {
         );
 
         String tagsMarks = "";
+        ArrayList<String> tags = new ArrayList<String>();
         if (page.hasMetaWithKey("tags")) {
             for (String tg: page.getMetaByKey("tags").split(",")) {
                 if (tg.trim().length() >0)
+                    tags.add(tg.trim());
                     tagsMarks += mContext.getString(
                             R.string.html_one_tag_template,
                             // Trim edge spaces and replace
@@ -279,7 +282,7 @@ public class WebViewJSCallback {
             tagsMarks = mContext.getString(
                     R.string.html_tags_template,
                     tagsMarks);
-            //TODO: Write to tag page here
+            FileIO.savePageTags(mContext, PFN, page.getPageTitleOrName(), tags);
         }
 
 

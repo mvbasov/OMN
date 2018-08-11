@@ -442,9 +442,10 @@ public class FileIO {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        if(jsonObject == null)
+        if(jsonObject == null) {
             tagJSONStr = "{}";
             dirty = true;
+        }
         if(dirty){
             String tagFileContent = c.getString(R.string.md_tag_file_template, tagJSONStr);
             writePageToFile(c, "/Tags", tagFileContent);

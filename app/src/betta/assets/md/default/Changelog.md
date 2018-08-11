@@ -4,7 +4,12 @@ Modified: 2018-08-03 22:52:40
 Author: Mikhail Basov
 Tags: OMN default,
 
+##### v00.20.00b
+
+- Implement tags
+
 ##### v00.19.00b
+###### Date:   Mon Aug 6 19:17:44 2018 +0300, commit 260fac5a9e11b54c84e9e85f216e244a463ae024
 
 - Add refresh HTML page
 - Get shared text as link

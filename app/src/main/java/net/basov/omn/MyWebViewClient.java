@@ -19,12 +19,15 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Build;
+import android.os.StrictMode;
+import android.util.Log;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import java.net.URISyntaxException;
 
+import net.basov.util.MyLog;
 import net.basov.util.FileIO;
 
 /**
@@ -88,16 +91,29 @@ public class MyWebViewClient extends WebViewClient {
                         view.stopLoading();
                         PackageManager packageManager = c.getPackageManager();
                         ResolveInfo info = packageManager.resolveActivity(intentApp, PackageManager.MATCH_DEFAULT_ONLY);
-                        if (info != null) {
-                            c.startActivity(intentApp);
+                        if (info != null) {             
+                            StrictMode.VmPolicy old = StrictMode.getVmPolicy();
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                                StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder(old)
+                                                       .detectFileUriExposure()
+                                                       //.penaltyLog()
+                                                       .build());
+                                c.startActivity(intentApp);
+                                StrictMode.setVmPolicy(old);
+                            } else {
+                                c.startActivity(intentApp);
+                            }
                         } else {
                             String fallbackUrl = intentApp.getStringExtra("browser_fallback_url");
                             view.loadUrl(fallbackUrl);
-
                         }
                         return true;
                     }
-                } catch (URISyntaxException e) {}
+                } catch (URISyntaxException e) {
+                    MyLog.LogE(e, "href processing error");
+                    Log.e(Constants.TAG, e.getMessage());
+                    e.printStackTrace();
+                }
             default:
                 return true;
                 

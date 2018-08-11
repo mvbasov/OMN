@@ -217,7 +217,7 @@ function sortObject(obj) {
 }
 
 var tagsList = '';
-for ( t in tagDb ) {
+for ( t in sortObject(tagDb)) {
   tagsList += '<span id=\"'
     + encodeURIComponent(
         t.replace(/ /g, '-')

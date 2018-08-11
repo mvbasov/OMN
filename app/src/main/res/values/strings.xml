@@ -205,33 +205,34 @@ for ( i in pageDb ) {
     if (!tagDb.hasOwnProperty(ctag))
       tagDb[ctag] = [];
     //tagDb[ctag].push({ 'name': i, 'title': pageDb[i]['title']});
-    tagDb[ctag].push(i);
+    tagDb[ctag].push(i.trim());
   }
 }
-var mm = '';
+var tagsList = '';
 for ( t in tagDb ) {
-  mm += '<span id=\"'
-    + encodeURIComponent(t.trim()
-       .replace(/ /g, '-')
-       .replace(/#/g, '')
-       .replace(/</g, '')
-       .replace(/>/g, '')
-       .replace(/\\//g,''))
+  tagsList += '<span id=\"'
+    + encodeURIComponent(
+        t.replace(/ /g, '-')
+         .replace(/#/g, '')
+         .replace(/</g, '')
+         .replace(/>/g, '')
+         .replace(/\\//g,'')
+      )
     + '\" class=\"tagmark\">'
     + t
-    + '</span><br />'
+    + '</span><br />\\n'
     + '<ul>\\n';
   for ( p in tagDb[t] ) {
     pn = tagDb[t][p];
-    mm += '<li><a href=\"'
+    tagsList += '<li><a href=\"'
       + pn
       + '.html\">'
       + pageDb[pn]['title']
       + '</a></li>\\n';
   }
-  mm += '</ul>';
+  tagsList += '</ul>';
 }
-document.getElementById('main').innerHTML = mm;
+document.getElementById('main').innerHTML = tagsList;
 
 var selected = window.location.href.split('#')[1];
 if (typeof selected != 'undefined')

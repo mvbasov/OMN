@@ -142,6 +142,7 @@ public class Page {
     }
 
     public void setMdContent(String mMdContent) {
+        this.mMeta = new LinkedHashMap<>();
         StringBuilder sb = new StringBuilder();
         Boolean inHeader = true;       
         Boolean firstPage = true;

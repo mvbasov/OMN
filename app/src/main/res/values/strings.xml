@@ -280,7 +280,7 @@ if (typeof selected != 'undefined')
         enableButton(\'btnLink\', %5$b);
         enableButton(\'btnEMail\', %6$b);
         enableButton(\'btnFolder\', %7$b);
-        enableButton(\'btnRefresh\', %8$b);   
+        enableButton(\'btnRefresh\', %8$b);
         enableButton(\'btnShortcut\', %9$b);
         enableButton(\'btnQuickNotes\', %10$b);
     "]]></string>

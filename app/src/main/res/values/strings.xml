@@ -172,7 +172,7 @@
         %1$s    tag
         %2$s    tag page href
     -->
-    <string name="html_one_tag_template"><![CDATA["      <a href=\"%2$s\"><span class=\"tagmark\">%1$s</span></a>
+    <string name="html_one_tag_template"><![CDATA["      <a href=\"%2$s\" class=\"taglink\"><span class=\"tagmark\">%1$s</span></a>
 "]]></string>
 
     <!-- Bottom part of any html page -->
@@ -208,16 +208,15 @@ for ( i in pageDb ) {
     tagDb[ctag].push(i);
   }
 }
-
 var mm = '';
 for ( t in tagDb ) {
   mm += '<span id=\"'
-    + t.trim()
-       .replace(' ', '-')
-       .replace('#', '')
-       .replace('<', '')
-       .replace('>', '')
-       .replace('/','')
+    + encodeURIComponent(t.trim()
+       .replace(/ /g, '-')
+       .replace(/#/g, '')
+       .replace(/</g, '')
+       .replace(/>/g, '')
+       .replace(/\\//g,''))
     + '\" class=\"tagmark\">'
     + t
     + '</span><br />'
@@ -233,6 +232,10 @@ for ( t in tagDb ) {
   mm += '</ul>';
 }
 document.getElementById('main').innerHTML = mm;
+
+var selected = window.location.href.split('#')[1];
+if (typeof selected != 'undefined')
+  document.getElementById(selected).classList.add('tagmarkselected');
 
 </script>
 "]]></string>

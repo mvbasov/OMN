@@ -284,6 +284,8 @@ public class WebViewJSCallback {
                     R.string.html_tags_template,
                     tagsMarks);
             FileIO.savePageTags(mContext, PFN, page.getPageTitleOrName(), tags);
+        } else {
+            FileIO.savePageTags(mContext, PFN, "fake", null);         
         }
 
 

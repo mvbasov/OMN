@@ -407,8 +407,6 @@ public class FileIO {
      * @param tags  list of tags
      */
     public static void savePageTags(Context c, String pfn, String title, ArrayList<String> tags) {
-        //String getStringFromFile (getFilesDir(c)+ "/md/Tags.md")
-
         String[] splitMd = getStringFromFile(getFilesDir(c)+ "/md/Tags.md").split("\\n");
         String tagJSONStr = "";
         Boolean inJSON = false;
@@ -422,18 +420,23 @@ public class FileIO {
         }
         tagJSONStr = tagJSONStr.replaceFirst("^var pageDb = ", "");
 
+        Boolean dirty = false;
         JSONObject jsonObject = null;
         try {
             jsonObject = new JSONObject(tagJSONStr);
+            if(jsonObject.has(pfn.substring(1)) && tags == null) {
+                jsonObject.remove(pfn.substring(1));
+                dirty = true;
+            } else if (tags != null) {
+                JSONArray jsaTags = new JSONArray();
+                for(String t : tags) jsaTags.put(t);
 
-            JSONArray jsaTags = new JSONArray();
-            for(String t : tags) jsaTags.put(t);
-
-            JSONObject pageJsonObject = new JSONObject();
-            pageJsonObject.put("tags",jsaTags);
-            pageJsonObject.put("title", title);
-            jsonObject.put(pfn.substring(1), pageJsonObject);
-
+                JSONObject pageJsonObject = new JSONObject();
+                pageJsonObject.put("tags",jsaTags);
+                pageJsonObject.put("title", title);
+                jsonObject.put(pfn.substring(1), pageJsonObject);
+                dirty = true;
+            }
 
             tagJSONStr = jsonObject.toString(2);
         } catch (JSONException e) {
@@ -441,8 +444,9 @@ public class FileIO {
         }
         if(jsonObject == null)
             tagJSONStr = "{}";
-
-        String tagFileContent = c.getString(R.string.md_tag_file_template, tagJSONStr);
-        writePageToFile(c, "/Tags", tagFileContent);
+        if(dirty){
+            String tagFileContent = c.getString(R.string.md_tag_file_template, tagJSONStr);
+            writePageToFile(c, "/Tags", tagFileContent);
+        }
     }
 }

@@ -2,7 +2,7 @@ Title: Extended Markdown syntax
 Date: 2017-10-11 01:40:42
 Modified: 2018-01-19 03:36:21
 Category: Documentation
-Tags: Markdown,
+Tags: Markdown, Documentation, OMN default 
 Lang: en
 Author: Mikhail Basov
 Summary: Extended Markdown syntax of Open Markdown Note

@@ -2,7 +2,7 @@ Title: Welcome!
 Date: 2017-10-11 01:38:26
 Modified: 2018-01-19 13:52:42
 Category: Index
-Tags: Markdown,
+Tags: OMN default,
 Lang: en
 Author: Mikhail Basov
 Summary: Open Markdown Note start page

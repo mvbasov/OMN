@@ -25,11 +25,18 @@ tr:nth-child(odd){
 tr:nth-child(even) {
 	background-color: #FFFFFF; color: black;
 }
+a.taglink {
+  text-decoration: none;
+  color: black;
+}
 .tagmark {
   background-color: #E7E7E7;
   padding: 2px 5px;
   border: 1px solid #505050;
   border-radius: 8px;
+}
+.tagmarkselected {
+  color: red;
 }
 .bg-yellow {
   background-color: yellow;

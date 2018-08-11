@@ -59,7 +59,7 @@
   <div id=\"ptitle\" style=\"overflow:hidden; background-color:lightgray\">
     <a
       onclick=\"toggleHdrBtnVis();\">
-      <h4 id=\"pageTitle\" align=\"center\">
+      <h4 id=\"pageTitle\" align=\"center\" style=\"margin-bottom:0.5em;\">
         %5$s
         <span id=\"title_arrow\">
           <i class=\"material-icons\">arrow_drop_down</i>

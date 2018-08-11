@@ -367,11 +367,12 @@ This page generated automaticaly.
 
 "]]></string>
 
-    <string name="template_page_start"><![CDATA["**This page generated automaticaly.**
+    <string name="template_page_start"><![CDATA["**This page generated automaticaly. Edit this as you wish.**
 
-* [Welcome!](default/Welcome.html)
-* [Help](default/Help.html)
 * [Quick notes](QuickNotes.html)
+* [Tags](Tags.html)
+* [Help](default/Help.html)
+* [Welcome!](default/Welcome.html)
 * [Build information](default/Build.html)
 
 "]]></string>

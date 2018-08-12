@@ -21,10 +21,10 @@ android {
     buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "net.basov.omn"
-        minSdkVersion 21
+        minSdkVersion 17
         targetSdkVersion 26
-        versionCode 2001
-        versionName "00.20.01"
+        versionCode 2003
+        versionName "00.20.03"
     }
 
     signingConfigs {
@@ -68,12 +68,6 @@ android {
     productFlavors {
         main {
             minSdkVersion 21
-        }
-        legacy {
-            minSdkVersion 17
-            maxSdkVersion 20
-            targetSdkVersion 20
-            versionName "legacy." + defaultConfig.versionName
         }
     }
 }

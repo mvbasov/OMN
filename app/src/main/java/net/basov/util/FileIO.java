@@ -270,7 +270,7 @@ public class FileIO {
         String newFileName = "";
         try {
             in = assetManager.open(aFilename);
-            newFileName = getFilesDir(c).getPath() + "/" + aFilename;
+            newFileName = getFilesDir(c).getPath() + "/" + aFilename.replace("_legacy", "");
             out = new FileOutputStream(newFileName);
 
             byte[] buffer = new byte[1024];

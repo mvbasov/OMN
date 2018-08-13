@@ -247,7 +247,7 @@ public class FileIO {
         for(int i=0; i<files.length; i++) {
             URI uriPage = null;
             try {
-                uriPage = new URI("file://" + getFilesDir(c).getPath() + "/" + files[i]);
+                uriPage = new URI("file://" + getFilesDir(c).getPath() + "/" + files[i].replace("_legacy", ""));
             } catch (URISyntaxException e) {
                 MyLog.LogE(e, "Copy files from asset. Problem with target file " + files[i]);
             }

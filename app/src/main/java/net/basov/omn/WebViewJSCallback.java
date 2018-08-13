@@ -289,8 +289,6 @@ public class WebViewJSCallback {
         } else {
             FileIO.savePageTags(mContext, PFN, "fake", null);
         }
-        //TODO: remove debug
-        MyLog.LogD("HTML body: \n" + html);
 
         String htmlTop = mContext.getString(
                 R.string.html_top,
@@ -303,8 +301,6 @@ public class WebViewJSCallback {
         );
         String htmlBottom = mContext.getString(R.string.html_buttom);
         String htmlPage = htmlTop + html + htmlBottom;
-        //TODO: remove debug
-        MyLog.LogD("HTML: \n" + htmlPage);
         if(FileIO.isFileExists(mContext, "md"+PFN+".md"))
             FileIO.saveHTML(mContext, PFN, htmlPage);
         Intent i = new Intent();

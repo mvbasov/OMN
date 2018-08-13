@@ -46,13 +46,17 @@ public class UI {
     public static void displayPage(final WebView wv, final Page page) {
 
         Context c = wv.getContext();
-        // TODO: Only tags display dosn't shown without the following string. But add this decrease performance (may be)
-        setMdContentFromFile(c, page);
-        String actionButtons = TextTools.escapeJavaScriptFunctionParameter(c.getString(
-                R.string.html_action_button_header
-        ));
-        SharedPreferences defSharedPref = PreferenceManager.getDefaultSharedPreferences(c);
-        final String setPageJS =
+        if(!FileIO.isPageActual(c, page.getPageName()) || !page.isHtmlActual()) {
+            createHTML(wv, page.getPageName());
+            page.setHtmlActual(true);
+        } else if(FileIO.isFileExists(c, "md/" + page.getPageName() + ".md")) {
+            // TODO: Only tags display dosn't shown without the following string. But add this decrease performance (may be)
+            setMdContentFromFile(c, page);
+            String actionButtons = TextTools.escapeJavaScriptFunctionParameter(c.getString(
+                    R.string.html_action_button_header
+            ));
+            SharedPreferences defSharedPref = PreferenceManager.getDefaultSharedPreferences(c);
+            final String setPageJS =
                 c.getString(
                         R.string.set_html_page_js,
                         page.getPageName(),
@@ -100,24 +104,20 @@ public class UI {
                         )
 
                 );
-        wv.setWebViewClient(new MyWebViewClient() {
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(wv, url);
-                wv.clearCache(true);
-                wv.clearHistory();
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    view.evaluateJavascript(setPageJS, null);
-                } else {
-                    view.loadUrl(setPageJS);
+            wv.setWebViewClient(new MyWebViewClient() {
+                @Override
+                public void onPageFinished(WebView view, String url) {
+                    super.onPageFinished(wv, url);
+                    wv.clearCache(true);
+                    wv.clearHistory();
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                        view.evaluateJavascript(setPageJS, null);
+                    } else {
+                        view.loadUrl(setPageJS);
+                    }
                 }
-            }
-        });
+            });
 
-        if(!FileIO.isPageActual(c, page.getPageName()) || !page.isHtmlActual()) {
-            createHTML(wv, page.getPageName());
-            page.setHtmlActual(true);
-        } else if(FileIO.isFileExists(c, "md/" + page.getPageName() + ".md")) {
             String htmlFileName = "file://" + FileIO.getFilesDir(c) + "/html" + page.getPageName() + ".html" + page.getInPageReference();
             wv.clearCache(true);
             wv.clearHistory();

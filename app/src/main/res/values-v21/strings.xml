@@ -262,7 +262,7 @@ if (typeof selected != 'undefined')
         %9$b    Enable Create shortcut button
         %10$b    Enable QuickNotes button
     -->
-    <string name="set_html_page_js"><![CDATA["
+    <string name="set_html_page_js">
         javascript:
         var PFN=\'%1$s\';
         document.getElementById(\'actions_header\').innerHTML=\'%2$s\';
@@ -283,7 +283,7 @@ if (typeof selected != 'undefined')
         enableButton(\'btnRefresh\', %8$b);
         enableButton(\'btnShortcut\', %9$b);
         enableButton(\'btnQuickNotes\', %10$b);
-    "]]></string>
+    </string>
 
     <!--
     JavaScript called at Markdown to HTML convertion time

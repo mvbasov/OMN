@@ -36,7 +36,7 @@
   <link rel=\"stylesheet\" type=\"text/css\" href=\"../%2$scss/common.css\" />
   <link rel=\"stylesheet\" type=\"text/css\" href=\"../%2$scss/custom.css\" />
 
-  <script type="text/javascript" src="../%2$sjs/functions.js"></script>
+  <script type="text/javascript" src="../%2$sjs/functions_legacy.js"></script>
 
   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />
   <meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\" />
@@ -161,12 +161,11 @@
 
     <!-- Bottom part of any html page -->
     <string name="html_buttom"><![CDATA["
-  </div>
-
 </body>
 
 </html>
     "]]></string>
+
     <!--
      Tag page template
         %1$s    Page name
@@ -188,13 +187,12 @@ for ( i in pageDb ) {
     var ctag = pageDb[i]['tags'][j];
     if (!tagDb.hasOwnProperty(ctag))
       tagDb[ctag] = [];
-    //tagDb[ctag].push({ 'name': i, 'title': pageDb[i]['title']});
     tagDb[ctag].push(i.trim());
   }
 }
 
 function sortObject(obj) {
-  return Object.keys(obj).sort().reduce(function (result, key) { 
+  return Object.keys(obj).sort().reduce(function (result, key) {
     result[key] = obj[key];
     return result;
   }, {});
@@ -233,6 +231,7 @@ if (typeof selected != 'undefined')
 </script>
 "]]></string>
 
+
     <!--
      Javascript called after load any html page
         %1$s    Page name
@@ -246,7 +245,7 @@ if (typeof selected != 'undefined')
         %9$b    Enable Create shortcut button
         %10$b    Enable QuickNotes button
     -->
-    <string name="set_html_page_js"><![CDATA["
+    <string name="set_html_page_js">
         javascript:
         var PFN=\'%1$s\';
         document.getElementById(\'actions_header\').innerHTML=\'%2$s\';
@@ -267,7 +266,7 @@ if (typeof selected != 'undefined')
         enableButton(\'btnRefresh\', %8$b);
         enableButton(\'btnShortcut\', %9$b);
         enableButton(\'btnQuickNotes\', %10$b);
-    "]]></string>
+    </string>
 
     <!--
     JavaScript called at Markdown to HTML convertion time

@@ -6,7 +6,10 @@
     
     <uses-permission
         android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
-    
+    <uses-permission
+        android:maxSdkVersion="18"
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/omn_ic"

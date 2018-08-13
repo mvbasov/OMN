@@ -12,6 +12,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 package net.basov.omn;
 
+import android.os.Build;
+
 /**
  * Created by mvb on 10/6/17.
  */
@@ -23,7 +25,8 @@ public class Constants {
     public static final String TAG = "#OMN#";
 
     public static final String WELCOME_PAGE = "default/Welcome";
-    public static final String HELP_PAGE = "default/Help";
+    public static final String HELP_PAGE = Build.VERSION.SDK_INT >=21
+            ? "default/Help":"default/Help_legacy";
     public static final String START_PAGE = "Start";
     public static final String SYNTAX_PAGE = "default/Markdown";
     public static final String SYNTAX_EXT_PAGE = "default/MarkdownExt";
@@ -35,8 +38,8 @@ public class Constants {
     public static final String HIGHLIGHT_CSS = "css/highlight.css";
     public static final String ICONS_FONT = "fonts/google-material/MaterialIcons-Regular.woff2";
     public static final String ICONS_CSS = "fonts/google-material/material-icons.css";
-    public static final String FUNCTIONS_JS = "js/functions.js";
-
+    public static final String FUNCTIONS_JS = Build.VERSION.SDK_INT >=21
+            ? "js/functions.js" :"js/functions_legacy.js";
     public static final String EMA = "omn-platform-stat";
     public static final String EMA_DOM = "basov.net";
 

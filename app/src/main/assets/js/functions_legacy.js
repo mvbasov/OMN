@@ -1,5 +1,5 @@
 /*
- * Function to show/hide page header (version for legacy build)
+ * Function to show/hide page header (legacy version)
 */
 
 function toggleHdrBtnVis() {

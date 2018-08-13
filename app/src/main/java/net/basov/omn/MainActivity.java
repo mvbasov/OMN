@@ -134,7 +134,7 @@ public class MainActivity extends Activity {
         webSettings.setJavaScriptEnabled(true);
         mainUI_WV.addJavascriptInterface(new WebViewJSCallback(this), "Android");
         /* Show external page in browser */
-        mainUI_WV.setWebViewClient(new MyWebViewClient());
+        //mainUI_WV.setWebViewClient(new MyWebViewClient());
         /* Handle JavaScript prompt dialog */
         mainUI_WV.setWebChromeClient(new myWebChromeClient());
 

@@ -47,6 +47,7 @@ import java.net.URISyntaxException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -365,7 +366,9 @@ public class FileIO {
         FileOutputStream stream = null;
         try {
             stream = new FileOutputStream(htmlFile);
-        } catch (FileNotFoundException e) {}
+        } catch (FileNotFoundException e) {
+            MyLog.LogE(e, "Unable write HTML to OutputStream " + aFile);
+        }
         try {
             stream.write(aHTML.getBytes());
         } catch (IOException e) {
@@ -415,15 +418,15 @@ public class FileIO {
             dirty = true;
             tagJSONStr = "{}";
         } else {
-        for(String str: splitMd) {
-            if(str.startsWith("// Start of Tags DB")) {
-                inJSON = true;
-                continue;
-            } else if (!inJSON) continue;
-            if(str.startsWith("// End of Tags DB")) break;
-            tagJSONStr += str;
-        }
-        tagJSONStr = tagJSONStr.replaceFirst("^var pageDb = ", "");
+            for(String str: splitMd) {
+                if(str.startsWith("// Start of Tags DB")) {
+                    inJSON = true;
+                    continue;
+                } else if (!inJSON) continue;
+                if(str.startsWith("// End of Tags DB")) break;
+                tagJSONStr += str;
+            }
+            tagJSONStr = tagJSONStr.replaceFirst("^var pageDb = ", "");
         }
 
         JSONObject jsonObject = null;

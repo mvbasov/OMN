@@ -64,12 +64,6 @@ android {
             signingConfig signingConfigs.debug
         }
     }
-
-    productFlavors {
-        main {
-            minSdkVersion 21
-        }
-    }
 }
 
 task makeHighlightJS(type: Exec) {

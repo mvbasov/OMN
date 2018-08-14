@@ -266,15 +266,16 @@ public class WebViewJSCallback {
         ArrayList<String> tags = new ArrayList<String>();
         if (page.hasMetaWithKey("tags")) {
             for (String tg: page.getMetaByKey("tags").split(",")) {
-                if (tg.trim().length() >0)
-                    tags.add(tg.trim());
+                // Trim edge spaces
+                tg = tg.trim();
+                if (tg.length() >0)
+                    tags.add(tg);
                     tagsMarks += mContext.getString(
                             R.string.html_one_tag_template,
-                            // Trim edge spaces and replace
-                            // internal spaces to &nbsp;
+                            // Replace internal spaces to &nbsp;
                             // to prevent split tag when wrap to next line
-                            tg.trim().replace(" ", "&nbsp;"),
-                            "/Tags.html#" + tg.trim()
+                            tg.replace(" ", "&nbsp;"),
+                            dirPrefix + "Tags.html#" + tg
                                     .replace(" ", "-")
                                     .replace("#", "")
                                     .replace("<", "")

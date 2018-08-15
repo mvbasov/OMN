@@ -175,6 +175,7 @@
     -->
     <string name="md_tag_file_template"><![CDATA["Title: Tags
 
+<div id=\"tagcloud\" style=\"margin-top: 1em\"></div>
 <div id=\"main\" style=\"margin-top: 1em;\"></div>
 
 <script>
@@ -184,6 +185,16 @@ var pageDb = %1$s
 </script>
 
 <script>
+
+var prev ='';
+function visit(ref) {
+  window.location.href='#'+ref;
+  document.getElementById(ref).classList.add('tagmarkselected');
+  if (prev.length != 0 && ref !== prev)
+    document.getElementById(prev).classList.remove('tagmarkselected');
+  prev = ref;
+}
+
 var tagDb = {};
 for ( i in pageDb ) {
   for ( j in pageDb[i]['tags'] ){
@@ -201,23 +212,34 @@ function sortObject(obj) {
   }, {});
 }
 
+var tagCloud = '';
 var tagsList = '';
-for ( t in sortObject(tagDb)) {
-  tagsList += '<span id=\"'
-    + encodeURIComponent(
-        t.replace(/ /g, '-')
-         .replace(/#/g, '')
-         .replace(/</g, '')
-         .replace(/>/g, '')
-         .replace(/\\//g,'')
-      )
+for ( t in sortObject(tagDb) ) {
+
+  tid = encodeURIComponent(
+    t.replace(/ /g, '-')
+     .replace(/#/g, '')
+     .replace(/</g, '')
+     .replace(/>/g, '')
+     .replace(/\\//g,'')
+  );
+
+  tagCloud += '<span class=\"tagmark\" onclick=\"visit(\\''
+    + tid
+    + '\\');\">'
+    + t.replace(/ /g, '&nbsp;')
+    + '</span>\\n';
+
+  tagsList += '<a href=\"#tagcloud\" class=\"taglink\">'
+    + '<span id=\"'
+    + tid
     + '\" class=\"tagmark\">'
     + t
-    + '</span><br />\\n'
+    + '</span></a><br />\\n'
     + '<ul>\\n';
   for ( p in tagDb[t] ) {
     pn = tagDb[t][p];
-    tagsList += '<li><a href=\"'
+    tagsList += '<li><a href=\"../'
       + pn
       + '.html\">'
       + pageDb[pn]['title']
@@ -225,11 +247,15 @@ for ( t in sortObject(tagDb)) {
   }
   tagsList += '</ul>';
 }
+
+document.getElementById('tagcloud').innerHTML = tagCloud;
 document.getElementById('main').innerHTML = tagsList;
 
 var selected = window.location.href.split('#')[1];
-if (typeof selected != 'undefined')
+if (typeof selected != 'undefined') {
   document.getElementById(selected).classList.add('tagmarkselected');
+  prev = selected;
+}
 
 </script>
 "]]></string>

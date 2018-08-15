@@ -36,7 +36,8 @@ a.taglink {
   border-radius: 8px;
 }
 .tagmarkselected {
-  color: red;
+  color: white;
+  background-color: #888;
 }
 .bg-yellow {
   background-color: yellow;

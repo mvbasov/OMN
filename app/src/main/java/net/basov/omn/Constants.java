@@ -40,6 +40,8 @@ public class Constants {
     public static final String ICONS_CSS = "fonts/google-material/material-icons.css";
     public static final String FUNCTIONS_JS = Build.VERSION.SDK_INT >=21
             ? "js/functions.js" :"js/functions_legacy.js";
+    public static final String ARROW_DOWN_SYMBOL = Build.VERSION.SDK_INT >=21
+            ? "<i class=\"material-icons\">arrow_drop_down</i>" :"+";
     public static final String EMA = "omn-platform-stat";
     public static final String EMA_DOM = "basov.net";
 

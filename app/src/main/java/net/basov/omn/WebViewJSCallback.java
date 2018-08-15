@@ -298,7 +298,8 @@ public class WebViewJSCallback {
                 htmlMeta,   //Summary
 				PFN,		//Page name in top control bock
                 Title,      //1-st page header as Title and top buttons block controll
-                tagsMarks   //Tags
+                tagsMarks,   //Tags
+                Constants.ARROW_DOWN_SYMBOL
         );
         String htmlBottom = mContext.getString(R.string.html_buttom);
         String htmlPage = htmlTop + html + htmlBottom;

@@ -22,6 +22,7 @@
         %4$s    Page name
         %5$s    1-st page header (function as page title)
         %6$s    Tags
+        %7$s    Arrow down symbol
     -->
     <string name="html_top"><![CDATA["<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">
 <html xmlns=\"http://www.w3.org/1999/xhtml\">
@@ -62,7 +63,7 @@
       <h4 id=\"pageTitle\" align=\"center\" style=\"margin-bottom:0.5em;\">
         %5$s
         <span id=\"title_arrow\">
-+
+%7$s
         </span>
       </h4>
     </a>
@@ -161,6 +162,8 @@
 
     <!-- Bottom part of any html page -->
     <string name="html_buttom"><![CDATA["
+  </div>
+
 </body>
 
 </html>
@@ -230,7 +233,6 @@ if (typeof selected != 'undefined')
 
 </script>
 "]]></string>
-
 
     <!--
      Javascript called after load any html page

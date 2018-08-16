@@ -591,8 +591,11 @@ public class MainActivity extends Activity {
                                 + cm.sourceId().replaceAll(".*/files/", "")
                                 + "\n- - -\n"
                                 + "\n```\n"
+                                + (cm.lineNumber() - 1) + ". "
                                 + srcStrings[cm.lineNumber() - 2] + "\n"
+                                + (cm.lineNumber()) + ". "
                                 + srcStrings[cm.lineNumber() - 1] + "\n"
+                                + (cm.lineNumber() + 1) + ". "
                                 + srcStrings[cm.lineNumber()] + "\n"
                                 + "```\n"
                                 + "\n- - -\n";

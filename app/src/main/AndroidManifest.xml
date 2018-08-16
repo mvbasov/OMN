@@ -55,6 +55,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter>
+                <action android:name="${applicationId}.DEBUG_PAGE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
                 <action android:name="${applicationId}.REDISPLAY_PAGE" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

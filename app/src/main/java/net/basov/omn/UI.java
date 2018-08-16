@@ -66,6 +66,11 @@ public class UI {
                                 c.getString(R.string.pk_btn_enable_home),
                                 true
                         ),
+                        //Enable Debug button
+                        defSharedPref.getBoolean(
+                                c.getString(R.string.pk_enable_js_debug),
+                                false
+                        ),
                         //Enable Add page button
                         defSharedPref.getBoolean(
                                 c.getString(R.string.pk_btn_enable_add_page),

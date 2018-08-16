@@ -100,6 +100,15 @@ public class WebViewJSCallback {
     }
 
     @JavascriptInterface
+    public void debugButtonCallback() {
+
+        Intent i = new Intent();
+        i.setAction(mContext.getPackageName()+".DEBUG_PAGE");
+
+        mContext.startActivity(i);
+    }
+
+    @JavascriptInterface
     public void emailButtonCallback(String pn, String title) {
 
         Intent i = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"));

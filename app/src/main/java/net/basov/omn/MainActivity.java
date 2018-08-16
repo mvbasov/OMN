@@ -308,6 +308,11 @@ public class MainActivity extends Activity {
                 /* Show home page */
                 pageAdd(UI.displayStartPage(mainUI_WV));
             }
+            if (intent.getAction().equals(this.getPackageName() + ".DEBUG_PAGE")) {
+                /* Show JavaScript debug page */
+                pageAdd("/"+Constants.JS_DEBUG_PAGE);
+                UI.displayPage(mainUI_WV, page);
+            }
             if (intent.getAction().equals(this.getPackageName() + ".REDISPLAY_PAGE")) {
                 /* Redisplay page after creation */
                 if(intent.getBooleanExtra("RECREATE_HTML", false)) page.setHtmlActual(false);

@@ -21,6 +21,12 @@
       <i class=\"material-icons\">home</i>
     </button>
     <button
+      id=\"btnDebug\"
+      class=\"hBtn\"
+      onclick=\"Android.debugButtonCallback()\">
+      <i class=\"material-icons\">adb</i>
+    </button>
+    <button
       id=\"btnAdd\"
       class=\"hBtn\"
       onclick=\"Android.newPageButtonCallback()\">

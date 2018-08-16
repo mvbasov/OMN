@@ -245,7 +245,7 @@ for ( t in sortObject(tagDb) ) {
     + '<ul>\\n';
   for ( p in tagDb[t] ) {
     pn = tagDb[t][p];
-    tagsList += '<li><a href=\"../'
+    tagsList += '<li><a href=\"'
       + pn
       + '.html\">'
       + pageDb[pn]['title']

@@ -175,6 +175,12 @@
     -->
     <string name="md_tag_file_template"><![CDATA["Title: Tags
 
+<!-- 
+  Don't edit this page! 
+  Page generated automaticaly.
+  All your changes will be lost.
+-->
+
 <div id=\"tagcloud\" style=\"margin-top: 1em\"></div>
 <div id=\"main\" style=\"margin-top: 1em;\"></div>
 

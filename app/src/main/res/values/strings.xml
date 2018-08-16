@@ -59,9 +59,9 @@
   <div id=\"ptitle\" style=\"overflow:hidden; background-color:lightgray\">
     <a
       onclick=\"toggleHdrBtnVis();\">
-      <h4 id=\"pageTitle\" align=\"center\" style=\"margin-bottom:0.5em;\">
+      <h4 id=\"pageTitle\" align=\"center\" style=\"margin-top:0.4em; margin-bottom:0.5em;\">
         %5$s
-        <span id=\"title_arrow\" style=\"border: 1px solid black; border-radius: 6px; padding 0.1em">
+        <span id=\"title_arrow\" style=\"border: 1px solid black; border-radius: 6px; padding: 0.1em\">
 &nbsp;+&nbsp;
         </span>
       </h4>

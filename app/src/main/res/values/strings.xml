@@ -174,7 +174,7 @@
     -->
     <string name="md_tag_file_template"><![CDATA["Title: Tags
 
-<!-- 
+<!--
   Don't edit this page! 
   Page generated automaticaly.
   All your changes will be lost.
@@ -421,6 +421,7 @@ This page generated automaticaly.
     <string name="pk_pref_version" translatable="false">prefVersion</string>
     <string name="pk_pref_changed" translatable="false">prefChanged</string>
     <string name="pk_enable_pelican_meta" translatable="false">enablePelicanMeta</string>
+    <string name="pk_enable_js_debug" translatable="false">enableJSDebug</string>
     <string name="pk_use_view_directory" translatable="false">prefViewDirectory</string>
     <string name="pk_notes_author" translatable="false">notesAuthor</string>
     <string name="pk_enable_code_highlight" translatable="false">enableCodeHighlight</string>

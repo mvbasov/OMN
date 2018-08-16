@@ -76,7 +76,7 @@ public class MainActivity extends Activity {
          */
         SharedPreferences defSharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = defSharedPref.edit();
-        final int currentPrefVersion = 9;
+        final int currentPrefVersion = 10;
         switch (defSharedPref.getInt(getString(R.string.pk_pref_version), 0)) {
             case 0: // initial
                 editor.putBoolean(getString(R.string.pk_use_view_directory), false);
@@ -99,6 +99,8 @@ public class MainActivity extends Activity {
                 editor.putBoolean(getString(R.string.pk_enable_pelican_meta), true);
             case 8:
                 editor.putBoolean(getString(R.string.pk_btn_enable_refresh_html), false);
+            case 9:
+                editor.putBoolean(getString(R.string.pk_enable_js_debug), false);
                 editor.putInt(getString(R.string.pk_pref_version), currentPrefVersion);
                 editor.commit();
                 break;
@@ -569,7 +571,28 @@ public class MainActivity extends Activity {
                     MyLog.LogD(formattedMessage);
                     break;
                 case ERROR:
-                    MyLog.LogE(formattedMessage);
+                    Context c = getApplicationContext();
+                    SharedPreferences defSharedPref =
+                            PreferenceManager.getDefaultSharedPreferences(c);
+                    if(defSharedPref.getBoolean(getString(R.string.pk_enable_js_debug),false) && cm.lineNumber() > 10) {
+                        String[] srcStrings = FileIO.getStringFromFile(cm.sourceId().replace("file://","")).split("\n");
+                        String debugMsg = "Title: JavaScript debug\n\n"
+                                + cm.message().replace(": ", ":\n\n")
+                                + "\n\non string "
+                                + cm.lineNumber()
+                                + " of file: \n\n"
+                                + cm.sourceId().replaceAll(".*/files/", "")
+                                + "\n- - -\n"
+                                + "\n```\n"
+                                + srcStrings[cm.lineNumber() - 2] + "\n"
+                                + srcStrings[cm.lineNumber() - 1] + "\n"
+                                + srcStrings[cm.lineNumber()] + "\n"
+                                + "```\n"
+                                + "\n- - -\n";
+                        FileIO.writePageToFile(c, "/Test/JSDebug", debugMsg);
+                    } else {
+                        MyLog.LogE(formattedMessage);
+                    }
                     break;
                 case LOG:
                     MyLog.LogI(formattedMessage);

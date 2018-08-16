@@ -39,6 +39,7 @@ public class Constants {
     public static final String ICONS_FONT = "fonts/google-material/MaterialIcons-Regular.woff2";
     public static final String ICONS_CSS = "fonts/google-material/material-icons.css";
     public static final String FUNCTIONS_JS = "js/functions.js";
+    public static final String JS_DEBUG_PAGE = "default/JSDebug";
     public static final String EMA = "omn-platform-stat";
     public static final String EMA_DOM = "basov.net";
 

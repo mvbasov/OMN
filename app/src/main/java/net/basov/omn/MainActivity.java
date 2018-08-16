@@ -589,7 +589,7 @@ public class MainActivity extends Activity {
                                 + srcStrings[cm.lineNumber()] + "\n"
                                 + "```\n"
                                 + "\n- - -\n";
-                        FileIO.writePageToFile(c, "/Test/JSDebug", debugMsg);
+                        FileIO.writePageToFile(c, "/" + Constants.JS_DEBUG_PAGE, debugMsg);
                     } else {
                         MyLog.LogE(formattedMessage);
                     }

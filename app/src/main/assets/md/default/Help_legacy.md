@@ -192,7 +192,7 @@ Button code:
 Default notes author name. Effective only at page creation time.
 
 #### "Use VIEW_DIRECTORY"
-Differnt File Managers <button onclick="Android.folderButtonCallback(PFN)"> <i class="material-icons">folder_open</i> </button> require different arguments to call.
+Differnt File Managers <button onclick="Android.folderButtonCallback(PFN)"> &#x1f4c2; </button> require different arguments to call.
  
 For X-plore or ES file managers this options need to be set to enable.
 For OI File Manager to disable.

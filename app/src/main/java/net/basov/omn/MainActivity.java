@@ -600,6 +600,7 @@ public class MainActivity extends Activity {
                                 + "```\n"
                                 + "\n- - -\n";
                         FileIO.writePageToFile(c, "/" + Constants.JS_DEBUG_PAGE, debugMsg);
+                        Toast.makeText(c, "JS debug genersted",Toast.LENGTH_SHORT).show();
                     } else {
                         MyLog.LogE(formattedMessage);
                     }

@@ -565,6 +565,10 @@ public class MainActivity extends Activity {
     private class myWebChromeClient extends WebChromeClient {
 
         public boolean onConsoleMessage(ConsoleMessage cm) {
+            Context c = getApplicationContext();
+            SharedPreferences defSharedPref =
+                PreferenceManager.getDefaultSharedPreferences(c);
+            Boolean jsDebug = defSharedPref.getBoolean(getString(R.string.pk_enable_js_debug),false);
             String formattedMessage =
                     cm.message()
                     + " -- From line: "
@@ -576,37 +580,18 @@ public class MainActivity extends Activity {
                     MyLog.LogD(formattedMessage);
                     break;
                 case ERROR:
-                    Context c = getApplicationContext();
-                    SharedPreferences defSharedPref =
-                            PreferenceManager.getDefaultSharedPreferences(c);
-                    if(defSharedPref.getBoolean(getString(R.string.pk_enable_js_debug),false) && cm.lineNumber() > 10) {
-                        String[] srcStrings = FileIO.getStringFromFile(cm.sourceId().replace("file://","")).split("\n");
-                        final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                        String debugMsg = "Title: JavaScript debug\n\n"
-                                + "##### " + DF.format(new Date()) + "\n\n"
-                                + cm.message().replace(": ", ":\n\n")
-                                + "\n\non string "
-                                + cm.lineNumber()
-                                + " of file: \n\n"
-                                + cm.sourceId().replaceAll(".*/files/", "")
-                                + "\n- - -\n"
-                                + "\n```\n"
-                                + (cm.lineNumber() - 1) + ". "
-                                + srcStrings[cm.lineNumber() - 2] + "\n"
-                                + (cm.lineNumber()) + ". "
-                                + srcStrings[cm.lineNumber() - 1] + "\n"
-                                + (cm.lineNumber() + 1) + ". "
-                                + srcStrings[cm.lineNumber()] + "\n"
-                                + "```\n"
-                                + "\n- - -\n";
-                        FileIO.writePageToFile(c, "/" + Constants.JS_DEBUG_PAGE, debugMsg);
-                        Toast.makeText(c, "JS debug genersted",Toast.LENGTH_SHORT).show();
+                    if(jsDebug && cm.lineNumber() > 10) {
+                        writeJSDebug(c, cm);
                     } else {
                         MyLog.LogE(formattedMessage);
                     }
                     break;
                 case LOG:
-                    MyLog.LogI(formattedMessage);
+                    if(jsDebug && cm.lineNumber() > 10) {
+                        writeJSDebug(c, cm);
+                    } else {
+                        MyLog.LogI(formattedMessage);
+                    }
                     break;
                 case TIP:
                     MyLog.LogI(formattedMessage);
@@ -619,6 +604,30 @@ public class MainActivity extends Activity {
                     break;
             }
             return true;
+        }
+        
+        private void writeJSDebug(Context c,  ConsoleMessage cm) {
+            String[] srcStrings = FileIO.getStringFromFile(cm.sourceId().replace("file://","")).split("\n");
+            final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String debugMsg = "Title: JavaScript debug\n\n"
+                + "##### " + DF.format(new Date()) + "\n\n"
+                + cm.message().replace(": ", ":\n\n")
+                + "\n\non string "
+                + cm.lineNumber()
+                + " of file: \n\n"
+                + cm.sourceId().replaceAll(".*/files/", "")
+                + "\n- - -\n"
+                + "\n```\n"
+                + (cm.lineNumber() - 1) + ". "
+                + srcStrings[cm.lineNumber() - 2] + "\n"
+                + (cm.lineNumber()) + ". "
+                + srcStrings[cm.lineNumber() - 1] + "\n"
+                + (cm.lineNumber() + 1) + ". "
+                + srcStrings[cm.lineNumber()] + "\n"
+                + "```\n"
+                + "\n- - -\n";
+            FileIO.writePageToFile(c, "/" + Constants.JS_DEBUG_PAGE, debugMsg);
+            Toast.makeText(c, "JS debug genersted",Toast.LENGTH_SHORT).show();
         }
     }
 }

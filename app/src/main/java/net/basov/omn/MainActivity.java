@@ -576,7 +576,9 @@ public class MainActivity extends Activity {
                             PreferenceManager.getDefaultSharedPreferences(c);
                     if(defSharedPref.getBoolean(getString(R.string.pk_enable_js_debug),false) && cm.lineNumber() > 10) {
                         String[] srcStrings = FileIO.getStringFromFile(cm.sourceId().replace("file://","")).split("\n");
+                        final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                         String debugMsg = "Title: JavaScript debug\n\n"
+                                + "##### " + DF.format(new Date()) + "\n\n"
                                 + cm.message().replace(": ", ":\n\n")
                                 + "\n\non string "
                                 + cm.lineNumber()

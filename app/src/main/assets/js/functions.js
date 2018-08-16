@@ -7,10 +7,10 @@ function toggleHdrBtnVis() {
     btn=document.getElementById('title_arrow');
     if (hheader.style.display !== 'none') {
         hheader.style.display = 'none';
-        btn.innerHTML = '<i class=\"material-icons\">arrow_drop_down</i>';
+        btn.innerHTML = '&nbsp;+&nbsp;';
     } else {
         hheader.style.display = 'block';
-        btn.innerHTML = '<i class=\"material-icons\">arrow_drop_up</i>';
+        btn.innerHTML = '&nbsp;&#x2013;&nbsp;';
     }
 }
 

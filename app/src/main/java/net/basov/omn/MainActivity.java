@@ -569,54 +569,84 @@ public class MainActivity extends Activity {
             SharedPreferences defSharedPref =
                 PreferenceManager.getDefaultSharedPreferences(c);
             Boolean jsDebug = defSharedPref.getBoolean(getString(R.string.pk_enable_js_debug),false);
-            String formattedMessage =
-                    cm.message()
-                    + " -- From line: "
-                    + cm.lineNumber()
-                    + " of "
-                    + cm.sourceId();
-            switch (cm.messageLevel()) {
-                case DEBUG:
-                    MyLog.LogD(formattedMessage);
-                    break;
-                case ERROR:
-                    if(jsDebug && cm.lineNumber() > 10) {
-                        writeJSDebug(c, cm);
-                    } else {
+            if(jsDebug && cm.lineNumber() > 10) {
+                writeJSDebug(c, cm);
+            } else {
+                String formattedMessage =
+                        cm.message()
+                                + " -- From line: "
+                                + cm.lineNumber()
+                                + " of "
+                                + cm.sourceId();
+                switch (cm.messageLevel()) {
+                    case DEBUG:
+                        MyLog.LogD(formattedMessage);
+                        break;
+                    case ERROR:
                         MyLog.LogE(formattedMessage);
-                    }
-                    break;
-                case LOG:
-                    if(jsDebug && cm.lineNumber() > 10) {
-                        writeJSDebug(c, cm);
-                    } else {
+                        break;
+                    case LOG:
                         MyLog.LogI(formattedMessage);
-                    }
-                    break;
-                case TIP:
-                    MyLog.LogI(formattedMessage);
-                    break;
-                case WARNING:
-                    MyLog.LogW(formattedMessage);
-                    break;
-                default:
-                    MyLog.LogW(formattedMessage);
-                    break;
+                        break;
+                    case TIP:
+                        MyLog.LogI(formattedMessage);
+                        break;
+                    case WARNING:
+                        MyLog.LogW(formattedMessage);
+                        break;
+                    default:
+                        MyLog.LogW(formattedMessage);
+                        break;
+                }
             }
             return true;
         }
-        
+
         private void writeJSDebug(Context c,  ConsoleMessage cm) {
             String[] srcStrings = FileIO.getStringFromFile(cm.sourceId().replace("file://","")).split("\n");
             final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String debugMsg = "Title: JavaScript debug\n\n"
-                + "##### " + DF.format(new Date()) + "\n\n"
-                + cm.message().replace(": ", ":\n\n")
-                + "\n\non string "
+            String severity = "UNDEFINED";
+            switch (cm.messageLevel()) {
+                case DEBUG:
+                    severity = "DEBUG";
+                    break;
+                case ERROR:
+                    severity = "ERROR";
+                    break;
+                case LOG:
+                    severity = "LOG";
+                    break;
+                case TIP:
+                    severity = "TIP";
+                    break;
+                case WARNING:
+                    severity = "WARNING";
+                    break;
+                default:
+                    severity = "UNKNOWN";
+                    break;
+            }
+            String debugMsg = ""
+                + "Title: JavaScript debug\n\n"
+                + "##### "
+                + DF.format(new Date())
+                + ", severity: "
+                + severity
+                + "\n\n";
+            if (cm.messageLevel() == ConsoleMessage.MessageLevel.ERROR)
+                debugMsg += ""
+                    + cm.message().replace(": ", ":\n\n");
+            else
+                debugMsg += ""
+                        + "Console log:\n\n"
+                        + cm.message()
+                        + "\n\n";
+            debugMsg += ""
+                + "\n\non line **"
                 + cm.lineNumber()
-                + " of file: \n\n"
+                + "** of file: ***"
                 + cm.sourceId().replaceAll(".*/files/", "")
-                + "\n- - -\n"
+                + "***\n- - -\n"
                 + "\n```\n"
                 + (cm.lineNumber() - 1) + ". "
                 + srcStrings[cm.lineNumber() - 2] + "\n"

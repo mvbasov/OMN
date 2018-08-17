@@ -628,6 +628,11 @@ public class MainActivity extends Activity {
             }
             String debugMsg = ""
                 + "Title: JavaScript debug\n\n"
+                + "<!--\n"
+                + "  Don't edit this page!\n"
+                + "  Page generated automaticaly.\n"
+                + "  All your changes will be lost.\n"
+                + "-->\n\n"
                 + "##### "
                 + DF.format(new Date())
                 + ", severity: "

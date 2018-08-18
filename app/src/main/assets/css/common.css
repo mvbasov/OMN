@@ -25,6 +25,18 @@ tr:nth-child(odd){
 tr:nth-child(even) {
 	background-color: #FFFFFF; color: black;
 }
+
+#TOC {border:solid black 1px; margin:10px; padding:10px;}
+.TOCEntry{font-family:sans-serief;}
+.TOCEntry a{text-decoration:none;}
+.TOCLevel1{font-weight:bold;}
+.TOCLevel2{font-weight:bold;}
+.TOCLevel3{font-weight:bold;}
+.TOCLevel4{font-weight:bold;margin-left:1em;}
+.TOCLevel4{font-weight:bold;margin-left:2em;}
+.TOCLevel4{font-weight:bold;margin-left:3em;}
+//.TOCSectNum{display:none;}
+
 a.taglink {
   text-decoration: none;
   color: black;

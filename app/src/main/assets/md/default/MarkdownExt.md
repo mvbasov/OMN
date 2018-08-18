@@ -7,28 +7,13 @@ Lang: en
 Author: Mikhail Basov
 Summary: Extended Markdown syntax of Open Markdown Note
 
-* [Links](#links)
-  * [Inline links](#links-inline)
-  * [Reference-style links](#links-reference)
-* [Supported URI schemas](#uri)
-  * [geo:](#uri-geo)
-  * [tel:](#uri-tel)
-  * [mailto:](#uri-mailto)
-  * [sms:](#uri-sms)
-  * [market:](#uri-market)
-* [Highlight text](#highlight-text)
-* [Google Material Design icons](#google-icons)
-* [Custom CSS](#custom-css)
-
-- - -
-
 <a name="links" />
-#### Links
+### Links
 
 Markdown supports two style of links: *inline* and *reference*.
 
 <a name="links-inline" />
-##### Inline links
+#### Inline links
 
 In both styles, the link text is delimited by [square brackets].
 
@@ -54,7 +39,7 @@ If you're referring to a local page, you must use relative paths:
     [My start page](../Start.html)
 
 <a name="links-reference" />
-##### Reference-style links
+#### Reference-style links
 
 Reference-style links use a second set of square brackets, inside
 which you place a label of your choosing to identify the link:
@@ -206,6 +191,21 @@ This CSS referenced at the end of header on any generated HTML page. You can ext
 
 - - -
 
+<a name="create-toc" />
+### Create TOC
+
+If you wish create Table Of Contents (TOC) place at the end of you page the following code:
+
+    <script>
+     window.onload=createTOC(document.getElementById('content'));
+    </script>
+
+TOC will be created at the top of you page. To position TOC to another place put at that place the following code:
+
+    <div id="TOC"></div>
+
+- - -
+
 <a name="google-icons" />
 ### Google Material Design icons
 
@@ -222,7 +222,7 @@ Renders to: <i class="material-icons">check_circle</i>
 <a name="unicode-symbols" />
 ### Unicode symbols collection
 
-Any pages can contain Unicode symbols. Legasy version use such symbols instead of Google Material Design icons.
+Any pages can contain Unicode symbols. In the legacy mode such symbols used instead of Google Material Design icons.
 There is collection of funny or usefull Unicode symbols.
 
 |          |           |          |           |
@@ -245,3 +245,7 @@ There is collection of funny or usefull Unicode symbols.
 |`&#x238c;`|`&#x2393;` |`&#x23f1;`|`&#x23f2;`
 |  &#xae;  |  &#xa9;   | &#x2122; | &#x23f2;
 | `&#xae;` | `&#xa9;`  |`&#x2122;`|`&#x23f2;`
+
+<script>
+  window.onload=createTOC(document.getElementById('content'));
+</script>

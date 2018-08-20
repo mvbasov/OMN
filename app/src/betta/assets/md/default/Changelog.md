@@ -4,7 +4,13 @@ Modified: 2018-08-15 22:11:31
 Author: Mikhail Basov
 Tags: OMN default,
 
+##### v00.22.00b
+
+- Automate TOC creation
+- Simple JavaScript debug
+
 ##### v00.21.00b
+###### Date:   Wed Aug 15 22:12:27 2018 +0300, commit a0347bbeb6055ef950a3904f19d28b0948abc974
 
 - Combine binary for both versions (ordinary and legacy)
 - New tag page design

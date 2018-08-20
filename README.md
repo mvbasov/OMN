@@ -129,3 +129,9 @@ Copy build/demo/styles/github.css as app/src/main/assets/css/highlight.css
 
 Font file (MaterialIcons-Regular.woff2) in the iconfont/ subdirectory.
 Dynamic chortcut (drawable/ic_baseline_comment_24px.xml)for QuickNote based on communication/svg/production/ic_comment_24px.svg
+
+#### Solutions from StackOverflow used in code
+* [Intent extra. Debug code](https://stackoverflow.com/a/15074150)
+* [Install desktop shortcut](https://stackoverflow.com/a/16873257)
+* [Generating TOC](https://stackoverflow.com/q/28792557)
+ 

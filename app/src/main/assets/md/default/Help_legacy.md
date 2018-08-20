@@ -67,6 +67,7 @@ css/common.css
 css/highlight.css
 fonts/google-material/MaterialIcons-Regular.woff2
 fonts/google-material/material-icons.css
+js/functions.js
 ```
 All other pages and files are you own files and never been touched by programm without your intention.
 

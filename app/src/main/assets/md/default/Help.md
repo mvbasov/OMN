@@ -8,18 +8,6 @@ Slug: omn-help
 Author: Mikhail Basov
 Summary: Open Markdown Note Help
 
-* [Syntax](#syntax)
-* [Recommended aditional software](#rec-software)
-* [Access notes from other device](#remote-acces)
-* [Automaticaly modified pages](#auto-pages)
-* [Action buttons description](#btn-desc)
-* [Application settings](#app-settings)
-* [Markdown page header](#page-header)
-* [Images](#images)
-* [Known issues](#issues)
-
-- - -
-
 <a id="syntax" />
 ### Syntax
 
@@ -314,3 +302,8 @@ In this case you need to put image file to `/storage/emulated/0/Android/data/net
 * Can't return to original link when use in-page reference. Back key return to previous page. 
 * Pages file name case sensitive but due to Android and VFat file system limitations 'FileName' and 'filename' may be the same file but may not to be ^)
 * Page with zerro file size is not normal for this application. 
+
+<script>
+  window.onload=createTOC(document.getElementById('content'));
+</script>
+

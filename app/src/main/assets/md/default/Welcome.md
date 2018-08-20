@@ -37,3 +37,6 @@ Any new pages can be created by editing current page and placing link to new pag
 Another way to add new page is to press 'add new page' button on any page header. See help about it [here](Help.html#add-new-page).
 
 Now, time to create [own start page](../Start.html). Which will be created with useful links inside automatically if it doesn't exists.
+
+To quickly exit from the application quickly press "back" key twice.
+

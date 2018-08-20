@@ -248,7 +248,7 @@ This meta data display as page name in application and set as `<title>` tag valu
 
 ##### Tags:
 
-This metadata will write to html page `<meta>` tag
+This metadata will write to html page `<meta>` tag. Tags from modified pages automaticaly collected to special [Tags page](/Tags.html) and placed to page header. If you press tag on page header you will be redirected to tag page section according to pressed tag and tag section header will be highlighted. To navigate to top of tag pege where some "tag cloud" displayed press on any tag section header.
 
 ##### Date:
 

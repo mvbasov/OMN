@@ -207,6 +207,12 @@ Disable this option speed up html page creation process.
 Enable/disable creation of Pelican CMS page metadata header.
 Effective only at page creation time. If disabled at first line of page title placed as 4-th level header.
 
+<a id="enable-jsdebug" />
+#### "Enable JavaScript debug"
+
+After enable this options JavasScripts's console log and errors messages processed by the application. Last string of output placed on [special debug page](/default/JSDebug.html) which can be quickly accessed from page header by button <button id="btnDebugH" onclick="Android.debugButtonCallback()"> <i class="material-icons">adb</i> </button>
+which apeared in page header automaticaly after enabling this option.
+
 #### "Actions buttons show/hide"
 
 Any of action buttons exclude <button id="btnSettings" onclick="Android.prefButtonCallback()"> <i class="material-icons">settings</i> </button> and <button onclick="BLOCK_Android.editButtonCallback(PFN)"> <i class="material-icons">edit</i> </button> can be disabled or enabled.

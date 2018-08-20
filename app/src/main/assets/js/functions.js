@@ -51,12 +51,16 @@ function createTOC(croot){
 
     sectionNumbers[level-1]++;
     for(var i=level; i<6; i++) sectionNumbers[i]=0;
-
+    
     var sectionNumber=sectionNumbers.slice(0, level).join(".");
 
     var span=document.createElement("span");
     span.className="TOCSectNum";
-    span.innerHTML=sectionNumber.replace(/0./g, "")+" ";
+    var sectionNumberDisplay = sectionNumber.replace(/0./g, "");
+    if(sectionNumberDisplay.length == 1)
+      sectionNumberDisplay += ".";
+    sectionNumberDisplay += " ";
+    span.innerHTML=sectionNumberDisplay;
     heading.insertBefore(span, heading.firstChild);
     heading.id="TOC"+sectionNumber;
     var anchor=document.createElement("a");

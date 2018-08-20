@@ -32,9 +32,9 @@ tr:nth-child(even) {
 .TOCLevel1{font-weight:bold;}
 .TOCLevel2{font-weight:bold;}
 .TOCLevel3{font-weight:bold;}
-.TOCLevel4{font-weight:bold;margin-left:1em;}
-.TOCLevel4{font-weight:bold;margin-left:2em;}
-.TOCLevel4{font-weight:bold;margin-left:3em;}
+.TOCLevel4{font-weight:bold;margin-left:0.5em;}
+.TOCLevel5{font-weight:bold;margin-left:1em;}
+.TOCLevel6{font-weight:bold;margin-left:1.5em;}
 //.TOCSectNum{display:none;}
 
 a.taglink {

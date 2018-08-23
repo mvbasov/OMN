@@ -55,13 +55,13 @@ public class MyWebViewClient extends WebViewClient {
         switch(uri.getScheme()){
             case "file":
                 String pageName = uri.toString()
-                        .replace("file://","")
+                        .replaceFirst("file://","")
                         .replace("//","/")
                         .replace(FileIO.getFilesDir(c).getPath(),"")
-                        .replace("/html/","")
-                        .replace("/android_asset","") //TODO: Why it is need?
-                        .replace(".html","")
-						.replace(".md","");
+                        .replaceFirst("/html/","")
+                        .replaceFirst("/android_asset","") //TODO: Why it is need?
+                        .replaceAll("\\.html$","")
+						.replaceAll("\\.md$","");
                         
                 /* For relative uri add / to begin because relative already translated to absolute */        
                 if(pageName.charAt(0) != '/') pageName = "/" + pageName;

@@ -85,7 +85,7 @@ Button code:
         <i class="material-icons">home</i>
     </button>
 
-<a name="aad-new-page" />
+<a name="add-new-page" />
 #### <button onclick="BLOCK_Android.newPageButtonCallback()"> <i class="material-icons">add_box</i> </button> "Add new page"
 
 Create new page and add link to it on top of current page. Input new page (file) name and title of new page. New page file name relative to current page name directory. As title automaticaly substitute page name which can be edited. Curent page modification time set automaticaly.
@@ -151,14 +151,14 @@ Button code:
         <i class="material-icons">screen_share</i>
     </button>
 
-#### <button onclick="Android.quicknoteButtonCallback()"> <i class="material-icons">receipt</i> </button> "Quick note"
+#### <button onclick="Android.quicknoteButtonCallback()"> <i class="material-icons">comment</i> </button> "Quick note"
 If you need to quickly write somethig press on this button. Write text dialogue form and press Ok. This text will be inserted at top of QuickNote page. Before text will be added horizontal devider and current time. 
 
 Button code:
 
     <button id="btnSettings"
         onclick="Android.quicknoteButtonCallback()">
-        <i class="material-icons">receipt</i>
+        <i class="material-icons">comment</i>
     </button>
 
 #### <button onclick="Android.prefButtonCallback()"> <i class="material-icons">settings</i> </button> "Edit appication settings"

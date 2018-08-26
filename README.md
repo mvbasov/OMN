@@ -131,6 +131,7 @@ Font file (MaterialIcons-Regular.woff2) in the iconfont/ subdirectory.
 Dynamic chortcut (drawable/ic_baseline_comment_24px.xml)for QuickNote based on communication/svg/production/ic_comment_24px.svg
 
 #### Solutions from StackOverflow used in code
+* [Escape JavaScript function parameters](https://stackoverflow.com/a/23224442)
 * [Intent extra. Debug code](https://stackoverflow.com/a/15074150)
 * [Install desktop shortcut](https://stackoverflow.com/a/16873257)
 * [Generating TOC](https://stackoverflow.com/q/28792557)

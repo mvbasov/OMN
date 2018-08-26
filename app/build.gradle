@@ -129,6 +129,20 @@ void buildIconFont() {
     println "*-*-* icon font copied *-*-*"
 }
 
+task makeStrings(type: Exec) {
+    inputs.file file("templates/Help.md.mustache")
+    outputs.file file("src/main/assets/md/default/Help.md")
+    buildStrings()
+}
+void buildStrings() {
+    exec {
+        workingDir 'templates'
+        commandLine "./@apply_templates.sh"
+    }
+    println "*-*-* strings generated *-*-*"
+}
+
+build.dependsOn makeStrings
 build.dependsOn makeHighlightJS
 build.dependsOn makeMarkedJS
 build.dependsOn makeIconFont

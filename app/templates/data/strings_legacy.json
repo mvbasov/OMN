@@ -1,0 +1,15 @@
+{
+  "legacy": true,
+  "btnEdit": "&#x270e;",
+  "btnHome": "&#x1f3e0;",
+  "btnNewPage": "&#x2795;",
+  "btnLink": "&#x1f517;",
+  "btnEmail": "&#x2709;",
+  "btnFolder": "&#x1f4c2;",
+  "btnRefreshHTML": "&#8634;",
+  "btnShortcut": "&#x2197;",
+  "btnQuickNote": "&#x1f3c3;",
+  "btnSettings": "&#x1f527;",
+  "btnDebug": "D"
+}
+

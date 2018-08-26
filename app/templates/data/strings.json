@@ -1,0 +1,15 @@
+{
+  "legacy": false,
+  "btnEdit": "<i class=\"material-icons\">edit</i>",
+  "btnHome": "<i class=\"material-icons\">home</i>",
+  "btnNewPage": "<i class=\"material-icons\">add_box</i>",
+  "btnLink": "<i class=\"material-icons\">insert_link</i>",
+  "btnEmail": "<i class=\"material-icons\">email</i>",
+  "btnFolder": "<i class=\"material-icons\">folder_open</i>",
+  "btnRefreshHTML": "<i class=\"material-icons\">cached</i>",
+  "btnShortcut": "<i class=\"material-icons\">screen_share</i>",
+  "btnQuickNote": "<i class=\"material-icons\">comment</i>",
+  "btnSettings": "<i class=\"material-icons\">settings</i>",
+  "btnDebug": "<i class=\"material-icons\">adb</i>"
+}
+

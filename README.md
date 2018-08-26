@@ -17,16 +17,18 @@ v**RR**.**BB**.**FF**[r|b|a]
 * **BB** - beta version (00 for release)
 * **FF** - fix for minor release
 
-if application has legacy version:
+r - release
+b - beta
+a or empty - alpha
+
+#### For versions before v00.21.00b
+
+if application had legacy version:
 
 **FF**=01 mark release legacy release build
 
 **FF**=02,04... mark fix for normal version
 **FF**=03,05... mark fix for legacy version
-
-r - release
-b - beta
-a or empty - alpha
 
 ### Note about source under android/support directory
 

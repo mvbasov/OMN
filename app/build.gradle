@@ -129,15 +129,15 @@ void buildIconFont() {
     println "*-*-* icon font copied *-*-*"
 }
 
-task makeStrings(type: Exec) {
-    inputs.file file("templates/Help.md.mustache")
-    outputs.file file("src/main/assets/md/default/Help.md")
-    buildStrings()
+task makeStrings() {
+    inputs.dir("templates")
+    outputs.files("src/main/assets/md/default/Help.md", "src/main/assets/md/default/Help_legacy.md", "src/main/res/valies/strings.xml", "src/main/res/valies-v21/strings.xml")
+    buildStringsFromTemplates()
 }
-void buildStrings() {
+void buildStringsFromTemplates() {
     exec {
         workingDir 'templates'
-        commandLine "./@apply_templates.sh"
+        commandLine 'sh', '@apply_templates.sh'
     }
     println "*-*-* strings generated *-*-*"
 }

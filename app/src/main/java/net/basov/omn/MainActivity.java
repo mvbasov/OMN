@@ -345,7 +345,7 @@ public class MainActivity extends Activity {
                         noteText += "#### " + sharedSubject + "\n";
 						link += "* [" + sharedSubject + "]";
                     }
-                    if (sharedText != null) {               
+                    if (sharedText != null) {           
 						if (sharedText.startsWith("http")) {
 							if (sharedText.contains("\n")) {
                                 endOfFirstLine = sharedText.indexOf("\n");
@@ -357,7 +357,11 @@ public class MainActivity extends Activity {
                                 noteText = sharedText.substring(sharedText.length() - endOfFirstLine);
                             else
                                 noteText = "";
-						} else {
+						} else if( sharedText.startsWith("OMNotesVersion: ")) {
+                            Toast.makeText(this, "Import page will be implemented...", Toast.LENGTH_SHORT).show();
+                            pageAdd(UI.displayStartPage(mainUI_WV));
+                            return;
+                        } else {
 							link = "";
                             noteText = sharedText;
 						}                     

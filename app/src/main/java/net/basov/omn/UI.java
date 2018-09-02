@@ -35,7 +35,7 @@ public class UI {
      * return name of displayed page
      */
     public static String displayStartPage(WebView wv) {
-        String goPage = "/" + Constants.WELCOME_PAGE;
+        String goPage = "/" + Constants.WELCOME_PAGE.replace("_legacy", "");
         if (FileIO.isFileExists(wv.getContext(), "/md/" + Constants.START_PAGE + ".md"))
             goPage = "/" + Constants.START_PAGE;
         Page page = new Page(goPage);

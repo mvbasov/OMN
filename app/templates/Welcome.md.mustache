@@ -35,11 +35,11 @@ It can be useful to simple web development on Android mobile devices.
 <a id="this-is-easy" />
 ### Simplest usage case
 You can create quick notes.
-Press on <button onclick="Android.quicknoteButtonCallback()"> <i class="material-icons">comment</i> </button> buton on any page header and enter text of new note then press "Ok".
+Press on <button onclick="Android.quicknoteButtonCallback()"> {{{btnQuickNote}}} </button> buton on any page header and enter text of new note then press "Ok".
 
 Notes organized as stream on one page.
 Your new note will be placed at the top of the [QuickNotes page](../QuickNotes.html) with time stamp before.
-To quick access to your notes you can create shortcut at the home screen by pressing <button onclick="Android.shortcutButtonCallback(PFN, Title)"> <i class="material-icons">screen_share</i> </button> buton on the QuickNotes page header.
+To quick access to your notes you can create shortcut at the home screen by pressing <button onclick="Android.shortcutButtonCallback(PFN, Title)"> {{{btnShortcut}}} </button> buton on the QuickNotes page header.
 
 If you are using the application on Android 8.0 (Oreo) you can long press the application icon on the home scree and then choise "Take QuickNotes" in the menu that appears.
 
@@ -71,7 +71,7 @@ On Android 8.0 and newer the following editors tested:
 #### Create new page
 Don't edit this page! All you changes will be lost at application version update time. At the first, create own start page. To do this visit [this link](../Start.html) and page will be created automatically. Useful links will be placed on the new start page.
 
-Read about how to [Add new pages](Help.html#add-new-page) by action button <button onclick="BLOCK_Android.newPageButtonCallback()"> <i class="material-icons">add_box</i> </button>.
+Read about how to [Add new pages](Help.html#add-new-page) by action button <button onclick="BLOCK_Android.newPageButtonCallback()"> {{{btnNewPage}}} </button>.
 
 Another way is to put link to new page on current page and then visit it. On this case link to another page is page name followed by `.html`
 Pages can be formatted using [Markdown syntax](Markdown.html) and

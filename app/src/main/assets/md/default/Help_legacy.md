@@ -1,8 +1,8 @@
 Title: Help (legacy version)
 Date: 2017-10-22 19:31:15
-Modified: 2018-08-26 16:22:19
+Modified: 2018-08-30 14:20:50
 Category: Index
-Tags: OMN default, Documentation 
+Tags: OMN default, Documentation
 Lang: en
 Slug: omn-help-legacy
 Author: Mikhail Basov
@@ -16,56 +16,11 @@ Read page about common [Markdown syntax](Markdown.html) and then about
 
 - - -
 
-<a id="rec-software" />
-### Recommended aditional software
-
-#### Recommended applications from F-Droid <span class="fg-green">(Recommended)</span>:
-
-* [Simple generic text editor](https://f-droid.org/app/org.billthefarmer.editor)
-* [OI File Manager](https://f-droid.org/app/org.openintents.filemanager)
-
-#### Recommended applications from Google Play Market:
-
-* [920 Text Editor](https://play.google.com/store/apps/details?id=com.jecelyin.editor.v2)
-* [OI Notepad](market://details?id=org.openintents.notepad)
-* [X-plore File Manager](market://details?id=com.lonelycatgames.Xplore)
-
-- - -
-
-<a id="remote-acces" />
-### Access notes from other device
-
-To see this application notes on another device (desktop or tablet, for example) I would recommend my small lightweight and simple web server for Android:
-
-* [lightweight Web Server (lWS)](http://play.google.com/store/apps/details?id=net.basov.lws.r)
-
-It was specially designed as companion application for these notes. To configure lWS go to its settings and set as document root OMN data directory. Data directory can be found at the bottom of [this page](Build.html).
-
-- - -
-
-<a id="auto-pages" />
-### Automaticaly modified pages and files
-
-All pages in the directory ```md/default/*``` can be totaly rewrite by application automaticaly. At version update time, usualy.
-The same is true for thr following files:
-
-```
-css/common.css
-css/highlight.css
-fonts/google-material/MaterialIcons-Regular.woff2
-fonts/google-material/material-icons.css
-js/functions.js
-```
-All other pages and files are you own files and never been touched by programm without your intention.
-
-If Pelican CMS header meta information ```modified``` exists on page it updated automaticaly after editor call and page modified.
-
-- - -
-
 <a id="btn-desc" />
 ### Action buttons description
 
-You can place any button buttons on any place of your pages by copy/paste button code. _At default pages buttons able to modify pages not function but you able to do it from page header if you wish._
+Actions bttons can be found at any page top header and allow you to controll the programm.
+Also you can place any button on any place of your pages by copy/paste button code. _At default pages buttons able to modify pages not function but you able to do it from page header if you wish._
 
 #### <button onclick="BLOCK_Android.editButtonCallback(PFN)"> &#x270e; </button> "Edit"
 
@@ -130,7 +85,7 @@ Button code:
         onclick="Android.folderButtonCallback(PFN)">
         &#x1f4c2;
     </button>
-
+    
 #### <button onclick="Android.refreshHtmlButtonCallback()"> &#8634; </button> "Refresh HTML page"
 
 Force create HTML page from Markdown source. Disabled by defsult.
@@ -151,21 +106,21 @@ Button code:
         &#x2197;
     </button>
 
-#### <button onclick="Android.quicknoteButtonCallback()"> &#x1f3c3; </button> "Quick note"
+#### <button onclick="Android.quicknoteButtonCallback()"> <i class="material-icons">receipt</i> </button> "Quick note"
 If you need to quickly write somethig press on this button. Write text dialogue form and press Ok. This text will be inserted at top of QuickNote page. Before text will be added horizontal devider and current time. 
 
 Button code:
 
-    <button id="btnSettings"
+    <button
         onclick="Android.quicknoteButtonCallback()">
-        &#x1f3c3;
+        <i class="material-icons">receipt</i>
     </button>
 
 #### <button onclick="Android.prefButtonCallback()"> &#x1f527; </button> "Edit appication settings"
 
 Button code:
 
-    <button id="btnSettings"
+    <button
         onclick="Android.prefButtonCallback()">
         &#x1f527;
     </button>
@@ -183,7 +138,7 @@ Default notes author name. Effective only at page creation time.
 
 Differnt File Managers <button onclick="Android.folderButtonCallback(PFN)"> &#x1f4c2; </button> require different arguments to call.
  
-For X-plore or ES file managers this options need to be set to enable.
+The exsmple. For X-plore or ES file managers this options need to be set to enable.
 For OI File Manager to disable.
 
 #### "Enable code highlight"
@@ -199,12 +154,12 @@ Effective only at page creation time. If disabled at first line of page title pl
 <a id="enable-jsdebug" />
 #### "Enable JavaScript debug"
 
-After enable this options JavasScripts's console log and errors messages processed by the application. Last string of output placed on [special debug page](/default/JSDebug.html) which can be quickly accessed from page header by button <button id="btnDebugH" onclick="Android.debugButtonCallback()"> D </button>
+After enable this options JavasScripts's console log and errors messages processed by the application. Last string of output placed on [special debug page](/default/JSDebug.html) which can be quickly accessed from page header by button <button onclick="Android.debugButtonCallback()"> D </button>
 which apeared in page header automaticaly after enabling this option.
 
 #### "Actions buttons show/hide"
 
-Any of action buttons exclude <button id="btnSettings" onclick="Android.prefButtonCallback()"> &#x1f527; </button> and <button onclick="BLOCK_Android.editButtonCallback(PFN)"> &#x270e; </button> can be disabled or enabled.
+Any of action buttons exclude <button onclick="Android.prefButtonCallback()"> &#x1f527; </button> and <button onclick="BLOCK_Android.editButtonCallback(PFN)"> &#x270e; </button> can be disabled or enabled.
 This option effective only at html page creation time. If you want to add remove buttons on already created page you need to set option an regenerate (delete and the visit) html page.
 
 - - -
@@ -212,7 +167,7 @@ This option effective only at html page creation time. If you want to add remove
 <a id="page-header" />
 ### Markdown page header
 
-This application use [Pelican Content Management System (Pelican CMS)]() Markdown extension for page header.
+This application use [Pelican Content Management System (Pelican CMS)](https://blog.getpelican.com) Markdown extension for page header.
 
 #### Header processing rules
 
@@ -234,8 +189,10 @@ Title meta set to Page(file) name relative to application data storage directory
 
 This meta data display as page name in application and set as `<title>` tag value in html page.
 
+<a id="help-tags" />
 ##### Tags:
 
+Tags help you to organize pages. Page tags displayed at page header.
 This metadata will write to html page `<meta>` tag. Tags from modified pages automaticaly collected to special [Tags page](/Tags.html) and placed to page header. If you press tag on page header you will be redirected to tag page section according to pressed tag and tag section header will be highlighted. To navigate to top of tag pege where some "tag cloud" displayed press on any tag section header.
 
 ##### Date:
@@ -292,7 +249,7 @@ Technicaly this programm suport image display. It can be done by the following c
 ``` markdown
 ![Image alternateve name](../img/Image.jpg)
 ```
-In this case you need to put image file to `/storage/emulated/0/Android/data/net.basov.omn.b/files/img/Image.jpg` but I don't know convenient way to do this and don't treat this feature as supported for this programm. Images need too be not upper then /storage/emulated/0/Android/data/net.basov.omn.b/files/ directory because this application has only permission to read files only from thos directory and below.
+In this case you need to put image file to [[data directory]]()`/img/Image.jpg` but I don't know convenient way to do this and don't treat this feature as supported for this programm. Images need too be not upper then /storage/emulated/0/Android/data/net.basov.omn.b/files/ directory because this application has only permission to read files only from thos directory and below.
 
 - - -
 
@@ -306,4 +263,3 @@ In this case you need to put image file to `/storage/emulated/0/Android/data/net
 <script>
   window.onload=createTOC(document.getElementById('content'));
 </script>
-

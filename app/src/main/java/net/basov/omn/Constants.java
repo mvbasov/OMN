@@ -24,12 +24,14 @@ public class Constants {
     public final static int PREFERENCES_REQUEST = 111;
     public static final String TAG = "#OMN#";
 
-    public static final String WELCOME_PAGE = "default/Welcome";
+    public static final String WELCOME_PAGE = Build.VERSION.SDK_INT >=21
+            ? "default/Welcome":"default/Welcome_legacy";
     public static final String HELP_PAGE = Build.VERSION.SDK_INT >=21
             ? "default/Help":"default/Help_legacy";
     public static final String START_PAGE = "Start";
     public static final String SYNTAX_PAGE = "default/Markdown";
-    public static final String SYNTAX_EXT_PAGE = "default/MarkdownExt";
+    public static final String SYNTAX_EXT_PAGE = Build.VERSION.SDK_INT >=21
+            ? "default/MarkdownExt":"default/MarkdownExt_legacy";
     public static final String CHANGELOG = "default/Changelog";
     public static final String BUILD_PAGE = "default/Build";
     public static final String QUICKNOTES_PAGE = "QuickNotes";

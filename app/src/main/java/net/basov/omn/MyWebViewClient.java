@@ -61,6 +61,7 @@ public class MyWebViewClient extends WebViewClient {
                         .replaceFirst("/html/","")
                         .replaceFirst("/android_asset","") //TODO: Why it is need?
                         .replaceAll("\\.html$","")
+                        .replaceAll("\\.html#","#")
 						.replaceAll("\\.md$","");
                         
                 /* For relative uri add / to begin because relative already translated to absolute */        

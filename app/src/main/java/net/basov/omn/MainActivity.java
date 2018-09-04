@@ -474,7 +474,7 @@ public class MainActivity extends Activity {
 
                                     Intent i = new Intent();
                                     i.setAction(MainActivity.this.getPackageName() + ".EDIT_PAGE");
-                                    i.putExtra("name", "/" + newPageName);
+                                    i.putExtra("name", newPageName);
                                     MainActivity.this.startActivity(i);
 
                                 }

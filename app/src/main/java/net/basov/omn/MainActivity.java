@@ -48,6 +48,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Stack;
 import android.support.v4.content.FileProvider;
+import net.basov.util.TextTools;
 
 public class MainActivity extends Activity {
 
@@ -419,6 +420,7 @@ public class MainActivity extends Activity {
             if (intent.getAction().equals(this.getPackageName() + ".NEW_PAGE")) {
                 /* Create new page and put link to it on top of current page */
                 final String currentPageName = page.getPageName();
+                final String currentPagePath = currentPageName.substring(0, currentPageName.lastIndexOf("/") + 1);
 
                 AlertDialog.Builder builderName = new AlertDialog.Builder(this);
                 builderName.setTitle("New page (file) name");
@@ -428,16 +430,31 @@ public class MainActivity extends Activity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         final String newPageNameEntered = inputName.getText().toString().trim();
-                        final String newPageName = currentPageName.substring(0, currentPageName.lastIndexOf("/") + 1) + newPageNameEntered;
-                        if (FileIO.isFileExists(MainActivity.this, "/md/" + newPageName + ".md")) {
+                        final String newPageName = currentPagePath + newPageNameEntered;
+                        final String newPageLink = TextTools.pathAbsolutize(newPageName);
+                        if (newPageNameEntered.startsWith("/")) {
+                            Toast.makeText(MainActivity.this, "Page link must be relative", Toast.LENGTH_SHORT).show();
+                            //TODO: implement stay on dialog
+                        } else if (newPageLink == null) {
+                            Toast.makeText(MainActivity.this, "Page link out of file tree", Toast.LENGTH_SHORT).show();
+                            //TODO: implement stay on dialog
+                        } else if (FileIO.isFileExists(MainActivity.this, "/md/" + newPageLink + ".md")) {
                             Toast.makeText(MainActivity.this, "Page already exists", Toast.LENGTH_SHORT).show();
                             //TODO: implement add link to current page if page exists
                         } else {
                             AlertDialog.Builder builderTitle = new AlertDialog.Builder(MainActivity.this);
+                            
                             builderTitle.setTitle("New page title");
                             final EditText inputTitle = new EditText(MainActivity.this);
-                            inputTitle.setText(newPageNameEntered, TextView.BufferType.EDITABLE);
+                            // If current page after absolute path is in the same directory
+                            // as current page squash directory name before offering new
+                            // page title
+                            String newPageTitleOffer = newPageLink.substring(1);
+                            if (newPageLink.startsWith(currentPagePath))
+                                newPageTitleOffer = newPageLink.replace(currentPagePath, "");                 
+                            inputTitle.setText(newPageTitleOffer, TextView.BufferType.EDITABLE);
                             builderTitle.setView(inputTitle);
+                            
                             builderTitle.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
@@ -468,13 +485,13 @@ public class MainActivity extends Activity {
                                         Toast.makeText(MainActivity.this, "Internal programm error. Link to page didn't created\n * page = " + pageName + "\n * pages.peek = " + stackState, Toast.LENGTH_SHORT).show();
                                     }
 
-                                    FileIO.createPageIfNotExists(MainActivity.this, newPageName, newPageTitle, "");
+                                    FileIO.createPageIfNotExists(MainActivity.this, newPageLink, newPageTitle, "");
 
-                                    pageAdd(newPageName);
+                                    pageAdd(newPageLink);
 
                                     Intent i = new Intent();
                                     i.setAction(MainActivity.this.getPackageName() + ".EDIT_PAGE");
-                                    i.putExtra("name", newPageName);
+                                    i.putExtra("name", newPageLink);
                                     MainActivity.this.startActivity(i);
 
                                 }

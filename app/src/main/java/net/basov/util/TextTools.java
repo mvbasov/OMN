@@ -11,13 +11,22 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
  */
 
 package net.basov.util;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+import android.text.TextUtils;
 
 /**
  * Created by mvb on 6/18/17.
  */
 
 public class TextTools {
-
+    /**
+    * Escape string to pass as JavaString function parameter
+    *
+    * @param  src    Source string
+    * @return String Escaped string
+    */
     public static String escapeJavaScriptFunctionParameter(String param) {
         /* Concept of code from here https://stackoverflow.com/a/23224442 */
         char[] chars = param.toCharArray();
@@ -55,5 +64,27 @@ public class TextTools {
             }
         }
         return sb.toString();
+    }
+    
+    /**
+    * Convert path with relative components path absolute
+    * 
+    * @param src     path with ../ inside it
+    * @return String Simplified path or null if result begin with ../
+    */
+    public static String pathAbsolutize(String src) {
+        if (src.charAt(0) == '/') src = src.substring(1);
+        List<String>  resArray = new ArrayList<String>(Arrays.asList(src.split("/")));
+
+        Integer idx;
+        while((idx = resArray.indexOf("..")) > 0){
+            resArray.remove(idx-1);
+            resArray.remove(idx-1);
+        }
+
+        if(resArray.indexOf("..")==0)
+            return null;
+        else
+            return "/" + TextUtils.join("/", resArray);
     }
 }

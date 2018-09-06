@@ -1,4 +1,4 @@
-Title: Help (legacy version)
+Title: Help (legacy mode)
 Date: 2017-10-22 19:31:15
 Modified: 2018-08-30 14:20:50
 Category: Index

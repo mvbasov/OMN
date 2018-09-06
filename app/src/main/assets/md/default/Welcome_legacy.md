@@ -1,4 +1,4 @@
-Title: Welcome!
+Title: Welcome! (legacy mode)
 Date: 2018-08-24 10:16:34
 Modified: 2018-08-30 13:25:08
 Author: Mikhail Basov

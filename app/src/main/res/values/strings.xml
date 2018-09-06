@@ -92,7 +92,7 @@
       id=\"btnDebug\"
       class=\"hBtn\"
       onclick=\"Android.debugButtonCallback()\">
-D
+&#x33d2
     </button>
     <button
       id=\"btnAdd\"

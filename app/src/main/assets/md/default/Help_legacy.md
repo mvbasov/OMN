@@ -154,7 +154,7 @@ Effective only at page creation time. If disabled at first line of page title pl
 <a id="enable-jsdebug" />
 #### "Enable JavaScript debug"
 
-After enable this options JavasScripts's console log and errors messages processed by the application. Last string of output placed on [special debug page](/default/JSDebug.html) which can be quickly accessed from page header by button <button onclick="Android.debugButtonCallback()"> D </button>
+After enable this options JavasScripts's console log and errors messages processed by the application. Last string of output placed on [special debug page](/default/JSDebug.html) which can be quickly accessed from page header by button <button onclick="Android.debugButtonCallback()"> &#x33d2 </button>
 which apeared in page header automaticaly after enabling this option.
 
 #### "Actions buttons show/hide"

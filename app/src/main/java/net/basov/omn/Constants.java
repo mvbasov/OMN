@@ -44,5 +44,9 @@ public class Constants {
     public static final String JS_DEBUG_PAGE = "default/JSDebug";
     public static final String EMA = "omn-platform-stat";
     public static final String EMA_DOM = "basov.net";
-
+    public static final String EMA_MARK_START = "``` markdown";
+    public static final String EMA_MARK_STOP = "``` end of markdown";
+    public static final String EMA_H_VER = "OMNotesVersion";
+    public static final String EMA_H_PFN = "PageFileName";
+  
 }

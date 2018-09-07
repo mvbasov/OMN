@@ -358,9 +358,15 @@ public class MainActivity extends Activity {
                                 noteText = sharedText.substring(sharedText.length() - endOfFirstLine);
                             else
                                 noteText = "";
-						} else if( sharedText.startsWith("OMNotesVersion: ")) {
-                            Toast.makeText(this, "Import page will be implemented...", Toast.LENGTH_SHORT).show();
-                            pageAdd(UI.displayStartPage(mainUI_WV));
+						} else if( sharedText.startsWith(Constants.EMA_H_VER + ": ")) {
+                            String importedPage = null;
+                            if ((importedPage = FileIO.importPage(MainActivity.this, sharedText)) == null) {
+                                Toast.makeText(this, "Page can't be imported...", Toast.LENGTH_SHORT).show();
+                                pageAdd(UI.displayStartPage(mainUI_WV));
+                            } else {
+                                pageAdd(importedPage);
+                            }
+                            UI.displayPage(mainUI_WV, page);
                             return;
                         } else {
 							link = "";

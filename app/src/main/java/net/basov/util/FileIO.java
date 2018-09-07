@@ -49,6 +49,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.io.StringReader;
 
 /**
  * Created by mvb on 9/29/17.
@@ -84,6 +85,56 @@ public class FileIO {
             MyLog.LogE(e, "Write page to file failed.");
         }
         saveTS(c);
+    }
+    
+    public static String importPage(Context c, String content) {
+        // String iteration based on https://stackoverflow.com/a/9259462
+        BufferedReader reader = new BufferedReader(new StringReader(content));
+        StringBuilder sb = new StringBuilder();
+        String pfn = null;
+        Boolean inMarkdown = false;
+        String currentLine = null;
+        try {
+            while ((currentLine = reader.readLine()) != null) {
+                if (currentLine.startsWith(Constants.EMA_H_VER)) continue;
+                if (currentLine.startsWith(Constants.EMA_H_PFN)) {
+                    pfn = currentLine.split(":")[1].trim();
+                    continue;
+                }
+                if (currentLine.startsWith("``` end of markdown")) {
+                    reader.close();
+                    break;
+                }
+                if (currentLine.startsWith("``` markdown")) {
+                    inMarkdown = true;
+                    continue;
+                }
+                if (inMarkdown) sb.append(currentLine+"\n");
+            }
+        } catch (IOException e) {
+            MyLog.LogE("Import page error.");
+            pfn = null;
+        }
+        String fileName = "/md/import" + pfn + ".md";
+        File file = new File(getFilesDir(c), fileName);
+        if(!file.exists()) {
+            creteParentDir(file);
+            try {
+                file.createNewFile();
+                Writer writer = new BufferedWriter(new FileWriter(file));
+                writer.write(sb.toString());
+                writer.flush();
+                writer.close();
+
+            } catch (IOException e) {
+                MyLog.LogE(e, "Can't import page " + pfn);
+                return null;
+            }
+            return "/import" + pfn;      
+        } else {
+           MyLog.LogE("Can't import page. Already exists" + pfn);
+        }
+        return null;
     }
 
     public static boolean createPageIfNotExists(Context c, String pageName, String mtitle, String wvUserAgent) {

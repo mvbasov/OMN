@@ -146,14 +146,23 @@ public class WebViewJSCallback {
                 )
         );
         i.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + FileIO.getFilesDir(mContext) + "/html" + pn + ".html"));
+        try {
         i.putExtra(
                 Intent.EXTRA_TEXT,
-                mContext.getString(R.string.ema_md_start)
+                Constants.EMA_H_VER
+                + ": " + AppDetails.getAppName(mContext)
+                + "\n" + Constants.EMA_H_PFN
+                + ": " + pn + "\n"
+                + Constants.EMA_MARK_START +"\n"
                 + FileIO.getStringFromFile(
                     FileIO.getFilesDir(mContext) + "/md" + pn + ".md"
                   )
-                +mContext.getString(R.string.ema_md_end)
+                + "\n" + Constants.EMA_MARK_STOP
         );
+        } catch (PackageManager.NameNotFoundException e) {
+            MyLog.LogE(e, "Get application name problem.");
+        }
+            
         try {
             mContext.startActivity(i);
         } catch (android.content.ActivityNotFoundException e) {

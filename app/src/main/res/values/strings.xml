@@ -422,9 +422,6 @@ This page generated automaticaly.
 
 "]]></string>
 
-    <string name="ema_md_start">\n``` markdown\n</string>
-    <string name="ema_md_end">\n```\n</string>
-
     <string name="pk_version_code" translatable="false">appVersionCode</string>
     <string name="pk_pref_version" translatable="false">prefVersion</string>
     <string name="pk_pref_changed" translatable="false">prefChanged</string>

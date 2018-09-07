@@ -50,6 +50,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.io.StringReader;
+import net.basov.omn.Page;
 
 /**
  * Created by mvb on 9/29/17.
@@ -87,18 +88,18 @@ public class FileIO {
         saveTS(c);
     }
     
-    public static String importPage(Context c, String content) {
+    public static Page importPage(Context c, String content) {
         // String iteration based on https://stackoverflow.com/a/9259462
         BufferedReader reader = new BufferedReader(new StringReader(content));
         StringBuilder sb = new StringBuilder();
-        String pfn = null;
+        Page inPage = null;
         Boolean inMarkdown = false;
         String currentLine = null;
         try {
             while ((currentLine = reader.readLine()) != null) {
                 if (currentLine.startsWith(Constants.EMA_H_VER)) continue;
                 if (currentLine.startsWith(Constants.EMA_H_PFN)) {
-                    pfn = currentLine.split(":")[1].trim();
+                    inPage = new Page("/incoming" + currentLine.split(":")[1].trim()); 
                     continue;
                 }
                 if (currentLine.startsWith("``` end of markdown")) {
@@ -113,9 +114,10 @@ public class FileIO {
             }
         } catch (IOException e) {
             MyLog.LogE("Import page error.");
-            pfn = null;
+            inPage = null;
         }
-        String fileName = "/md/import" + pfn + ".md";
+        String fileName = "/md/"+ inPage.getPageName() + ".md";
+        inPage.setMdContent(sb.toString());
         File file = new File(getFilesDir(c), fileName);
         if(!file.exists()) {
             creteParentDir(file);
@@ -127,12 +129,12 @@ public class FileIO {
                 writer.close();
 
             } catch (IOException e) {
-                MyLog.LogE(e, "Can't import page " + pfn);
+                MyLog.LogE(e, "Can't import page " + inPage.getPageName());
                 return null;
             }
-            return "/import" + pfn;      
+            return inPage;      
         } else {
-           MyLog.LogE("Can't import page. Already exists" + pfn);
+           MyLog.LogE("Can't import page. Already exists" + inPage.getPageName());
         }
         return null;
     }

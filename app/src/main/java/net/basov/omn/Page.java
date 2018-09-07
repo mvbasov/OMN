@@ -56,6 +56,10 @@ public class Page {
             return null;
     }
 
+    public void setMetaByKey (String key, String value) {
+        mMeta.put(key, value);
+    }
+
     public Boolean hasMetaWithKey(String key) {
         return mMeta.containsKey(key.toLowerCase());
     }

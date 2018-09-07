@@ -48,5 +48,6 @@ public class Constants {
     public static final String EMA_MARK_STOP = "``` end of markdown";
     public static final String EMA_H_VER = "OMNotesVersion";
     public static final String EMA_H_PFN = "PageFileName";
+    public static final String INCOMING_INDEX_PAGE = "/incoming/Incoming";
   
 }

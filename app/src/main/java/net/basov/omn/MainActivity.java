@@ -359,12 +359,28 @@ public class MainActivity extends Activity {
                             else
                                 noteText = "";
 						} else if( sharedText.startsWith(Constants.EMA_H_VER + ": ")) {
-                            String importedPage = null;
+                            Page importedPage = null;
                             if ((importedPage = FileIO.importPage(MainActivity.this, sharedText)) == null) {
                                 Toast.makeText(this, "Page can't be imported...", Toast.LENGTH_SHORT).show();
                                 pageAdd(UI.displayStartPage(mainUI_WV));
                             } else {
-                                pageAdd(importedPage);
+                                String importedPageLink = importedPage.getPageName().replaceFirst("/incoming/","");
+                                pageAdd(Constants.INCOMING_INDEX_PAGE);
+                                FileIO.createPageIfNotExists(this,
+                                                             Constants.INCOMING_INDEX_PAGE,
+                                                             "Incoming pages index",
+                                                             ""
+                                                             );
+                                UI.setMdContentFromFile(this, page);
+                                page.setMetaByKey("tags", "Index, OMN default");
+                                String newText = "* ["+ importedPage.getMetaByKey("title") +"]("+ importedPageLink +".html)\n";                                       
+                                page.addAtTopOfPage(newText);
+                                FileIO.writePageToFile(
+                                    this,
+                                    Constants.INCOMING_INDEX_PAGE,
+                                    page.getMdContent()
+                                );
+                                pageAdd(importedPage.getPageName());
                             }
                             UI.displayPage(mainUI_WV, page);
                             return;

@@ -102,11 +102,11 @@ public class FileIO {
                     inPage = new Page("/incoming" + currentLine.split(":")[1].trim()); 
                     continue;
                 }
-                if (currentLine.startsWith("``` end of markdown")) {
+                if (currentLine.startsWith(Constants.EMA_MARK_STOP)) {
                     reader.close();
                     break;
                 }
-                if (currentLine.startsWith("``` markdown")) {
+                if (currentLine.startsWith(Constants.EMA_MARK_START)) {
                     inMarkdown = true;
                     continue;
                 }

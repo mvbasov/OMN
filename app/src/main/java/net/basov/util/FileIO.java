@@ -93,13 +93,14 @@ public class FileIO {
         BufferedReader reader = new BufferedReader(new StringReader(content));
         StringBuilder sb = new StringBuilder();
         Page inPage = null;
+        String pn = null;
         Boolean inMarkdown = false;
         String currentLine = null;
         try {
             while ((currentLine = reader.readLine()) != null) {
                 if (currentLine.startsWith(Constants.EMA_H_VER)) continue;
                 if (currentLine.startsWith(Constants.EMA_H_PFN)) {
-                    inPage = new Page("/incoming" + currentLine.split(":")[1].trim()); 
+                    pn = "/incoming" + currentLine.split(":")[1].trim(); 
                     continue;
                 }
                 if (currentLine.startsWith(Constants.EMA_MARK_STOP)) {
@@ -116,15 +117,27 @@ public class FileIO {
             MyLog.LogE("Import page error.");
             inPage = null;
         }
-        String fileName = "/md/"+ inPage.getPageName() + ".md";
+        
+        String fileName = "/md/"+ pn;      
+        File file = new File(getFilesDir(c), fileName + ".md");
+        String suffix = "";
+        String str;
+        for(int idx = 1; idx < 100; idx++) {
+            if (!file.exists()) break;
+            str = "0" + idx;
+            suffix = str.length() > 2 ? str.substring(str.length() - 2) : str;
+            suffix = "-" + suffix;
+            file = new File(getFilesDir(c), fileName + suffix + ".md");
+        }
+        inPage = new Page(pn + suffix);
         inPage.setMdContent(sb.toString());
-        File file = new File(getFilesDir(c), fileName);
+        if (suffix.length() > 0) inPage.setMetaByKey("title", inPage.getMetaByKey("title") + " (" + suffix.substring(1) + ")");
         if(!file.exists()) {
             creteParentDir(file);
             try {
                 file.createNewFile();
                 Writer writer = new BufferedWriter(new FileWriter(file));
-                writer.write(sb.toString());
+                writer.write(inPage.getMetaHeaderAsString() + inPage.getMdContent());
                 writer.flush();
                 writer.close();
 

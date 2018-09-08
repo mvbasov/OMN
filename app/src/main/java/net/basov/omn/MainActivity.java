@@ -371,8 +371,7 @@ public class MainActivity extends Activity {
                                                              "Incoming pages index",
                                                              ""
                                                              );
-                                UI.setMdContentFromFile(this, page);
-                                page.setMetaByKey("tags", "Index, OMN default");
+                                UI.setMdContentFromFile(this, page);                       
                                 String newText = "* ["+ importedPage.getMetaByKey("title") +"]("+ importedPageLink +".html)\n";                                       
                                 page.addAtTopOfPage(newText);
                                 FileIO.writePageToFile(

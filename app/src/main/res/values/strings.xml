@@ -339,12 +339,13 @@ if (typeof selected != 'undefined') {
     %2$s    Creation date
     %3$s    Modification date
     %4$s    Authors
+    %5$s    Tags
     -->
     <string name="pelican_header"><![CDATA["Title: %1$s
 Date: %2$s
 Modified: %3$s
 Author: %4$s
-Tags: 
+Tags: %5$s
 
 "]]>
     </string>

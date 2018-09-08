@@ -164,14 +164,25 @@ public class FileIO {
 
                 String ts = DF.format(new Date());
                 String title = "";
+                String tags = "";
 
                 if (mtitle.length() == 0)
                     title = pageName;
                 else
                     title = mtitle;
                 if(pageName.equals("/default/Build")) title = "Build information";
-                if(pageName.equals("/Start")) title = "My start page";
-                if(pageName.equals("/QuickNotes")) title = "My quick notes";
+                if(pageName.equals("/Start")) {
+                    title = "My start page";
+                    tags += "OMN default, Index";
+                }
+                if(pageName.equals("/QuickNotes")) {
+                    title = "My quick notes";
+                    tags += "OMN default, Notes";
+                }
+                if(pageName.equals("/incoming/Incoming")) {
+                    title = "Incoming pages index";
+                    tags += "OMN default, Index";
+                }
 
                 String pageHeader = "";
                 if (defSharedPref.getBoolean(
@@ -189,7 +200,9 @@ public class FileIO {
                             defSharedPref.getString(
                                     c.getString(R.string.pk_notes_author),
                                     ""
-                            )
+                            ),
+                            // Tags
+                            tags
                     );
 
                 } else {

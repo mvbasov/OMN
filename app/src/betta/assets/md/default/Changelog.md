@@ -4,7 +4,13 @@ Modified: 2018-08-15 22:11:31
 Author: Mikhail Basov
 Tags: OMN default,
 
+##### v00.23.00b
+
+- Import page from E-Mail
+- Fix several fixes
+
 ##### v00.22.00b
+###### Date:   Mon Aug 20 22:29:45 2018 +0300, commit 856e7dbf5b454a9882f466713042a654fbac553d
 
 - Automate TOC creation
 - Simple JavaScript debug

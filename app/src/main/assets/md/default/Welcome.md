@@ -119,7 +119,8 @@ Place you pages under md/ directory, JavaScripts under js/ and styles under /css
 │  │  ├─ Markdown.md
 │  │  ├─ MarkdownExt.md
 │  │  └─ Welcome.md
-│  ├─ import/ (*)
+│  ├─ incoming/ (*)
+│  │  └─ Incoming.md (**)
 │  ├─ QuickNotes.md (*)
 │  ├─ Start.md (**)
 │  └─ Tags.md (*)

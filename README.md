@@ -98,6 +98,14 @@ Mentioned source code license and coperight:
 
 I use several code components from another open source projects. You nee to obtain their before building.
 
+#### Mustache JavaScript (node)
+I use mustache JavaScript based engine to produse text resources from templates for different application modes (ordinary and legacy)
+
+The project source code located [here](https://github.com/janl/mustache.js) 
+
+##### install
+`sudo npm install -g mustache`
+
 #### Markdown to html javascript (app/src/main/assets/js/marked.min.js)
 
 ##### download source:

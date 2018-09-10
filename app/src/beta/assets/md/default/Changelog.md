@@ -4,7 +4,12 @@ Modified: 2018-08-15 22:11:31
 Author: Mikhail Basov
 Tags: OMN default,
 
+##### v00.23.02b
+
+- Fix install from market error
+
 ##### v00.23.01b
+###### Date:   Mon Sep 10 16:39:02 2018 +0300, commit 303f745edc0f27b47a13838b3d022e891069ff53
 
 - Fix NPE (MainActivity.java:515)
 

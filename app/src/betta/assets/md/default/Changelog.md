@@ -4,7 +4,12 @@ Modified: 2018-08-15 22:11:31
 Author: Mikhail Basov
 Tags: OMN default,
 
+##### v00.23.01b
+
+- Fix NPE (MainActivity.java:515)
+
 ##### v00.23.00b
+###### Date:   Sun Sep 9 05:23:15 2018 +0300, commit 6a61ee03aa1e9d84161f4bf6859fa47be48a6e7e
 
 - Import page from E-Mail
 - Fix several fixes

@@ -33,13 +33,11 @@ import android.view.KeyEvent;
 import android.webkit.ConsoleMessage;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
+import android.webkit.WebStorage;
 import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import net.basov.util.FileIO;
-import net.basov.util.MyLog;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -47,7 +45,10 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Stack;
+
 import android.support.v4.content.FileProvider;
+import net.basov.util.FileIO;
+import net.basov.util.MyLog;
 import net.basov.util.TextTools;
 
 public class MainActivity extends Activity {
@@ -138,6 +139,12 @@ public class MainActivity extends Activity {
         mainUI_WV.addJavascriptInterface(new WebViewJSCallback(this), "Android");
         /* Show external page in browser */
         //mainUI_WV.setWebViewClient(new MyWebViewClient());
+        /* Enable WebDB */
+        //webSettings.setJavaScriptCanOpenWindowsAutomatically(true); 
+        webSettings.setDatabaseEnabled(true);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+          webSettings.setDatabasePath(FileIO.getFilesDir(MainActivity.this).getPath() + "/db/");
+        }
         /* Handle JavaScript prompt dialog */
         mainUI_WV.setWebChromeClient(new myWebChromeClient());
 
@@ -606,6 +613,13 @@ public class MainActivity extends Activity {
      * Handle JavaScript console log
      */
     private class myWebChromeClient extends WebChromeClient {
+        // Based on https://stackoverflow.com/a/2474524
+        // need for API < 19
+        public void onExceededDatabaseQuota(String url, String
+                databaseIdentifier, long currentQuota, long estimatedSize, long
+                totalUsedQuota, WebStorage.QuotaUpdater quotaUpdater) {
+            quotaUpdater.updateQuota(256 * 1024);
+        } 
 
         public boolean onConsoleMessage(ConsoleMessage cm) {
             Context c = getApplicationContext();

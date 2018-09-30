@@ -146,4 +146,5 @@ Dynamic chortcut (drawable/ic_baseline_comment_24px.xml)for QuickNote based on c
 * [Install desktop shortcut](https://stackoverflow.com/a/16873257)
 * [Generating TOC](https://stackoverflow.com/q/28792557)
 * [Iterate multi-line string](https://stackoverflow.com/a/9259462)
+* [Setup Web DB](https://stackoverflow.com/a/2474524)
  

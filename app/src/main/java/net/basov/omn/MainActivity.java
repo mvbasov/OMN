@@ -145,6 +145,8 @@ public class MainActivity extends Activity {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
           webSettings.setDatabasePath(FileIO.getFilesDir(MainActivity.this).getPath() + "/db/");
         }
+        /* Enable localStorage in WebView */
+        webSettings.setDomStorageEnabled(true);
         /* Handle JavaScript prompt dialog */
         mainUI_WV.setWebChromeClient(new myWebChromeClient());
 

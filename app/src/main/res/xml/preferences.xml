@@ -23,12 +23,8 @@
             android:summary="at page creation time"
             android:defaultValue="true"
             android:key="@string/pk_enable_pelican_meta" />
-        <CheckBoxPreference
-            android:title="Enable JavaScript debug"
-            android:defaultValue="false"
-            android:key="@string/pk_enable_js_debug" />
     </PreferenceCategory>
-    
+
     <PreferenceCategory
         android:title="Actions buttons show/hide"
         android:key="pref_key_storage_settings">
@@ -65,5 +61,24 @@
             android:defaultValue="true"
             android:key="@string/pk_btn_enable_quicknotes" />
     </PreferenceCategory>
-    
+
+    <PreferenceCategory
+        android:title="JavaScript options"
+        android:key="pref_general">
+        <CheckBoxPreference
+            android:title="Enable JS debug"
+            android:defaultValue="false"
+            android:key="@string/pk_enable_js_debug" />
+        <CheckBoxPreference
+            android:title="Enable JS localStorage"
+            android:summary="WARNING: Experimental!!!"
+            android:defaultValue="false"
+            android:key="@string/pk_enable_js_local_storage" />
+        <CheckBoxPreference
+            android:title="Enable JS openDatabase"
+            android:summary="WARNING: Experimental !!!"
+            android:defaultValue="false"
+            android:key="@string/pk_enable_js_web_db" />
+    </PreferenceCategory>
+
 </PreferenceScreen>

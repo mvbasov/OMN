@@ -151,17 +151,30 @@ Disable this option speed up html page creation process.
 Enable/disable creation of Pelican CMS page metadata header.
 Effective only at page creation time. If disabled at first line of page title placed as 4-th level header.
 
-<a id="enable-jsdebug" />
-#### "Enable JavaScript debug"
-
-After enable this options JavasScripts's console log and errors messages processed by the application. Last string of output placed on [special debug page](/default/JSDebug.html) which can be quickly accessed from page header by button <button onclick="Android.debugButtonCallback()"> <i class="material-icons">adb</i> </button>
-which apeared in page header automaticaly after enabling this option.
-
 #### "Actions buttons show/hide"
 
 Any of action buttons exclude <button onclick="Android.prefButtonCallback()"> <i class="material-icons">settings</i> </button> and <button onclick="BLOCK_Android.editButtonCallback(PFN)"> <i class="material-icons">edit</i> </button> can be disabled or enabled.
 This option effective only at html page creation time. If you want to add remove buttons on already created page you need to set option an regenerate (delete and the visit) html page.
 
+<a id="enable-jsdebug" />
+#### "Enable JS debug"
+
+After enable this options JavasScripts's console log and errors messages processed by the application. Last string of output placed on [special debug page](/default/JSDebug.html) which can be quickly accessed from page header by button <button onclick="Android.debugButtonCallback()"> <i class="material-icons">adb</i> </button>
+which apeared in page header automaticaly after enabling this option.
+
+#### "Enable JS localStorage"
+
+Enable using `localStorage` in Java Scripts on pages  
+<span class="fg-red">WARNNG! EXPERIMENTAL! </span>  
+_The application has no mechanism to clean or manage another way databases created by this feature_  
+**Restart the application to make this setting effective**
+
+#### "Enable JS openDatabase"
+
+Enable using `openDatabase` in Java Scripts on pages  
+<span class="fg-red">WARNNG! EXPERIMENTAL! </span>  
+_The application has no mechanism to clean or manage another way databases created by this feature_  
+**Restart the application to make this setting effective**
 - - -
 
 <a id="page-header" />

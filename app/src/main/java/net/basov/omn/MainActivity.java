@@ -78,7 +78,7 @@ public class MainActivity extends Activity {
          */
         SharedPreferences defSharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = defSharedPref.edit();
-        final int currentPrefVersion = 10;
+        final int currentPrefVersion = 11;
         switch (defSharedPref.getInt(getString(R.string.pk_pref_version), 0)) {
             case 0: // initial
                 editor.putBoolean(getString(R.string.pk_use_view_directory), false);
@@ -103,6 +103,9 @@ public class MainActivity extends Activity {
                 editor.putBoolean(getString(R.string.pk_btn_enable_refresh_html), false);
             case 9:
                 editor.putBoolean(getString(R.string.pk_enable_js_debug), false);
+            case 10:
+                editor.putBoolean(getString(R.string.pk_enable_js_web_db), false);
+                editor.putBoolean(getString(R.string.pk_enable_js_local_storage), false);
                 editor.putInt(getString(R.string.pk_pref_version), currentPrefVersion);
                 editor.commit();
                 break;
@@ -141,12 +144,16 @@ public class MainActivity extends Activity {
         //mainUI_WV.setWebViewClient(new MyWebViewClient());
         /* Enable WebDB */
         //webSettings.setJavaScriptCanOpenWindowsAutomatically(true); 
-        webSettings.setDatabaseEnabled(true);
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-          webSettings.setDatabasePath(FileIO.getFilesDir(MainActivity.this).getPath() + "/db/");
+        if (defSharedPref.getBoolean(getString(R.string.pk_enable_js_web_db), false)) {
+            webSettings.setDatabaseEnabled(true);
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+                webSettings.setDatabasePath(FileIO.getFilesDir(MainActivity.this).getPath() + "/db/");
+            }
         }
         /* Enable localStorage in WebView */
-        webSettings.setDomStorageEnabled(true);
+        if (defSharedPref.getBoolean(getString(R.string.pk_enable_js_local_storage), false)) {
+            webSettings.setDomStorageEnabled(true);
+        }
         /* Handle JavaScript prompt dialog */
         mainUI_WV.setWebChromeClient(new myWebChromeClient());
 

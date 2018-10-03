@@ -4,7 +4,13 @@ Modified: 2018-08-15 22:11:31
 Author: Mikhail Basov
 Tags: OMN default,
 
+##### v00.24.00b
+
+- Add experimental JS openDatabases and localStorage support
+- Update gradle configuration for Android Studio 3.2
+
 ##### v00.23.02b
+###### Date:   Mon Sep 10 20:11:37 2018 +0300, commit 33e06b8c9575671f16ddc9bd152147b1fcad46f4
 
 - Fix install from market error
 

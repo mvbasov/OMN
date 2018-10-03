@@ -7,13 +7,6 @@ android {
     def current_commit = getGitRevParseInfo("rev-parse --short")
 
     applicationVariants.all { variant ->
-//        variant.outputs.each { output ->
-//            def outputFile = outputFileName
-//            if (outputFile != null && outputFile.name.endsWith('.apk')) {
-//                def fileName = "OpenMarkdownNotes." + versionName + ".apk"
-//                outputFileName = new File(outputFile.parent, fileName)
-//            }
-//        }
         variant.outputs.all {
             outputFileName = "OpenMarkdownNotes.${variant.versionName}.apk"
         }
@@ -26,8 +19,8 @@ android {
         applicationId "net.basov.omn"
         minSdkVersion 17
         targetSdkVersion 26
-        versionCode 2302
-        versionName "00.23.02"
+        versionCode 2400
+        versionName "00.24.00"
     }
 
     signingConfigs {

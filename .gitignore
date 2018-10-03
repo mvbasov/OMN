@@ -1,6 +1,7 @@
 # Built application files
 build/
 app/apk/
+OMN_assets.*.tgz
 
 # Crashlytics configuations
 /*/com_crashlytics_export_strings.xml

@@ -309,7 +309,8 @@ public class FileIO {
                 Constants.HIGHLIGHT_CSS,
                 Constants.ICONS_FONT,
                 Constants.ICONS_CSS,
-                Constants.FUNCTIONS_JS
+                Constants.FUNCTIONS_JS,
+                Constants.GITIGNORE
         };
         copyFilesFromAssets(c, files, force);
 
@@ -322,11 +323,26 @@ public class FileIO {
 
     }
 
+    /**
+     * Copy files from Assets to data files directory
+     * If name contain '_legacy' this substring will be removed
+     * If name start with '_' it will be replaced to '.'
+     *
+     * @param c     Application context
+     * @param files Files list
+     * @param force Force to overwrite flag
+     */
+
     private static void copyFilesFromAssets(Context c, String[] files, Boolean force) {
         for(int i=0; i<files.length; i++) {
             URI uriPage = null;
+            String toName = files[i];
+            if (toName.contains("_legacy"))
+                toName = toName.replace("_legacy", "");
+            if (toName.indexOf("_") == 0)
+                toName = toName.replaceFirst("^_", ".");
             try {
-                uriPage = new URI("file://" + getFilesDir(c).getPath() + "/" + files[i].replace("_legacy", ""));
+                uriPage = new URI("file://" + getFilesDir(c).getPath() + "/" + toName);
             } catch (URISyntaxException e) {
                 MyLog.LogE(e, "Copy files from asset. Problem with target file " + files[i]);
             }
@@ -341,6 +357,14 @@ public class FileIO {
         }
     }
 
+    /**
+     * Copy file from Assets to data files directory
+     * If name contain '_legacy' this substring will be removed
+     * If name start with '_' it will be replaced to '.'
+     *
+     * @param c         Application context
+     * @param aFilename File to copy
+     */
     private static void copyFileFromAssets(Context c, String aFilename) {
         AssetManager assetManager = c.getAssets();
 
@@ -349,7 +373,12 @@ public class FileIO {
         String newFileName = "";
         try {
             in = assetManager.open(aFilename);
-            newFileName = getFilesDir(c).getPath() + "/" + aFilename.replace("_legacy", "");
+            String toName = aFilename;
+            if (toName.contains("_legacy"))
+                toName = toName.replace("_legacy", "");
+            if (toName.indexOf("_") == 0)
+                toName = toName.replaceFirst("^_", ".");
+            newFileName = getFilesDir(c).getPath() + "/" + toName;
             out = new FileOutputStream(newFileName);
 
             byte[] buffer = new byte[1024];

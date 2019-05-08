@@ -158,7 +158,7 @@ public class MainActivity extends Activity {
         mainUI_WV.setWebChromeClient(new myWebChromeClient());
 
 
-        /* Enable chome remote debuging for WebView (Ctrl-Shift-I) */
+        /* Enable chrome remote debugging for WebView (Ctrl-Shift-I) */
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             if (0 != (getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE))
             { WebView.setWebContentsDebuggingEnabled(true); }
@@ -519,7 +519,7 @@ public class MainActivity extends Activity {
                                             stackState = "empty";
                                         else
                                             stackState = pages.peek();
-                                        Toast.makeText(MainActivity.this, "Internal programm error. Link to page didn't created\n * page = " + pageName + "\n * pages.peek = " + stackState, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(MainActivity.this, "Internal program error. Link to page didn't created\n * page = " + pageName + "\n * pages.peek = " + stackState, Toast.LENGTH_SHORT).show();
                                     }
 
                                     FileIO.createPageIfNotExists(MainActivity.this, newPageLink, newPageTitle, "");
@@ -696,7 +696,7 @@ public class MainActivity extends Activity {
                 + "Title: JavaScript debug\n\n"
                 + "<!--\n"
                 + "  Don't edit this page!\n"
-                + "  Page generated automaticaly.\n"
+                + "  Page generated automatically.\n"
                 + "  All your changes will be lost.\n"
                 + "-->\n\n"
                 + "##### "
@@ -728,7 +728,7 @@ public class MainActivity extends Activity {
                 + "```\n"
                 + "\n- - -\n";
             FileIO.writePageToFile(c, "/" + Constants.JS_DEBUG_PAGE, debugMsg);
-            Toast.makeText(c, "JS debug genersted",Toast.LENGTH_SHORT).show();
+            Toast.makeText(c, "JS debug generated",Toast.LENGTH_SHORT).show();
         }
     }
 }

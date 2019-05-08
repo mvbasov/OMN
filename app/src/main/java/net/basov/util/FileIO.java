@@ -423,7 +423,7 @@ public class FileIO {
             }
             reader.close();
         } catch (IOException e) {
-            MyLog.LogE(e, "Reding file problem.");
+            MyLog.LogE(e, "Reading file problem.");
         }
         return sb.toString();
     }

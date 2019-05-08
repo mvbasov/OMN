@@ -24,7 +24,7 @@ public class TextTools {
     /**
     * Escape string to pass as JavaString function parameter
     *
-    * @param  src    Source string
+    * @param  param  Source string
     * @return String Escaped string
     */
     public static String escapeJavaScriptFunctionParameter(String param) {

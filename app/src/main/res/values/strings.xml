@@ -183,7 +183,7 @@
 
 <!--
   Don't edit this page! 
-  Page generated automaticaly.
+  Page generated automatically.
   All your changes will be lost.
 -->
 
@@ -282,7 +282,7 @@ if (typeof selected != 'undefined') {
         %6$b    Enable Link button
         %7$b    Enable E-Mail button
         %8$b    Enable File browser button
-        %9$b    Enable Rfresh HTML button
+        %9$b    Enable Refresh HTML button
         %10$b   Enable Create shortcut button
         %11$b   Enable QuickNotes button
     -->
@@ -396,13 +396,13 @@ Tags: %5$s
 
 - - -
 
-This page generated automaticaly.
+This page generated automatically.
 
 **To get actual build information delete and recreate this file.**
 
 "]]></string>
 
-    <string name="template_page_start"><![CDATA["**This page generated automaticaly. Edit this as you wish.**
+    <string name="template_page_start"><![CDATA["**This page generated automatically. Edit this as you wish.**
 
 * [Quick notes](QuickNotes.html)
 * [Tags](Tags.html)

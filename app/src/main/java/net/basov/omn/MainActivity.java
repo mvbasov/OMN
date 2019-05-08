@@ -569,8 +569,8 @@ public class MainActivity extends Activity {
                 //TODO: Why this result code actual instead of RESULT_OK?
                 //MyLog.LogD("* Call DP from ma onActivityResult(CANCELED), PN: " + ui.getPageName());
                 Date tsBefore = page.getFileTS();
-                Date tsAfter = page.getFileTS();
                 UI.setTSFromFile(c, page);
+                Date tsAfter = page.getFileTS();
                 if (tsBefore != null && tsAfter != null && tsAfter.after(tsBefore)) {
                     UI.setMdContentFromFile(c, page);
                     page.addAtTopOfPage(""); //To set 'modified' meta

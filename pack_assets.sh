@@ -1,4 +1,5 @@
 #!/bin/bash
+# Pack assets for mobile development
 
 GCOMMIT=`git rev-parse --short HEAD`
 GLTAG=`git  describe --tags --abbrev=0`

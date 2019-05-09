@@ -4,7 +4,12 @@ Modified: 2018-08-15 22:11:31
 Author: Mikhail Basov
 Tags: OMN default,
 
+##### v00.24.01b
+
+- Fix broken Modified page timestamp
+
 ##### v00.24.00b
+###### Date:   Wed Oct 3 20:59:23 2018 +0300, commit 7c3609da4cd540b0657f8559717095e58e82a695
 
 - Add experimental JS openDatabases and localStorage support
 - Update gradle configuration for Android Studio 3.2

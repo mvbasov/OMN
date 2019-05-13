@@ -4,7 +4,12 @@ Modified: 2018-08-15 22:11:31
 Author: Mikhail Basov
 Tags: OMN default,
 
+##### v00.24.02b
+
+- Several fixes
+
 ##### v00.24.01b
+###### Date:   Thu May 9 16:18:09 2019 +0300, commit a7079ef17723aba83b828047d0569bf09c76cbba
 
 - Fix broken Modified page timestamp
 

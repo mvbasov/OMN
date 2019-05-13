@@ -44,6 +44,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Stack;
 
 import android.support.v4.content.FileProvider;
@@ -258,7 +259,7 @@ public class MainActivity extends Activity {
     protected void onNewIntent(Intent intent) {
         //super.onNewIntent(intent);
         if (intent != null) {
-            if (intent.getAction().equals(Intent.ACTION_MAIN)) {
+            if (Intent.ACTION_MAIN.equals(intent.getAction())) {
                 /* Show page from old shortcut or start from launcher */
                 Bundle main_extras = intent.getExtras();
                 if (main_extras != null) {
@@ -282,7 +283,7 @@ public class MainActivity extends Activity {
                     pageAdd(UI.displayStartPage(mainUI_WV));
                 }
             }
-            if (intent.getAction().equals(this.getPackageName() + ".EDIT_PAGE")) {
+            if ((this.getPackageName() + ".EDIT_PAGE").equals(intent.getAction())) {
                 /* Call external editor to edit page */
                 Bundle extras = intent.getExtras();
                 if (extras != null) {
@@ -321,28 +322,28 @@ public class MainActivity extends Activity {
                     }
                 }
             }
-            if (intent.getAction().equals(this.getPackageName() + ".HOME_PAGE")) {
+            if ((this.getPackageName() + ".HOME_PAGE").equals(intent.getAction())) {
                 /* Show home page */
                 pageAdd(UI.displayStartPage(mainUI_WV));
             }
-            if (intent.getAction().equals(this.getPackageName() + ".DEBUG_PAGE")) {
+            if ((this.getPackageName() + ".DEBUG_PAGE").equals(intent.getAction())) {
                 /* Show JavaScript debug page */
                 pageAdd("/"+Constants.JS_DEBUG_PAGE);
                 UI.displayPage(mainUI_WV, page);
             }
-            if (intent.getAction().equals(this.getPackageName() + ".REDISPLAY_PAGE")) {
+            if ((this.getPackageName() + ".REDISPLAY_PAGE").equals(intent.getAction())) {
                 /* Redisplay page after creation */
                 if(intent.getBooleanExtra("RECREATE_HTML", false)) page.setHtmlActual(false);
                 UI.displayPage(mainUI_WV, page);
             }
-            if (intent.getAction().equals(this.getPackageName() + ".PREFERENCES")) {
+            if ((this.getPackageName() + ".PREFERENCES").equals(intent.getAction())) {
                 /* Redisplay page after creation */
                 Intent i = new Intent(this, AppPreferencesActivity.class);
                 this.startActivityForResult(i, Constants.PREFERENCES_REQUEST);
             }
-            if (intent.getAction().equals(this.getPackageName() + ".QUICK_NOTE")
-                    || intent.getAction().equals(Intent.ACTION_SEND)
-                    || intent.getAction().equals(Intent.ACTION_SENDTO)) {
+            if ((this.getPackageName() + ".QUICK_NOTE").equals(intent.getAction())
+                    || Intent.ACTION_SEND.equals(intent.getAction())
+                    || Intent.ACTION_SENDTO.equals(intent.getAction())) {
                 /* QuickNotes creation */
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Create QuickNote");
@@ -454,7 +455,7 @@ public class MainActivity extends Activity {
                 UI.displayPage(mainUI_WV, page);
 
             }
-            if (intent.getAction().equals(this.getPackageName() + ".NEW_PAGE")) {
+            if ((this.getPackageName() + ".NEW_PAGE").equals(intent.getAction())) {
                 /* Create new page and put link to it on top of current page */
                 final String currentPageName = page.getPageName();
                 final String currentPagePath = currentPageName.substring(0, currentPageName.lastIndexOf("/") + 1);

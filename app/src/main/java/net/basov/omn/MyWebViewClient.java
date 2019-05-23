@@ -97,6 +97,9 @@ public class MyWebViewClient extends WebViewClient {
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
                                 StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder(old)
                                                        .detectFileUriExposure()
+                                        // TODO: implement it as config option
+                                        /* To enable using 'file///' scheme at
+                                           intent processing time uncomment the following line */
                                                        //.penaltyLog()
                                                        .build());
                                 c.startActivity(intentApp);

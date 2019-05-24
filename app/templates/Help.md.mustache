@@ -274,5 +274,5 @@ In this case you need to put image file to [[data directory]]()`/img/Image.jpg` 
 * Page with zerro file size is not normal for this application. 
 
 <script>
-  window.onload=createTOC(document.getElementById('content'));
+  window.onload=createTOC();
 </script>

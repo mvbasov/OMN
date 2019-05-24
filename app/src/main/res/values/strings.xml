@@ -52,14 +52,13 @@
 <body style=\"height:100%%; width:100%%; margin:0\">
 
   <div id=\"ptitle\" style=\"overflow:hidden; background-color:lightgray; position:fixed; width:100%%\">
-
     <div id=\"hidable_header\" style=\"display:none; background-color:lightgray; width:100%%; padding-top:0.5em; padding-left:0.5em\" >
       <div id=\"actions_header\">
       </div>
       Name:<span>%4$s</span>%6$s
     </div>
 
-     <a
+    <a
       onclick=\"toggleHdrBtnVis();\">
       <h4 id=\"pageTitle\" align=\"center\" style=\"margin-top:0.4em; margin-bottom:0.5em;\">
         %5$s
@@ -70,7 +69,7 @@
     </a>
   </div>
 
-  <div id=\"content\" style=\"padding:0.5em; padding-top:1.5em;overflow:auto;\">
+  <div id=\"content\" style=\"padding:0.5em; padding-top:1.5em; overflow:auto;\">
 
     "]]></string>
 

@@ -31,13 +31,13 @@ function findHeadings(root, sects){
   return sects;
 }
 
-function createTOC(croot){
-
+function createTOC(){
+  var croot=document.getElementById("content");
   var toc=document.getElementById("TOC");
   if(!toc) {
     toc=document.createElement("div");
     toc.id="TOC";
-    document.body.insertBefore(toc, croot);
+    croot.insertBefore(toc, croot.firstChild);
   }
 
   var headings;

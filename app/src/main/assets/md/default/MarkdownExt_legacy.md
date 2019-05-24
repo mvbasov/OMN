@@ -240,5 +240,5 @@ There is collection of funny or usefull Unicode symbols.
 | `&#xae;` | `&#xa9;`  |`&#x2122;`|`&#x23f2;`
 
 <script>
-  window.onload=createTOC(document.getElementById('content'));
+  window.onload=createTOC();
 </script>

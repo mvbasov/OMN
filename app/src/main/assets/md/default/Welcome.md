@@ -179,5 +179,5 @@ You can use the application and it's [source code](https://github.com/mvbasov/lW
 If you wish to contribute your efforts to the project I am welcome it. Open issues on source page or [E-Mail me](mailto: OMN@basov.net). The first and main thing required to the project is to translate documentation pages from my English to common used English.
 
 <script>
-  window.onload=createTOC(document.getElementById('content'));
+  window.onload=createTOC();
 </script>

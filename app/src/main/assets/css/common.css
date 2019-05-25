@@ -1,3 +1,8 @@
+.material-icons.wa {
+/* Lineage OS 16 Xiaomi Mi8 workaround */
+  color: #FFFFFF;
+  font-size: 18px;
+}
 .hBtn {
   padding-left: 3px;
   padding-right: 3px;

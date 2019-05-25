@@ -272,6 +272,7 @@ In this case you need to put image file to [[data directory]]()`/img/Image.jpg` 
 * Can't return to original link when use in-page reference. Back key return to previous page. 
 * Pages file name case sensitive but due to Android and VFat file system limitations 'FileName' and 'filename' may be the same file but may not to be ^)
 * Page with zerro file size is not normal for this application. 
+* First click on the page header shift top of page content little bit lower then expected (approximetly to the size of expnded header). The following click place page content top to apropriate place. This issue reproduced only on Xiaomi Mi8 (Android 9) with Lineage OS 16. As work around at the end of every html page Goggle material design icon font symbol <i class="material-icons">error</i> placed. Symbol is isnvisible (white on white). It solve the issue.
 
 <script>
   window.onload=createTOC();

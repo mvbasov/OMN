@@ -4,7 +4,12 @@ Modified: 2018-08-15 22:11:31
 Author: Mikhail Basov
 Tags: OMN default,
 
+##### v00.25.00b
+
+- Page header now fixed when page scrolled
+
 ##### v00.24.02b
+###### Date:   Mon May 13 20:05:47 2019 +0300, commit 21186bcefec003a6b695a5d34339056ca5102daf
 
 - Several fixes
 

@@ -1,10 +1,15 @@
 Title: Betta version change log
 Date: 2017-10-13 22:26:43
-Modified: 2018-08-15 22:11:31
+Modified: 2019-05-31 22:56:54
 Author: Mikhail Basov
 Tags: OMN default,
 
+##### v00.25.01b
+
+- New adaptive icons
+
 ##### v00.25.00b
+###### Date:   Sat May 25 20:50:57 2019 +0300, commit c800479b7b2c3b9882020bc9e9f1787799ba10d8
 
 - Page header now fixed when page scrolled
 

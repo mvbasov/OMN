@@ -31,6 +31,7 @@ import android.text.Html;
 import android.webkit.JavascriptInterface;
 import android.widget.Toast;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
@@ -193,6 +194,15 @@ public class WebViewJSCallback {
                                            .detectFileUriExposure()
                                            //.penaltyLog()
                                            .build());
+                if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.N){
+                    try{
+                        Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposure");
+                        m.invoke(null);
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+                }
+                                           
                 mContext.startActivity(Intent.createChooser(intent, "Open pages folder"));
                 StrictMode.setVmPolicy(old);
             } else {

@@ -25,6 +25,7 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import java.lang.reflect.Method;
 import java.net.URISyntaxException;
 
 import net.basov.util.MyLog;
@@ -102,6 +103,14 @@ public class MyWebViewClient extends WebViewClient {
                                            intent processing time uncomment the following line */
                                                        //.penaltyLog()
                                                        .build());
+                                if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.N){
+                                    try{
+                                        Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposure");
+                                        m.invoke(null);
+                                    }catch(Exception e){
+                                        e.printStackTrace();
+                                    }
+                                }
                                 c.startActivity(intentApp);
                                 StrictMode.setVmPolicy(old);
                             } else {

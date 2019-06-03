@@ -1,6 +1,6 @@
 Title: Welcome! (legacy mode)
 Date: 2018-08-24 10:16:34
-Modified: 2018-08-30 13:25:08
+Modified: 2019-05-31 22:50:43
 Author: Mikhail Basov
 Tags: OMN default, Documentation
 
@@ -162,7 +162,7 @@ It was specially designed as companion application for these notes. To configure
 
 ### License
 
-The app licensed under MIT License. Copyright (c) 2017-2018, Mikhail Basov
+The app licensed under MIT License. Copyright (c) 2017-2019, Mikhail Basov
 
 marked.js is released under MIT License. Copyright (c) 2011-2018, Christopher Jeffrey
 

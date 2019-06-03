@@ -4,7 +4,12 @@ Modified: 2019-05-31 22:56:54
 Author: Mikhail Basov
 Tags: OMN default,
 
+##### v00.25.02b
+
+- Fix file uri expose exception
+
 ##### v00.25.01b
+##### Date:   Fri May 31 22:59:02 2019 +0300, commit 47e618327caa4d761be293c36b081cccf859cac1
 
 - New adaptive icons
 

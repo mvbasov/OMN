@@ -2,5 +2,7 @@ md/default/Build.md
 html/default/Build.html
 md/default/JSDebug.md
 html/default/JSDebug.html
+md/Test/Temporary.md
+html/Test/Temporary.html
 md/incoming/
 html/incoming/

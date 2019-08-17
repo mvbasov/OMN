@@ -18,10 +18,10 @@ This is application to create and organize everyday notes.
 It can be useful to simple web development on Android mobile devices.
 
 #### Key features
-* ** Simple.** See [simplest usage case](#this-is-easy)
-* ** Lightweight.** Package size less then 500Kb
-* ** [Open source.](https://github.com/mvbasov/OMN) **
-* ** Features rich. ** 
+* **Simple.** See [simplest usage case](#this-is-easy)
+* **Lightweight.** Package size less then 500Kb
+* **[Open source.](https://github.com/mvbasov/OMN)**
+* **Features rich.** 
   * Markdown, HTML, CSS and JavaScript can be used.
   * Pages can be organized by tags and folders
   * Pages can be exported by E-Mail for example

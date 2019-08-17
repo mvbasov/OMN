@@ -8,11 +8,13 @@ Author: Mikhail Basov
 Summary: Extended Markdown syntax of Open Markdown Note
 
 <a name="links" />
+
 ### Links
 
 Markdown supports two style of links: *inline* and *reference*.
 
 <a name="links-inline" />
+
 #### Inline links
 
 In both styles, the link text is delimited by [square brackets].
@@ -39,6 +41,7 @@ If you're referring to a local page, you must use relative paths:
     [My start page](../Start.html)
 
 <a name="links-reference" />
+
 #### Reference-style links
 
 Reference-style links use a second set of square brackets, inside
@@ -68,6 +71,7 @@ That is:
 - - -
 
 <a name="uri" />
+
 ### Supported URI schemas
 
 URI schema is protocol which will be used to follow link.
@@ -76,6 +80,7 @@ http:// or https:// uri schemas open web pages, usually.
 This program also support the following uri:
 
 <a name="uri-geo" />
+
 #### "geo:"
 
 Open map or navigation application and point it to geographical coordinates
@@ -86,6 +91,7 @@ Renders to:
 [Some place I don't know where it is](geo:55.55,11.11)
 
 <a name="uri-tel" />
+
 #### "tel:"
 
 Open telephony application an place provided number
@@ -107,6 +113,7 @@ Renders to:
 [Balance \*100#](tel:*100 %23)
 
 <a name="uri-mailto" />
+
 #### "mailto:"
 
 Call E-Mail application.
@@ -119,6 +126,7 @@ Renders to:
 Subject an body parts optional
 
 <a name="uri-sms" />
+
 #### "sms:"
 
 Call SMS application.
@@ -129,6 +137,7 @@ Renders to:
 [Predefined SMS](sms:+8765?body=SMS text)
 
 <a name="uri-market" />
+
 #### "market:"
 
 Call Google Play Market application and open some application page.
@@ -145,6 +154,7 @@ This type of link work only inside Android. Equivalent links operates on pages e
 - - -
 
 <a name="highlight-text" />
+
 ### Highlight text 
 
 You can change text background (like maker on paper text). See examples:
@@ -184,6 +194,7 @@ Some text <span class="bg-yellow fg-red">text with both attributes changed</span
 - - - 
 
 <a name="javascripts" />
+
 ### Use JavaScripts
 
 You can insert JavaScript in any place of you page. In the result HTML page this script will be placed inside BODY of HTML document. To see console.log() or execution errors you can enable [JavaScript debug](/default/Help.html#enable-jsdebug) in the application settings. One known limitation exist - you can't use alert() function.
@@ -191,6 +202,7 @@ You can insert JavaScript in any place of you page. In the result HTML page this
 - - -
 
 <a name="custom-css" />
+
 ### Custom CSS
 
 You can customize global CSS used on all pages by creating and editing ```css/custom.css``` file.
@@ -199,6 +211,7 @@ This CSS referenced at the end of header on any generated HTML page. You can ext
 - - -
 
 <a name="create-toc" />
+
 ### Create TOC
 
 If you wish create Table Of Contents (TOC) place at the end of you page the following code:
@@ -215,6 +228,7 @@ TOC will be created at the top of you page. To position TOC to another place put
 - - -
 
 <a name="google-icons" />
+
 ### Google Material Design icons
 
 *Doesn't available in legacy version*
@@ -229,6 +243,7 @@ Renders to: <i class="material-icons">check_circle</i>
 - - -
 
 <a name="unicode-symbols" />
+
 ### Unicode symbols collection
 
 Any pages can contain Unicode symbols. In the legacy mode such symbols used instead of Google Material Design icons.

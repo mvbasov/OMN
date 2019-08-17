@@ -9,6 +9,7 @@ Author: Mikhail Basov
 Summary: Open Markdown Note Help
 
 <a id="syntax" />
+
 ### Syntax
 
 Read page about common [Markdown syntax](Markdown.html) and then about
@@ -17,6 +18,7 @@ Read page about common [Markdown syntax](Markdown.html) and then about
 - - -
 
 <a id="btn-desc" />
+
 ### Action buttons description
 
 Actions bttons can be found at any page top header and allow you to controll the programm.
@@ -41,6 +43,7 @@ Button code:
     </button>
 
 <a name="add-new-page" />
+
 #### <button onclick="BLOCK_Android.newPageButtonCallback()"> <i class="material-icons">add_box</i> </button> "Add new page"
 
 Create new page and add link to it on top of current page. Input new page (file) name and title of new page. New page file name relative to current page name directory. As title automaticaly substitute page name which can be edited. Curent page modification time set automaticaly.
@@ -128,6 +131,7 @@ Button code:
 - - -
 
 <a id="app-settings" />
+
 ### Application settings
 
 #### "Notes author"
@@ -157,6 +161,7 @@ Any of action buttons exclude <button onclick="Android.prefButtonCallback()"> <i
 This option effective only at html page creation time. If you want to add remove buttons on already created page you need to set option an regenerate (delete and the visit) html page.
 
 <a id="enable-jsdebug" />
+
 #### "Enable JS debug"
 
 After enable this options JavasScripts's console log and errors messages processed by the application. Last string of output placed on [special debug page](/default/JSDebug.html) which can be quickly accessed from page header by button <button onclick="Android.debugButtonCallback()"> <i class="material-icons">adb</i> </button>
@@ -178,6 +183,7 @@ _The application has no mechanism to clean or manage another way databases creat
 - - -
 
 <a id="page-header" />
+
 ### Markdown page header
 
 This application use [Pelican Content Management System (Pelican CMS)](https://blog.getpelican.com) Markdown extension for page header.
@@ -203,6 +209,7 @@ Title meta set to Page(file) name relative to application data storage directory
 This meta data display as page name in application and set as `<title>` tag value in html page.
 
 <a id="help-tags" />
+
 ##### Tags:
 
 Tags help you to organize pages. Page tags displayed at page header.
@@ -255,6 +262,7 @@ This metadata affect Pelican CMS page processing logic. Does not write to html p
 - - -
 
 <a id="images" />
+
 ### Images
 
 Technicaly this programm suport image display. It can be done by the following code:
@@ -267,6 +275,7 @@ In this case you need to put image file to [[data directory]]()`/img/Image.jpg` 
 - - -
 
 <a id="issues" />
+
 ### Known issues
 
 * Can't return to original link when use in-page reference. Back key return to previous page. 

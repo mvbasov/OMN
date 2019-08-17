@@ -79,6 +79,11 @@
             android:summary="WARNING: Experimental !!!"
             android:defaultValue="false"
             android:key="@string/pk_enable_js_web_db" />
+        <CheckBoxPreference
+            android:title="Enable Intent URI"
+            android:summary="WARNING: Experimental !!! Dangerous but powerful."
+            android:defaultValue="false"
+            android:key="@string/pk_enable_intent_uri" />
     </PreferenceCategory>
 
 </PreferenceScreen>

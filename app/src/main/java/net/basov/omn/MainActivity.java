@@ -44,7 +44,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.Objects;
 import java.util.Stack;
 
 import android.support.v4.content.FileProvider;
@@ -79,7 +78,7 @@ public class MainActivity extends Activity {
          */
         SharedPreferences defSharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = defSharedPref.edit();
-        final int currentPrefVersion = 11;
+        final int currentPrefVersion = 12;
         switch (defSharedPref.getInt(getString(R.string.pk_pref_version), 0)) {
             case 0: // initial
                 editor.putBoolean(getString(R.string.pk_use_view_directory), false);
@@ -107,6 +106,8 @@ public class MainActivity extends Activity {
             case 10:
                 editor.putBoolean(getString(R.string.pk_enable_js_web_db), false);
                 editor.putBoolean(getString(R.string.pk_enable_js_local_storage), false);
+            case 11:
+                editor.putBoolean(getString(R.string.pk_enable_intent_uri),false);
                 editor.putInt(getString(R.string.pk_pref_version), currentPrefVersion);
                 editor.commit();
                 break;

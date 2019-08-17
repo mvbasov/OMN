@@ -15,11 +15,13 @@ package net.basov.omn;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.StrictMode;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
@@ -86,6 +88,9 @@ public class MyWebViewClient extends WebViewClient {
                 c.startActivity(intentMarket);
                 return true;
             case "intent":
+                SharedPreferences defSharedPref = PreferenceManager.getDefaultSharedPreferences(c);
+                if (! defSharedPref.getBoolean(c.getString(R.string.pk_enable_intent_uri), false))
+                    return false;
                 try {
                     // TODO: remove double translation string - uri - string
                     final Intent intentApp = new Intent().parseUri(uri.toString(), Intent.URI_INTENT_SCHEME);

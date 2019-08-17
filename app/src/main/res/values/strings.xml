@@ -438,6 +438,7 @@ This page generated automatically.
     <string name="pk_use_view_directory" translatable="false">prefViewDirectory</string>
     <string name="pk_notes_author" translatable="false">notesAuthor</string>
     <string name="pk_enable_code_highlight" translatable="false">enableCodeHighlight</string>
+    <string name="pk_enable_intent_uri" translatable="false">enableIntentURI</string>
     <string name="pk_btn_enable_home" translatable="false">btnEnableHome</string>
     <string name="pk_btn_enable_add_page" translatable="false">btnEnableAddPage</string>
     <string name="pk_btn_enable_link" translatable="false">btnEnableLink</string>

@@ -7,6 +7,7 @@ function run_marked(body, eHlJs){
 
   marked.setOptions({
     gfm: true,
+    xhtml: true
   });
   
   if ('true' == eHlJs) {

@@ -28,7 +28,9 @@ It can be useful to simple web development on Android mobile devices.
   * The application can be target for sharing from another applications
   * Optional support [Pelican Content Management System (Pelican CMS)](https://blog.getpelican.com) Markdown extension for page header
 
-<span class="bg-yellow">To see <a href="Help.html#btn-desc">action buttons</a> press on the page title.</span>
+To see <a href="Help.html#btn-desc">action buttons</a> press on the page title.
+
+The program store it's files in application private directory. The directory path can be found near the bottom of [this page](Build.html). It allow to operate without storage access permission. But be <span class="fg-red">carefully!</span> If you use Android 5.0 or above and deinstall the application this directory and it's content will be removed.
 
 - - -
 

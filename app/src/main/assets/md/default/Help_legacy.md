@@ -243,7 +243,7 @@ This metadata will write to html page `<meta>` tag
 
 ##### Author:
 
-Same as previout but can't contain ','
+Same as previous but can't contain ','
 This metadata will write to html page `<meta>` tag
 
 ##### Summary:

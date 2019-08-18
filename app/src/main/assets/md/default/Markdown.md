@@ -1,18 +1,26 @@
 Title: Markdown syntax
 Date: 2017-10-11 01:36:31
-Modified: 2017-10-11 01:36:31
+Modified: 2019-08-19 02:46:35
 Category: Documentation
-Tags: Markdown, Documentation, OMN default 
+Tags: Markdown, Documentation, OMN default
 Slug: Markdown-syntax
 Lang: en
-Authors: Mikhail Basov
+Author: Mikhail Basov
 Summary: General markdown syntax
+
+<style>
+p {
+text-indent: 1em;
+margin: 0px 3px 0px 3px;
+}
+</style>
 
 The programm support [GitHub Flavored Markdown Spec](https://github.github.com/gfm/).
 
-### The breef markdown syntax description
+---
+# The breef markdown syntax description
 
-#### Headings
+### Headings
 
 Headings from `h1` through `h6` are constructed with a `#` for each level:
 
@@ -45,7 +53,8 @@ HTML:
 <h6>h6 Heading</h6>
 ```
 
-#### Horizontal Rules
+---
+### Horizontal Rules
 
 The HTML `<hr>` element is for creating a "thematic break" between paragraph-level elements. In markdown, you can create a `<hr>` with any of the following:
 
@@ -61,7 +70,8 @@ ___
 
 ***
 
-#### Body Copy 
+---
+### Body Copy 
 
 Body copy written as normal, plain text will be wrapped with `<p></p>` tags in the rendered HTML.
 
@@ -76,9 +86,10 @@ renders to this HTML:
 <p>Lorem ipsum dolor sit amet, graecis denique ei vel, at duo primis mandamus. Et legere ocurreret pri, animal tacimates complectitur ad cum. Cu eum inermis inimicus efficiendi. Labore officiis his ex, soluta officiis concludaturque ei qui, vide sensibus vim ad.</p>
 ```
 
-#### Emphasis
+---
+### Emphasis
 
-##### Bold
+#### Bold
 For emphasizing a snippet of text with a heavier font-weight.
 
 The following snippet of text is **rendered as bold text**.
@@ -96,7 +107,7 @@ and this HTML
 <strong>rendered as bold text</strong>
 ```
 
-##### Italics
+#### Italics
 For emphasizing a snippet of text with italics.
 
 The following snippet of text is _rendered as italicized text_.
@@ -116,7 +127,7 @@ and this HTML:
 ```
 
 
-##### strikethrough
+#### strikethrough
 In GFM you can do strickthroughs. 
 
 ``` markdown
@@ -126,7 +137,8 @@ Which renders to:
 
 ~~Strike through this text.~~
 
-#### Blockquotes
+---
+### Blockquotes
 For quoting blocks of content from another source within your document.
 
 Add `>` before any text you want to quote. 
@@ -167,9 +179,10 @@ odio non est accumsan facilisis. Aliquam id turpis in dolor tincidunt mollis ac 
 >>> Donec massa lacus, ultricies a ullamcorper in, fermentum sed augue. 
 Nunc augue augue, aliquam non hendrerit ac, commodo vel nisi. 
 
-#### Lists
+---
+### Lists
 
-##### Unordered
+#### Unordered
 A list of items in which the order of the items does not explicitly matter.
 
 You may use any of the following symbols to denote bullets for each list item:
@@ -233,7 +246,7 @@ And this HTML
 </ul>
 ```
 
-##### Ordered
+#### Ordered
 
 A list of items in which the order of items does explicitly matter.
 
@@ -297,9 +310,10 @@ Renders to:
 7. Aenean sit amet erat nunc
 8. Eget porttitor lorem
 
-#### Code
+---
+### Code
 
-##### Inline code
+#### Inline code
 Wrap inline snippets of code with `` ` ``.
 
 For example, `<section></section>` should be wrapped as "inline".
@@ -309,7 +323,7 @@ For example, `<section></section>` should be wrapped as "inline".
 ```
 
 
-##### Indented code
+#### Indented code
 
 Or indent several lines of code by at least four spaces, as in:
 
@@ -326,7 +340,7 @@ Or indent several lines of code by at least four spaces, as in:
     line 3 of code
 
 
-##### Block code "fences"
+#### Block code "fences"
 
 Use "fences"  ```` ``` ```` to block in multiple lines of code. 
 
@@ -349,7 +363,7 @@ HTML:
 </pre>
 ```
 
-##### Syntax highlighting
+#### Syntax highlighting
 
 GFM, or "GitHub Flavored Markdown" also supports syntax highlighting. To activate it, simply add the file extension of the language you want to use directly after the first code "fence", ` ``` js `, and syntax highlighting will automatically be applied in the rendered HTML. For example, to apply syntax highlighting to JavaScript code:
 
@@ -423,7 +437,8 @@ And this complicated HTML:
 </pre></div>
 ```
 
-#### Tables
+---
+### Tables
 Tables are created by adding pipes as dividers between each cell, and by adding a line of dashes (also separated by bars) beneath the header. Note that the pipes do not need to be vertically aligned.
 
 
@@ -466,7 +481,7 @@ And this HTML:
 </table>
 ```
 
-##### Right aligned text
+#### Right aligned text
 
 Adding a colon on the right side of the dashes below any heading will right align text for that column.
 
@@ -484,9 +499,10 @@ Adding a colon on the right side of the dashes below any heading will right alig
 | engine | engine to be used for processing templates. Handlebars is the default. |
 | ext    | extension to be used for dest files. |
 
-#### Links
+---
+### Links
 
-##### Basic link
+#### Basic link
 
 ``` markdown
 [Assemble](http://assemble.io)
@@ -503,7 +519,7 @@ HTML:
 ```
 
 
-##### Add a title
+#### Add a title
 
 ``` markdown
 [Upstage](https://github.com/upstage/ "Visit Upstage!")
@@ -519,7 +535,7 @@ HTML:
 <a href="https://github.com/upstage/" title="Visit Upstage!">Upstage</a>
 ```
 
-##### Named Anchors
+#### Named Anchors
 
 Named anchors enable you to jump to the specified anchor point on the same page. For example, each of these chapters:
 
@@ -545,4 +561,3 @@ Content for chapter one.
 
 
 This page base on <a href="http://assemble.io/docs/Cheatsheet-Markdown.html">this document</a>
-

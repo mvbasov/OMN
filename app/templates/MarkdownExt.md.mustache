@@ -76,6 +76,7 @@ That is:
 
 URI schema is protocol which will be used to follow link.
 http:// or https:// uri schemas open web pages, usually.
+Link part need to be "URI encoded" (space replaced by %20, e.t.c)
 
 This program also support the following uri:
 
@@ -107,10 +108,10 @@ If you wish to place USSD code as number use aditional rules:
 * Replace \# with %23 in phone number
 
 ``` markdown
-[Balance \*100#](tel:*100 %23)
+[Balance \*100#](tel:*100%23)
 ```
 Renders to:
-[Balance \*100#](tel:*100 %23)
+[Balance \*100#](tel:*100%23)
 
 <a name="uri-mailto" />
 
@@ -118,10 +119,10 @@ Renders to:
 
 Call E-Mail application.
 ``` markdown
-[E-Mail predefined letter](mailto:someone@example.com?subject=Subject text&body=E-Mail body)
+[E-Mail predefined letter](mailto:someone@example.com?subject=Subject%20text&body=E-Mail%20body)
 ```
 Renders to:
-[E-Mail predefined letter](mailto:someone@example.com?subject=Subject text&body=E-Mail body)
+[E-Mail predefined letter](mailto:someone@example.com?subject=Subject%20text&body=E-Mail%20body)
 
 Subject an body parts optional
 
@@ -131,10 +132,10 @@ Subject an body parts optional
 
 Call SMS application.
 ``` markdown
-[Predefined SMS](sms:+8765?body=SMS text)
+[Predefined SMS](sms:+8765?body=SMS%20text)
 ```
 Renders to:
-[Predefined SMS](sms:+8765?body=SMS text)
+[Predefined SMS](sms:+8765?body=SMS%20text)
 
 <a name="uri-market" />
 
@@ -169,8 +170,7 @@ Renders to:
 ```
 intent:[DATA]#Intent;<ACTION>;][SCHEME;][PACKAGE;][CATEGORY;][EXTRA;]end;
 ```
-All components are optional except ACTION
-
+All components are optional.
 
 EXTRA has types: 
 * **S** - String
@@ -185,7 +185,7 @@ EXTRA has types:
 
 Example:
 ```
-S.android.intent.extra.SUBJECT=Subject
+S.android.intent.extra.SUBJECT=Subject%20of%20message
 ```
 - - -
 

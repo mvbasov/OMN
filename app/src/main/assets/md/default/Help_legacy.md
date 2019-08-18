@@ -180,6 +180,13 @@ Enable using `openDatabase` in Java Scripts on pages
 <span class="fg-red">WARNNG! EXPERIMENTAL! </span>  
 _The application has no mechanism to clean or manage another way databases created by this feature_  
 **Restart the application to make this setting effective**
+
+#### "Enable Intent URI"
+
+Enable "intent:" URI scheme.  
+<span class="fg-red">WARNNG! EXPERIMENTAL! Dangerous but powerful. You device can be controlled by simple link click.</span>
+[Example of usage](/default/MarkdownExt.html#uri-intent)  
+
 - - -
 
 <a id="page-header" />

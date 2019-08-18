@@ -151,6 +151,42 @@ This type of link work only inside Android. Equivalent links operates on pages e
 ``` markdown
 [Google Maps](http://play.google.com/store/apps/details?id=com.google.android.apps.maps)
 ```
+
+<a name="uri-intent" />
+
+#### "intent:"
+Directly make android intent and send it to system.
+
+
+Example:
+```
+[Settings WIRELESS_SETTINGS](intent:#Intent;action=android.settings.WIRELESS_SETTINGS;end;)
+```
+Renders to:
+[Settings WIRELESS_SETTINGS](intent:#Intent;action=android.settings.WIRELESS_SETTINGS;end;)
+
+##### intent uri format
+```
+intent:[DATA]#Intent;<ACTION>;][SCHEME;][PACKAGE;][CATEGORY;][EXTRA;]end;
+```
+All components are optional except ACTION
+
+
+EXTRA has types: 
+* **S** - String
+* **B** - Boolean
+* **b** - Byte
+* **c** - Character
+* **d** - Double
+* **f** - Float
+* **i** - Integer
+* **l** - Long
+* **s** - Short
+
+Example:
+```
+S.android.intent.extra.SUBJECT=Subject
+```
 - - -
 
 <a name="highlight-text" />

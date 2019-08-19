@@ -4,12 +4,20 @@ Modified: 2019-05-31 22:56:54
 Author: Mikhail Basov
 Tags: OMN default,
 
+##### v00.26.00b
+
+- Add experimental support intent: URI scheme
+- Switch to new markedjs v0.7.0
+- Continue write documentation
+- Get incoming pages from intent: scheme based HTML link
+
 ##### v00.25.02b
+###### Date:   Mon Jun 3 16:46:48 2019 +0300, commit d6bc4970dfc5427c9d0333a8d2c8af8d9c55c9a4
 
 - Fix file uri expose exception
 
 ##### v00.25.01b
-##### Date:   Fri May 31 22:59:02 2019 +0300, commit 47e618327caa4d761be293c36b081cccf859cac1
+###### Date:   Fri May 31 22:59:02 2019 +0300, commit 47e618327caa4d761be293c36b081cccf859cac1
 
 - New adaptive icons
 

@@ -381,6 +381,7 @@ Tags: %5$s
     <string name="template_page_build"><![CDATA["#### %11$s
 
 <a name=\"%2$s-%3$s\" />
+
 * [%1$s](#%2$s-%3$s)
 
 ##### Platform information #####

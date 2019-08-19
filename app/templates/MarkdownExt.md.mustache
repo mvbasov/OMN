@@ -72,10 +72,10 @@ That is:
 
 <a name="uri" />
 
-### Supported URI schemas
+### Supported URI schemes
 
 URI schema is protocol which will be used to follow link.
-http:// or https:// uri schemas open web pages, usually.
+http:// or https:// uri schemes open web pages, usually.
 Link part need to be "URI encoded" (space replaced by %20, e.t.c)
 
 This program also support the following uri:
@@ -102,7 +102,7 @@ Open telephony application an place provided number
 Renders to:
 [call phone +87654](tel:+87654)
 
-If you wish to place USSD code as number use aditional rules:
+If you wish to place USSD code as number use additional rules:
 
 * Escape \* by \\ in link name
 * Replace \# with %23 in phone number
@@ -148,7 +148,7 @@ Call Google Play Market application and open some application page.
 Renders to:
 [Google Maps](market://details?id=com.google.android.apps.maps)
 
-This type of link work only inside Android. Equivalent links operates on pages exported html pages are
+This type of link work only inside Android. Equivalent links operates on pages exported HTML pages are
 ``` markdown
 [Google Maps](http://play.google.com/store/apps/details?id=com.google.android.apps.maps)
 ```
@@ -156,7 +156,7 @@ This type of link work only inside Android. Equivalent links operates on pages e
 <a name="uri-intent" />
 
 #### "intent:"
-Directly make android intent and send it to system. Support of this URI scheme can be enabled or disabled in application settings. Disbled by default.
+Directly make android intent and send it to system. Support of this URI scheme can be enabled or disabled in application settings. Disabled by default.
 
 Example:
 ```
@@ -268,7 +268,7 @@ TOC will be created at the top of you page. To position TOC to another place put
 
 *Doesn't available in legacy version*
 You can use [Material design icons](https://material.io/icons/) anywhere as text.  
-(if name contain spece replace it to _)
+(if name contain space replace it to _)
 
     <i class="material-icons">check_circle</i>
     
@@ -282,7 +282,7 @@ Renders to: <i class="material-icons">check_circle</i>
 ### Unicode symbols collection
 
 Any pages can contain Unicode symbols. In the legacy mode such symbols used instead of Google Material Design icons.
-There is collection of funny or usefull Unicode symbols.
+There is collection of funny or useful Unicode symbols.
 
 |          |           |          |           |
 |:--------:|:---------:|:--------:|:---------:|

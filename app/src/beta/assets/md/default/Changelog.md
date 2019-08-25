@@ -4,7 +4,13 @@ Modified: 2019-05-31 22:56:54
 Author: Mikhail Basov
 Tags: OMN default,
 
+##### v00.26.01b
+
+- Get ROM build version
+- Fix build information template
+
 ##### v00.26.00b
+###### Date:   Mon Aug 19 04:05:19 2019 +0300, commit 404983aac4451fc844918c4299128dfbe5aaac95
 
 - Add experimental support intent: URI scheme
 - Switch to new markedjs v0.7.0

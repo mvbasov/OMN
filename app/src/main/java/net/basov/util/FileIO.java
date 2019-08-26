@@ -231,8 +231,10 @@ public class FileIO {
                                     + cmVersion;
                         } else {
                             cmVersion = AppDetails.getSystemProperty("ro.modversion");
-                            cmVersionString = "\n* ROM mod version: "
-                                    + cmVersion;
+                            if (cmVersion.length() != 0) {
+                                cmVersionString = "\n* ROM mod version: "
+                                        + cmVersion;
+                            }
                         }
                     }
                     // Get App. name and build

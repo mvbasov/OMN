@@ -124,7 +124,7 @@ void buildIconFont() {
     exec {
         workingDir 'src/main/assets/fonts/google-material'
         //commandLine "wget", "-q", "https://github.com/google/material-design-icons/raw/master/iconfont/MaterialIcons-Regular.woff2", "-O", "MaterialIcons-Regular.woff2"
-        commandLine "wget", "-q", "https://github.com/google/material-design-icons/blob/3.0.2/iconfont/MaterialIcons-Regular.woff2", "-O", "MaterialIcons-Regular.woff2"
+        commandLine "wget", "-q", "https://github.com/google/material-design-icons/raw/3.0.2/iconfont/MaterialIcons-Regular.woff2", "-O", "MaterialIcons-Regular.woff2"
     }
     println "*-*-* icon font copied *-*-*"
 }

@@ -26,7 +26,7 @@ public class Page {
     private LinkedHashMap<String, String> mMeta;
     private String mPageName;
     private Boolean mHasPelicanMeta;
-    private String mInPageReference;
+    private String mPageExtraParams;
     private String mMdContent;
     private String mLog;
     private Date mFileTS;
@@ -126,19 +126,20 @@ public class Page {
 
     public void setPageName(String mPageName) {
         if (null != mPageName && mPageName.length() > 0 ) {
-            int endIndex = mPageName.lastIndexOf("#");
+            int endIndex = mPageName.lastIndexOf("#"); //handle inpage reference
+            if (endIndex == -1) endIndex = mPageName.lastIndexOf("?"); // handle URL params
             if (endIndex != -1) {
                 this.mPageName = mPageName.substring(0, endIndex);
-                this.mInPageReference = mPageName.substring(endIndex);
+                this.mPageExtraParams = mPageName.substring(endIndex);
             } else {
                 this.mPageName = mPageName;
-                this.mInPageReference = "";	   
+                this.mPageExtraParams = "";
 			}
         }
 	}
 
     public String getInPageReference() {
-        return mInPageReference;
+        return mPageExtraParams;
     }
 
     public String getMdContent() {

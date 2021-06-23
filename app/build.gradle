@@ -1,6 +1,9 @@
 apply plugin: 'com.android.application'
 
 android {
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
 
     def last_tag = getGitRevParseInfo("describe --tags --abbrev=0")
     def commit_count = getGitRevParseInfo("rev-list --count ${last_tag}..")
@@ -13,12 +16,12 @@ android {
 
     }
 
-    compileSdkVersion 28
+    compileSdkVersion 29
     buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "net.basov.omn"
         minSdkVersion 17
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 2700
         versionName "00.27.00"
     }

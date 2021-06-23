@@ -4,7 +4,13 @@ Modified: 2019-05-31 22:56:54
 Author: Mikhail Basov
 Tags: OMN default,
 
+
+##### v00.27.00b
+
+- Add URL params support
+
 ##### v00.26.01b
+###### Date:   Sun Aug 25 16:34:41 2019 +0300, commit 6d5cd63afeac778a1392e6416fb6fe5d74ee1f1c
 
 - Get ROM build version
 - Fix build information template

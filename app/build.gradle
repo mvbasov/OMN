@@ -19,8 +19,8 @@ android {
         applicationId "net.basov.omn"
         minSdkVersion 17
         targetSdkVersion 28
-        versionCode 2601
-        versionName "00.26.01"
+        versionCode 2700
+        versionName "00.27.00"
     }
 
     signingConfigs {

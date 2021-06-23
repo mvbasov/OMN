@@ -5,7 +5,12 @@ Author: Mikhail Basov
 Tags: OMN default,
 
 
+##### v00.27.01b
+
+- Fix font icons
+
 ##### v00.27.00b
+###### Date:   Wed Jun 23 18:54:50 2021 +0300, commit 0cd51f5f1e1b81f2a4576046e78e039f2cb7cabd
 
 - Add URL params support
 

@@ -20,6 +20,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -29,6 +30,7 @@ import android.webkit.WebViewClient;
 
 import java.lang.reflect.Method;
 import java.net.URISyntaxException;
+import java.util.Arrays;
 
 import net.basov.util.MyLog;
 import net.basov.util.FileIO;
@@ -53,6 +55,7 @@ public class MyWebViewClient extends WebViewClient {
         return processUri(uri, view);
     }
 
+    @TargetApi(Build.VERSION_CODES.M)
     private boolean processUri(final Uri uri, WebView view) {
         Context c = view.getContext();
         switch(uri.getScheme()){
@@ -125,6 +128,28 @@ public class MyWebViewClient extends WebViewClient {
                         } else {
                             String fallbackUrl = intentApp.getStringExtra("browser_fallback_url");
                             view.loadUrl(fallbackUrl);
+                        }
+                        // Termux RUN_COMMAND Intent integration
+                        final Bundle extras = intentApp.getExtras();
+                        if (extras != null && extras.containsKey("com.termux.RUN_COMMAND_PATH")){
+                            MyLog.LogD( "com.termux intent has extras");
+                            String cmd = extras.getString("com.termux.RUN_COMMAND_PATH");
+                            MyLog.LogD("cmd is: " + cmd );
+                            if (cmd != null) {
+                                String[] cmdParts = cmd.split("\\?");
+                                if (cmdParts.length > 1) {
+                                    MyLog.LogD( "parts is: "
+                                            + Arrays.toString(cmdParts)
+                                    );
+                                    String[] cmdArgs = cmdParts[1].split("&");
+                                    intentApp.putExtra("com.termux.RUN_COMMAND_PATH", cmdParts[0].trim());
+                                    MyLog.LogD("args is: "
+                                            + Arrays.toString(cmdArgs)
+                                    );
+                                    intentApp.putExtra("com.termux.RUN_COMMAND_ARGUMENTS", cmdArgs);
+                                }
+                            }
+                            c.startService(intentApp);
                         }
                         return true;
                     }

@@ -4,8 +4,12 @@ Modified: 2019-05-31 22:56:54
 Author: Mikhail Basov
 Tags: OMN default,
 
+##### v00.28.00b
+
+- Add termux integration (RUN_COMMAND)
 
 ##### v00.27.01b
+Date:   Wed Jun 23 19:55:50 2021 +0300, commit dca6811fad1a274636bd51e34d87b7be7a280d5b
 
 - Fix font icons
 

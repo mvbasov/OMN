@@ -41,7 +41,7 @@ import net.basov.util.MyLog;
 
 public class WebViewJSCallback {
 
-    private Context mContext;
+    private final Context mContext;
 
     WebViewJSCallback(Context c) {
         mContext = c;

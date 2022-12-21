@@ -1,6 +1,6 @@
 Title: Help
 Date: 2017-10-22 19:31:15
-Modified: 2019-05-31 22:49:15
+Modified: 2022-12-22 01:19:15
 Category: Index
 Tags: OMN default, Documentation
 Lang: en
@@ -185,7 +185,10 @@ _The application has no mechanism to clean or manage another way databases creat
 
 Enable "intent:" URI scheme.  
 <span class="fg-red">WARNING! EXPERIMENTAL! Dangerous but powerful. You device can be controlled by simple link click.</span>
-[Example of usage](/default/MarkdownExt.html#uri-intent)  
+[Example of usage](/default/MarkdownExt.html#uri-intent)
+
+#### "Enable Termux RUN_COMMANT Intent"
+Enable [Termux] integration. [Example of usage](/default/MarkdownExt.html#termux-intent)
 
 - - -
 

@@ -1,6 +1,6 @@
 Title: Extended Markdown syntax (legacy mode)
 Date: 2017-10-11 01:40:42
-Modified: 2018-01-19 03:36:21
+Modified: 2002-12-22 01:14:21
 Category: Documentation
 Tags: Markdown, Documentation, OMN default 
 Lang: en
@@ -186,6 +186,40 @@ Example:
 ```
 S.android.intent.extra.SUBJECT=Subject%20of%20message
 ```
+NOTE: String Array type not supported by URI string format.
+
+<a name="termux-intent" />
+
+##### Termux integration
+
+It is possible to issue intent to execute command by [Termux](https://f-droid.org/en/packages/com.termux/) application.
+To perform this non standart URI string is used (extended by parameters like url).
+More details about Termux Intemt format [here](https://github.com/termux/termux-app/wiki/RUN_COMMAND-Intent).
+You need to enable this functionality in application settings. Disabled by defaukt.
+
+Example:
+```
+<button onclick="window.location='\
+intent:#Intent;\
+action=com.termux.RUN_COMMAND;\
+component=com.termux/.app.RunCommandService;\
+S.com.termux.RUN_COMMAND_PATH=$PREFIX/bin/sleep?5;\
+end'">
+sleep 5
+</button>
+```
+
+<button onclick="window.location='\
+intent:#Intent;\
+action=com.termux.RUN_COMMAND;\
+component=com.termux/.app.RunCommandService;\
+S.com.termux.RUN_COMMAND_PATH=$PREFIX/bin/sleep?5;\
+end'">
+sleep 5
+</button>
+
+This example execute `sleep 5` Linux command in Termux terminal 
+
 - - -
 
 <a name="highlight-text" />

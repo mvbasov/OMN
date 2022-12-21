@@ -195,7 +195,8 @@ NOTE: String Array type not supported by URI string format.
 It is possible to issue intent to execute command by [Termux](https://f-droid.org/en/packages/com.termux/) application.
 To perform this non standart URI string is used (extended by parameters like url).
 More details about Termux Intemt format [here](https://github.com/termux/termux-app/wiki/RUN_COMMAND-Intent).
-You need to enable this functionality in application settings. Disabled by defaukt.
+You need to enable this functionality in application settings together with "Enable Intent URI". Disabled by default.
+
 
 Example:
 ```

@@ -187,8 +187,10 @@ Enable "intent:" URI scheme.
 <span class="fg-red">WARNING! EXPERIMENTAL! Dangerous but powerful. You device can be controlled by simple link click.</span>
 [Example of usage](/default/MarkdownExt.html#uri-intent)
 
-#### "Enable Termux RUN_COMMANT Intent"
+#### "Enable Termux RUN_COMMAND Intent"
+<span class="fg-red">WARNING! EXPERIMENTAL! Dangerous but powerful.</span>
 Enable [Termux] integration. [Example of usage](/default/MarkdownExt.html#termux-intent)
+**Require "Enable Intent URI" enabled.**
 
 - - -
 

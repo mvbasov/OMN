@@ -141,6 +141,7 @@ public class MainActivity extends Activity {
         webSettings.setSaveFormData(false);
         /* Enable JavaScript */
         webSettings.setJavaScriptEnabled(true);
+        webSettings.setAllowFileAccess(true);
         mainUI_WV.addJavascriptInterface(new WebViewJSCallback(this), "Android");
         /* Show external page in browser */
         //mainUI_WV.setWebViewClient(new MyWebViewClient());

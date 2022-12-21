@@ -4,7 +4,17 @@ Modified: 2019-05-31 22:56:54
 Author: Mikhail Basov
 Tags: OMN default,
 
+##### v00.28.02b
+
+- Fix permission issue
+
+##### v00.28.01b
+Date:   Tue Dec 20 01:30:28 2022 +0300, commit bc945b01502f082fe0733d23bc9ebfc4d6b8e892
+
+- Bump version to v00.28.01b
+
 ##### v00.28.00b
+Date:   Tue Dec 20 01:24:25 2022 +0300, commit d080e184c58af56b85dce176abb150ea2ab2e249 
 
 - Add termux integration (RUN_COMMAND)
 

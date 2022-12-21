@@ -6,6 +6,11 @@ Tags: OMN default,
 
 ##### v00.28.02b
 
+Remove MANAGE_EXTERNAL_STORAGE permission
+
+##### v00.28.02b
+Date:   Wed Dec 21 18:56:49 2022 +0300, commit 27adeac47f62e15da7f2ed2995fa1135ee7c0d19
+
 - Fix permission issue
 
 ##### v00.28.01b

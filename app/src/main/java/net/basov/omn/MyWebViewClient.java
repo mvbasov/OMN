@@ -130,6 +130,8 @@ public class MyWebViewClient extends WebViewClient {
                             view.loadUrl(fallbackUrl);
                         }
                         // Termux RUN_COMMAND Intent integration
+                        if (! defSharedPref.getBoolean(c.getString(R.string.pk_enable_termux_intent_uri), false))
+                            return false;
                         final Bundle extras = intentApp.getExtras();
                         if (extras != null && extras.containsKey("com.termux.RUN_COMMAND_PATH")){
                             MyLog.LogD( "com.termux intent has extras");

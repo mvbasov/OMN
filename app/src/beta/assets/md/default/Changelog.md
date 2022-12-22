@@ -4,7 +4,17 @@ Modified: 2019-05-31 22:56:54
 Author: Mikhail Basov
 Tags: OMN default,
 
+##### v00.28.04
+
+Request Termux RUN_COMMAND permission at runtime
+
+##### v00.28.03b
+Date:   Wed Dec 21 19:31:11 2022 +0300, commit e27232f3cda0b0f563789b89a3155ed11787b88b
+
+Bump version to publis in store
+
 ##### v00.28.02b
+Date:   Wed Dec 21 18:56:49 2022 +0300, commit 27adeac47f62e15da7f2ed2995fa1135ee7c0d19
 
 Remove MANAGE_EXTERNAL_STORAGE permission
 

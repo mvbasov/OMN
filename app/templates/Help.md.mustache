@@ -188,8 +188,9 @@ Enable "intent:" URI scheme.
 [Example of usage](/default/MarkdownExt.html#uri-intent)
 
 #### "Enable Termux RUN_COMMAND Intent"
+
 <span class="fg-red">WARNING! EXPERIMENTAL! Dangerous but powerful.</span>
-Enable [Termux] integration. [Example of usage](/default/MarkdownExt.html#termux-intent)
+Enable [Termux](https://f-droid.org/en/packages/com.termux/) integration. [Example of usage](/default/MarkdownExt.html#termux-intent)
 **Require "Enable Intent URI" enabled.**
 
 - - -

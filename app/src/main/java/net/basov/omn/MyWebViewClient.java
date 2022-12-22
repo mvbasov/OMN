@@ -16,6 +16,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
@@ -27,6 +28,7 @@ import android.util.Log;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import java.lang.reflect.Method;
 import java.net.URISyntaxException;
@@ -130,10 +132,19 @@ public class MyWebViewClient extends WebViewClient {
                             view.loadUrl(fallbackUrl);
                         }
                         // Termux RUN_COMMAND Intent integration
-                        if (! defSharedPref.getBoolean(c.getString(R.string.pk_enable_termux_intent_uri), false))
-                            return false;
                         final Bundle extras = intentApp.getExtras();
                         if (extras != null && extras.containsKey("com.termux.RUN_COMMAND_PATH")){
+                            if (! defSharedPref.getBoolean(c.getString(R.string.pk_enable_termux_intent_uri), false)
+                                    || ! checkPermission("com.termux.permission.RUN_COMMAND", c)
+                                    || ! isPackageExisted("com.termux", c)) {
+                                Toast.makeText(c,
+                                        "Intent URI disabled" +
+                                                " or permission RUN_COMMAND not granted" +
+                                                " or Termux not installed.",
+                                        Toast.LENGTH_LONG
+                                ).show();
+                                return false;
+                            }
                             MyLog.LogD( "com.termux intent has extras");
                             String cmd = extras.getString("com.termux.RUN_COMMAND_PATH");
                             MyLog.LogD("cmd is: " + cmd );
@@ -164,5 +175,23 @@ public class MyWebViewClient extends WebViewClient {
                 return true;
                 
          }              
+    }
+    private boolean checkPermission(String permission_name, Context c) {
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+            int result = c.checkSelfPermission(permission_name);
+            return result == PackageManager.PERMISSION_GRANTED;
+        }
+        return false;
+    }
+
+    private boolean isPackageExisted(String targetPackage, Context c){
+        // code from https://stackoverflow.com/a/6758962
+        PackageManager pm = c.getPackageManager();
+        try {
+            PackageInfo info=pm.getPackageInfo(targetPackage,PackageManager.GET_META_DATA);
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
+        return true;
     }
 }

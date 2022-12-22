@@ -191,6 +191,8 @@ public class MainActivity extends Activity {
             shortcutManager.setDynamicShortcuts(Arrays.asList(shortcut));
         }
 
+        requestTermuxPermission(defSharedPref);
+
         onNewIntent(getIntent());
         
     }
@@ -594,6 +596,7 @@ public class MainActivity extends Activity {
                 UI.displayPage(mainUI_WV, page);
                 editor.putBoolean(getString(R.string.pk_pref_changed), false);
                 editor.commit();
+                requestTermuxPermission(defSharedPref);
             }
         }
     }
@@ -621,6 +624,13 @@ public class MainActivity extends Activity {
         page = new Page(pages.peek());
         UI.displayPage(mainUI_WV, page);
         return true;
+    }
+
+    private void requestTermuxPermission(SharedPreferences pref){
+        if (Build.VERSION.SDK_INT > 22 && pref.getBoolean(this.getString(R.string.pk_enable_termux_intent_uri), false) ) {
+            String[] Termux_permission = {"com.termux.permission.RUN_COMMAND"};
+            this.requestPermissions(Termux_permission, 10743);
+        }
     }
 
     /**

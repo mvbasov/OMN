@@ -86,7 +86,7 @@
             android:key="@string/pk_enable_intent_uri" />
         <CheckBoxPreference
             android:title="Enable Termux Intent URI"
-            android:summary="Require \"Enable Intent URI\". WARNING: Experimental !!! Dangerous but powerful."
+            android:summary="Require [Enable Intent URI]. WARNING: Experimental !!! Dangerous but powerful."
             android:defaultValue="false"
             android:key="@string/pk_enable_termux_intent_uri" />
     </PreferenceCategory>

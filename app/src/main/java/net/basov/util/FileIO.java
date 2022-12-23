@@ -102,6 +102,10 @@ public class FileIO {
         try {
             while ((currentLine = reader.readLine()) != null) {
                 if (inMarkdown) {
+                    if (currentLine.startsWith(Constants.EMA_MARK_STOP)) {
+                        reader.close();
+                        break;
+                    }
                     sb.append(currentLine+"\n");
                 } else {
                     if (currentLine.startsWith(Constants.EMA_H_VER)) continue;
@@ -121,10 +125,6 @@ public class FileIO {
                     if (currentLine.startsWith(Constants.EMA_H_TO + ":")) {
                         to = currentLine;
                         continue;
-                    }
-                    if (currentLine.startsWith(Constants.EMA_MARK_STOP)) {
-                        reader.close();
-                        break;
                     }
                     if (currentLine.startsWith(Constants.EMA_MARK_START)) {
                         inMarkdown = true;

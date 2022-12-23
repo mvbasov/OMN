@@ -185,8 +185,8 @@ public class WebViewJSCallback {
             /* For OI File Manager */
             intent.setAction("android.intent.action.VIEW");
         }
-
-        Uri uri = Uri.parse("file://" + FileIO.getFilesDir(mContext).getAbsolutePath());
+        String pageFolder = pn.replaceFirst("[^/]*$", "");
+        Uri uri = Uri.parse("file://" + FileIO.getFilesDir(mContext).getAbsolutePath() + "/md" + pageFolder);
         intent.setData(uri);
         try {
             // Dirty hack to enable file:// URI
@@ -205,10 +205,10 @@ public class WebViewJSCallback {
                     }
                 }
                                            
-                mContext.startActivity(Intent.createChooser(intent, "Open pages folder"));
+                mContext.startActivity(Intent.createChooser(intent, "Open page folder"));
                 StrictMode.setVmPolicy(old);
             } else {
-                mContext.startActivity(Intent.createChooser(intent, "Open pages folder"));
+                mContext.startActivity(Intent.createChooser(intent, "Open page folder"));
             }
         } catch (ActivityNotFoundException e) {
             Toast.makeText(mContext, "No File Manager found. Please install one.", Toast.LENGTH_LONG).show();
@@ -246,14 +246,14 @@ public class WebViewJSCallback {
         }
         String fileName = "/md" + pn + ".md";
         File pageFile = new File(FileIO.getFilesDir(mContext), fileName);
-        Uri uri = FileProvider.getUriForFile(mContext, BuildConfig.APPLICATION_ID, pageFile);
+        Uri uri = FileProvider.getUriForFile(mContext, mContext.getPackageName(), pageFile);
         Intent sendToIntent = new Intent();
         sendToIntent.setAction(Intent.ACTION_SEND);
         sendToIntent.putExtra(Intent.EXTRA_TITLE, "Title test");
         sendToIntent.putExtra(Intent.EXTRA_SUBJECT, title +" [OMN v" + appInfo +"]" );
         sendToIntent.putExtra(Intent.EXTRA_TEXT, "* [" + title + "](" + pn +")");
         sendToIntent.putExtra(Intent.EXTRA_STREAM, uri);
-        sendToIntent.setType("text/plain");
+        sendToIntent.setType("text/markdown");
 
         mContext.startActivity(Intent.createChooser(sendToIntent, "Send page: " + pn));
     }

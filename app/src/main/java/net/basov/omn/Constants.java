@@ -49,6 +49,10 @@ public class Constants {
     public static final String EMA_MARK_STOP = "!-!-! the end of note";
     public static final String EMA_H_VER = "OMNotesVersion";
     public static final String EMA_H_PFN = "PageFileName";
+    public static final String EMA_H_SUBJECT = "Subject";
+    public static final String EMA_H_SENT = "Sent";
+    public static final String EMA_H_FROM = "From";
+    public static final String EMA_H_TO = "To";
     public static final String INCOMING_INDEX_PAGE = "/incoming/Incoming";
   
 }

@@ -96,11 +96,27 @@ public class FileIO {
         String pn = null;
         Boolean inMarkdown = false;
         String currentLine = null;
+        String sent = null;
+        String from = null;
+        String to = null;
         try {
             while ((currentLine = reader.readLine()) != null) {
                 if (currentLine.startsWith(Constants.EMA_H_VER)) continue;
-                if (currentLine.startsWith(Constants.EMA_H_PFN)) {
+                if (currentLine.startsWith(Constants.EMA_H_PFN + ":")) {
                     pn = "/incoming" + currentLine.split(":")[1].trim(); 
+                    continue;
+                }
+
+                if (currentLine.startsWith(Constants.EMA_H_SENT + ":")) {
+                    sent = currentLine;
+                    continue;
+                }
+                if (currentLine.startsWith(Constants.EMA_H_FROM + ":")) {
+                    from = currentLine;
+                    continue;
+                }
+                if (currentLine.startsWith(Constants.EMA_H_TO + ":")) {
+                    to = currentLine;
                     continue;
                 }
                 if (currentLine.startsWith(Constants.EMA_MARK_STOP)) {
@@ -117,7 +133,13 @@ public class FileIO {
             MyLog.LogE("Import page error.");
             inPage = null;
         }
-        
+        if (sent != null || from != null || to != null) {
+            sb.append("\n- - -\n");
+            if (sent != null) sb.append(sent + "  \n");
+            if (from != null) sb.append(from + "  \n");
+            if (to != null) sb.append(to + "  \n");
+        }
+
         String fileName = "/md/"+ pn;      
         File file = new File(getFilesDir(c), fileName + ".md");
         String suffix = "";

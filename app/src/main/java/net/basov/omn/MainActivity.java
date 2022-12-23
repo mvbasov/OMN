@@ -384,7 +384,7 @@ public class MainActivity extends Activity {
                             else
                                 noteText = "";
 						} else if( sharedText.startsWith(Constants.EMA_H_VER + ": ")
-                                || sharedText.startsWith("Subject: ")
+                                || sharedText.startsWith(Constants.EMA_H_SUBJECT)
                         ) {
                             Page importedPage = null;
                             if ((importedPage = FileIO.importPage(MainActivity.this, sharedText)) == null) {

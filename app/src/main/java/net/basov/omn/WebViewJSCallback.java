@@ -27,10 +27,12 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
+import android.support.v4.content.FileProvider;
 import android.text.Html;
 import android.webkit.JavascriptInterface;
 import android.widget.Toast;
 
+import java.io.File;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -233,7 +235,29 @@ public class WebViewJSCallback {
         i.putExtra("RECREATE_HTML", true);
         mContext.startActivity(i);
     }
-    
+
+    @JavascriptInterface
+    public void sendButtonCallback(String pn, String title) {
+        String appInfo = "";
+        try {
+            appInfo += " " + AppDetails.getAppName(mContext);
+        } catch (PackageManager.NameNotFoundException e) {
+            MyLog.LogE(e, "Get application name problem.");
+        }
+        String fileName = "/md" + pn + ".md";
+        File pageFile = new File(FileIO.getFilesDir(mContext), fileName);
+        Uri uri = FileProvider.getUriForFile(mContext, BuildConfig.APPLICATION_ID, pageFile);
+        Intent sendToIntent = new Intent();
+        sendToIntent.setAction(Intent.ACTION_SEND);
+        sendToIntent.putExtra(Intent.EXTRA_TITLE, "Title test");
+        sendToIntent.putExtra(Intent.EXTRA_SUBJECT, title +" [OMN v" + appInfo +"]" );
+        sendToIntent.putExtra(Intent.EXTRA_TEXT, "* [" + title + "](" + pn +")");
+        sendToIntent.putExtra(Intent.EXTRA_STREAM, uri);
+        sendToIntent.setType("text/plain");
+
+        mContext.startActivity(Intent.createChooser(sendToIntent, "Send page: " + pn));
+    }
+
     @JavascriptInterface
     public void saveHTML(String html, String PFN, String Title) {
         Toast.makeText(mContext, "Save HTML.", Toast.LENGTH_SHORT).show();

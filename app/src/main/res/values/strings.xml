@@ -114,6 +114,12 @@
 &#x2709;
     </button>
     <button
+      id=\"btnSend\"
+      class=\"hBtn\"
+      onclick=\"Android.sendButtonCallback(PageName, Title)\">
+&#x2197;
+    </button>
+    <button
       id=\"btnFolder\"
       class=\"hBtn\"
       onclick=\"Android.folderButtonCallback(PageName)\">
@@ -287,6 +293,7 @@ if (typeof selected != 'undefined') {
         %9$b    Enable Refresh HTML button
         %10$b   Enable Create shortcut button
         %11$b   Enable QuickNotes button
+        %12$b   Enable Send button
     -->
     <string name="set_html_page_js">
         javascript:
@@ -310,6 +317,7 @@ if (typeof selected != 'undefined') {
         enableButton(\'btnRefresh\', %9$b);
         enableButton(\'btnShortcut\', %10$b);
         enableButton(\'btnQuickNotes\', %11$b);
+        enableButton(\'btnSend\', %12$b);
         setBodyTop();
     </string>
 
@@ -449,5 +457,6 @@ This page generated automatically.
     <string name="pk_btn_enable_refresh_html" translatable="false">btnRefreshHtml</string>
     <string name="pk_btn_enable_shortcut" translatable="false">btnEnableShortcut</string>
     <string name="pk_btn_enable_quicknotes" translatable="false">btnEnableQuicknotes</string>
+    <string name="pk_btn_enable_send" translatable="false">btnEnableSend</string>
 
 </resources>

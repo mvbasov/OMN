@@ -106,6 +106,11 @@ public class UI {
                         defSharedPref.getBoolean(
                                 c.getString(R.string.pk_btn_enable_quicknotes),
                                 true
+                        ),
+                        //Enable Send button
+                        defSharedPref.getBoolean(
+                                c.getString(R.string.pk_btn_enable_send),
+                                true
                         )
 
                 );

@@ -45,6 +45,12 @@
       <i class=\"material-icons\">email</i>
     </button>
     <button
+      id=\"btnSend\"
+      class=\"hBtn\"
+      onclick=\"Android.sendButtonCallback(PageName, Title)\">
+      <i class=\"material-icons\">send</i>
+    </button>
+    <button
       id=\"btnFolder\"
       class=\"hBtn\"
       onclick=\"Android.folderButtonCallback(PageName)\">

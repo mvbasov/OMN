@@ -45,6 +45,10 @@
             android:defaultValue="true"
             android:key="@string/pk_btn_enable_email" />
         <CheckBoxPreference
+            android:title="Send ..."
+            android:defaultValue="true"
+            android:key="@string/pk_btn_enable_send" />
+        <CheckBoxPreference
             android:title="Open file manager"
             android:defaultValue="true"
             android:key="@string/pk_btn_enable_filemanager" />

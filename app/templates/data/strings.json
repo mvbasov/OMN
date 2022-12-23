@@ -5,6 +5,7 @@
   "btnNewPage": "<i class=\"material-icons\">add_box</i>",
   "btnLink": "<i class=\"material-icons\">insert_link</i>",
   "btnEmail": "<i class=\"material-icons\">email</i>",
+  "btnSend": "<i class=\"material-icons\">send</i>",
   "btnFolder": "<i class=\"material-icons\">folder_open</i>",
   "btnRefreshHTML": "<i class=\"material-icons\">cached</i>",
   "btnShortcut": "<i class=\"material-icons\">screen_share</i>",

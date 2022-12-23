@@ -383,7 +383,9 @@ public class MainActivity extends Activity {
                                 noteText = sharedText.substring(sharedText.length() - endOfFirstLine);
                             else
                                 noteText = "";
-						} else if( sharedText.startsWith(Constants.EMA_H_VER + ": ")) {
+						} else if( sharedText.startsWith(Constants.EMA_H_VER + ": ")
+                                || sharedText.startsWith("Subject: ")
+                        ) {
                             Page importedPage = null;
                             if ((importedPage = FileIO.importPage(MainActivity.this, sharedText)) == null) {
                                 Toast.makeText(this, "Page can't be imported...", Toast.LENGTH_SHORT).show();

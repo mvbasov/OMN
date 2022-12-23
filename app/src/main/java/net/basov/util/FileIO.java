@@ -101,33 +101,36 @@ public class FileIO {
         String to = null;
         try {
             while ((currentLine = reader.readLine()) != null) {
-                if (currentLine.startsWith(Constants.EMA_H_VER)) continue;
-                if (currentLine.startsWith(Constants.EMA_H_PFN + ":")) {
-                    pn = "/incoming" + currentLine.split(":")[1].trim(); 
-                    continue;
-                }
+                if (inMarkdown) {
+                    sb.append(currentLine+"\n");
+                } else {
+                    if (currentLine.startsWith(Constants.EMA_H_VER)) continue;
+                    if (currentLine.startsWith(Constants.EMA_H_PFN + ":")) {
+                        pn = "/incoming" + currentLine.split(":")[1].trim();
+                        continue;
+                    }
 
-                if (currentLine.startsWith(Constants.EMA_H_SENT + ":")) {
-                    sent = currentLine;
-                    continue;
+                    if (currentLine.startsWith(Constants.EMA_H_SENT + ":")) {
+                        sent = currentLine;
+                        continue;
+                    }
+                    if (currentLine.startsWith(Constants.EMA_H_FROM + ":")) {
+                        from = currentLine;
+                        continue;
+                    }
+                    if (currentLine.startsWith(Constants.EMA_H_TO + ":")) {
+                        to = currentLine;
+                        continue;
+                    }
+                    if (currentLine.startsWith(Constants.EMA_MARK_STOP)) {
+                        reader.close();
+                        break;
+                    }
+                    if (currentLine.startsWith(Constants.EMA_MARK_START)) {
+                        inMarkdown = true;
+                        continue;
+                    }
                 }
-                if (currentLine.startsWith(Constants.EMA_H_FROM + ":")) {
-                    from = currentLine;
-                    continue;
-                }
-                if (currentLine.startsWith(Constants.EMA_H_TO + ":")) {
-                    to = currentLine;
-                    continue;
-                }
-                if (currentLine.startsWith(Constants.EMA_MARK_STOP)) {
-                    reader.close();
-                    break;
-                }
-                if (currentLine.startsWith(Constants.EMA_MARK_START)) {
-                    inMarkdown = true;
-                    continue;
-                }
-                if (inMarkdown) sb.append(currentLine+"\n");
             }
         } catch (IOException e) {
             MyLog.LogE("Import page error.");

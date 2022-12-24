@@ -310,7 +310,7 @@ public class MainActivity extends Activity {
                     } else {
                         File pageDir = new File(FileIO.getFilesDir(MainActivity.this), "md");
                         File pageFile = new File(pageDir, name + ".md");
-                        uri = FileProvider.getUriForFile(this, this.getPackageName(), pageFile);
+                        uri = NoteProvider.getUriForFile(this, this.getPackageName(), pageFile);
                         intentE.setDataAndType(uri, "text/plain");
                         intentE.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
                     }

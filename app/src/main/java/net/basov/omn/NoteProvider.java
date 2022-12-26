@@ -34,9 +34,14 @@ import net.basov.util.AppDetails;
 import net.basov.util.FileIO;
 import net.basov.util.MyLog;
 
+/**
+ * The custom file provider need to "wrap" file with footer/header.
+ * This need to provide original file name of page when transfered
+ * as file (Telegram, for example. Information about OMN version also provided.
+ **/
 
 public class NoteProvider extends FileProvider {
-
+// some code used from here: https://stackoverflow.com/questions/27591756/android-contentprovider-openfile-need-to-serve-modified-file
     @Override
     public ParcelFileDescriptor openFile(Uri uri, String mode) throws FileNotFoundException {
         MyLog.LogD("URI in openFile: " + uri.toString());
@@ -54,7 +59,8 @@ public class NoteProvider extends FileProvider {
                     fout.write(
                             (Constants.EMA_H_VER
                             + ": " + AppDetails.getAppName(getContext())
-                            + "\n" + Constants.EMA_H_PFN
+                            + "\n"
+                            + Constants.EMA_H_PFN
                             + ": " + uri.getPath()
                                     .replaceFirst("^/md", "")
                                     .replaceFirst("\\.md$", "")

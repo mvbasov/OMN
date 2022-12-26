@@ -55,7 +55,9 @@ public class NoteProvider extends FileProvider {
                             (Constants.EMA_H_VER
                             + ": " + AppDetails.getAppName(getContext())
                             + "\n" + Constants.EMA_H_PFN
-                            + ": " + uri.getPath().replace("/md", "")
+                            + ": " + uri.getPath()
+                                    .replaceFirst("^/md", "")
+                                    .replaceFirst("\\.md$", "")
                             + "\n"
                             ).getBytes("UTF-8")
                     );

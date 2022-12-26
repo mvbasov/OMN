@@ -46,6 +46,13 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:mimeType="text/markdown" />
             </intent-filter>
+            <!-- Used to handle import note from Telegram.-->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:mimeType="application/octet-stream" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.SENDTO" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -105,6 +112,17 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_provider_paths"/>
+        </provider>
+        
+        <provider
+            android:name="${applicationId}.NoteProvider"
+            android:grantUriPermissions="true"
+            android:exported="false"
+            android:authorities="${applicationId}.NoteProvider">
+
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/note_provider_paths"/>
 
         </provider>
 

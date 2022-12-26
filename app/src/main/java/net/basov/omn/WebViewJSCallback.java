@@ -246,8 +246,10 @@ public class WebViewJSCallback {
         }
         String fileName = "/md" + pn + ".md";
         File pageFile = new File(FileIO.getFilesDir(mContext), fileName);
-        Uri uri = FileProvider.getUriForFile(mContext, mContext.getPackageName(), pageFile);
+        Uri uri = NoteProvider.getUriForFile(mContext, mContext.getPackageName() + ".NoteProvider", pageFile);
+        MyLog.LogD("URI in WebUiewJSCallback: " + uri.toString());
         Intent sendToIntent = new Intent();
+        sendToIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         sendToIntent.setAction(Intent.ACTION_SEND);
         sendToIntent.putExtra(Intent.EXTRA_TITLE, "Title test");
         sendToIntent.putExtra(Intent.EXTRA_SUBJECT, title +" [OMN v" + appInfo +"]" );

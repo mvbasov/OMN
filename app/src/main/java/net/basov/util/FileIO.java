@@ -87,6 +87,10 @@ public class FileIO {
         }
         saveTS(c);
     }
+
+    public static Page importPage(Context c, InputStream stream) {
+        return importPage(c, convertStreamToString(stream));
+    }
     
     public static Page importPage(Context c, String content) {
         // String iteration based on https://stackoverflow.com/a/9259462

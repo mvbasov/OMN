@@ -40,6 +40,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -364,6 +365,24 @@ public class MainActivity extends Activity {
                 String sharedSubject = intent.getStringExtra(Intent.EXTRA_SUBJECT);
                 String sharedHTML = intent.getStringExtra(Intent.EXTRA_HTML_TEXT);
                 Integer endOfFirstLine = 0;
+                Page importedPage = null;
+                if ( intent.hasExtra(Intent.EXTRA_STREAM)){
+                    MyLog.LogD("Intent has EXTRA_STREAM");
+                    Uri streamuri = (Uri)intent.getExtras().get(Intent.EXTRA_STREAM);
+                    try {
+                        if (streamuri != null) {
+                            importedPage = FileIO.importPage(MainActivity.this,
+                                    getContentResolver().openInputStream(streamuri));
+                        }
+                        if (importedPage == null) {
+                            Toast.makeText(this, "Page can't be imported...", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    checkAndImportPage(importedPage);
+                    return;
+                }
                 if (sharedHTML != null) {
                     noteText += sharedHTML;
                 } else {
@@ -386,29 +405,12 @@ public class MainActivity extends Activity {
 						} else if( sharedText.startsWith(Constants.EMA_H_VER + ": ")
                                 || sharedText.startsWith(Constants.EMA_H_SUBJECT)
                         ) {
-                            Page importedPage = null;
-                            if ((importedPage = FileIO.importPage(MainActivity.this, sharedText)) == null) {
+                            if (importedPage == null && (importedPage = FileIO.importPage(MainActivity.this, sharedText)) == null) {
                                 Toast.makeText(this, "Page can't be imported...", Toast.LENGTH_SHORT).show();
                                 pageAdd(UI.displayStartPage(mainUI_WV));
                             } else {
-                                String importedPageLink = importedPage.getPageName().replaceFirst("/incoming/","");
-                                pageAdd(Constants.INCOMING_INDEX_PAGE);
-                                FileIO.createPageIfNotExists(this,
-                                                             Constants.INCOMING_INDEX_PAGE,
-                                                             "Incoming pages index",
-                                                             ""
-                                                             );
-                                UI.setMdContentFromFile(this, page);                       
-                                String newText = "* ["+ importedPage.getMetaByKey("title") +"]("+ importedPageLink +".html)\n";                                       
-                                page.addAtTopOfPage(newText);
-                                FileIO.writePageToFile(
-                                    this,
-                                    Constants.INCOMING_INDEX_PAGE,
-                                    page.getMdContent()
-                                );
-                                pageAdd(importedPage.getPageName());
+                                checkAndImportPage(importedPage);
                             }
-                            UI.displayPage(mainUI_WV, page);
                             return;
                         } else {
 							link = "";
@@ -567,6 +569,26 @@ public class MainActivity extends Activity {
             }
         }
 
+    }
+
+    private void checkAndImportPage(Page importedPage) {
+        String importedPageLink = importedPage.getPageName().replaceFirst("/incoming/","");
+        pageAdd(Constants.INCOMING_INDEX_PAGE);
+        FileIO.createPageIfNotExists(this,
+                Constants.INCOMING_INDEX_PAGE,
+                "Incoming pages index",
+                ""
+        );
+        UI.setMdContentFromFile(this, page);
+        String newText = "* ["+ importedPage.getMetaByKey("title") +"]("+ importedPageLink +".html)\n";
+        page.addAtTopOfPage(newText);
+        FileIO.writePageToFile(
+                this,
+                Constants.INCOMING_INDEX_PAGE,
+                page.getMdContent()
+        );
+        pageAdd(importedPage.getPageName());
+        UI.displayPage(mainUI_WV, page);
     }
 
     @Override

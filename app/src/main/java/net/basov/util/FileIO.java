@@ -140,6 +140,7 @@ public class FileIO {
             MyLog.LogE("Import page error.");
             inPage = null;
         }
+        if (sb.length() == 0) return null;
         if (sent != null || from != null || to != null) {
             sb.append("\n- - -\n");
             if (sent != null) sb.append(sent + "  \n");

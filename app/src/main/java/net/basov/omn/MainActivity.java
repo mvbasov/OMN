@@ -366,8 +366,9 @@ public class MainActivity extends Activity {
                 String sharedHTML = intent.getStringExtra(Intent.EXTRA_HTML_TEXT);
                 Integer endOfFirstLine = 0;
                 Page importedPage = null;
+                //Page shared as file
                 if ( intent.hasExtra(Intent.EXTRA_STREAM)){
-                    MyLog.LogD("Intent has EXTRA_STREAM");
+                    //MyLog.LogD("Intent has EXTRA_STREAM");
                     Uri streamuri = (Uri)intent.getExtras().get(Intent.EXTRA_STREAM);
                     try {
                         if (streamuri != null) {
@@ -375,12 +376,21 @@ public class MainActivity extends Activity {
                                     getContentResolver().openInputStream(streamuri));
                         }
                         if (importedPage == null) {
-                            Toast.makeText(this, "Page can't be imported...", Toast.LENGTH_SHORT).show();
+                            fallbackDisplayStartPage("Page can't be imported...");
+                            return;
                         }
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
-                    checkAndImportPage(importedPage);
+                    if (importedPage != null) {
+                        checkAndImportPage(importedPage);
+                    } else {
+                        if (streamuri.toString().startsWith("file:")) {
+                            fallbackDisplayStartPage("file:// uri scheme not supported. ContentProvider required.\n\nFile can't be imported...");
+                        } else {
+                            fallbackDisplayStartPage("Page can't be imported...");
+                        }
+                    }
                     return;
                 }
                 if (sharedHTML != null) {
@@ -405,9 +415,8 @@ public class MainActivity extends Activity {
 						} else if( sharedText.startsWith(Constants.EMA_H_VER + ": ")
                                 || sharedText.startsWith(Constants.EMA_H_SUBJECT)
                         ) {
-                            if (importedPage == null && (importedPage = FileIO.importPage(MainActivity.this, sharedText)) == null) {
-                                Toast.makeText(this, "Page can't be imported...", Toast.LENGTH_SHORT).show();
-                                pageAdd(UI.displayStartPage(mainUI_WV));
+                            if ((importedPage = FileIO.importPage(MainActivity.this, sharedText)) == null) {
+                                fallbackDisplayStartPage("Page can't be imported...");
                             } else {
                                 checkAndImportPage(importedPage);
                             }
@@ -568,6 +577,12 @@ public class MainActivity extends Activity {
                 UI.displayPage(mainUI_WV, page);
             }
         }
+
+    }
+
+    private void fallbackDisplayStartPage(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+        pageAdd(UI.displayStartPage(mainUI_WV));
 
     }
 

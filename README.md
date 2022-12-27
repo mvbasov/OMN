@@ -1,4 +1,6 @@
 
+<a href="https://play.google.com/store/apps/details?id=net.basov.omn.b"><img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" height="80" alt="Available on Google Play" /></a>
+
 ### General information.
 This is simple, lightweight and open source application to create and organize everyday notes. Notes stored in Markdown format and shown as html. New html page create if it does not exists or corresponding markdown page has later modification time stamp.
 

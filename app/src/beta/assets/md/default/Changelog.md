@@ -4,7 +4,12 @@ Modified: 2019-05-31 22:56:54
 Author: Mikhail Basov
 Tags: OMN default,
 
-##### v00.28.04
+#### v00.29.00b
+
+Send/Recive (shared) notes as files (tested with Telegram and K9-Mail)
+
+Date:   Thu Dec 22 06:20:00 2022 +0300, commit c3d2f5778c99c4fb967fbf7b242cfa14be20188c
+##### v00.28.04b
 
 Request Termux RUN_COMMAND permission at runtime
 

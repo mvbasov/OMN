@@ -115,7 +115,7 @@
         </provider>
         
         <provider
-            android:name="${applicationId}.NoteProvider"
+            android:name=".NoteProvider"
             android:grantUriPermissions="true"
             android:exported="false"
             android:authorities="${applicationId}.NoteProvider">

@@ -75,6 +75,17 @@ Button code:
         <i class="material-icons">email</i>
     </button>
 
+#### <button onclick="Android.sendButtonCallback(PFN, Title)"> <i class="material-icons">send</i> </button> "Send page ..."
+
+You can send current page as file. Page file will be wraped by some meta information whivh required to correct import. Tested with Telegram and K-9 Mail
+
+Button code:
+
+    <button
+        onclick="Android.sendButtonCallback(PFN)">
+        
+    </button>
+
 #### <button onclick="Android.folderButtonCallback(PFN)"> <i class="material-icons">folder_open</i> </button> "Open data folder in file manager"
 
 This application has no permission to write to storage.

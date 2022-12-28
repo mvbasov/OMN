@@ -4,42 +4,42 @@ Modified: 2019-05-31 22:56:54
 Author: Mikhail Basov
 Tags: OMN default,
 
-#### v00.29.00b
+##### v00.29.00b
 
-Send/Recive (shared) notes as files (tested with Telegram and K9-Mail)
+- Send/Recive (shared) notes as files (tested with Telegram and K9-Mail)
 
-Date:   Thu Dec 22 06:20:00 2022 +0300, commit c3d2f5778c99c4fb967fbf7b242cfa14be20188c
 ##### v00.28.04b
+###### Date:   Thu Dec 22 06:20:00 2022 +0300, commit c3d2f5778c99c4fb967fbf7b242cfa14be20188c
 
-Request Termux RUN_COMMAND permission at runtime
+- Request Termux RUN_COMMAND permission at runtime
 
 ##### v00.28.03b
-Date:   Wed Dec 21 19:31:11 2022 +0300, commit e27232f3cda0b0f563789b89a3155ed11787b88b
+###### Date:   Wed Dec 21 19:31:11 2022 +0300, commit e27232f3cda0b0f563789b89a3155ed11787b88b
 
-Bump version to publis in store
-
-##### v00.28.02b
-Date:   Wed Dec 21 18:56:49 2022 +0300, commit 27adeac47f62e15da7f2ed2995fa1135ee7c0d19
-
-Remove MANAGE_EXTERNAL_STORAGE permission
+- Bump version to publis in store
 
 ##### v00.28.02b
-Date:   Wed Dec 21 18:56:49 2022 +0300, commit 27adeac47f62e15da7f2ed2995fa1135ee7c0d19
+###### Date:   Wed Dec 21 18:56:49 2022 +0300, commit 27adeac47f62e15da7f2ed2995fa1135ee7c0d19
+
+- Remove MANAGE_EXTERNAL_STORAGE permission
+
+##### v00.28.02b
+###### Date:   Wed Dec 21 18:56:49 2022 +0300, commit 27adeac47f62e15da7f2ed2995fa1135ee7c0d19
 
 - Fix permission issue
 
 ##### v00.28.01b
-Date:   Tue Dec 20 01:30:28 2022 +0300, commit bc945b01502f082fe0733d23bc9ebfc4d6b8e892
+###### Date:   Tue Dec 20 01:30:28 2022 +0300, commit bc945b01502f082fe0733d23bc9ebfc4d6b8e892
 
 - Bump version to v00.28.01b
 
 ##### v00.28.00b
-Date:   Tue Dec 20 01:24:25 2022 +0300, commit d080e184c58af56b85dce176abb150ea2ab2e249 
+###### Date:   Tue Dec 20 01:24:25 2022 +0300, commit d080e184c58af56b85dce176abb150ea2ab2e249 
 
 - Add termux integration (RUN_COMMAND)
 
 ##### v00.27.01b
-Date:   Wed Jun 23 19:55:50 2021 +0300, commit dca6811fad1a274636bd51e34d87b7be7a280d5b
+###### Date:   Wed Jun 23 19:55:50 2021 +0300, commit dca6811fad1a274636bd51e34d87b7be7a280d5b
 
 - Fix font icons
 

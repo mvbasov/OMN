@@ -99,7 +99,9 @@ If you're referring to a local page, you must use relative paths:
 
 More information about links format can be found [here](MarkdownExt.html#links)
 
-Place you pages under md/ directory, JavaScripts under js/ and styles under /css or embed all of these in page directly.. 
+Place you pages under md/ directory, JavaScripts under js/ and styles under /css or embed all of these in page directly. 
+
+The Telegram channel with news about OMN and examples of pages [created](https://t.me/OMNNewsAndTips)
 
 #### Application files tree
 

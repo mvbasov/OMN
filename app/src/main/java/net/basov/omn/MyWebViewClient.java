@@ -13,6 +13,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 package net.basov.omn;
 
 import android.annotation.TargetApi;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,7 +25,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -80,7 +80,7 @@ public class MyWebViewClient extends WebViewClient {
                         MainActivity.class);
                 intentDisplayPage.putExtra("page_name", pageName);
                 intentDisplayPage.setAction(Intent.ACTION_MAIN);
-                view.getContext().startActivity(intentDisplayPage);
+                c.startActivity(intentDisplayPage);
 
                 return false;
             case "http":
@@ -91,8 +91,12 @@ public class MyWebViewClient extends WebViewClient {
 			case "sms":
 			case "market":
                 final Intent intentMarket = new Intent(Intent.ACTION_VIEW, uri);
-                c.startActivity(intentMarket);
-                return true;
+                try {
+                    c.startActivity(intentMarket);
+                    return true;
+                } catch (ActivityNotFoundException e) {
+                    MyLog.LogE(e, "Activity to handle " + uri.getScheme() + "not found");
+                }
             case "intent":
                 SharedPreferences defSharedPref = PreferenceManager.getDefaultSharedPreferences(c);
                 if (! defSharedPref.getBoolean(c.getString(R.string.pk_enable_intent_uri), false))
@@ -122,10 +126,18 @@ public class MyWebViewClient extends WebViewClient {
                                         e.printStackTrace();
                                     }
                                 }
-                                c.startActivity(intentApp);
+                                try {
+                                    c.startActivity(intentApp);
+                                } catch (ActivityNotFoundException e) {
+                                    MyLog.LogE(e, "No Activity to handle " + intentApp.getAction() + " found");
+                                }
                                 StrictMode.setVmPolicy(old);
                             } else {
-                                c.startActivity(intentApp);
+                                try {
+                                    c.startActivity(intentApp);
+                                } catch (ActivityNotFoundException e) {
+                                    MyLog.LogE(e, "No Activity to handle " + intentApp.getAction() + " found");
+                                }
                             }
                         } else {
                             String fallbackUrl = intentApp.getStringExtra("browser_fallback_url");
@@ -162,14 +174,16 @@ public class MyWebViewClient extends WebViewClient {
                                     intentApp.putExtra("com.termux.RUN_COMMAND_ARGUMENTS", cmdArgs);
                                 }
                             }
-                            c.startService(intentApp);
+                            try {
+                                c.startService(intentApp);
+                            } catch (SecurityException | ActivityNotFoundException e) {
+                                MyLog.LogE(e, "Service to handle " + uri.getScheme() + "not found");
+                            }
                         }
                         return true;
                     }
                 } catch (URISyntaxException e) {
                     MyLog.LogE(e, "href processing error");
-                    Log.e(Constants.TAG, e.getMessage());
-                    e.printStackTrace();
                 }
             default:
                 return true;

@@ -4,7 +4,12 @@ Modified: 2019-05-31 22:56:54
 Author: Mikhail Basov
 Tags: OMN default,
 
+##### v00.30.01b
+
+- Bum version to v00.30.01b for Play Market beta release
+
 ##### v00.30.00b
+###### Date:   Thu Dec 29 22:38:30 2022 +0300, commit 3911f77804819b3d134e38e06723b6bded379035 (HEAD -> beta, tag: v00.30.00b)
 
 - Several fixes of code and documentation
 

@@ -4,7 +4,12 @@ Modified: 2019-05-31 22:56:54
 Author: Mikhail Basov
 Tags: OMN default,
 
+##### v00.30.00b
+
+- Several fixes of code and documentation
+
 ##### v00.29.00b
+###### Date:   Tue Dec 27 22:16:56 2022 +0300, commit dd27b3343a3e2f49bfda81a53a7a40f2111930b4 (tag: v00.29.00b)
 
 - Send/Recive (shared) notes as files (tested with Telegram and K9-Mail)
 

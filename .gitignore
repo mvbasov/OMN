@@ -15,6 +15,7 @@ local.properties
 gradle/
 gradlew
 gradlew.bat
+!gradle/wrapper/gradle-wrapper.properties
 
 # Signing files
 /*/.signing/

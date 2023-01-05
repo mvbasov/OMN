@@ -1,0 +1,1 @@
+Notes taken application with Markdown, HTML, CSS and JavaScript support

@@ -48,7 +48,7 @@ android {
     }
 
     buildTypes {
-         fdroid {
+         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
             zipAlignEnabled true
@@ -57,7 +57,7 @@ android {
             resValue "string", "git_describe", getGitRevParseInfo("describe --tags --abbrev=1")
             signingConfig signingConfigs.release
         }
-        release {
+        general {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
             zipAlignEnabled true

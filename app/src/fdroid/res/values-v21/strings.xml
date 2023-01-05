@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <!-- sharedUserId for use with plugins -->
-    <string name="shared_user_id">net.basov.omn_id.fdroid</string>
-    <string name="shared_user_label">Open Markdown Notes Software (F-Droid)</string>
-
-</resources>

@@ -36,6 +36,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebStorage;
 import android.webkit.WebView;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -354,12 +355,14 @@ public class MainActivity extends Activity {
                     || Intent.ACTION_SEND.equals(intent.getAction())
                     || Intent.ACTION_SENDTO.equals(intent.getAction())) {
                 /* QuickNotes creation */
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Create QuickNote");
-                final EditText input = new EditText(this);
+                //AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                //builder.setTitle("Create QuickNote");
+                //final EditText input = new EditText(this);
 
                 // Get shared text
 				String link = "";
+                String urlLink = "";
+                String urlTitle = "";
                 String noteText = "";
                 String sharedText = intent.getStringExtra(Intent.EXTRA_TEXT);
                 String sharedSubject = intent.getStringExtra(Intent.EXTRA_SUBJECT);
@@ -399,19 +402,25 @@ public class MainActivity extends Activity {
                     if (sharedSubject != null) {
                         noteText += "#### " + sharedSubject + "\n";
 						link += "* [" + sharedSubject + "]";
+                        urlTitle = sharedSubject;
                     }
                     if (sharedText != null) {           
 						if (sharedText.startsWith("http")) {
 							if (sharedText.contains("\n")) {
                                 endOfFirstLine = sharedText.indexOf("\n");
 							    link += sharedText.substring(0, endOfFirstLine);
+                                urlLink = sharedText.substring(0, endOfFirstLine);
 							} else
 						        link += "(" + sharedText +")\n";
-                            link += "\n";
+                                urlLink = sharedText;
                             if (endOfFirstLine != 0)
                                 noteText = sharedText.substring(sharedText.length() - endOfFirstLine);
                             else
                                 noteText = "";
+                            if(!urlLink.isEmpty()){
+                                showUrlImportDialog(urlTitle, urlLink);
+                                return;
+                             }
 						} else if( sharedText.startsWith(Constants.EMA_H_VER + ": ")
                                 || sharedText.startsWith(Constants.EMA_H_SUBJECT)
                         ) {
@@ -428,47 +437,8 @@ public class MainActivity extends Activity {
 						noteText = link + noteText;
                     }
                 }
-                input.setText(noteText);
-                builder.setView(input);
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Context c = MainActivity.this;
-                        pageAdd("/" + Constants.QUICKNOTES_PAGE);
-                        FileIO.createPageIfNotExists(c,
-                                "/" + Constants.QUICKNOTES_PAGE,
-                                "",
-                                ""
-                        );
-                        UI.setMdContentFromFile(c, page);
-
-                        final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                        String newText = getString(
-                                R.string.template_quick_note,
-                                // Time stamp
-                                DF.format(new Date()),
-                                // Note text
-                                input.getText().toString()
-                        );
-                        page.addAtTopOfPage(newText);
-
-                        FileIO.writePageToFile(
-                                c,
-                                "/" + Constants.QUICKNOTES_PAGE,
-                                page.getMdContent()
-                        );
-                        Intent i = new Intent();
-                        i.setAction(c.getPackageName() + ".REDISPLAY_PAGE");
-                        c.startActivity(i);
-                    }
-                });
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-                builder.show();
+ 
+                showQuickNoteDialog(noteText);
 
                 //Set start page before display if called from dynamic shortcut
                 if (page == null)
@@ -672,6 +642,166 @@ public class MainActivity extends Activity {
             String[] Termux_permission = {"com.termux.permission.RUN_COMMAND"};
             this.requestPermissions(Termux_permission, 10743);
         }
+    }
+    
+    private void showQuickNoteDialog(String noteText) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Create QuickNote");
+        final EditText input = new EditText(this);
+        builder.setView(input);
+        if (!noteText.isEmpty()) {
+            input.setText(noteText);
+        }
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Context c = MainActivity.this;
+                    pageAdd("/" + Constants.QUICKNOTES_PAGE);
+                    FileIO.createPageIfNotExists(c,
+                                                 "/" + Constants.QUICKNOTES_PAGE,
+                                                 "",
+                                                 ""
+                                                 );
+                    UI.setMdContentFromFile(c, page);
+
+                    final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    String newText = getString(
+                        R.string.template_quick_note,
+                        // Time stamp
+                        DF.format(new Date()),
+                        // Note text
+                        input.getText().toString()
+                    );
+                    page.addAtTopOfPage(newText);
+
+                    FileIO.writePageToFile(
+                        c,
+                        "/" + Constants.QUICKNOTES_PAGE,
+                        page.getMdContent()
+                    );
+                    Intent i = new Intent();
+                    i.setAction(c.getPackageName() + ".REDISPLAY_PAGE");
+                    c.startActivity(i);
+                }
+            });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+        builder.show();
+        
+    }
+    
+    private void showUrlImportDialog(String title, String url) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Import URL");
+        /*****************/
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+
+        final EditText titleBox = new EditText(this);
+        titleBox.setHint("Title");
+        layout.addView(titleBox);
+        if(!title.isEmpty())
+            titleBox.setText(title);
+
+        final EditText urlBox = new EditText(this);
+        urlBox.setHint("URL");
+        layout.addView(urlBox);
+        if(!url.isEmpty())
+            urlBox.setText(url);
+
+        final EditText tagsBox = new EditText(this);
+        tagsBox.setHint("Tags");
+        layout.addView(tagsBox);
+        //tagsBox.setText("* ");
+
+        final EditText notesBox = new EditText(this);
+        notesBox.setHint("Notes");
+        layout.addView(notesBox);
+        //notesBox.setText("* ");
+
+        builder.setView(layout);
+
+
+        /**************/
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Context c = MainActivity.this;
+                    pageAdd("/" + Constants.URL_INCOMING_PAGE);
+                    FileIO.createPageIfNotExists(c,
+                                                 "/" + Constants.URL_INCOMING_PAGE,
+                                                 "",
+                                                 ""
+                                                 );
+                    final StringBuilder tags_sb = new StringBuilder();
+                    if (tagsBox.getText().toString().length() > 0) {
+                        String[] tags = tagsBox.getText().toString().split(";");
+                        if (tags.length > 0) {
+                            for (int i = 0; i < tags.length; i++) {
+                                tags_sb.append("      \"")
+                                        .append(tags[i].trim())
+                                        .append("\"");
+                                if (i != tags.length-1)
+                                    tags_sb.append(",");
+                                tags_sb.append("\n");
+                            }
+
+                        }
+                    }
+                    final StringBuilder notes_sb = new StringBuilder();
+                    if (notesBox.getText().toString().length() > 0) {
+                        String[] notes = notesBox.getText().toString().split(";");
+                        if (notes.length > 0) {
+                            for (int i = 0; i < notes.length; i++) {
+                                notes_sb.append("      \"")
+                                        .append(notes[i].trim())
+                                        .append("\"");
+                                if (i != notes.length-1)
+                                    notes_sb.append(",");
+                                notes_sb.append("\n");
+                            }
+                        }
+                    }
+
+                    final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    String newText = getString(
+                        R.string.template_url_bookmark,
+                        // Time stamp
+                        DF.format(new Date()),
+                        urlBox.getText().toString(),
+                        titleBox.getText().toString(),
+                        tags_sb.toString(),
+                        notes_sb.toString()
+                    );
+                    UI.setMdContentFromFile(c, page);
+                    String header = page.getMetaHeaderAsString();
+                    String bookmarkHeaderRegexp = "<script>bookmarks = \\[\n<!-- Don't edit body below this line -->\n";
+                    page.setMdContent(page.getMdContent().replaceFirst(bookmarkHeaderRegexp, ""));
+                    page.addAtTopOfPage(newText);
+                    page.addAtTopOfPage(header);
+
+                    FileIO.writePageToFile(
+                        c,
+                        "/" + Constants.URL_INCOMING_PAGE,
+                        page.getMdContent()
+                    );
+                    Intent i = new Intent();
+                    i.setAction(c.getPackageName() + ".REDISPLAY_PAGE");
+                    c.startActivity(i);
+                }
+            });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                    fallbackDisplayStartPage("Url not imported...");
+                }
+            });
+        builder.show();
     }
 
     /**

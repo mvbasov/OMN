@@ -419,6 +419,7 @@ This page generated automatically.
 * [Quick notes](QuickNotes.html)
 * [Tags](Tags.html)
 * [Incoming pages](incoming/Incoming.html)
+* [Incoming bookmarks](bookmarks/Incoming.html)
 * [Help](default/Help.html)
 * [Changelog](default/Changelog.html)
 * [Welcome!](default/Welcome.html)
@@ -436,6 +437,28 @@ This page generated automatically.
 
 %2$s
 
+"]]></string>
+
+
+    <!--
+    Incoming bookmark
+    %1$s    date
+    %2$s    url
+    %3$s    title
+    %4$s    tags
+    %5$s    notes
+    -->
+    <string name="template_url_bookmark"><![CDATA["<script>bookmarks = [
+<!-- Don't edit body below this line -->
+  {
+    \"date\": \"%1$s\",
+    \"url\": \"%2$s\",
+    \"title\": \"%3$s\",
+    \"tags\": [
+%4$s    ],
+    \"notes\": [
+%5$s    ]
+  },
 "]]></string>
 
     <string name="pk_version_code" translatable="false">appVersionCode</string>

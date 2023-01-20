@@ -766,14 +766,13 @@ public class MainActivity extends Activity {
                             }
                         }
                     }
-
                     final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     String newText = getString(
                         R.string.template_url_bookmark,
                         // Time stamp
                         DF.format(new Date()),
                         urlBox.getText().toString(),
-                        titleBox.getText().toString(),
+                        TextTools.escapeJavaScriptFunctionParameter(titleBox.getText().toString()),
                         tags_sb.toString(),
                         notes_sb.toString()
                     );

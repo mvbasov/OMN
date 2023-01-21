@@ -53,7 +53,7 @@ public class Constants {
     public static final String EMA_H_SENT = "Sent";
     public static final String EMA_H_FROM = "From";
     public static final String EMA_H_TO = "To";
-    public static final String INCOMING_INDEX_PAGE = "incoming/Incoming";
+    public static final String INCOMING_INDEX_PAGE = "/incoming/Incoming";
     public static final String URL_INCOMING_PAGE = "bookmarks/Incoming";
     public static final String URL_INCOMING_CSS = "css/Bookmarker.css";
     public static final String URL_INCOMING_JS = "js/Bookmarker.js";

@@ -57,4 +57,5 @@ public class Constants {
     public static final String URL_INCOMING_PAGE = "bookmarks/Incoming";
     public static final String URL_INCOMING_CSS = "css/Bookmarker.css";
     public static final String URL_INCOMING_JS = "js/Bookmarker.js";
+    public static final String URL_INCOMING_HELP_PAGE = "default/BookmarkerHelp";
 }

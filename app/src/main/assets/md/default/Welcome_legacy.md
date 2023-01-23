@@ -56,6 +56,12 @@ Also you can share some text from another application. The quick note dialog wil
 
 If someone share URL in browser to E-Mail program and send you this message you can share it message with OMNotes and give it as [list item](Markdown.html#help-lists)
 
+#### OMN as target for `Share...` from other applications
+If you use the OMN as target for `Share` from another application OMN will receive this information.
+* From K9-Mail: if someone send you a page from OMN by E-Mail (K9-Mail tested) you OMN will receive this page and import if to [Incoming pages](/incoming/Incoming.html)
+* The same, using Telegram.
+* If you share some currently opened page from Web Browser (Google Chrome tested) OMN will receive the page information and save it to special [Incoming bookmarks](/bookmarks/Incoming.html) page. More information about this page [here](/default/BookmarkerHelp.html)
+
 #### External editor
 This program use external editor. If you try to edit page and get message about no editor found install one, please.
 On Android older then 8.0 (Oreo) suitable almost any editor. 
@@ -120,6 +126,7 @@ The Telegram channel with news about OMN and examples of pages [created](https:/
 │  └── functions.js
 ├─ md/
 │  ├─ default/
+│  │  ├─ BookmarkerHelp.md
 │  │  ├─ Build.md (*)
 │  │  ├─ Changelog.md
 │  │  ├─ Help.md
@@ -127,6 +134,8 @@ The Telegram channel with news about OMN and examples of pages [created](https:/
 │  │  ├─ MarkdownExt.md
 │  │  └─ Welcome.md
 │  ├─ incoming/ (*)
+│  │  └─ Incoming.md (**)
+│  ├─ bookmarks/ (*)
 │  │  └─ Incoming.md (**)
 │  ├─ QuickNotes.md (*)
 │  ├─ Start.md (**)

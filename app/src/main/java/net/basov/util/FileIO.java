@@ -348,6 +348,7 @@ public class FileIO {
                 "md/" + Constants.SYNTAX_PAGE + ".md",
                 "md/" + Constants.SYNTAX_EXT_PAGE + ".md",
                 "md/" + Constants.CHANGELOG + ".md",
+                "md/" + Constants.URL_INCOMING_HELP_PAGE + ".md",
                 Constants.COMON_CSS,
                 Constants.HIGHLIGHT_CSS,
                 Constants.ICONS_FONT,

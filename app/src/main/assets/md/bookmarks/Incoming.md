@@ -1,21 +1,33 @@
 Title: Incoming bookmarks
-Date: 2023-01-20 00:59:22
+Date: 2023-01-23 22:22:22
 Modified: 2023-01-20 02:38:01
 
 <script>bookmarks = [
 <!-- Don't edit body below this line -->
   {
-    "date": "2023-01-20 02:17:01",
-    "url": "https://www.java67.com/2014/09/right-way-to-check-if-string-is-empty.html",
-    "title": "Java67: Right way to check if String is empty in Java with Example",
+    "date": "2023-01-22 22:22:23",
+    "url": "https://t.me/OMNNewsAndTips",
+    "title": "OMN (Open Markdown Notes) news and best practices",
     "tags": [
-      "Tag1",
-      "     Tag2"
+      "OMN"
     ],
     "notes": [
-      "   note    "
+      "The Telegram channel"
     ]
   },
+  {
+    "date": "2023-01-22 22:22:22",
+    "url": "/default/BookmarkerHelp.html",
+    "title": "Help about this bookmark page",
+    "tags": [
+      "OMN",
+      "Local pages",
+      "Help"
+    ],
+    "notes": [
+      "File format described on this page also"
+    ]
+  }
 ];
 </script>
 

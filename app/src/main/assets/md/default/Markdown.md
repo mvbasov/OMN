@@ -2,7 +2,7 @@ Title: Markdown syntax
 Date: 2017-10-11 01:36:31
 Modified: 2019-08-19 02:46:35
 Category: Documentation
-Tags: Markdown, Documentation, OMN default
+Tags: Markdown, OMN documentation
 Slug: Markdown-syntax
 Lang: en
 Author: Mikhail Basov

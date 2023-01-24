@@ -2,7 +2,7 @@ Title: Help
 Date: 2017-10-22 19:31:15
 Modified: 2022-12-22 01:19:15
 Category: Index
-Tags: OMN default, Documentation
+Tags: OMN documentation
 Lang: en
 Slug: omn-help
 Author: Mikhail Basov

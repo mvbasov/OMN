@@ -2,7 +2,7 @@ Title: Betta version change log
 Date: 2023-01-05 19:38:39
 Modified: 2019-05-31 22:56:54
 Author: Mikhail Basov
-Tags: OMN default,
+Tags: OMN information
 
 ##### v00.30.02f
 

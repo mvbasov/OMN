@@ -2,7 +2,7 @@ Title: Bookmarker
 Date: 2023-01-21 16:31:36
 Modified: 2023-01-23 17:07:08
 Author: Mikhail Basov
-Tags: default
+Tags: OMN documentation
 
 ## General
 

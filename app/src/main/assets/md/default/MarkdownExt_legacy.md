@@ -2,7 +2,7 @@ Title: Extended Markdown syntax (legacy mode)
 Date: 2017-10-11 01:40:42
 Modified: 2002-12-22 01:14:21
 Category: Documentation
-Tags: Markdown, Documentation, OMN default 
+Tags: Markdown, OMN documentation 
 Lang: en
 Author: Mikhail Basov
 Summary: Extended Markdown syntax of Open Markdown Note

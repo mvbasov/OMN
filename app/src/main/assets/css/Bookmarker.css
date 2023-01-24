@@ -39,6 +39,11 @@ div#content button.details {
   outline: none;
   font-size: 1.1em;
 }
+span#counter {
+  cursor:pointer;
+  color:blue;
+  text-decoration:underline;
+}
 span.spanDate {
    font-size: 0.6em;
 }

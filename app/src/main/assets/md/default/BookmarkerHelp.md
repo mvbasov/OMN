@@ -1,6 +1,6 @@
 Title: Bookmarker
 Date: 2023-01-21 16:31:36
-Modified: 2023-01-23 17:07:08
+Modified: 2023-01-24 16:34:12
 Author: Mikhail Basov
 Tags: OMN documentation
 
@@ -13,7 +13,7 @@ You can organize url bookmarks using the bookmark page. Share opened page in bro
 Search lookup in title, url, tags and notes parts of bookmarks and display bookmarks where search string found.
 Search uses JavaScript RegExp.
 
-[How to Use Regular Expressions in JavaScript – Tutorial for Beginners](https://www.freecodecamp.org/news/4-reasons-your-z-index-isnt-working-and-how-to-fix-it-coder-coder-6bc05f103e6c/)
+[How to Use Regular Expressions in JavaScript – Tutorial for Beginners](https://www.freecodecamp.org/news/regular-expressions-for-beginners/)
 
 #### Useful search patterns examples
 | Pattern | search for |
@@ -21,6 +21,8 @@ Search uses JavaScript RegExp.
 |`li(-)?ion`| liion or li-ion|
 |`(?=.*omn)(?=.*mqtt)`| omn and mqtt|
 |`OMN\|mqtt`|omn or mqtt|
+|`\bOpen\b`|`Open Markdown` but not `OpenFile`|
+|`Open\w`|`OpenFile` but not `Open Markdown`|
 
 ## Displayed bookmarks counter
 
@@ -175,4 +177,3 @@ The following lines must to be at the bottom of the bookmark file. The path to .
 - - -
 
 <link rel="stylesheet" type="text/css" href="../../css/Bookmarker.css" />
-

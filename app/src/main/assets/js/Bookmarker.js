@@ -1,4 +1,4 @@
-var bVersion = '0.7 2023-01-17 17:31:27';
+var bVersion = '0.8 2023-01-24 18:29:29';
 
 function showBookmarks(onlyTag = '', search = '') {
   // sort bookmarks by date (newest upper)
@@ -133,31 +133,29 @@ function toggleTagsCloud(){
 function display(bm, tag, search) {
   //serch in notes, url, tags, date and title
   if (search != '') {
-    const lsearch = search.toLowerCase();
-    var patt = new RegExp(lsearch);
-    if (bm.url.toLowerCase().search(patt) !== -1) {
+    const lsearch = lowCaseAndStripAccents(search.trim());
+    var patt = new RegExp(lsearch, 'imu');
+    if (bm.url.search(patt) !== -1) {
       return true;
-    } else {
-      if (typeof bm.notes !== 'undefined' && bm.notes.length > 0) {
-        for (note of bm.notes) {
-          if (note != '' && note.toLowerCase().search(patt) !== -1)
-            return true;
-        }
-      }
-      if (typeof bm.tags !== 'undefined' && bm.tags.length > 0) {
-        for (tag of bm.tags) {
-          if (tag != '' && tag.toLowerCase().search(patt) !== -1)
-            return true;
-        }
-      }
-      if (typeof bm.title !== 'undefined' && bm.title != '')
-        if (bm.title.toLowerCase().search(patt) !== -1)
-          return true; 
-      if (typeof bm.date !== 'undefined' && bm.date != '')
-        if (bm.date.toLowerCase().search(patt) !== -1)
-          return true; 
-      return false;
     }
+    if (typeof bm.notes !== 'undefined' && bm.notes.length > 0) {
+      for (note of bm.notes) {
+        if (note != '' && lowCaseAndStripAccents(note).search(patt) !== -1)
+          return true;
+      }
+    }
+    if (typeof bm.tags !== 'undefined' && bm.tags.length > 0) {
+      for (tag of bm.tags) {
+        if (tag != '' && lowCaseAndStripAccents(tag).search(patt) !== -1)
+          return true;
+      }
+    }
+    if (typeof bm.title !== 'undefined' && bm.title != '')
+      if (lowCaseAndStripAccents(bm.title).search(patt) !== -1)
+        return true; 
+    if (typeof bm.date !== 'undefined' && bm.date != '')
+      if (bm.date.search(patt) !== -1)
+        return true; 
     return false;
   }
   // show without tags
@@ -218,7 +216,8 @@ Search
   searchD.id = 'searchBox';
   var searchI = document.createElement('input');
   searchI.id = 'searchInput';
-  searchI.type = 'text';
+  searchI.type = 'search';
+  searchI.placeholder = 'Enter search pattern…';
   searchD.appendChild(searchI);
 
   var searchB = document.createElement('button');
@@ -229,6 +228,14 @@ Search
     showBookmarks('', document.querySelector('#searchInput').value);
   };
   searchD.appendChild(searchB);
+  // Enable 'Enter' on keyboard to perform search
+  //document.querySelector('#searchInput')
+  searchI.addEventListener('keyup', function(event) {
+      event.preventDefault();
+      if (event.keyCode === 13) {
+        document.querySelector('#searchBtn').click();
+      }
+  });
 
   var searchC = document.createElement('span');
   searchC.id = 'counter';
@@ -361,5 +368,25 @@ function urlParams() {
     //showBookmarks('', 'google.com'); // search 'google.com'
   }
 }
+
+// Convert string to lower case and strip accents 
+function lowCaseAndStripAccents(str) { 
+  var r=str.toLowerCase();
+  //r = r.replace(new RegExp("\\s", 'g'),""); 
+  r = r.replace(new RegExp("[àáâãäå]", 'g'),"a");
+  r = r.replace(new RegExp("æ", 'g'),"ae");
+  r = r.replace(new RegExp("ç", 'g'),"c");
+  r = r.replace(new RegExp("[èéê]", 'g'),"e");
+  r = r.replace(new RegExp("[ё]", 'g'),"е"); // replace Cyrillic ё то Cyrillic е
+  r = r.replace(new RegExp("[ìíîï]", 'g'),"i");
+  r = r.replace(new RegExp("ñ", 'g'),"n");
+  r = r.replace(new RegExp("[òóôõö]", 'g'),"o");
+  r = r.replace(new RegExp("œ", 'g'),"oe");
+  r = r.replace(new RegExp("[ùúûü]", 'g'),"u");
+  r = r.replace(new RegExp("[ýÿ]", 'g'),"y");
+  //r = r.replace(new RegExp("\\W", 'g'),"");
+  ///alert(r);
+  return r;
+};
 
 urlParams();

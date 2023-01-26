@@ -1,5 +1,5 @@
-var bVersion = '0.8 2023-01-24 18:29:29';
-
+var bVersion = '0.9 2023-01-26 03:03:30';
+var config = {};
 function showBookmarks(onlyTag = '', search = '') {
   // sort bookmarks by date (newest upper)
   bookmarks = bookmarks.sort((a, b) => { if (a.date > b.date) { return -1; } });
@@ -349,30 +349,39 @@ function urlParams() {
   // one of two parameters 'tag' or 'search' processed
   // The 'tag' has higher priority then 'search'.
   var urlQuery = window.location.search.substring(1);
+  var searchF = document.querySelector('#searchInput');
   if(urlQuery.length > 0){
     const urlParams = new URLSearchParams(urlQuery);
-    var searchF = document.querySelector('#searchInput');
-    var tagP = urlParams.get('tag', '')
-    if (tagP)
+    var configP = urlParams.get('config', '');
+    if (configP) {
+      configuration(configP);
+    } else {
+      configuration();
+    }
+    var tagP = urlParams.get('tag', '');
+    if (tagP) {
       searchF.value = '';
       showBookmarks(tagP);
-    var searchP = urlParams.get('search','')
-    if (searchP) {;
+      return;
+    }
+    var searchP = urlParams.get('search','');
+    if (searchP) {
       searchF.value = searchP;
       showBookmarks('', searchP);
+      return;
     }
-  } else {
-    showBookmarks();
-    //showBookmarks(-1); // without tags
-    //showBookmarks('Tag 2'); // with 'Tag 2'
-    //showBookmarks('', 'google.com'); // search 'google.com'
   }
+  configuration();
+  showBookmarks();
+  //showBookmarks(-1); // without tags
+  //showBookmarks('Tag 2'); // with 'Tag 2'
+  //showBookmarks('', 'google.com'); // search 'google.com'
 }
 
 // Convert string to lower case and strip accents 
-function lowCaseAndStripAccents(str) { 
-  var r=str.toLowerCase();
-  //r = r.replace(new RegExp("\\s", 'g'),""); 
+function lowCaseAndStripAccents(str) {
+  var r = str.toLowerCase();
+  if (!config["stripAccents"]) return r; 
   r = r.replace(new RegExp("[àáâãäå]", 'g'),"a");
   r = r.replace(new RegExp("æ", 'g'),"ae");
   r = r.replace(new RegExp("ç", 'g'),"c");
@@ -384,9 +393,60 @@ function lowCaseAndStripAccents(str) {
   r = r.replace(new RegExp("œ", 'g'),"oe");
   r = r.replace(new RegExp("[ùúûü]", 'g'),"u");
   r = r.replace(new RegExp("[ýÿ]", 'g'),"y");
-  //r = r.replace(new RegExp("\\W", 'g'),"");
-  ///alert(r);
   return r;
 };
+
+function configuration(params = "") {
+  var configDefault = {
+    "stripAccents": true,
+    "storage": false
+  };
+  configDefault["configVersion"] = bVersion;
+  var configURI = {};
+  if (params !== "") {
+    alert("URI params: " + params);
+    try {
+      if (params != "show") 
+        configURI = JSON.parse(params);
+    } catch (e) {
+      alert("URI Config parsing error: " + e);
+    }
+  }
+  var configStorage = {};
+  if (localStorage != null) {
+    if (localStorage.OMNConfig) {
+      try {
+        configStorage = JSON.parse(localStorage.OMNConfig);
+        configStorage["storage"] = true;
+      } catch (e) {
+        alert("Storage Config parsing error: " + e);
+        configStorage["storage"] = false;
+      }
+    } else {
+       localStorage.OMNConfig = JSON.stringify(configDefault);
+    } 
+  }
+  for (const p in configDefault) {
+    if (configURI.hasOwnProperty(p))
+      config[p] = configURI[p];
+    else if (configStorage.hasOwnProperty(p))
+      config[p] = configStorage[p];
+    else 
+      config[p] = configDefault[p];
+  }
+  config["configVersion"] = bVersion;
+  if (localStorage != null)
+    localStorage.OMNConfig = JSON.stringify(config);
+  if (params !== "") {
+    alert(
+      "Configuration\n"
+    + "—".repeat(16) +"\n"
+    + "Default: " + JSON.stringify(configDefault, null, 2) + "\n"
+    + "Storage: "  + JSON.stringify(configStorage, null, 2) + "\n"
+    + "URI: " + JSON.stringify(configURI, null, 2) + "\n"
+    + "Effective: "  + JSON.stringify(config, null, 2)
+    );
+  }
+}
 
 urlParams();

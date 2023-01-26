@@ -1,4 +1,4 @@
-var bVersion = '0.9 2023-01-26 03:03:30';
+var bVersion = '0.10 2023-01-26 05:08:00';
 var config = {};
 function showBookmarks(onlyTag = '', search = '') {
   // sort bookmarks by date (newest upper)
@@ -133,25 +133,25 @@ function toggleTagsCloud(){
 function display(bm, tag, search) {
   //serch in notes, url, tags, date and title
   if (search != '') {
-    const lsearch = lowCaseAndStripAccents(search.trim());
+    const lsearch = stripAccents(search.trim());
     var patt = new RegExp(lsearch, 'imu');
     if (bm.url.search(patt) !== -1) {
       return true;
     }
     if (typeof bm.notes !== 'undefined' && bm.notes.length > 0) {
       for (note of bm.notes) {
-        if (note != '' && lowCaseAndStripAccents(note).search(patt) !== -1)
+        if (note != '' && stripAccents(note).search(patt) !== -1)
           return true;
       }
     }
     if (typeof bm.tags !== 'undefined' && bm.tags.length > 0) {
       for (tag of bm.tags) {
-        if (tag != '' && lowCaseAndStripAccents(tag).search(patt) !== -1)
+        if (tag != '' && stripAccents(tag).search(patt) !== -1)
           return true;
       }
     }
     if (typeof bm.title !== 'undefined' && bm.title != '')
-      if (lowCaseAndStripAccents(bm.title).search(patt) !== -1)
+      if (stripAccents(bm.title).search(patt) !== -1)
         return true; 
     if (typeof bm.date !== 'undefined' && bm.date != '')
       if (bm.date.search(patt) !== -1)
@@ -378,21 +378,32 @@ function urlParams() {
   //showBookmarks('', 'google.com'); // search 'google.com'
 }
 
-// Convert string to lower case and strip accents 
-function lowCaseAndStripAccents(str) {
-  var r = str.toLowerCase();
+// Strip accents 
+function stripAccents(str) {
+  var r = str;
   if (!config["stripAccents"]) return r; 
   r = r.replace(new RegExp("[àáâãäå]", 'g'),"a");
+  r = r.replace(new RegExp("[ÀÁÂÃÄÅ]", 'g'),"A");
   r = r.replace(new RegExp("æ", 'g'),"ae");
+  r = r.replace(new RegExp("Æ", 'g'),"Ae");
   r = r.replace(new RegExp("ç", 'g'),"c");
+  r = r.replace(new RegExp("Ç", 'g'),"C");
   r = r.replace(new RegExp("[èéê]", 'g'),"e");
+  r = r.replace(new RegExp("[ÈÉÊ]", 'g'),"E");
   r = r.replace(new RegExp("[ё]", 'g'),"е"); // replace Cyrillic ё то Cyrillic е
+  r = r.replace(new RegExp("[Ё]", 'g'),"Е"); // replace Cyrillic Ё то Cyrillic Е
   r = r.replace(new RegExp("[ìíîï]", 'g'),"i");
+  r = r.replace(new RegExp("[ÌÍÎÏ]", 'g'),"I");
   r = r.replace(new RegExp("ñ", 'g'),"n");
+  r = r.replace(new RegExp("Ñ", 'g'),"N");
   r = r.replace(new RegExp("[òóôõö]", 'g'),"o");
+  r = r.replace(new RegExp("[ÒÓÔÕÖ]", 'g'),"O");
   r = r.replace(new RegExp("œ", 'g'),"oe");
+  r = r.replace(new RegExp("Œ", 'g'),"Oe");
   r = r.replace(new RegExp("[ùúûü]", 'g'),"u");
+  r = r.replace(new RegExp("[ÙÚÛÜ]", 'g'),"U");
   r = r.replace(new RegExp("[ýÿ]", 'g'),"y");
+  r = r.replace(new RegExp("[ÝŸ]", 'g'),"Y");
   return r;
 };
 

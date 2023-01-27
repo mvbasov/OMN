@@ -1,5 +1,7 @@
-var bVersion = '0.10 2023-01-26 05:08:00';
+var bVersion = '0.12 2023-01-27 15:56:04';
 var config = {};
+var configKey = 'OMNBookmarkerConfig';
+
 function showBookmarks(onlyTag = '', search = '') {
   // sort bookmarks by date (newest upper)
   bookmarks = bookmarks.sort((a, b) => { if (a.date > b.date) { return -1; } });
@@ -134,7 +136,9 @@ function display(bm, tag, search) {
   //serch in notes, url, tags, date and title
   if (search != '') {
     const lsearch = stripAccents(search.trim());
-    var patt = new RegExp(lsearch, 'imu');
+    var roptions = 'mu';
+    if (config['ignoreCase']) roptions += 'i';
+    var patt = new RegExp(lsearch, roptions);
     if (bm.url.search(patt) !== -1) {
       return true;
     }
@@ -410,6 +414,7 @@ function stripAccents(str) {
 function configuration(params = "") {
   var configDefault = {
     "stripAccents": true,
+    "ignoreCase": true,
     "storage": false
   };
   configDefault["configVersion"] = bVersion;
@@ -425,16 +430,16 @@ function configuration(params = "") {
   }
   var configStorage = {};
   if (localStorage != null) {
-    if (localStorage.OMNConfig) {
+    if (localStorage[configKey]) {
       try {
-        configStorage = JSON.parse(localStorage.OMNConfig);
+        configStorage = JSON.parse(localStorage[configKey]);
         configStorage["storage"] = true;
       } catch (e) {
         alert("Storage Config parsing error: " + e);
         configStorage["storage"] = false;
       }
     } else {
-       localStorage.OMNConfig = JSON.stringify(configDefault);
+       localStorage[configKey] = JSON.stringify(configDefault);
     } 
   }
   for (const p in configDefault) {
@@ -447,7 +452,7 @@ function configuration(params = "") {
   }
   config["configVersion"] = bVersion;
   if (localStorage != null)
-    localStorage.OMNConfig = JSON.stringify(config);
+    localStorage[configKey]= JSON.stringify(config);
   if (params !== "") {
     alert(
       "Configuration\n"

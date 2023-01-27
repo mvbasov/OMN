@@ -1,6 +1,6 @@
 Title: Bookmarker
 Date: 2023-01-21 16:31:36
-Modified: 2023-01-24 16:34:12
+Modified: 2023-01-26 21:06:06
 Author: Mikhail Basov
 Tags: OMN documentation
 
@@ -8,7 +8,7 @@ Tags: OMN documentation
 
 You can organize url bookmarks using the bookmark page. Share opened page in browser (Google Chrome tested) and point OMN as target for this sharing. The OMN will show you dialog with 'Title', 'URL', 'Tags' and 'Notes' which can be changed. Multiple tags and notes need to be separated by `;` After you will press 'OK' button the bookmark will be created on the [Incoming bookmarks](/bookmarks/Incoming.html) page
 
-## Search
+### Search
 
 Search lookup in title, url, tags and notes parts of bookmarks and display bookmarks where search string found.
 Search uses JavaScript RegExp.
@@ -18,17 +18,17 @@ Search uses JavaScript RegExp.
 #### Useful search patterns examples
 | Pattern | search for |
 |---------|------------|
-|`li(-)?ion`| liion or li-ion|
-|`(?=.*omn)(?=.*mqtt)`| omn and mqtt|
-|`OMN\|mqtt`|omn or mqtt|
+|`li(-)?ion`| `liion` or `li-ion`|
+|`(?=.*omn)(?=.*mqtt)`| `omn` and `mqtt`|
+|`OMN\|mqtt`|`omn` or `mqtt`|
 |`\bOpen\b`|`Open Markdown` but not `OpenFile`|
 |`Open\w`|`OpenFile` but not `Open Markdown`|
 
-## Displayed bookmarks counter
+### Displayed bookmarks counter
 
 At the top right of page the displayed bookmarks counter shown. This counter is clickable and show/hide "tags cloud".
 
-## Control buttons
+### Control buttons
 
 <button class="colexp">Expand</button>
 
@@ -46,11 +46,11 @@ Show all bookmarks
 
 Show only bookmarks without tags
 
-## Tags cloud
+### Tags cloud
 
 Tags cloud show all tags of displayed bookmarks. All tags, except current, are clickable. Click on tag show bookmarks with this tag only.
 
-## Bookmark element
+### Bookmark element
 
 - - -
 
@@ -90,8 +90,9 @@ Tags cloud show all tags of displayed bookmarks. All tags, except current, are c
 * The bookmark creation date displayed above title: `2022-12-25 16:07:28`.
 * The Tag is clickable and show bookmarks with this tag only.
 
-## Bookmark page URI parameters
-
+## Advanced 
+### Bookmark page URI parameters
+#### Predefined tag/searh
 It is possible to create links to the bookmark page with predefined search string or tag to display. The URL parameters need to be encoded as in browser url. Examples are below:
 
 ```
@@ -116,14 +117,40 @@ It is possible to create links to the bookmark page with predefined search strin
 
 Tag parameter has priority on search. If both specified only tag used.
 
-## Data store format
-OMN will add incoming bookmarks automatically to [Incoming bookmark](/bookmarks/Incoming.html).
-You can create you own bookmark page according to file format.
+#### Configuration
+The bookmark page has options listed below:
+
+##### `ignoreCase`
+Default value is `true`.  
+If this option set (true) the strings `tiMer` and `timer` treat the same for search. If the option unset (false) the strings is differ.
+
+##### `stripAccents`
+Default value is `true`.  
+If this option set (true) the strings `ёжик` and `ежик` treat the same for search. If the option unset (false) the strings is differ.
+
+To run bookmark page with some option set/unset click the links below:
+* [ignoreCase unset](/bookmarks/Incoming.html?config=%7B%22ignoreCase%22%3Afalse%7D)
+* [ignoreCase set](/bookmarks/Incoming.html?config=%7B%22ignoreCase%22%3Atrue%7D)
+* [stripAccents unset](/bookmarks/Incoming.html?config=%7B%22stripAccents%22%3Afalse%7D)
+* [stripAccents set](/bookmarks/Incoming.html?config=%7B%22stripAccents%22%3Atrue%7D)
+
+To show current effective configuration visit the following link:
+* [show config](/bookmarks/Incoming.html?config=show)
+
+The configuration stored permanently if [JS localStorage](/default/Help.html#enable-jsdebug) enabled.
+
+Bookmark page configuration not added to application settings to allow page operate even if page exported as .html page and placed to desktop computer for example.
+
+`config` and `url`/`search` uri parametes allowed to be combined.
+
+### Data store format
+OMN will add incoming bookmarks automatically to [Incoming bookmark](/bookmarks/Incoming.html).  
+You can create you own bookmark page according to file format.  
 Format of the bookmark page described below.
 
 #### Mandatory header of file
 
-The following lines must to be on the top of the bookmark file.
+The following lines must to be on the top of the bookmark file (below metadata if present).
 
 - - -
 
@@ -175,5 +202,8 @@ The following lines must to be at the bottom of the bookmark file. The path to .
 ```
 
 - - -
+<script>
+  window.onload=createTOC(document.getElementById('content'));
+</script>
 
 <link rel="stylesheet" type="text/css" href="../../css/Bookmarker.css" />

@@ -353,16 +353,16 @@ public class FileIO {
                 Constants.HIGHLIGHT_CSS,
                 Constants.ICONS_FONT,
                 Constants.ICONS_CSS,
-                Constants.FUNCTIONS_JS
+                Constants.FUNCTIONS_JS,
+                Constants.URL_INCOMING_CSS,
+                Constants.URL_INCOMING_JS
         };
         copyFilesFromAssets(c, files, force);
 
         String[] optionalFiles = {
                 Constants.CUSTOM_CSS,
                 Constants.GITIGNORE,
-                "md/" + Constants.URL_INCOMING_PAGE + ".md",
-                Constants.URL_INCOMING_CSS,
-                Constants.URL_INCOMING_JS
+                "md/" + Constants.URL_INCOMING_PAGE + ".md"
         };
         copyFilesFromAssets(c, optionalFiles, false);
 

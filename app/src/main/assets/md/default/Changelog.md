@@ -4,7 +4,13 @@ Modified: 2019-05-31 22:56:54
 Author: Mikhail Basov
 Tags: OMN information
 
+##### v00.31.00b
+
+* Add URL Bookmark organizer
+* Add package name to all pages as variable
+
 ##### v00.30.02f
+###### Date:   Fri Jan 6 02:12:49 2023 +0300, commit b346e3fd752295c01d3b1f4230819471b7a3a642 (tag: v00.30.02f)
 
 - Prepare to F-Droid publish
 

@@ -1,0 +1,2 @@
+* Add URL Bookmark organizer
+* Add package name to all pages as variable

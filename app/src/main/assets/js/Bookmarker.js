@@ -1,6 +1,8 @@
-var bVersion = '0.12 2023-01-27 15:56:04';
+var bVersion = '0.14 2023-01-27 21:11:46';
 var config = {};
 var configKey = 'OMNBookmarkerConfig';
+if (typeof packgeName !== 'undefined' && packgeName)
+  configKey = packageName.replace('\.','-') + '_' + configKey;
 
 function showBookmarks(onlyTag = '', search = '') {
   // sort bookmarks by date (newest upper)
@@ -62,7 +64,7 @@ function showBookmarks(onlyTag = '', search = '') {
         ulin.appendChild(liint);
       }
       // find notes if exists
-      txt = document.createTextNode("")
+      txt = document.createTextNode('')
       var first = true;
       if (bm.notes && bm.notes.length > 0){
         var liinn = document.createElement('li');
@@ -385,47 +387,47 @@ function urlParams() {
 // Strip accents 
 function stripAccents(str) {
   var r = str;
-  if (!config["stripAccents"]) return r; 
-  r = r.replace(new RegExp("[àáâãäå]", 'g'),"a");
-  r = r.replace(new RegExp("[ÀÁÂÃÄÅ]", 'g'),"A");
-  r = r.replace(new RegExp("æ", 'g'),"ae");
-  r = r.replace(new RegExp("Æ", 'g'),"Ae");
-  r = r.replace(new RegExp("ç", 'g'),"c");
-  r = r.replace(new RegExp("Ç", 'g'),"C");
-  r = r.replace(new RegExp("[èéê]", 'g'),"e");
-  r = r.replace(new RegExp("[ÈÉÊ]", 'g'),"E");
-  r = r.replace(new RegExp("[ё]", 'g'),"е"); // replace Cyrillic ё то Cyrillic е
-  r = r.replace(new RegExp("[Ё]", 'g'),"Е"); // replace Cyrillic Ё то Cyrillic Е
-  r = r.replace(new RegExp("[ìíîï]", 'g'),"i");
-  r = r.replace(new RegExp("[ÌÍÎÏ]", 'g'),"I");
-  r = r.replace(new RegExp("ñ", 'g'),"n");
-  r = r.replace(new RegExp("Ñ", 'g'),"N");
-  r = r.replace(new RegExp("[òóôõö]", 'g'),"o");
-  r = r.replace(new RegExp("[ÒÓÔÕÖ]", 'g'),"O");
-  r = r.replace(new RegExp("œ", 'g'),"oe");
-  r = r.replace(new RegExp("Œ", 'g'),"Oe");
-  r = r.replace(new RegExp("[ùúûü]", 'g'),"u");
-  r = r.replace(new RegExp("[ÙÚÛÜ]", 'g'),"U");
-  r = r.replace(new RegExp("[ýÿ]", 'g'),"y");
-  r = r.replace(new RegExp("[ÝŸ]", 'g'),"Y");
+  if (!config['stripAccents']) return r; 
+  r = r.replace(new RegExp('[àáâãäå]', 'g'),'a');
+  r = r.replace(new RegExp('[ÀÁÂÃÄÅ]', 'g'),'A');
+  r = r.replace(new RegExp('æ', 'g'),'ae');
+  r = r.replace(new RegExp('Æ', 'g'),'Ae');
+  r = r.replace(new RegExp('ç', 'g'),'c');
+  r = r.replace(new RegExp('Ç', 'g'),'C');
+  r = r.replace(new RegExp('[èéê]', 'g'),'e');
+  r = r.replace(new RegExp('[ÈÉÊ]', 'g'),'E');
+  r = r.replace(new RegExp('[ё]', 'g'),'е'); // replace Cyrillic ё то Cyrillic е
+  r = r.replace(new RegExp('[Ё]', 'g'),'Е'); // replace Cyrillic Ё то Cyrillic Е
+  r = r.replace(new RegExp('[ìíîï]', 'g'),'i');
+  r = r.replace(new RegExp('[ÌÍÎÏ]', 'g'),'I');
+  r = r.replace(new RegExp('ñ', 'g'),'n');
+  r = r.replace(new RegExp('Ñ', 'g'),'N');
+  r = r.replace(new RegExp('[òóôõö]', 'g'),'o');
+  r = r.replace(new RegExp('[ÒÓÔÕÖ]', 'g'),'O');
+  r = r.replace(new RegExp('œ', 'g'),'oe');
+  r = r.replace(new RegExp('Œ', 'g'),'Oe');
+  r = r.replace(new RegExp('[ùúûü]', 'g'),'u');
+  r = r.replace(new RegExp('[ÙÚÛÜ]', 'g'),'U');
+  r = r.replace(new RegExp('[ýÿ]', 'g'),'y');
+  r = r.replace(new RegExp('[ÝŸ]', 'g'),'Y');
   return r;
 };
 
-function configuration(params = "") {
+function configuration(params = '') {
   var configDefault = {
     "stripAccents": true,
     "ignoreCase": true,
     "storage": false
   };
-  configDefault["configVersion"] = bVersion;
+  configDefault['configVersion'] = bVersion;
   var configURI = {};
-  if (params !== "") {
-    alert("URI params: " + params);
+  if (params !== '') {
+    alert('URI params: ' + params);
     try {
-      if (params != "show") 
+      if (params != 'show') 
         configURI = JSON.parse(params);
     } catch (e) {
-      alert("URI Config parsing error: " + e);
+      alert('URI Config parsing error: ' + e);
     }
   }
   var configStorage = {};
@@ -433,10 +435,10 @@ function configuration(params = "") {
     if (localStorage[configKey]) {
       try {
         configStorage = JSON.parse(localStorage[configKey]);
-        configStorage["storage"] = true;
+        configStorage['storage'] = true;
       } catch (e) {
-        alert("Storage Config parsing error: " + e);
-        configStorage["storage"] = false;
+        alert('Storage Config parsing error: ' + e);
+        configStorage['storage'] = false;
       }
     } else {
        localStorage[configKey] = JSON.stringify(configDefault);
@@ -450,17 +452,18 @@ function configuration(params = "") {
     else 
       config[p] = configDefault[p];
   }
-  config["configVersion"] = bVersion;
+  config['configVersion'] = bVersion;
   if (localStorage != null)
     localStorage[configKey]= JSON.stringify(config);
-  if (params !== "") {
+  if (params !== '') {
     alert(
-      "Configuration\n"
-    + "—".repeat(16) +"\n"
-    + "Default: " + JSON.stringify(configDefault, null, 2) + "\n"
-    + "Storage: "  + JSON.stringify(configStorage, null, 2) + "\n"
-    + "URI: " + JSON.stringify(configURI, null, 2) + "\n"
-    + "Effective: "  + JSON.stringify(config, null, 2)
+      'Configuration\n'
+    + '—'.repeat(16) +'\n'
+    + 'configKey: ' + configKey + '\n'
+    + 'Default: ' + JSON.stringify(configDefault, null, 2) + '\n'
+    + 'Storage: '  + JSON.stringify(configStorage, null, 2) + '\n'
+    + 'URI: ' + JSON.stringify(configURI, null, 2) + '\n'
+    + 'Effective: '  + JSON.stringify(config, null, 2)
     );
   }
 }

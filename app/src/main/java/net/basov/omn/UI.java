@@ -20,7 +20,7 @@ import android.webkit.WebView;
 //import android.widget.Toast;
 
 import net.basov.util.FileIO;
-import net.basov.util.MyLog;
+//import net.basov.util.MyLog;
 import net.basov.util.TextTools;
 
 /**
@@ -60,6 +60,7 @@ public class UI {
                 c.getString(
                         R.string.set_html_page_js,
                         page.getPageName(),
+                        c.getPackageName(),
                         actionButtons,            
                         //Enable Home button
                         defSharedPref.getBoolean(

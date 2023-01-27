@@ -17,34 +17,36 @@
 
     <!--
     Top part of any html page
-        %1$s    Page title
-        %2$s    Reference level to top ("../" for 1-st level subdirectory)
-        %3$s    Meta information
-        %4$s    Page name
-        %5$s    1-st page header (function as page title)
-        %6$s    Tags
+        %1$s    Package name
+        %2$s    Page title
+        %3$s    Reference level to top ("../" for 1-st level subdirectory)
+        %4$s    Meta information
+        %5$s    Page name
+        %6$s    1-st page header (function as page title)
+        %7$s    Tags
     -->
     <string name="html_top"><![CDATA["<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">
 <html xmlns=\"http://www.w3.org/1999/xhtml\">
 
 <head>
 
-  <title>%1$s</title>
+  <title>%2$s</title>
 
-  <link rel=\"stylesheet\" type=\"text/css\" href=\"../%2$scss/highlight.css\" />
+  <link rel=\"stylesheet\" type=\"text/css\" href=\"../%3$scss/highlight.css\" />
   <link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/icon?family=Material+Icons\" />
-  <link rel=\"stylesheet\" href=\"../%2$sfonts/google-material/material-icons.css\"  />
-  <link rel=\"stylesheet\" type=\"text/css\" href=\"../%2$scss/common.css\" />
-  <link rel=\"stylesheet\" type=\"text/css\" href=\"../%2$scss/custom.css\" />
+  <link rel=\"stylesheet\" href=\"../%3$sfonts/google-material/material-icons.css\"  />
+  <link rel=\"stylesheet\" type=\"text/css\" href=\"../%3$scss/common.css\" />
+  <link rel=\"stylesheet\" type=\"text/css\" href=\"../%3$scss/custom.css\" />
 
-  <script type="text/javascript" src="../%2$sjs/functions.js"></script>
+  <script type="text/javascript" src="../%3$sjs/functions.js"></script>
 
   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />
   <meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\" />
-%3$s
+%4$s
   <script>
-    var PageName = \'%4$s\';
-    var Title = \'%5$s\';
+    var PackageName = \'%1$s\';
+    var PageName = \'%5$s\';
+    var Title = \'%6$s\';
   </script>
 
 </head>
@@ -55,7 +57,7 @@
     <div id=\"hidable_header\" style=\"display:none; background-color:lightgray; width:100%%; padding-top:0.5em; padding-left:0.5em\" >
       <div id=\"actions_header\">
       </div>
-      Name:<span>%4$s</span>%6$s
+      Name:<span>%5$s</span>%7$s
     </div>
 
     <a
@@ -282,8 +284,8 @@ if (typeof selected != 'undefined') {
 
     <!--
      Javascript called after load any html page
-        %1$s    Page name
-        %2$s    OMN package name
+        %1$s    OMN package name
+        %2$s    Page name
         %3$b    Inject action button header
         %4$b    Enable Home button
         %5$b    Enable Debug button
@@ -298,8 +300,8 @@ if (typeof selected != 'undefined') {
     -->
     <string name="set_html_page_js">
         javascript:
-        var PFN=\'%1$s\';
-        var OMNPKG=\'%2$s\';
+        var OMNPKG=\'%1$s\';
+        var PFN=\'%2$s\';
         document.getElementById(\'actions_header\').innerHTML=\'%3$s\';
         document.getElementById(\'title_arrow\').style.display=\'inline\';
 
@@ -325,26 +327,30 @@ if (typeof selected != 'undefined') {
 
     <!--
     JavaScript called at Markdown to HTML convertion time
-        %1$s    Page name
+        %1$s    Package name
+        %2$s    Page name
     -->
     <string name="set_md_page_js_create">
         javascript:
-        var PFN=\'%1$s\';
-        document.getElementById(\'pname\').innerHTML=\'%1$s\';
+        var OMNPKG=\'%1$s\';
+        var PFN=\'%2$s\';
+        document.getElementById(\'pname\').innerHTML=\'%2$s\';
     </string>
 
     <!--
     JavaScript called at Markdown to HTML convertion time
-        %1$s    Page name
+        %1$s    Package name
         %2$s    Page title
-        %3$s    Markdown content
-        %4$b    Enable code highlight
+        %3$s    Page title
+        %4$s    Markdown content
+        %5$b    Enable code highlight
     -->
     <string name="set_md_page_js">
         javascript:
-        var PFN=\'%1$s\';
-        var Title = \'%2$s\';
-        run_marked(\'%3$s\', \'%4$b\');
+        var OMNPKG=\'%1$s\';
+        var PFN=\'%2$s\';
+        var Title = \'%3$s\';
+        run_marked(\'%4$s\', \'%5$b\');
     </string>
 
     <!--

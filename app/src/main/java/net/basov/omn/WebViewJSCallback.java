@@ -347,6 +347,7 @@ public class WebViewJSCallback {
 
         String htmlTop = mContext.getString(
                 R.string.html_top,
+                mContext.getPackageName(),
                 Title,      //Page title
                 dirPrefix,  //Reference to top (../*[0..n])
                 htmlMeta,   //Summary

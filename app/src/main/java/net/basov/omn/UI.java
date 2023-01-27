@@ -59,9 +59,9 @@ public class UI {
             final String setPageJS =
                 c.getString(
                         R.string.set_html_page_js,
-                        page.getPageName(),
                         c.getPackageName(),
-                        actionButtons,            
+                        page.getPageName(),
+                        actionButtons,
                         //Enable Home button
                         defSharedPref.getBoolean(
                                 c.getString(R.string.pk_btn_enable_home),
@@ -146,6 +146,7 @@ public class UI {
             final String setPageJS =
                     c.getString(
                             R.string.set_md_page_js_create,
+                            c.getPackageName(),
                             pageName
                     );
             wv.setWebViewClient(new MyWebViewClient() {
@@ -176,7 +177,7 @@ public class UI {
             final String setPageJS =
                     c.getString(
                             R.string.set_md_page_js,
-
+                            c.getPackageName(),
                             pageName,
                             pageTitle,
                             mdBody,

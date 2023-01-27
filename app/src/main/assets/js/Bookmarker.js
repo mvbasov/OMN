@@ -1,8 +1,8 @@
-var bVersion = '0.14 2023-01-27 21:11:46';
+var bVersion = '0.15 2023-01-27 21:37:20';
 var config = {};
-var configKey = 'OMNBookmarkerConfig';
-if (typeof packgeName !== 'undefined' && packgeName)
-  configKey = packageName.replace('\.','-') + '_' + configKey;
+var configKey = 'BookmarkerConfig';
+if (typeof PackageName !== 'undefined' && PackageName)
+  configKey = PackageName.replaceAll('\.','-') + '_' + configKey;
 
 function showBookmarks(onlyTag = '', search = '') {
   // sort bookmarks by date (newest upper)

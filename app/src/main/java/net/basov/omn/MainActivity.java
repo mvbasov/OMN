@@ -744,6 +744,7 @@ public class MainActivity extends Activity {
                         String[] tags = tagsBox.getText().toString().split(";");
                         if (tags.length > 0) {
                             for (int i = 0; i < tags.length; i++) {
+                                if (tags[i].trim().length() == 0) continue;
                                 tags_sb.append("      \"")
                                         .append(tags[i].trim())
                                         .append("\"");
@@ -758,6 +759,7 @@ public class MainActivity extends Activity {
                         String[] notes = notesBox.getText().toString().split(";");
                         if (notes.length > 0) {
                             for (int i = 0; i < notes.length; i++) {
+                                if (notes[i].trim().length() == 0) continue;
                                 notes_sb.append("      \"")
                                         .append(notes[i].trim())
                                         .append("\"");

@@ -6,6 +6,12 @@ Pelican CMS meta information support can be enabled in preferences screen.
 
 The application has JavaScript, HTML and CSS support. Can interact with Android system by Intents (run another application activites). Intent need to be enabled in settings (disabled by default). Interaction vith Termux possible also.
 
+There is also a URL bookmark organizer.
+
+You can enable page search.
+
+I tried to describe as much as possible in the built-in documentation. Please read it.
+
 I design this application to my needs and use it everyday for several years. I will be glad if this application meets anybody needs also.
 
 The Telegram channel created to share news and usage tips for this application https://t.me/OMNNewsAndTips

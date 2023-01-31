@@ -24,8 +24,10 @@ It can be useful to simple web development on Android mobile devices.
 * **Features rich.** 
   * Markdown, HTML, CSS and JavaScript can be used.
   * Pages can be organized by tags and folders
-  * Pages can be exported by E-Mail for example
-  * The application can be target for sharing from another applications
+  * Pages can be [exported by E-Mail or Telegram](/default/Help.html#send-page-by-e-mail) for example
+  * The application can be [target for sharing](#OMN-as-share-target) from another applications
+  * URL bookmarks can be organized on [Incoming bookmarks](/bookmarks/Incoming.html)
+  * [Search](/default/MarkdownExt.html#add-search-to-page) available on the page
   * Optional support [Pelican Content Management System (Pelican CMS)](https://blog.getpelican.com) Markdown extension for page header
 
 To see <a href="Help.html#btn-desc">action buttons</a> press on the page title.
@@ -54,7 +56,7 @@ If you are using the application on Android 8.0 (Oreo) you can long press the ap
 #### More about QuickNotes
 Also you can share some text from another application. The quick note dialog will be fired in this case.
 
-If someone share URL in browser to E-Mail program and send you this message you can share it message with OMNotes and give it as [list item](Markdown.html#help-lists)
+<a id="OMN-as-share-target"/>
 
 #### OMN as target for `Share...` from other applications
 If you use the OMN as target for `Share` from another application OMN will receive this information.
@@ -79,7 +81,9 @@ On Android 8.0 and newer the following editors tested:
 * [Total Commander](market://details?id=com.ghisler.android.TotalCommander)
 
 #### Create new page
-Don't edit this page! All you changes will be lost at application version update time. At the first, create own start page. To do this visit [this link](../Start.html) and page will be created automatically. Useful links will be placed on the new start page.
+**Don't edit this and other default pages! All you changes will be lost at application version update time.**
+Before making your own pages set "Author name" in [application settings](/default/Help.html#app-settings).
+At the first, create own start page. To do this visit [this link](../Start.html) and page will be created automatically. Useful links will be placed on the new start page.
 
 Read about how to [Add new pages](Help.html#add-new-page) by action button <button onclick="BLOCK_Android.newPageButtonCallback()"> &#x2795; </button>.
 
@@ -105,7 +109,7 @@ If you're referring to a local page, you must use relative paths:
 
 More information about links format can be found [here](MarkdownExt.html#links)
 
-Place you pages under md/ directory, JavaScripts under js/ and styles under /css or embed all of these in page directly. 
+Place you pages under md/ directory, JavaScripts under js/ and styles under css/ or embed all of these in page directly. 
 
 The Telegram channel with news about OMN and examples of pages [created](https://t.me/OMNNewsAndTips)
 
@@ -114,6 +118,8 @@ The Telegram channel with news about OMN and examples of pages [created](https:/
 ``` text
 /
 ├─ css/
+│  ├─ Bookmarker.css
+│  ├─ PSearch.css
 │  ├─ common.css
 │  ├─ custom.css (**)
 │  └─ highlight.css (**)
@@ -123,7 +129,9 @@ The Telegram channel with news about OMN and examples of pages [created](https:/
 │     └─ MaterialIcons-Regular.woff2
 ├─ html/ (*)
 ├─ js/
-│  └── functions.js
+│  ├─ Bookmarker.js
+│  ├─ PSearch.js
+│  └─ functions.js
 ├─ md/
 │  ├─ default/
 │  │  ├─ BookmarkerHelp.md
@@ -156,10 +164,14 @@ All pages in the directory ```md/default/*``` can be totally rewrite by applicat
 The same is true for the following files:
 
 ```
+css/Bookmarker.css
+css/PSearch.css
 css/common.css
 css/highlight.css
 fonts/google-material/MaterialIcons-Regular.woff2
 fonts/google-material/material-icons.css
+js/Bookmarker.js
+js/PSearch.js
 js/functions.js
 ```
 All other pages and files are you own files and never been touched by program without your intention.

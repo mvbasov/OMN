@@ -64,6 +64,8 @@ Button code:
         {{{btnLink}}}
     </button>
 
+<a id="send-page-by-e-mail" />
+
 #### <button onclick="Android.emailButtonCallback(PFN, Title)"> {{{btnEmail}}} </button> "Send page by E-Mail"
 
 You can send current page by E-Mail. If you press this button on ```/default/Build``` page my special address to collect platform statistic will be substituted automatically.
@@ -77,7 +79,7 @@ Button code:
 
 #### <button onclick="Android.sendButtonCallback(PFN, Title)"> {{{btnSend}}} </button> "Send page ..."
 
-You can send current page as file. Page file will be wraped by some meta information whivh required to correct import. Tested with Telegram and K-9 Mail
+You can send current page as file. Page file will be wraped by some meta information which required to correct import. Tested with Telegram and K-9 Mail
 
 Button code:
 
@@ -217,7 +219,7 @@ This application use [Pelican Content Management System (Pelican CMS)](https://b
 From the begin of file any string contains valid metadata name and value (empty value is valid) treat as page header string.
 Page header processed till first empty line or not valid meta name.
 No one meta strings is mandatory for this application but header processing rules applied to any page.
-Recommended minimum meta header is `Title: Page title` or "#### Page title", if meta not used, followed by one empty line.
+Recommended minimum meta header is `Title: Page title` or `#### Page title`, if meta not used, followed by one empty line.
 4-th level header at 1-st line of file always treat as page title.
 
 If "Enable Pelican CMS meta" option is enabled new pages automatically created with Date: and Modified: meta set to current time also Author: meta set if defined in application settings.
@@ -301,6 +303,12 @@ In this case you need to put image file to [[data directory]]()`/img/Image.jpg` 
 <a id="issues" />
 
 ### Known issues
+
+* Version v00.31.00 contain bug in default incoming bookmark page. To fix it delete the following line from bookmark file:
+
+   Tag: Bookmarks
+
+(or change Tag to Tags and place string to page header)
 
 * Can't return to original link when use in-page reference. Back key return to previous page. 
 * Pages file name case sensitive but due to Android and VFat file system limitations 'FileName' and 'filename' may be the same file but may not to be ^)

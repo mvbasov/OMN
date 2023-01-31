@@ -4,13 +4,21 @@ Modified: 2019-05-31 22:56:54
 Author: Mikhail Basov
 Tags: OMN information
 
-##### v00.31.00b
+##### v00.32.00b
+
+* Add search on the page
+* Fix URL bookmark issue
+* Fix empty bookmark tags and notes
+* Fix shortcut create (Android 12)
+
+##### v00.31.00b, v00.31.00f
+###### Date:   Fri Jan 27 22:56:52 2023 +0300, commit e5ee5c63ef974ba6d17e1bd45c3b4ca2d7140e9e
 
 * Add URL Bookmark organizer
 * Add package name to all pages as variable
 
 ##### v00.30.02f
-###### Date:   Fri Jan 6 02:12:49 2023 +0300, commit b346e3fd752295c01d3b1f4230819471b7a3a642 (tag: v00.30.02f)
+###### Date:   Fri Jan 6 02:12:49 2023 +0300, commit b346e3fd752295c01d3b1f4230819471b7a3a642
 
 - Prepare to F-Droid publish
 

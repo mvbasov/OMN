@@ -303,9 +303,13 @@ public class FileIO {
                             FileIO.getFilesDir(c)
                     ));
 
-                } if(pageName.equals("/Start")) {
+                } if (pageName.equals("/" + Constants.START_PAGE)) {
                     writer.write(c.getString(
                             R.string.template_page_start
+                    ));
+                } if (pageName.equals("/" + Constants.QUICKNOTES_PAGE)){
+                    writer.write(c.getString(
+                            R.string.template_page_quick_notes
                     ));
                 }
                 writer.flush();
@@ -355,7 +359,9 @@ public class FileIO {
                 Constants.ICONS_CSS,
                 Constants.FUNCTIONS_JS,
                 Constants.URL_INCOMING_CSS,
-                Constants.URL_INCOMING_JS
+                Constants.URL_INCOMING_JS,
+                Constants.PSEARCH_CSS,
+                Constants.PSEARCH_JS
         };
         copyFilesFromAssets(c, files, force);
 

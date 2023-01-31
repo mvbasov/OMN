@@ -561,3 +561,7 @@ Content for chapter one.
 
 
 This page base on <a href="http://assemble.io/docs/Cheatsheet-Markdown.html">this document</a>
+
+<link rel="stylesheet" type="text/css" href="../../css/PSearch.css" />
+<script type="text/javascript" src="../../js/PSearch.js"></script>
+

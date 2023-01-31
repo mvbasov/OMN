@@ -435,6 +435,14 @@ This page generated automatically.
 
 "]]></string>
 
+    <string name="template_page_quick_notes"><![CDATA["
+- - -
+
+<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/PSearch.css\" />
+<script type=\"text/javascript\" src=\"../js/PSearch.js\"></script>
+"]]></string>
+    
+
     <!--
     New page pelican header
     %1$s    Time stamp

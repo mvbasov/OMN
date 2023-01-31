@@ -207,3 +207,7 @@ The following lines must to be at the bottom of the bookmark file. The path to .
 </script>
 
 <link rel="stylesheet" type="text/css" href="../../css/Bookmarker.css" />
+
+<link rel="stylesheet" type="text/css" href="../../css/PSearch.css" />
+<script type="text/javascript" src="../../js/PSearch.js"></script>
+

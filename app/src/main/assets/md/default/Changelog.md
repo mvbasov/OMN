@@ -277,3 +277,6 @@ Tags: OMN information
 
 - Initial version
 
+<link rel="stylesheet" type="text/css" href="../../css/PSearch.css" />
+<script type="text/javascript" src="../../js/PSearch.js"></script>
+

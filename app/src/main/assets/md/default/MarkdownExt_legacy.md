@@ -326,3 +326,7 @@ There is collection of funny or useful Unicode symbols.
 <script>
   window.onload=createTOC();
 </script>
+
+<link rel="stylesheet" type="text/css" href="../../css/PSearch.css" />
+<script type="text/javascript" src="../../js/PSearch.js"></script>
+

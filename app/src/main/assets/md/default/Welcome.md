@@ -199,3 +199,7 @@ If you wish to contribute your efforts to the project I am welcome it. Open issu
 <script>
   window.onload=createTOC();
 </script>
+
+<link rel="stylesheet" type="text/css" href="../../css/PSearch.css" />
+<script type="text/javascript" src="../../js/PSearch.js"></script>
+

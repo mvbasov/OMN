@@ -324,7 +324,7 @@ public class WebViewJSCallback {
                 tg = tg.trim();
                 if (tg.length() >0)
                     tags.add(tg);
-                    tagsMarks += mContext.getString(
+                tagsMarks += mContext.getString(
                             R.string.html_one_tag_template,
                             // Replace internal spaces to &nbsp;
                             // to prevent split tag when wrap to next line

@@ -12,6 +12,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 package net.basov.omn;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -61,6 +62,7 @@ public class MainActivity extends Activity {
     private Stack<String> pages;
     boolean backPressedRecently = false;
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -367,7 +369,7 @@ public class MainActivity extends Activity {
                 String sharedText = intent.getStringExtra(Intent.EXTRA_TEXT);
                 String sharedSubject = intent.getStringExtra(Intent.EXTRA_SUBJECT);
                 String sharedHTML = intent.getStringExtra(Intent.EXTRA_HTML_TEXT);
-                Integer endOfFirstLine = 0;
+                int endOfFirstLine = 0;
                 Page importedPage = null;
                 //Page shared as file
                 if ( intent.hasExtra(Intent.EXTRA_STREAM)){
@@ -749,7 +751,6 @@ public class MainActivity extends Activity {
                                     tags_sb.append(",");
                                 tags_sb.append("\n");
                             }
-
                         }
                     }
                     final StringBuilder notes_sb = new StringBuilder();

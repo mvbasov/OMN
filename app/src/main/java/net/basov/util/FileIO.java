@@ -200,16 +200,17 @@ public class FileIO {
                     title = pageName;
                 else
                     title = mtitle;
-                if(pageName.equals("/default/Build")) title = "Build information";
-                if(pageName.equals("/Start")) {
+                // Create headers for special pages
+                if(pageName.equals("/" + Constants.BUILD_PAGE)) title = "Build information";
+                if(pageName.equals("/" + Constants.START_PAGE)) {
                     title = "My start page";
                     tags += "OMN default, Index";
                 }
-                if(pageName.equals("/QuickNotes")) {
+                if(pageName.equals("/" + Constants.QUICKNOTES_PAGE)) {
                     title = "My quick notes";
                     tags += "OMN default, Notes";
                 }
-                if(pageName.equals("/incoming/Incoming")) {
+                if(pageName.equals("/" + Constants.INCOMING_INDEX_PAGE)) {
                     title = "Incoming pages index";
                     tags += "OMN default, Index";
                 }
@@ -244,10 +245,12 @@ public class FileIO {
 
                 }
 
+                // Write header
                 Writer writer = new BufferedWriter(new FileWriter(file));
                 writer.write(pageHeader);
 
-                if(pageName.equals("/default/Build")) {
+                // Write body of special pages
+                if(pageName.equals("/" + Constants.BUILD_PAGE)) {
 
                     String cmVersionString = "";
                     String cmVersion = AppDetails.getSystemProperty("ro.cm.version");

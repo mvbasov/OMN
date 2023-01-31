@@ -368,7 +368,7 @@ public class WebViewJSCallback {
     @JavascriptInterface
     public void shortcutButtonCallback(String pn, String title) {
 
-        Toast.makeText(mContext, "Create shortcut to \"" + title + "\"", Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext, "Create shortcut to \"" + title + "\"(" + pn + ")", Toast.LENGTH_SHORT).show();
 
         Intent shortcutIntent = new Intent(mContext.getApplicationContext(),
                 MainActivity.class);
@@ -379,7 +379,7 @@ public class WebViewJSCallback {
         if(Build.VERSION.SDK_INT >= 26) {
             ShortcutManager mShortcutManager =
                     mContext.getSystemService(ShortcutManager.class);
-            ShortcutInfo shortcut = new ShortcutInfo.Builder(mContext, pn)
+            ShortcutInfo shortcut = new ShortcutInfo.Builder(mContext, pn.replaceAll("/",""))
                     .setShortLabel(title)
                     .setLongLabel(title)
                     .setIcon(Icon.createWithResource(mContext, R.mipmap.omn_ic_shortcut))
@@ -389,7 +389,7 @@ public class WebViewJSCallback {
                 Intent pinnedShortcutCallbackIntent =
                         mShortcutManager.createShortcutResultIntent(shortcut);
                 PendingIntent successCallback = PendingIntent.getBroadcast(mContext, 0,
-                        pinnedShortcutCallbackIntent, 0);
+                        pinnedShortcutCallbackIntent, PendingIntent.FLAG_IMMUTABLE);
 
                 mShortcutManager.requestPinShortcut(shortcut,
                         successCallback.getIntentSender());

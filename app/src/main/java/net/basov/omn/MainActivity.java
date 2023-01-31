@@ -746,7 +746,7 @@ public class MainActivity extends Activity {
                             for (int i = 0; i < tags.length; i++) {
                                 if (tags[i].trim().length() == 0) continue;
                                 tags_sb.append("      \"")
-                                        .append(tags[i].trim())
+                                        .append(TextTools.escapeJavaScriptFunctionParameter(tags[i].trim()))
                                         .append("\"");
                                 if (i != tags.length-1)
                                     tags_sb.append(",");
@@ -761,7 +761,7 @@ public class MainActivity extends Activity {
                             for (int i = 0; i < notes.length; i++) {
                                 if (notes[i].trim().length() == 0) continue;
                                 notes_sb.append("      \"")
-                                        .append(notes[i].trim())
+                                        .append(TextTools.escapeJavaScriptFunctionParameter(notes[i].trim()))
                                         .append("\"");
                                 if (i != notes.length-1)
                                     notes_sb.append(",");

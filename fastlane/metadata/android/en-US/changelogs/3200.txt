@@ -1,0 +1,5 @@
+* Add search on the page
+* Fix URL bookmark issue
+* Fix empty bookmark tags and notes
+* Fix shortcut create (Android 12)
+

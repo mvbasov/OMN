@@ -41,8 +41,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.StringReader;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -356,10 +359,6 @@ public class MainActivity extends Activity {
             if ((this.getPackageName() + ".QUICK_NOTE").equals(intent.getAction())
                     || Intent.ACTION_SEND.equals(intent.getAction())
                     || Intent.ACTION_SENDTO.equals(intent.getAction())) {
-                /* QuickNotes creation */
-                //AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                //builder.setTitle("Create QuickNote");
-                //final EditText input = new EditText(this);
 
                 // Get shared text
 				String link = "";
@@ -426,7 +425,9 @@ public class MainActivity extends Activity {
 						} else if( sharedText.startsWith(Constants.EMA_H_VER + ": ")
                                 || sharedText.startsWith(Constants.EMA_H_SUBJECT)
                         ) {
-                            if ((importedPage = FileIO.importPage(MainActivity.this, sharedText)) == null) {
+                            if (importURLFromMail(sharedText)) {
+                                return;
+                            } else if ((importedPage = FileIO.importPage(MainActivity.this, sharedText)) == null) {
                                 fallbackDisplayStartPage("Page can't be imported...");
                             } else {
                                 checkAndImportPage(importedPage);
@@ -696,10 +697,45 @@ public class MainActivity extends Activity {
         
     }
     
+    private Boolean importURLFromMail(String sharedText) {
+        String title = "", url = "", tags = "", notes = "";
+        int counter = 0;
+        String line = null;
+        BufferedReader reader = new BufferedReader(new StringReader(sharedText));
+
+        try {
+            while ((line = reader.readLine()) != null && counter < 10) {
+                e.printStackTrace();
+            }
+            if (line.startsWith(Constants.EMA_H_SUBJECT)) {
+                title = line.substring(line.indexOf(":")+1);
+            } else if (line.startsWith("http")) {
+                url = line;
+            } else if (line.startsWith("#")) {
+                tags = line.substring(1);
+            } else if (line.startsWith("//")) {
+                notes = line.substring(2);
+            }
+            counter++;
+        } catch (IOException e) {
+            MyLog.LogE("Import E-Mail error.");
+        }
+        if (title.length() > 0 && url.length() > 0) {
+            showUrlImportDialog(title, url, tags, notes);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     private void showUrlImportDialog(String title, String url) {
+        showUrlImportDialog(title, url, "", "") ;
+
+    }
+    private void showUrlImportDialog(String title, String url, String tags, String notes) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Import URL");
-        /*****************/
+
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
 
@@ -718,17 +754,16 @@ public class MainActivity extends Activity {
         final EditText tagsBox = new EditText(this);
         tagsBox.setHint("Tags");
         layout.addView(tagsBox);
-        //tagsBox.setText("* ");
+        if(!tags.isEmpty())
+            tagsBox.setText(tags);
 
         final EditText notesBox = new EditText(this);
         notesBox.setHint("Notes");
         layout.addView(notesBox);
-        //notesBox.setText("* ");
+        if(!notes.isEmpty())
+            notesBox.setText(notes);
 
         builder.setView(layout);
-
-
-        /**************/
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {

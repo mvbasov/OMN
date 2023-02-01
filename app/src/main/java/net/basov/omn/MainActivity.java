@@ -698,30 +698,43 @@ public class MainActivity extends Activity {
     }
     
     private Boolean importURLFromMail(String sharedText) {
-        String title = "", url = "", tags = "", notes = "";
+        String title = "", url = "", tags = "", notes = "", from ="", mdate = "";
+        Date edate = null;
         int counter = 0;
         String line = null;
         BufferedReader reader = new BufferedReader(new StringReader(sharedText));
-
         try {
             while ((line = reader.readLine()) != null && counter < 10) {
-                e.printStackTrace();
+              if (line.startsWith(Constants.EMA_H_SUBJECT+":")) {
+                  title = line.substring(line.indexOf(":")+1).trim();
+              } else if (line.startsWith(Constants.EMA_H_FROM+":")) {
+                  from = line.substring(line.indexOf(":")+1).trim();
+              } else if (line.startsWith(Constants.EMA_H_SENT+":")) {
+                  mdate = line.substring(line.indexOf(":")+1).trim();
+                  Toast.makeText(MainActivity.this, "  " + mdate, Toast.LENGTH_LONG);
+              } else  if (line.startsWith("http")) {
+                  url = line.trim();
+              } else if (line.startsWith("#")) {
+                  tags = line.substring(1).trim();
+              } else if (line.startsWith("//")) {
+                  notes = line.substring(2).trim();
+              }
+              counter++;
             }
-            if (line.startsWith(Constants.EMA_H_SUBJECT)) {
-                title = line.substring(line.indexOf(":")+1);
-            } else if (line.startsWith("http")) {
-                url = line;
-            } else if (line.startsWith("#")) {
-                tags = line.substring(1);
-            } else if (line.startsWith("//")) {
-                notes = line.substring(2);
-            }
-            counter++;
         } catch (IOException e) {
             MyLog.LogE("Import E-Mail error.");
         }
+        if (mdate.length() > 0) {
+            //January 31, 2023 3:16:42 PM GMT+03:00
+            SimpleDateFormat format = new SimpleDateFormat("MMMM dd, yyyy h:mm:ss a Z");
+            try {
+                edate = format.parse(mdate); 
+            } catch (java.text.ParseException e) {
+                MyLog.LogE("E-Mail date parse error '" + mdate + "'");
+            }
+        }
         if (title.length() > 0 && url.length() > 0) {
-            showUrlImportDialog(title, url, tags, notes);
+            showUrlImportDialog(title, url, tags, notes, from, edate != null ? edate : new Date());
             return true;
         } else {
             return false;
@@ -729,12 +742,12 @@ public class MainActivity extends Activity {
     }
 
     private void showUrlImportDialog(String title, String url) {
-        showUrlImportDialog(title, url, "", "") ;
+        showUrlImportDialog(title, url, "", "", "", new Date()) ;
 
     }
-    private void showUrlImportDialog(String title, String url, String tags, String notes) {
+    private void showUrlImportDialog(final String title, final String url, final String tags, final String notes, final String from, final Date edate) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Import URL");
+        builder.setTitle("Import URL" + (from.length() > 0 ? " from: " + from : ""));
 
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
@@ -808,7 +821,8 @@ public class MainActivity extends Activity {
                     String newText = getString(
                         R.string.template_url_bookmark,
                         // Time stamp
-                        DF.format(new Date()),
+                        DF.format(edate),
+                        from.length() > 0 ? "\n    \"from\": \"" + from + "\"," : "",
                         urlBox.getText().toString(),
                         TextTools.escapeJavaScriptFunctionParameter(titleBox.getText().toString()),
                         tags_sb.toString(),

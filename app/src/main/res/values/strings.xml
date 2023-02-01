@@ -459,21 +459,22 @@ This page generated automatically.
     <!--
     Incoming bookmark
     %1$s    date
-    %2$s    url
-    %3$s    title
-    %4$s    tags
-    %5$s    notes
+    %2$s    from
+    %3$s    url
+    %4$s    title
+    %5$s    tags
+    %6$s    notes
     -->
     <string name="template_url_bookmark"><![CDATA["<script>bookmarks = [
 <!-- Don't edit body below this line -->
   {
-    \"date\": \"%1$s\",
-    \"url\": \"%2$s\",
-    \"title\": \"%3$s\",
+    \"date\": \"%1$s\",%2$s
+    \"url\": \"%3$s\",
+    \"title\": \"%4$s\",
     \"tags\": [
-%4$s    ],
+%5$s    ],
     \"notes\": [
-%5$s    ]
+%6$s    ]
   },
 "]]></string>
 

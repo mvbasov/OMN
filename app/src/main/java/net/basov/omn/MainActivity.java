@@ -428,7 +428,8 @@ public class MainActivity extends Activity {
                             if (importURLFromMail(sharedText)) {
                                 return;
                             } else if ((importedPage = FileIO.importPage(MainActivity.this, sharedText)) == null) {
-                                fallbackDisplayStartPage("Page can't be imported...");
+                                showQuickNoteDialog(sharedText);
+                                //fallbackDisplayStartPage("Page can't be imported...");
                             } else {
                                 checkAndImportPage(importedPage);
                             }

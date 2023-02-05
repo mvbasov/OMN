@@ -1,11 +1,10 @@
+/*
+ * Function to show/hide page header
+ */
 function setBodyTop(){
   var sticky = document.getElementById('ptitle').offsetHeight;
   document.getElementById('content').style.paddingTop=sticky+'px'; 
 }
-
-/*
- * Function to show/hide page header
-*/
 
 function toggleHdrBtnVis() {
   hheader=document.getElementById('hidable_header');
@@ -17,9 +16,12 @@ function toggleHdrBtnVis() {
     hheader.style.display = 'block';
     btn.innerHTML = '&nbsp;&#x2013;&nbsp;';
   }
-  setBodyTop();
+  //setBodyTop();
 }
 
+/*
+ * Functions to create Table Of Content (TOC)
+ */
 function findHeadings(root, sects){
   for(var c=root.firstChild; c!=null; c=c.nextSibling){
     if (c.nodeType!==1) continue;

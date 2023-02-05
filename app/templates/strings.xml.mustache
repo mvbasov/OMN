@@ -51,27 +51,24 @@
 
 </head>
 
-<body style=\"height:100%%; width:100%%; margin:0\">
+<body>
 
-  <div id=\"ptitle\" style=\"overflow:hidden; background-color:lightgray; position:fixed; width:100%%\">
-    <div id=\"hidable_header\" style=\"display:none; background-color:lightgray; width:100%%; padding-top:0.5em; padding-left:0.5em\" >
+  <div id=\"ptitle\">
+    <div id=\"hidable_header\">
       <div id=\"actions_header\">
       </div>
       Name:<span>%5$s</span>%7$s
     </div>
 
-    <a
-      onclick=\"toggleHdrBtnVis();\">
-      <h4 id=\"pageTitle\" align=\"center\" style=\"margin-top:0.4em; margin-bottom:0.5em;\">
-        %6$s
-        <span id=\"title_arrow\" style=\"border: 1px solid black; border-radius: 6px; padding: 0.1em\">
+    <h4 id=\"pageTitle\" align=\"center\" onclick=\"toggleHdrBtnVis();\">
+      %6$s
+      <span id=\"title_arrow\">
 &nbsp;+&nbsp;
-        </span>
-      </h4>
-    </a>
+      </span>
+    </h4>
   </div>
 
-  <div id=\"content\" style=\"padding:0.5em; padding-top:1.5em; overflow:auto;\">
+  <div id=\"content\">
 
     "]]></string>
 
@@ -162,7 +159,7 @@
         %1$s    tags (each in span)
     -->
     <string name="html_tags_template"><![CDATA["
-    <div id=\"tags\" style=\"margin-top:5px;\">
+    <div id=\"tags\">
 %1$s    </div>
 "]]></string>
 
@@ -178,8 +175,6 @@
     <string name="html_buttom"><![CDATA["
   </div>
   
-  <a href=\"/default/Help.html#header-issue\"><i class=\"material-icons wa\">error</i></a>
-
 </body>
 
 </html>
@@ -197,8 +192,8 @@
   All your changes will be lost.
 -->
 
-<div id=\"tagcloud\" style=\"margin-top: 1em\"></div>
-<div id=\"main\" style=\"margin-top: 1em;\"></div>
+<div id=\"tagcloud\"></div>
+<div id=\"main\"></div>
 
 <script>
 // Start of Tags DB

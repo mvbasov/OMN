@@ -1,3 +1,45 @@
+body {
+  height: 100%;
+  width: 100%;
+  margin:0;                      
+}
+div#ptitle {
+  overflow: hidden;
+  background-color: lightgray;
+  position: sticky;
+  top: 0;
+  width: 100%
+}
+div#hidable_header {
+  display: none;
+  background-color: lightgray;
+  width: 100%;
+  padding-top: 0.5em;
+  padding-left: 0.5em;
+}
+h4#pageTitle {
+  margin-top: 0.4em;
+  margin-bottom: 0.5em;
+  width: 100%;
+}
+span#title_arrow {
+  border: 1px solid black;
+  border-radius: 6px;
+  padding: 0.1em;
+}
+div#content {
+  padding: 0.5em;
+  overflow: auto;
+}
+div#tags {
+  margin-top:5px;
+}
+div#tagcloud {
+  margin-top: 1em;
+}
+div#main {
+  margin-top: 1em;
+}
 .material-icons.wa {
 /* Lineage OS 16 Xiaomi Mi8 workaround */
   color: #FFFFFF;

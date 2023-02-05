@@ -17,6 +17,10 @@ div#hidable_header {
   padding-top: 0.5em;
   padding-left: 0.5em;
 }
+.hBtn {
+  padding-left: 3px;
+  padding-right: 3px;
+}
 h4#pageTitle {
   margin-top: 0.4em;
   margin-bottom: 0.5em;
@@ -27,35 +31,56 @@ span#title_arrow {
   border-radius: 6px;
   padding: 0.1em;
 }
+/* on page tags decoration */
+div#tags {
+  margin-top:5px;
+}
+a.taglink {
+  text-decoration: none;
+  color: black;
+}
+.tagmark {
+  background-color: #E7E7E7;
+  padding: 2px 5px;
+  border: 1px solid #505050;
+  border-radius: 8px;
+}
+.tagmarkselected {
+  color: white;
+  background-color: #888;
+}
+/* every page content */
 div#content {
   padding: 0.5em;
   overflow: auto;
 }
-div#tags {
-  margin-top:5px;
-}
+/* tag page decoration */
 div#tagcloud {
   margin-top: 1em;
 }
-div#main {
+div#taglist {
   margin-top: 1em;
 }
+
 .material-icons.wa {
 /* Lineage OS 16 Xiaomi Mi8 workaround */
   color: #FFFFFF;
   font-size: 18px;
 }
-.hBtn {
-  padding-left: 3px;
-  padding-right: 3px;
-}
-#pageTitle {
-  margin-top: 1px;
-  margin-bottom: 1em;
-}
-pre {
-  font-size:12pt
-}
+
+#TOC {border:solid black 1px; margin:10px; padding:10px;}
+.TOCEntry{font-family:sans-serief;}
+.TOCEntry a{text-decoration:none;}
+.TOCLevel1{font-weight:bold;}
+.TOCLevel2{font-weight:bold;}
+.TOCLevel3{font-weight:bold;}
+.TOCLevel4{font-weight:bold;margin-left:0.5em;}
+.TOCLevel5{font-weight:bold;margin-left:1em;}
+.TOCLevel6{font-weight:bold;margin-left:1.5em;}
+//.TOCSectNum{display:none;}
+
+
+/* pag content decoration */
 table {
   border-collapse: collapse;
 }
@@ -72,31 +97,8 @@ tr:nth-child(odd){
 tr:nth-child(even) {
 	background-color: #FFFFFF; color: black;
 }
-
-#TOC {border:solid black 1px; margin:10px; padding:10px;}
-.TOCEntry{font-family:sans-serief;}
-.TOCEntry a{text-decoration:none;}
-.TOCLevel1{font-weight:bold;}
-.TOCLevel2{font-weight:bold;}
-.TOCLevel3{font-weight:bold;}
-.TOCLevel4{font-weight:bold;margin-left:0.5em;}
-.TOCLevel5{font-weight:bold;margin-left:1em;}
-.TOCLevel6{font-weight:bold;margin-left:1.5em;}
-//.TOCSectNum{display:none;}
-
-a.taglink {
-  text-decoration: none;
-  color: black;
-}
-.tagmark {
-  background-color: #E7E7E7;
-  padding: 2px 5px;
-  border: 1px solid #505050;
-  border-radius: 8px;
-}
-.tagmarkselected {
-  color: white;
-  background-color: #888;
+pre {
+  font-size:12pt
 }
 .bg-yellow {
   background-color: yellow;

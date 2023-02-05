@@ -193,7 +193,7 @@
 -->
 
 <div id=\"tagcloud\"></div>
-<div id=\"main\"></div>
+<div id=\"taglist\"></div>
 
 <script>
 // Start of Tags DB
@@ -266,7 +266,7 @@ for ( t in sortObject(tagDb) ) {
 }
 
 document.getElementById('tagcloud').innerHTML = tagCloud;
-document.getElementById('main').innerHTML = tagsList;
+document.getElementById('taglist').innerHTML = tagsList;
 
 var selected = window.location.href.split('#')[1];
 if (typeof selected != 'undefined') {

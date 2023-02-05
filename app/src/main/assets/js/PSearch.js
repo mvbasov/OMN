@@ -89,34 +89,32 @@ function injectSearch() {
 // https://stackoverflow.com/questions/5886858/full-text-search-in-html-ignoring-tags
 var lastpos = -1; // 1 because 0 in input area
 function doSearch(text, pos) { 
-  if (window.find && window.getSelection) {
-    document.designMode = "on"; 
-    var sel = window.getSelection();
-    sel.collapse(document.body, 0);
-    while (window.find(text) && pos > 0 ) {
-      //document.execCommand("HiliteColor", false, "yellow");
-      sel.collapseToEnd();
-      pos--;
-      if (pos==0){
-        document.execCommand("HiliteColor", false, "#00ff00");
-      }
+  if (!window.find || !window.getSelection) return;
+  document.designMode = "on"; 
+  var sel = window.getSelection();
+  sel.collapse(document.body, 0);
+  while (window.find(text) && pos > 0 ) {
+    //document.execCommand("HiliteColor", false, "yellow");
+    sel.collapseToEnd();
+    pos--;
+    if (pos==0){
+      document.execCommand("HiliteColor", false, "#00ff00");
     }
-    if (!window.find(text)) lastpos--;
-    document.designMode = "off"; 
   }
+  if (!window.find(text)) lastpos--;
+  document.designMode = "off"; 
 }
 
 function urlParams() {
   injectSearch();
   // process url parameters
   var urlQuery = window.location.search.substring(1);
-  if(urlQuery.length > 0){
-    const urlParams = new URLSearchParams(urlQuery);
-    var searchP = urlParams.get('search','');
-    if (searchP) {
-      document.querySelector('#search_input').value = searchP;
-      document.querySelector('#btnNext').click();
-    }
+  if(urlQuery.length <= 0) return;
+  const urlParams = new URLSearchParams(urlQuery);
+  var searchP = urlParams.get('search','');
+  if (searchP) {
+    document.querySelector('#search_input').value = searchP;
+    document.querySelector('#btnNext').click();
   }
 }
 

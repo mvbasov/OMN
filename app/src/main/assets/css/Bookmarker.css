@@ -50,8 +50,10 @@ span.spanDate {
 a + span {
    display: none;
 }
-a:focus + span, a:hover + span {
-  display: inline;
+@media not (hover:hover) {
+  a:hover + span {
+    display: inline;
+  }
 }
 span#bVersion {
   font-size: 0.3em;

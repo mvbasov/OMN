@@ -52,7 +52,7 @@
 </head>
 
 <body>
-
+<div class="page_container">
   <div id=\"ptitle\">
     <div id=\"hidable_header\">
       <div id=\"actions_header\">
@@ -174,7 +174,7 @@
     <!-- Bottom part of any html page -->
     <string name="html_buttom"><![CDATA["
   </div>
-  
+</div>
 </body>
 
 </html>

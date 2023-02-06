@@ -267,7 +267,7 @@ Some text <span class="bg-yellow fg-red">text with both attributes changed</span
 
 ### Use JavaScripts
 
-You can insert JavaScript in any place of you page. In the result HTML page this script will be placed inside BODY of HTML document. To see console.log() or execution errors you can enable [JavaScript debug](/default/Help.html#enable-jsdebug) in the application settings. One known limitation exist - you can't use alert() function.
+You can insert JavaScript in any place of you page. In the result HTML page this script will be placed inside BODY of HTML document. To see console.log() or execution errors you can enable [JavaScript debug](/default/Help.html#enable-jsdebug) in the application settings. 
 
 - - -
 

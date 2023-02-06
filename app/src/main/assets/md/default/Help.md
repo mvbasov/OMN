@@ -304,6 +304,7 @@ In this case you need to put image file to [[data directory]]()`/img/Image.jpg` 
 
 ### Known issues
 
+* In-page search not always highlight and scroll to search result
 * Version v00.31.00 contain bug in default incoming bookmark page. To fix it delete the following line from bookmark file:
 
    Tag: Bookmarks
@@ -313,9 +314,6 @@ In this case you need to put image file to [[data directory]]()`/img/Image.jpg` 
 * Can't return to original link when use in-page reference. Back key return to previous page. 
 * Pages file name case sensitive but due to Android and VFat file system limitations 'FileName' and 'filename' may be the same file but may not to be ^)
 * Page with zero file size is not normal for this application. 
-<a name="header-issue" />
-* First click on the page header shift top of page content little bit lower then expected (approximetly to the size of expnded header). The following click place page content top to apropriate place. This issue reproduced only on some Android 8/9. As work around at the end of every html page Goggle material design icon font symbol <i class="material-icons">error</i> placed. Symbol is isnvisible (white on white). It solve the issue.
-
 <script>
   window.onload=createTOC();
 </script>

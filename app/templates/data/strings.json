@@ -12,7 +12,5 @@
   "btnQuickNote": "<i class=\"material-icons\">comment</i>",
   "btnSettings": "<i class=\"material-icons\">settings</i>",
   "btnDebug": "<i class=\"material-icons\">adb</i>",
-  "Mi8LOS16Issue": "<a name=\"header-issue\" />\n* First click on the page header shift top of page content little bit lower then expected (approximetly to the size of expnded header). The following click place page content top to apropriate place. This issue reproduced only on some Android 8/9. As work around at the end of every html page Goggle material design icon font symbol <i class=\"material-icons\">error</i> placed. Symbol is isnvisible (white on white). It solve the issue.\n"
-
 }
 

@@ -1,10 +1,13 @@
 html, body {
   height: 100%;
+  padding: 1px;
+  margin: 0;
 }
 .page_container {
   height:100%;
   display: flex;
   flex-direction: column;
+  padding: 0px;
 }
 .header, .footer {
   overflow-x: hidden;
@@ -15,13 +18,10 @@ html, body {
   flex: 1;
 }
 div#ptitle {
-  overflow-x: hidden;
   overflow: hidden;
   background-color: lightgray;
-  flex-grow: 0;
-#  position: sticky;
-#  top: 0;
-#  width: 100%
+  width: 100%;
+  margin: 0px;
 }
 div#hidable_header {
   display: none;
@@ -43,6 +43,9 @@ span#title_arrow {
   border: 1px solid black;
   border-radius: 6px;
   padding: 0.1em;
+}
+div#status {
+  display: none;
 }
 /* on page tags decoration */
 div#tags {

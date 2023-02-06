@@ -12,8 +12,11 @@ input#search_input{
   border-radius: 0.4em;
   margin-left: 0.1em;
 }
-button.#btnFind {
-  margin: 5px;
+button#btnFind {
+  float: right;
+  font-size: 1.2em;
+  margin-top: 2px;
+  margin-right: 3px;
 }
 button.b05 {
   width: 46%;

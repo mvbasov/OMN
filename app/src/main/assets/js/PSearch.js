@@ -73,7 +73,7 @@ function injectSearch() {
   var btnFind = document.createElement('button');
   btnFind.id = 'btnFind';
   btnFind.innerText = '\uD83D\uDD0E';
-  btnFind.style = 'float: right; font-size: 1.2em';
+  //btnFind.style = 'float: right; font-size: 1.2em';
   btnFind.onclick = function() {
     var formState = document.querySelector('#search_form');
       if (formState.style.display === 'none')

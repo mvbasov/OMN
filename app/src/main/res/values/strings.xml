@@ -54,7 +54,7 @@
 <body>
 <div class="page_container">
   <div id=\"ptitle\" class=\"header\">
-    <div id=\"hidable_header\">
+    <div id=\"hidable_header\" style=\"display: none;\">
       <div id=\"actions_header\">
       </div>
       Name:<span>%5$s</span>%7$s

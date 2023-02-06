@@ -43,7 +43,8 @@ function injectSearch() {
   btnTop.innerText = '\u25B2';
   btnTop.type = 'button';
   btnTop.onclick = function() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    var cnt = document.querySelector('#content');
+    cnt.scrollTo({ top: 0, behavior: 'smooth' });
   }
   btnTop.className = 'b03';
   btnHide.innerText = '\u2716';
@@ -56,7 +57,7 @@ function injectSearch() {
   btnButtom.type='button';
   btnButtom.onclick = function() {
       var cnt = document.querySelector('#content');
-      window.scroll({ top: cnt.scrollHeight, behavior: 'smooth' });
+      cnt.scroll({ top: cnt.scrollHeight, behavior: 'smooth' });
   }
   btnButtom.className = 'b03';
   // make search form from elements
@@ -86,12 +87,43 @@ function injectSearch() {
   document.querySelector('#ptitle').appendChild(btnFind);
 }
 
+//http://roysharon.com/blog/37
+function scrollIntoView(t) {
+   if (typeof(t) != 'object') return;
+
+   if (t.getRangeAt) {
+      // we have a Selection object
+      if (t.rangeCount == 0) return;
+      t = t.getRangeAt(0);
+   }
+
+   if (t.cloneRange) {
+      // we have a Range object
+      var r = t.cloneRange();	// do not modify the source range
+      r.collapse(true);		// collapse to start
+      var t = r.startContainer;
+      // if start is an element, then startOffset is the child number
+      // in which the range starts
+      if (t.nodeType == 1) t = t.childNodes[r.startOffset];
+   }
+
+   // if t is not an element node, then we need to skip back until we find the
+   // previous element with which we can call scrollIntoView()
+   o = t;
+   while (o && o.nodeType != 1) o = o.previousSibling;
+   t = o || t.parentNode;
+   if (t) t.scrollIntoView();
+}
+
 // https://stackoverflow.com/questions/5886858/full-text-search-in-html-ignoring-tags
 var lastpos = -1; // 1 because 0 in input area
 function doSearch(text, pos) { 
+
   if (!window.find || !window.getSelection) return;
+  
+  var cnt = document.querySelector('#content');
   document.designMode = "on"; 
-  var sel = window.getSelection();
+  var sel = document.getSelection();
   sel.collapse(document.body, 0);
   while (window.find(text) && pos > 0 ) {
     //document.execCommand("HiliteColor", false, "yellow");
@@ -101,6 +133,7 @@ function doSearch(text, pos) {
       document.execCommand("HiliteColor", false, "#00ff00");
     }
   }
+  scrollIntoView(sel);
   if (!window.find(text)) lastpos--;
   document.designMode = "off"; 
 }

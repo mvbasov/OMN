@@ -459,6 +459,12 @@ public class MainActivity extends Activity {
                 builderName.setTitle("New page (file) name");
                 final EditText inputName = new EditText(this);
                 builderName.setView(inputName);
+                builderName.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
                 builderName.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -487,7 +493,13 @@ public class MainActivity extends Activity {
                                 newPageTitleOffer = newPageLink.replace(currentPagePath, "");                 
                             inputTitle.setText(newPageTitleOffer, TextView.BufferType.EDITABLE);
                             builderTitle.setView(inputTitle);
-                            
+
+                            builderTitle.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            });
                             builderTitle.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
@@ -530,20 +542,8 @@ public class MainActivity extends Activity {
                                 }
 
                             });
-                            builderTitle.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                }
-                            });
                             builderTitle.show();
                         }
-                    }
-                });
-                builderName.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
                     }
                 });
                 builderName.show();
@@ -656,6 +656,12 @@ public class MainActivity extends Activity {
         if (!noteText.isEmpty()) {
             input.setText(noteText);
         }
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -687,13 +693,7 @@ public class MainActivity extends Activity {
                     i.setAction(c.getPackageName() + ".REDISPLAY_PAGE");
                     c.startActivity(i);
                 }
-            });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-            });
+        });
         builder.show();
         
     }
@@ -778,6 +778,13 @@ public class MainActivity extends Activity {
             notesBox.setText(notes);
 
         builder.setView(layout);
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                fallbackDisplayStartPage("Url not imported...");
+            }
+        });
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -845,14 +852,7 @@ public class MainActivity extends Activity {
                     i.setAction(c.getPackageName() + ".REDISPLAY_PAGE");
                     c.startActivity(i);
                 }
-            });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                    fallbackDisplayStartPage("Url not imported...");
-                }
-            });
+        });
         builder.show();
     }
 

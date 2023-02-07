@@ -1,2 +1,3 @@
 * Import share from E-Mail (URL or Quick Note)
 * Reorganize pages HTML/CSS code and improve layout
+* Use new application Theme

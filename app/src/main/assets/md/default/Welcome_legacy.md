@@ -11,6 +11,10 @@ margin: 0px 3px 0px 3px;
 }
 </style>
 
+[I don't want to read the documentation! Create my page now!](../Start.html)
+
+<div id="TOC"></div>
+
 ### General information.
 
 This is application to create and organize everyday notes.

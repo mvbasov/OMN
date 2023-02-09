@@ -98,6 +98,11 @@ div#taglist {
 
 
 /* pag content decoration */
+#content p {
+  text-indent: 1em;
+  margin: 0px 3px 0px 3px;
+}
+
 table {
   border-collapse: collapse;
 }

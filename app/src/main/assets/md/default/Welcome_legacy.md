@@ -4,14 +4,7 @@ Modified: 2019-05-31 22:50:43
 Author: Mikhail Basov
 Tags: OMN documentation
 
-<style>
-p {
-text-indent: 1em;
-margin: 0px 3px 0px 3px;
-}
-</style>
-
-[I don't want to read the documentation! Create my page now!](../Start.html)
+[I don't want to read the documentation! Create my own page now!](../Start.html)
 
 <div id="TOC"></div>
 

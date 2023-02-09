@@ -468,7 +468,7 @@ public class MainActivity extends Activity {
                 builderName.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        final String newPageNameEntered = inputName.getText().toString().trim();
+                        final String newPageNameEntered = inputName.getText().toString().trim().replace(" ", "_");
                         final String newPageName = currentPagePath + newPageNameEntered;
                         final String newPageLink = TextTools.pathAbsolutize(newPageName);
                         if (newPageNameEntered.startsWith("/")) {

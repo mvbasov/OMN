@@ -7,10 +7,10 @@ function toggleHdrBtnVis() {
   var btn=document.getElementById('title_arrow');
   if (hidableHdrStyle.display !== 'none') {
     hidableHdrStyle.display = 'none';
-    btn.innerHTML = '&nbsp;+&nbsp;';
+    btn.innerHTML = '+';
   } else {
     hidableHdrStyle.display = 'block';
-    btn.innerHTML = '&nbsp;&#x2013;&nbsp;';
+    btn.innerHTML = '&#x2013';
   }
 }
 

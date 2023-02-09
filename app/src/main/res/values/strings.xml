@@ -417,9 +417,7 @@ This page generated automatically.
 
 "]]></string>
 
-    <string name="template_page_start"><![CDATA["**This page generated automatically. Edit this as you wish.**
-
-* [Quick notes](QuickNotes.html)
+    <string name="template_page_start"><![CDATA["* [Quick notes](QuickNotes.html)
 * [Tags](Tags.html)
 * [Incoming pages](incoming/Incoming.html)
 * [Incoming bookmarks](bookmarks/Incoming.html)
@@ -428,6 +426,8 @@ This page generated automatically.
 * [Help](default/Help.html)
 * [Extended Markdown syntax](default/MarkdownExt.html)
 * [Build information](default/Build.html)
+
+**This page generated automatically. Edit this as you wish.**
 
 "]]></string>
 

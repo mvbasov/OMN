@@ -10,6 +10,10 @@
             android:singleLine="true"
             android:title="Notes author" />
         <CheckBoxPreference
+            android:title="Full screen"
+            android:defaultValue="false"
+            android:key="@string/pk_ui_fullscreen" />
+        <CheckBoxPreference
             android:title="Use VIEW_DIRECTORY"
             android:summary="Yes for X-plore or ES, no for OI File Managers"
             android:defaultValue="false"

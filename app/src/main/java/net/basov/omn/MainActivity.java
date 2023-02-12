@@ -85,7 +85,7 @@ public class MainActivity extends Activity {
          */
         SharedPreferences defSharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = defSharedPref.edit();
-        final int currentPrefVersion = 14;
+        final int currentPrefVersion = 15;
         switch (defSharedPref.getInt(getString(R.string.pk_pref_version), 0)) {
             case 0: // initial
                 editor.putBoolean(getString(R.string.pk_use_view_directory), false);
@@ -119,6 +119,8 @@ public class MainActivity extends Activity {
                 editor.putBoolean(getString(R.string.pk_enable_termux_intent_uri),false);
             case 13:
                 editor.putBoolean(getString(R.string.pk_btn_enable_send),false);
+            case 14:
+                editor.putBoolean(getString(R.string.pk_ui_fullscreen),false);
                 editor.putInt(getString(R.string.pk_pref_version), currentPrefVersion);
                 editor.commit();
                 break;
@@ -140,6 +142,12 @@ public class MainActivity extends Activity {
             runAfterUpdate(oldVersion, versionCode);
             editor.putInt(getString(R.string.pk_version_code), versionCode);
             editor.commit();
+        }
+
+        if (defSharedPref.getBoolean(getString(R.string.pk_ui_fullscreen), false)) {
+            setTheme(android.R.style.Theme_DeviceDefault_NoActionBar_Fullscreen);
+        } else {
+            setTheme(android.R.style.Theme_DeviceDefault_NoActionBar);
         }
 
         setContentView(R.layout.webview_ui);
@@ -612,6 +620,7 @@ public class MainActivity extends Activity {
                 editor.putBoolean(getString(R.string.pk_pref_changed), false);
                 editor.commit();
                 requestTermuxPermission(defSharedPref);
+                recreate();
             }
         }
     }

@@ -478,6 +478,7 @@ This page generated automatically.
     <string name="pk_pref_version" translatable="false">prefVersion</string>
     <string name="pk_pref_changed" translatable="false">prefChanged</string>
     <string name="pk_enable_pelican_meta" translatable="false">enablePelicanMeta</string>
+    <string name="pk_ui_fullscreen" translatable="false">uiFullScreen</string>
     <string name="pk_enable_js_debug" translatable="false">enableJSDebug</string>
     <string name="pk_enable_js_local_storage" translatable="false">enableJSLocalStorage</string>
     <string name="pk_enable_js_web_db" translatable="false">enableJSWebDb</string>

@@ -151,6 +151,10 @@ Button code:
 
 Default notes author name. Effective only at page creation time.
 
+#### "Fullscreen"
+
+Application UI fullscreen mode.
+
 #### "Use VIEW_DIRECTORY"
 
 Different File Managers <button onclick="Android.folderButtonCallback(PFN)"> <i class="material-icons">folder_open</i> </button> require different arguments to call.

@@ -6,10 +6,10 @@ Tags: OMN information
 
 ##### v00.32.00b
 
-* Add search on the page
-* Fix URL bookmark issue
-* Fix empty bookmark tags and notes
-* Fix shortcut create (Android 12)
+* Import share from E-Mail (URL or Quick Note)
+* Reorganize pages HTML/CSS code and improve layout
+* Use new application Theme
+* Fullscreen UI (configurable)
 
 ##### v00.31.00b, v00.31.00f
 ###### Date:   Fri Jan 27 22:56:52 2023 +0300, commit e5ee5c63ef974ba6d17e1bd45c3b4ca2d7140e9e

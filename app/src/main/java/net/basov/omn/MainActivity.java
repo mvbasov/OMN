@@ -479,6 +479,7 @@ public class MainActivity extends Activity {
                         AlertDialog.Builder builderName = new AlertDialog.Builder(MainActivity.this);
                         builderName.setTitle("New page (file) name");
                         final EditText inputName = new EditText(MainActivity.this);
+                        inputName.setText(inputTitle.getText().toString().trim().replace(" ", "_"), TextView.BufferType.EDITABLE);
                         builderName.setView(inputName);
                         builderName.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
@@ -496,7 +497,7 @@ public class MainActivity extends Activity {
                                 final String currentMeta = page.getMetaHeaderAsString();
                                 final String currentContent = page.getMdContent();
 
-                                final String newPageNameEntered = inputName.getText().toString().trim().replace(" ", "_");
+                                final String newPageNameEntered = inputName.getText().toString().trim();
                                 final String newPageName = currentPagePath + newPageNameEntered;
                                 final String newPageLink = TextTools.pathAbsolutize(newPageName);
 

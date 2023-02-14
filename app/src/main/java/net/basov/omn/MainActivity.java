@@ -487,9 +487,6 @@ public class MainActivity extends Activity {
                             }
                         });
                         builderName.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            final String newPageNameEntered = inputName.getText().toString().trim();
-                            final String newPageName = currentPagePath + newPageNameEntered;
-                            final String newPageLink = TextTools.pathAbsolutize(newPageName);
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -499,35 +496,50 @@ public class MainActivity extends Activity {
                                 final String currentMeta = page.getMetaHeaderAsString();
                                 final String currentContent = page.getMdContent();
 
-                                String newPageTitle = inputTitle.getText().toString().trim();
-                                String linkToNewPage = String.format("* [%s](%s.html)\n", newPageTitle, newPageNameEntered);
-                                if (currentMeta != null && currentContent != null) {
-                                    page.addAtTopOfPage(linkToNewPage);
-                                    FileIO.writePageToFile(
-                                            MainActivity.this,
-                                            currentPageName,
-                                            page.getMdContent()
-                                    );
+                                final String newPageNameEntered = inputName.getText().toString().trim().replace(" ", "_");
+                                final String newPageName = currentPagePath + newPageNameEntered;
+                                final String newPageLink = TextTools.pathAbsolutize(newPageName);
+
+                                if (newPageNameEntered.startsWith("/")) {
+                                    Toast.makeText(MainActivity.this, "Page link must be relative", Toast.LENGTH_SHORT).show();
+                                    //TODO: implement stay on dialog
+                                } else if (newPageLink == null) {
+                                    Toast.makeText(MainActivity.this, "Page link out of file tree", Toast.LENGTH_SHORT).show();
+                                    //TODO: implement stay on dialog
+                                } else if (FileIO.isFileExists(MainActivity.this, "/md/" + newPageLink + ".md")) {
+                                    Toast.makeText(MainActivity.this, "Page already exists", Toast.LENGTH_SHORT).show();
+                                    //TODO: implement add link to current page if page exists
                                 } else {
-                                    String stackState;
-                                    if (pages == null)
-                                        stackState = "null";
-                                    else if (pages.empty())
-                                        stackState = "empty";
-                                    else
-                                        stackState = pages.peek();
-                                    Toast.makeText(MainActivity.this, "Internal program error. Link to page didn't created\n * page = " + pageName + "\n * pages.peek = " + stackState, Toast.LENGTH_SHORT).show();
+                                    String newPageTitle = inputTitle.getText().toString().trim();
+                                    String linkToNewPage = String.format("* [%s](%s.html)\n", newPageTitle, newPageNameEntered);
+                                    if (currentMeta != null && currentContent != null) {
+                                        page.addAtTopOfPage(linkToNewPage);
+                                        FileIO.writePageToFile(
+                                                MainActivity.this,
+                                                currentPageName,
+                                                page.getMdContent()
+                                        );
+                                    } else {
+                                        String stackState;
+                                        if (pages == null)
+                                            stackState = "null";
+                                        else if (pages.empty())
+                                            stackState = "empty";
+                                        else
+                                            stackState = pages.peek();
+                                        Toast.makeText(MainActivity.this, "Internal program error. Link to page didn't created\n * page = " + pageName + "\n * pages.peek = " + stackState, Toast.LENGTH_SHORT).show();
+                                    }
+
+                                    // create new page
+                                    FileIO.createPageIfNotExists(MainActivity.this, newPageLink, newPageTitle, "");
+
+                                    pageAdd(newPageLink);
+
+                                    Intent i = new Intent();
+                                    i.setAction(MainActivity.this.getPackageName() + ".EDIT_PAGE");
+                                    i.putExtra("name", newPageLink);
+                                    MainActivity.this.startActivity(i);
                                 }
-
-                                // create new page
-                                FileIO.createPageIfNotExists(MainActivity.this, newPageLink, newPageTitle, "");
-
-                                pageAdd(newPageLink);
-
-                                Intent i = new Intent();
-                                i.setAction(MainActivity.this.getPackageName() + ".EDIT_PAGE");
-                                i.putExtra("name", newPageLink);
-                                MainActivity.this.startActivity(i);
                             }
                         });
                         builderName.show();

@@ -463,100 +463,77 @@ public class MainActivity extends Activity {
                 final String currentPageName = page.getPageName();
                 final String currentPagePath = currentPageName.substring(0, currentPageName.lastIndexOf("/") + 1);
 
-                AlertDialog.Builder builderName = new AlertDialog.Builder(this);
-                builderName.setTitle("New page (file) name");
-                final EditText inputName = new EditText(this);
-                builderName.setView(inputName);
-                builderName.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder builderTitle = new AlertDialog.Builder(MainActivity.this);
+                builderTitle.setTitle("New page title");
+                final EditText inputTitle = new EditText(MainActivity.this);
+                builderTitle.setView(inputTitle);
+                builderTitle.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                     }
                 });
-                builderName.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                builderTitle.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        final String newPageNameEntered = inputName.getText().toString().trim().replace(" ", "_");
-                        final String newPageName = currentPagePath + newPageNameEntered;
-                        final String newPageLink = TextTools.pathAbsolutize(newPageName);
-                        if (newPageNameEntered.startsWith("/")) {
-                            Toast.makeText(MainActivity.this, "Page link must be relative", Toast.LENGTH_SHORT).show();
-                            //TODO: implement stay on dialog
-                        } else if (newPageLink == null) {
-                            Toast.makeText(MainActivity.this, "Page link out of file tree", Toast.LENGTH_SHORT).show();
-                            //TODO: implement stay on dialog
-                        } else if (FileIO.isFileExists(MainActivity.this, "/md/" + newPageLink + ".md")) {
-                            Toast.makeText(MainActivity.this, "Page already exists", Toast.LENGTH_SHORT).show();
-                            //TODO: implement add link to current page if page exists
-                        } else {
-                            AlertDialog.Builder builderTitle = new AlertDialog.Builder(MainActivity.this);
-                            
-                            builderTitle.setTitle("New page title");
-                            final EditText inputTitle = new EditText(MainActivity.this);
-                            // If current page after absolute path is in the same directory
-                            // as current page squash directory name before offering new
-                            // page title
-                            String newPageTitleOffer = newPageLink.substring(1);
-                            if (newPageLink.startsWith(currentPagePath))
-                                newPageTitleOffer = newPageLink.replace(currentPagePath, "");                 
-                            inputTitle.setText(newPageTitleOffer, TextView.BufferType.EDITABLE);
-                            builderTitle.setView(inputTitle);
+                        AlertDialog.Builder builderName = new AlertDialog.Builder(MainActivity.this);
+                        builderName.setTitle("New page (file) name");
+                        final EditText inputName = new EditText(MainActivity.this);
+                        builderName.setView(inputName);
+                        builderName.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                        builderName.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            final String newPageNameEntered = inputName.getText().toString().trim();
+                            final String newPageName = currentPagePath + newPageNameEntered;
+                            final String newPageLink = TextTools.pathAbsolutize(newPageName);
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                final String timeStamp = DF.format(new Date());
+                                UI.setMdContentFromFile(MainActivity.this, page);
+                                page.setMetaModified(timeStamp);
+                                final String currentMeta = page.getMetaHeaderAsString();
+                                final String currentContent = page.getMdContent();
 
-                            builderTitle.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                }
-                            });
-                            builderTitle.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                                    final String timeStamp = DF.format(new Date());
-                                    UI.setMdContentFromFile(MainActivity.this, page);
-                                    page.setMetaModified(timeStamp);
-                                    final String currentMeta = page.getMetaHeaderAsString();
-                                    final String currentContent = page.getMdContent();
-
-                                    String newPageTitle = inputTitle.getText().toString().trim();
-                                    String linkToNewPage = String.format("* [%s](%s.html)\n", newPageTitle, newPageNameEntered);
-                                    if (currentMeta != null && currentContent != null) {
-                                        page.addAtTopOfPage(linkToNewPage);
-                                        FileIO.writePageToFile(
-                                                MainActivity.this,
-                                                currentPageName,
-                                                page.getMdContent()
-                                        );
-                                    } else {
-                                        String stackState;
-                                        if (pages == null)
-                                            stackState = "null";
-                                        else if (pages.empty())
-                                            stackState = "empty";
-                                        else
-                                            stackState = pages.peek();
-                                        Toast.makeText(MainActivity.this, "Internal program error. Link to page didn't created\n * page = " + pageName + "\n * pages.peek = " + stackState, Toast.LENGTH_SHORT).show();
-                                    }
-
-                                    FileIO.createPageIfNotExists(MainActivity.this, newPageLink, newPageTitle, "");
-
-                                    pageAdd(newPageLink);
-
-                                    Intent i = new Intent();
-                                    i.setAction(MainActivity.this.getPackageName() + ".EDIT_PAGE");
-                                    i.putExtra("name", newPageLink);
-                                    MainActivity.this.startActivity(i);
-
+                                String newPageTitle = inputTitle.getText().toString().trim();
+                                String linkToNewPage = String.format("* [%s](%s.html)\n", newPageTitle, newPageNameEntered);
+                                if (currentMeta != null && currentContent != null) {
+                                    page.addAtTopOfPage(linkToNewPage);
+                                    FileIO.writePageToFile(
+                                            MainActivity.this,
+                                            currentPageName,
+                                            page.getMdContent()
+                                    );
+                                } else {
+                                    String stackState;
+                                    if (pages == null)
+                                        stackState = "null";
+                                    else if (pages.empty())
+                                        stackState = "empty";
+                                    else
+                                        stackState = pages.peek();
+                                    Toast.makeText(MainActivity.this, "Internal program error. Link to page didn't created\n * page = " + pageName + "\n * pages.peek = " + stackState, Toast.LENGTH_SHORT).show();
                                 }
 
-                            });
-                            builderTitle.show();
-                        }
+                                // create new page
+                                FileIO.createPageIfNotExists(MainActivity.this, newPageLink, newPageTitle, "");
+
+                                pageAdd(newPageLink);
+
+                                Intent i = new Intent();
+                                i.setAction(MainActivity.this.getPackageName() + ".EDIT_PAGE");
+                                i.putExtra("name", newPageLink);
+                                MainActivity.this.startActivity(i);
+                            }
+                        });
+                        builderName.show();
                     }
                 });
-                builderName.show();
-
-                UI.displayPage(mainUI_WV, page);
+                builderTitle.show();
             }
         }
 

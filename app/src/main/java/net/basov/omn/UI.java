@@ -22,6 +22,7 @@ import android.webkit.WebView;
 import net.basov.util.FileIO;
 //import net.basov.util.MyLog;
 import net.basov.util.TextTools;
+import android.widget.*;
 
 /**
  * Created by mvb on 8/1/17.
@@ -46,6 +47,7 @@ public class UI {
     public static void displayPage(final WebView wv, final Page page) {
 
         Context c = wv.getContext();
+        //Toast.makeText(c, page.getPageName(), Toast.LENGTH_LONG).show();
         if(!FileIO.isPageActual(c, page.getPageName()) || !page.isHtmlActual()) {
             createHTML(wv, page.getPageName());
             page.setHtmlActual(true);

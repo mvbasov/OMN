@@ -46,6 +46,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -56,6 +58,7 @@ import android.support.v4.content.FileProvider;
 import net.basov.util.FileIO;
 import net.basov.util.MyLog;
 import net.basov.util.TextTools;
+
 
 public class MainActivity extends Activity {
 
@@ -297,6 +300,11 @@ public class MainActivity extends Activity {
 
                     String page_name = (String) main_extras.get("page_name");
                     if (page_name != null && page_name.length() > 0) {
+                        try {
+                            page_name = URLDecoder.decode(page_name, "UTF-8");
+                        } catch (UnsupportedEncodingException e) {
+                            MyLog.LogE("Page name" + page_name +" URI decode failed");
+                        }
                         pageAdd(page_name);
                         UI.displayPage(mainUI_WV, page);
                     } else {

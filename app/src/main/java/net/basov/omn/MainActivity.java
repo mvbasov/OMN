@@ -31,6 +31,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.view.KeyEvent;
+import android.view.ViewGroup;
 import android.webkit.ConsoleMessage;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -765,33 +766,39 @@ public class MainActivity extends Activity {
 
     }
     private void showUrlImportDialog(final String title, final String url, final String tags, final String notes, final String from, final Date edate) {
+        //TODO: dip to global scope because used in several dialogues
+        final float dip = MainActivity.this.getResources().getDisplayMetrics().density; //DIP - Dencity Independant Pixel
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Import URL" + (from.length() > 0 ? " from: " + from : ""));
 
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
+        // from https://stackoverflow.com/a/63767696
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.setMargins((int)(20*dip), (int)(1*dip), (int)(20*dip), (int)(1*dip));
 
         final EditText titleBox = new EditText(this);
         titleBox.setHint("Title");
-        layout.addView(titleBox);
+        layout.addView(titleBox, params);
         if(!title.isEmpty())
             titleBox.setText(title);
 
         final EditText urlBox = new EditText(this);
         urlBox.setHint("URL");
-        layout.addView(urlBox);
+        layout.addView(urlBox, params);
         if(!url.isEmpty())
             urlBox.setText(url);
 
         final EditText tagsBox = new EditText(this);
         tagsBox.setHint("Tags");
-        layout.addView(tagsBox);
+        layout.addView(tagsBox, params);
         if(!tags.isEmpty())
             tagsBox.setText(tags);
 
         final EditText notesBox = new EditText(this);
         notesBox.setHint("Notes");
-        layout.addView(notesBox);
+        layout.addView(notesBox, params);
         if(!notes.isEmpty())
             notesBox.setText(notes);
 

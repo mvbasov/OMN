@@ -709,7 +709,6 @@ public class MainActivity extends Activity {
                     c.startActivity(i);
                 }
         });
-        builder.show();
         AlertDialog alertDialog = builder.create();
         alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.setView(input, (int)(20*dip), (int)(10*dip), (int)(20*dip), (int)(10*dip));

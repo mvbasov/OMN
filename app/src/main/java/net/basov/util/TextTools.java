@@ -87,4 +87,22 @@ public class TextTools {
         else
             return "/" + TextUtils.join("/", resArray);
     }
+
+    /**
+    * Convert string with ' ' or '_' to CamelCase string
+    *
+    * @param  str   original string
+    * @return       string converted to CamelCase
+    */
+    public static String toCamelCase(String str){
+        // from https://stackoverflow.com/a/1144014
+        StringBuilder sb = new StringBuilder();
+        for(String oneWord : str.toLowerCase().split("[_ ]"))
+        {
+            sb.append(oneWord.substring(0,1).toUpperCase());
+            sb.append(oneWord.substring(1) );
+        }
+        return sb.toString();
+    }
+
 }

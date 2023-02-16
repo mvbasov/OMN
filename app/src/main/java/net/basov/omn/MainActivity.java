@@ -487,7 +487,7 @@ public class MainActivity extends Activity {
                         AlertDialog.Builder builderName = new AlertDialog.Builder(MainActivity.this);
                         builderName.setTitle("New page (file) name");
                         final EditText inputName = new EditText(MainActivity.this);
-                        inputName.setText(inputTitle.getText().toString().trim().replace(" ", "_"), TextView.BufferType.EDITABLE);
+                        inputName.setText(TextTools.toCamelCase(inputTitle.getText().toString().trim().replace(" ", "_")), TextView.BufferType.EDITABLE);
                         builderName.setView(inputName);
                         builderName.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override

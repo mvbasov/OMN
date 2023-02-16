@@ -468,6 +468,7 @@ public class MainActivity extends Activity {
             }
             if ((this.getPackageName() + ".NEW_PAGE").equals(intent.getAction())) {
                 /* Create new page and put link to it on top of current page */
+                //TODO: dip to global scope because used in several dialogues
                 final float dip = MainActivity.this.getResources().getDisplayMetrics().density; //DIP - Dencity Independant Pixel
                 final String currentPageName = page.getPageName();
                 final String currentPagePath = currentPageName.substring(0, currentPageName.lastIndexOf("/") + 1);
@@ -661,10 +662,12 @@ public class MainActivity extends Activity {
     }
     
     private void showQuickNoteDialog(String noteText) {
+        //TODO: dip to global scope because used in several dialogues
+        final float dip = MainActivity.this.getResources().getDisplayMetrics().density; //DIP - Dencity Independant Pixel
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Create QuickNote");
         final EditText input = new EditText(this);
-        builder.setView(input);
+        //builder.setView(input);
         if (!noteText.isEmpty()) {
             input.setText(noteText);
         }
@@ -707,9 +710,13 @@ public class MainActivity extends Activity {
                 }
         });
         builder.show();
-        
+        AlertDialog alertDialog = builder.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.setView(input, (int)(20*dip), (int)(10*dip), (int)(20*dip), (int)(10*dip));
+        alertDialog.show();
+
     }
-    
+
     private Boolean importURLFromMail(String sharedText) {
         String title = "", url = "", tags = "", notes = "", from ="", mdate = "";
         Date edate = null;

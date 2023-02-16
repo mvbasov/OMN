@@ -4,14 +4,15 @@
  */
 html, body {
   height: 100%;
-  padding: 1px;
-  margin: 0;
+  padding: 0px;
+  margin: 0px;
 }
 .page_container {
   height:100%;
   display: flex;
   flex-direction: column;
   padding: 0px;
+  margin: 0px;
 }
 .header, .footer {
   overflow-x: hidden;

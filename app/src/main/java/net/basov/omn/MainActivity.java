@@ -468,13 +468,13 @@ public class MainActivity extends Activity {
             }
             if ((this.getPackageName() + ".NEW_PAGE").equals(intent.getAction())) {
                 /* Create new page and put link to it on top of current page */
+                final float dip = MainActivity.this.getResources().getDisplayMetrics().density; //DIP - Dencity Independant Pixel
                 final String currentPageName = page.getPageName();
                 final String currentPagePath = currentPageName.substring(0, currentPageName.lastIndexOf("/") + 1);
 
                 AlertDialog.Builder builderTitle = new AlertDialog.Builder(MainActivity.this);
                 builderTitle.setTitle("New page title");
                 final EditText inputTitle = new EditText(MainActivity.this);
-                builderTitle.setView(inputTitle);
                 builderTitle.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -488,7 +488,6 @@ public class MainActivity extends Activity {
                         builderName.setTitle("New page (file) name");
                         final EditText inputName = new EditText(MainActivity.this);
                         inputName.setText(TextTools.toCamelCase(inputTitle.getText().toString().trim().replace(" ", "_")), TextView.BufferType.EDITABLE);
-                        builderName.setView(inputName);
                         builderName.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -551,10 +550,16 @@ public class MainActivity extends Activity {
                                 }
                             }
                         });
-                        builderName.show();
+                        AlertDialog alertDialogName = builderName.create();
+                        alertDialogName.setCanceledOnTouchOutside(false);
+                        alertDialogName.setView(inputName, (int)(20*dip), (int)(10*dip), (int)(20*dip), (int)(10*dip));
+                        alertDialogName.show();
                     }
                 });
-                builderTitle.show();
+                AlertDialog alertDialogTitle = builderTitle.create();
+                alertDialogTitle.setCanceledOnTouchOutside(false);
+                alertDialogTitle.setView(inputTitle, (int)(20*dip), (int)(10*dip), (int)(20*dip), (int)(10*dip));
+                alertDialogTitle.show();
             }
         }
 

@@ -2,3 +2,4 @@
 * Reorganize pages HTML/CSS code and improve layout
 * Use new application Theme
 * Fullscreen UI (configurable)
+* New page dialog order changed from FileName/Title to Title/FileName

@@ -418,14 +418,14 @@ public class MainActivity extends Activity {
                 } else {
                     if (sharedSubject != null) {
                         noteText += "#### " + sharedSubject + "\n";
-						link += "* [" + sharedSubject + "]";
+                        link += "* [" + sharedSubject + "]";
                         urlTitle = sharedSubject;
                     }
                     if (sharedText != null) {           
 						if (sharedText.startsWith("http")) {
 							if (sharedText.contains("\n")) {
                                 endOfFirstLine = sharedText.indexOf("\n");
-							    link += sharedText.substring(0, endOfFirstLine);
+                                link += sharedText.substring(0, endOfFirstLine);
                                 urlLink = sharedText.substring(0, endOfFirstLine);
 							} else
 						        link += "(" + sharedText +")\n";

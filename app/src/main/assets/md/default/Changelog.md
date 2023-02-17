@@ -4,12 +4,21 @@ Modified: 2019-05-31 22:56:54
 Author: Mikhail Basov
 Tags: OMN information
 
-##### v00.32.00b
+##### v00.33.00b
 
 * Import share from E-Mail (URL or Quick Note)
 * Reorganize pages HTML/CSS code and improve layout
 * Use new application Theme
 * Fullscreen UI (configurable)
+* New page dialog order changed from FileName/Title to Title/FileName
+
+##### v00.32.00f, tag: v00.32.00b
+###### Date:   Tue Jan 31 04:32:25 2023 +0300, commit 2eeef1f838ddbfdadaa6b616ca834f5fa6aa6e9e 
+
+* Add search on the page
+* Fix URL bookmark issue
+* Fix empty bookmark tags and notes
+* Fix shortcut create (Android 12)
 
 ##### v00.31.00b, v00.31.00f
 ###### Date:   Fri Jan 27 22:56:52 2023 +0300, commit e5ee5c63ef974ba6d17e1bd45c3b4ca2d7140e9e

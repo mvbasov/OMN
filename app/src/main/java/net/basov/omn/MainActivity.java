@@ -477,6 +477,7 @@ public class MainActivity extends Activity {
                 AlertDialog.Builder builderTitle = new AlertDialog.Builder(MainActivity.this);
                 builderTitle.setTitle("New page title");
                 final EditText inputTitle = new EditText(MainActivity.this);
+                inputTitle.setHint("Title");
                 builderTitle.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -489,6 +490,7 @@ public class MainActivity extends Activity {
                         AlertDialog.Builder builderName = new AlertDialog.Builder(MainActivity.this);
                         builderName.setTitle("New page (file) name");
                         final EditText inputName = new EditText(MainActivity.this);
+                        inputName.setHint("File");
                         inputName.setText(TextTools.toCamelCase(inputTitle.getText().toString().trim().replace(" ", "_")), TextView.BufferType.EDITABLE);
                         builderName.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
@@ -668,7 +670,7 @@ public class MainActivity extends Activity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Create QuickNote");
         final EditText input = new EditText(this);
-        //builder.setView(input);
+        input.setHint("Note");
         if (!noteText.isEmpty()) {
             input.setText(noteText);
         }

@@ -6,6 +6,9 @@ app/beta/
 app/debug/
 app/release
 
+# Submodules modified at build time but not included to submodule .gitignore
+app/highlight.js/package-lock.json
+
 # Crashlytics configuations
 /*/com_crashlytics_export_strings.xml
 

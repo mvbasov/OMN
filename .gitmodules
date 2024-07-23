@@ -1,6 +1,7 @@
 [submodule "app/highlight.js"]
 	path = app/highlight.js
 	url = https://github.com/isagalaev/highlight.js
+	ignore = dirty
 [submodule "app/marked"]
 	path = app/marked
 	url = https://github.com/markedjs/marked

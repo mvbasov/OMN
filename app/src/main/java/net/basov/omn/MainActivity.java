@@ -51,6 +51,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Stack;
@@ -748,11 +749,16 @@ public class MainActivity extends Activity {
         }
         if (mdate.length() > 0) {
             //January 31, 2023 3:16:42 PM GMT+03:00
-            SimpleDateFormat format = new SimpleDateFormat("MMMM dd, yyyy h:mm:ss a Z");
+            SimpleDateFormat format12 = new SimpleDateFormat("MMMM dd, yyyy h:mm:ss a Z");
+            SimpleDateFormat format24 = new SimpleDateFormat("MMMM dd, yyyy H:mm:ss Z");
             try {
-                edate = format.parse(mdate); 
-            } catch (java.text.ParseException e) {
-                MyLog.LogE("E-Mail date parse error '" + mdate + "'");
+                edate = format12.parse(mdate);
+            } catch (java.text.ParseException e12) {
+                try {
+                    edate = format24.parse(mdate);
+                } catch (java.text.ParseException e24) {
+                    MyLog.LogE("E-Mail date parse error '" + mdate + "'");
+                }
             }
         }
         if (title.length() > 0 && url.length() > 0) {

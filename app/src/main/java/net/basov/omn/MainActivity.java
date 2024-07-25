@@ -983,21 +983,26 @@ public class MainActivity extends Activity {
                         + "Console log:\n\n"
                         + cm.message()
                         + "\n\n";
-            debugMsg += ""
-                + "\n\non line **"
-                + cm.lineNumber()
-                + "** of file: ***"
-                + cm.sourceId().replaceAll(".*/files/", "")
-                + "***\n- - -\n"
-                + "\n```\n"
-                + (cm.lineNumber() - 1) + ". "
-                + srcStrings[cm.lineNumber() - 2] + "\n"
-                + (cm.lineNumber()) + ". "
-                + srcStrings[cm.lineNumber() - 1] + "\n"
-                + (cm.lineNumber() + 1) + ". "
-                + srcStrings[cm.lineNumber()] + "\n"
-                + "```\n"
-                + "\n- - -\n";
+            try {
+                debugMsg += ""
+                        + "\n\non line **"
+                        + cm.lineNumber()
+                        + "** of file: ***"
+                        + cm.sourceId().replaceAll(".*/files/", "")
+                        + "***\n- - -\n"
+                        + "\n```\n"
+                        + (cm.lineNumber() - 1) + ". "
+                        + srcStrings[cm.lineNumber() - 2] + "\n"
+                        + (cm.lineNumber()) + ". "
+                        + srcStrings[cm.lineNumber() - 1] + "\n"
+                        + (cm.lineNumber() + 1) + ". "
+                        + srcStrings[cm.lineNumber()] + "\n"
+                        + "```\n"
+                        + "\n- - -\n";
+            } catch (Exception e) {
+                Toast.makeText(c, "JS debug exception" + e, Toast.LENGTH_SHORT).show();
+                MyLog.LogE(e);
+            }
             FileIO.writePageToFile(c, "/" + Constants.JS_DEBUG_PAGE, debugMsg);
             Toast.makeText(c, "JS debug generated",Toast.LENGTH_SHORT).show();
         }

@@ -126,8 +126,8 @@ public class Page {
 
     public void setPageName(String mPageName) {
         if (null != mPageName && mPageName.length() > 0 ) {
-            int endIndex = mPageName.lastIndexOf("#"); //handle inpage reference
-            if (endIndex == -1) endIndex = mPageName.lastIndexOf("?"); // handle URL params
+            int endIndex = mPageName.indexOf("#"); //handle inpage reference
+            if (endIndex == -1) endIndex = mPageName.indexOf("?"); // handle URL params
             if (endIndex != -1) {
                 this.mPageName = mPageName.substring(0, endIndex);
                 this.mPageExtraParams = mPageName.substring(endIndex);

@@ -161,7 +161,7 @@ public class MainActivity extends Activity {
 
         /* Disable using cache */
         webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
-        webSettings.setAppCacheEnabled(false);
+        //webSettings.setAppCacheEnabled(false); //deprecated on SDK 33
         webSettings.setSaveFormData(false);
         /* Enable JavaScript */
         webSettings.setJavaScriptEnabled(true);

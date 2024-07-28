@@ -5,6 +5,8 @@ android {
         javaMaxHeapSize "4g"
     }
 
+    namespace "net.basov.omn"
+
     def last_tag = getGitRevParseInfo("describe --tags --abbrev=0")
     def commit_count = getGitRevParseInfo("rev-list --count ${last_tag}..")
     def current_commit = getGitRevParseInfo("rev-parse --short")
@@ -16,8 +18,8 @@ android {
 
     }
 
-    compileSdkVersion 31
-    buildToolsVersion '28.0.3'
+    compileSdkVersion 34
+    buildToolsVersion '34.0.0'
 
     defaultConfig {
 // Keep two lines around applicationId unchanged to allow use patch for F-Droid build
@@ -28,22 +30,25 @@ android {
 
 // End of strings reserved for F-Droid patch
         minSdkVersion 17
-        targetSdkVersion 31
+        targetSdkVersion 34
         versionCode 3300
         versionName "00.33.00"
     }
 
     signingConfigs {
+// Define MY_RELEASE_... and MY_DEBUG_... in gradle.properties at the root of application source
         release {
-            keyAlias 'mvb_key'
-            storeFile file('../../.keys/mvb-release.keystore')
+            storePassword MY_RELEASE_KEYSTORE_PASSWORD
+            keyAlias MY_RELEASE_KEY_ALIAS
+            keyPassword MY_RELEASE_KEY_PASSWORD
+            storeFile file(MY_RELEASE_KEYSTORE_FILE)
             v2SigningEnabled false
         }
         debug {
-            storeFile file('../../.keys/mvb-debug.keystore')
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
-            storePassword 'android'
+            storeFile file(MY_DEBUG_KEYSTORE_FILE)
+            storePassword MY_DEBUG_KEYSTORE_PASSWORD
+            keyAlias MY_DEBUG_KEY_ALIAS
+            keyPassword MY_DEBUG_KEY_PASSWORD
         }
     }
 
@@ -82,7 +87,7 @@ android {
 }
 
 task makeHighlightJS(type: Exec) {
-    inputs.file file("ghlight.js/src/highligt.js")
+    inputs.file file("highlight.js/src/highlight.js")
     outputs.file file("src/main/assets/js/highlight.pack.js")
     buildHighlightJS()
 }
@@ -104,7 +109,7 @@ void buildHighlightJS() {
         workingDir 'highlight.js'
         commandLine "cp", "src/styles/github.css", "../src/main/assets/css/highlight.css"
     }
-    println "*-*-* ghlight.js generated *-*-*"
+    println "*-*-* highlight.js generated *-*-*"
 }
 
 task makeMarkedJS(type: Exec) {
@@ -168,8 +173,8 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 }
 
-def getGitRevParseInfo (what) {
+static def getGitRevParseInfo (what) {
     def cmd = "git " + what + " HEAD"
-    def proc = cmd.execute ()
-    proc.text.trim ()
+    def info = cmd.execute ()
+    info.text.trim ()
 }

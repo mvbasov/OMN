@@ -242,6 +242,14 @@ public class MainActivity extends Activity {
     }
 
     private void runAfterUpdate(int oldVersion, int newVersion) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            try {
+                FileIO.moveDirectory(this.getExternalFilesDir(null), FileIO.getFilesDir(this));
+            } catch (IOException e) {
+                Toast.makeText(this, "Directory move failed: " + e, Toast.LENGTH_LONG).show();
+            }
+            Toast.makeText(this, "Directory moved ", Toast.LENGTH_SHORT).show();
+        }
         FileIO.creteHomePage(MainActivity.this, true);
         FileIO.deletePage(this, "/" + Constants.BUILD_PAGE);
         Toast.makeText(this, "version upgrade from " + oldVersion + " to " + newVersion, Toast.LENGTH_LONG).show();

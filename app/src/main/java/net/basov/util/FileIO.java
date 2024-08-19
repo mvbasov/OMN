@@ -517,7 +517,13 @@ public class FileIO {
                 filesDir = new File(Environment.getExternalStorageDirectory()
                         + "/Android/data/"
                         + c.getPackageName()
-                        +"/files"
+                        + "/files"
+                );
+            else if (Build.VERSION.SDK_INT >= 33)
+                filesDir = new File(c.getExternalFilesDir(null)
+                        .getAbsolutePath()
+                        .replace("/data/", "/media/")
+                        .replace("files", "")
                 );
             else
                 filesDir = c.getExternalFilesDir(null);
@@ -619,13 +625,71 @@ public class FileIO {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        if(jsonObject == null) {
+        if (jsonObject == null) {
             tagJSONStr = "{}";
             dirty = true;
         }
-        if(dirty){
+        if (dirty) {
             String tagFileContent = c.getString(R.string.md_tag_file_template, tagJSONStr);
             writePageToFile(c, "/Tags", tagFileContent);
+        }
+    }
+
+    public static void moveDirectory(File fileFrom, File fileTo) throws IOException {
+        if(!fileFrom.renameTo(fileTo)){
+            copyDirectory(fileFrom, fileTo);
+            recursiveDelete(fileFrom);
+        }
+    }
+
+    // From https://subversivebytes.wordpress.com/2012/11/05/java-copy-directory-recursive-delete/
+    public static void recursiveDelete(File rootDir) {
+        recursiveDelete(rootDir, true);
+    }
+
+    public static void recursiveDelete(File rootDir, boolean deleteRoot) {
+        File[] childDirs = rootDir.listFiles();
+        for(int i = 0; i < childDirs.length; i++) {
+            if(childDirs[i].isFile()) {
+                childDirs[i].delete();
+            }
+            else {
+                recursiveDelete(childDirs[i], deleteRoot);
+                childDirs[i].delete();
+            }
+        }
+
+        if(deleteRoot) {
+            rootDir.delete();
+        }
+    }
+
+    public static void copyDirectory(File sourceLocation, File targetLocation) throws IOException {
+        if(sourceLocation.isDirectory()) {
+            if(!targetLocation.exists()) {
+                targetLocation.mkdir();
+            }
+
+            String[] children = sourceLocation.list();
+            for(int i = 0; i < children.length; i++) {
+                copyDirectory(new File(sourceLocation, children[i]), new File(targetLocation, children[i]));
+            }
+        }
+        else {
+            InputStream in = new FileInputStream(sourceLocation);
+            OutputStream out = new FileOutputStream(targetLocation);
+
+            try {
+                byte[] buf = new byte[1024];
+                int len;
+                while((len = in.read(buf)) > 0) {
+                    out.write(buf, 0, len);
+                }
+            }
+            finally {
+                in.close();
+                out.close();
+            }
         }
     }
 }

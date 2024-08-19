@@ -66,16 +66,16 @@ public class FileIO {
     public static void deletePage(Context c, String pageName) {
         File mdFile = new File(getFilesDir(c), "/md" + pageName + ".md");
         File htmlFile = new File(getFilesDir(c), "/html" + pageName + ".html");
-        if(mdFile.exists())
+        if (mdFile.exists())
             mdFile.delete();
-        if(htmlFile.exists())
+        if (htmlFile.exists())
             htmlFile.delete();
     }
 
     public static void writePageToFile(Context c, String pageName, String content) {
         String fileName = "/md" + pageName + ".md";
         File file = new File(getFilesDir(c), fileName);
-        if(!file.exists()) creteParentDir(file);
+        if (!file.exists()) creteParentDir(file);
         try {
             file.createNewFile();
             Writer writer = new BufferedWriter(new FileWriter(file));
@@ -91,7 +91,7 @@ public class FileIO {
     public static Page importPage(Context c, InputStream stream) {
         return importPage(c, convertStreamToString(stream));
     }
-    
+
     public static Page importPage(Context c, String content) {
         // String iteration based on https://stackoverflow.com/a/9259462
         BufferedReader reader = new BufferedReader(new StringReader(content));
@@ -110,7 +110,7 @@ public class FileIO {
                         reader.close();
                         break;
                     }
-                    sb.append(currentLine+"\n");
+                    sb.append(currentLine + "\n");
                 } else {
                     if (currentLine.startsWith(Constants.EMA_H_VER)) continue;
                     if (currentLine.startsWith(Constants.EMA_H_PFN + ":")) {
@@ -148,11 +148,11 @@ public class FileIO {
             if (to != null) sb.append(to + "  \n");
         }
 
-        String fileName = "/md/"+ pn;      
+        String fileName = "/md/" + pn;
         File file = new File(getFilesDir(c), fileName + ".md");
         String suffix = "";
         String str;
-        for(int idx = 1; idx < 100; idx++) {
+        for (int idx = 1; idx < 100; idx++) {
             if (!file.exists()) break;
             str = "0" + idx;
             suffix = str.length() > 2 ? str.substring(str.length() - 2) : str;
@@ -161,8 +161,9 @@ public class FileIO {
         }
         inPage = new Page(pn + suffix);
         inPage.setMdContent(sb.toString());
-        if (suffix.length() > 0) inPage.setMetaByKey("title", inPage.getMetaByKey("title") + " (" + suffix.substring(1) + ")");
-        if(!file.exists()) {
+        if (suffix.length() > 0)
+            inPage.setMetaByKey("title", inPage.getMetaByKey("title") + " (" + suffix.substring(1) + ")");
+        if (!file.exists()) {
             creteParentDir(file);
             try {
                 file.createNewFile();
@@ -175,9 +176,9 @@ public class FileIO {
                 MyLog.LogE(e, "Can't import page " + inPage.getPageName());
                 return null;
             }
-            return inPage;      
+            return inPage;
         } else {
-           MyLog.LogE("Can't import page. Already exists" + inPage.getPageName());
+            MyLog.LogE("Can't import page. Already exists" + inPage.getPageName());
         }
         return null;
     }
@@ -187,7 +188,7 @@ public class FileIO {
         String fileName = "/md" + pageName + ".md";
         File file = new File(getFilesDir(c), fileName);
         SharedPreferences defSharedPref = PreferenceManager.getDefaultSharedPreferences(c);
-        if(!file.exists()) {
+        if (!file.exists()) {
             creteParentDir(file);
             try {
                 file.createNewFile();
@@ -201,23 +202,23 @@ public class FileIO {
                 else
                     title = mtitle;
                 // Create headers for special pages
-                if(pageName.equals("/" + Constants.BUILD_PAGE)) title = "Build information";
-                if(pageName.equals("/" + Constants.START_PAGE)) {
+                if (pageName.equals("/" + Constants.BUILD_PAGE)) title = "Build information";
+                if (pageName.equals("/" + Constants.START_PAGE)) {
                     title = "My start page";
                     tags += "OMN default, Index";
                 }
-                if(pageName.equals("/" + Constants.QUICKNOTES_PAGE)) {
+                if (pageName.equals("/" + Constants.QUICKNOTES_PAGE)) {
                     title = "My quick notes";
                     tags += "OMN default, Notes";
                 }
-                if(pageName.equals("/" + Constants.INCOMING_INDEX_PAGE)) {
+                if (pageName.equals("/" + Constants.INCOMING_INDEX_PAGE)) {
                     title = "Incoming pages index";
                     tags += "OMN default, Index";
                 }
 
                 String pageHeader = "";
                 if (defSharedPref.getBoolean(
-                        c.getString(R.string.pk_enable_pelican_meta), true)){
+                        c.getString(R.string.pk_enable_pelican_meta), true)) {
 
                     pageHeader += c.getString(
                             R.string.pelican_header,
@@ -250,7 +251,7 @@ public class FileIO {
                 writer.write(pageHeader);
 
                 // Write body of special pages
-                if(pageName.equals("/" + Constants.BUILD_PAGE)) {
+                if (pageName.equals("/" + Constants.BUILD_PAGE)) {
 
                     String cmVersionString = "";
                     String cmVersion = AppDetails.getSystemProperty("ro.cm.version");
@@ -279,7 +280,7 @@ public class FileIO {
                     }
 
                     writer.write(c.getString(
-                                R.string.template_page_build,
+                            R.string.template_page_build,
                             // %1$s    android.os.Build.MODEL
                             android.os.Build.MODEL,
                             // %2$s    Build.MANUFACTURER
@@ -306,11 +307,13 @@ public class FileIO {
                             FileIO.getFilesDir(c)
                     ));
 
-                } if (pageName.equals("/" + Constants.START_PAGE)) {
+                }
+                if (pageName.equals("/" + Constants.START_PAGE)) {
                     writer.write(c.getString(
                             R.string.template_page_start
                     ));
-                } if (pageName.equals("/" + Constants.QUICKNOTES_PAGE)){
+                }
+                if (pageName.equals("/" + Constants.QUICKNOTES_PAGE)) {
                     writer.write(c.getString(
                             R.string.template_page_quick_notes
                     ));
@@ -332,7 +335,7 @@ public class FileIO {
         if (!mdFile.exists()) return false;
         File htmlFile = new File(FileIO.getFilesDir(c) + "/html/" + pageName + ".html");
         if (!htmlFile.exists()) return false;
-        if(htmlFile.lastModified() < mdFile.lastModified()) return false;
+        if (htmlFile.lastModified() < mdFile.lastModified()) return false;
         return true;
     }
 
@@ -343,7 +346,7 @@ public class FileIO {
         else
             return null;
     }
-    
+
     public static boolean creteHomePage(Context c) {
         return creteHomePage(c, false);
     }
@@ -390,7 +393,7 @@ public class FileIO {
      */
 
     private static void copyFilesFromAssets(Context c, String[] files, Boolean force) {
-        for(int i=0; i<files.length; i++) {
+        for (int i = 0; i < files.length; i++) {
             URI uriPage = null;
             String toName = files[i];
             if (toName.contains("_legacy"))
@@ -457,8 +460,8 @@ public class FileIO {
 
     public static void creteParentDir(File file) {
         File parent = file.getParentFile();
-        if(parent != null)
-            if(!parent.exists())
+        if (parent != null)
+            if (!parent.exists())
                 parent.mkdirs();
     }
 
@@ -470,7 +473,7 @@ public class FileIO {
         Boolean firstLine = true;
         try {
             while ((line = reader.readLine()) != null) {
-                if(firstLine){
+                if (firstLine) {
                     sb.append(line);
                     firstLine = false;
                 } else {
@@ -484,7 +487,7 @@ public class FileIO {
         return sb.toString();
     }
 
-    public static String getStringFromFile (String filePath) {
+    public static String getStringFromFile(String filePath) {
         // https://stackoverflow.com/a/36701219
         String ret = "";
         File fl = new File(filePath);
@@ -523,7 +526,7 @@ public class FileIO {
         }
         return filesDir;
     }
-    
+
     public static boolean saveHTML(Context c, String aFile, String aHTML) {
         File htmlFile = new File(getFilesDir(c), "/html/" + aFile + ".html");
         creteParentDir(htmlFile);
@@ -550,6 +553,7 @@ public class FileIO {
 
     /**
      * Save last write operation timestamp (UNIX time) to file
+     *
      * @param c Application context
      */
     private static void saveTS(Context c) {
@@ -568,6 +572,7 @@ public class FileIO {
 
     /**
      * Save page tags to special (like DB) file
+     *
      * @param c     Application context
      * @param pfn   page file name (without extension)
      * @param title page title
@@ -577,17 +582,17 @@ public class FileIO {
         String tagJSONStr = "";
         Boolean inJSON = false;
         Boolean dirty = false;
-        String[] splitMd = getStringFromFile(getFilesDir(c)+ "/md/Tags.md").split("\\n");
+        String[] splitMd = getStringFromFile(getFilesDir(c) + "/md/Tags.md").split("\\n");
         if (splitMd.length < 3) {
             dirty = true;
             tagJSONStr = "{}";
         } else {
-            for(String str: splitMd) {
-                if(str.startsWith("// Start of Tags DB")) {
+            for (String str : splitMd) {
+                if (str.startsWith("// Start of Tags DB")) {
                     inJSON = true;
                     continue;
                 } else if (!inJSON) continue;
-                if(str.startsWith("// End of Tags DB")) break;
+                if (str.startsWith("// End of Tags DB")) break;
                 tagJSONStr += str;
             }
             tagJSONStr = tagJSONStr.replaceFirst("^var pageDb = ", "");
@@ -596,15 +601,15 @@ public class FileIO {
         JSONObject jsonObject = null;
         try {
             jsonObject = new JSONObject(tagJSONStr);
-            if(jsonObject.has(pfn.substring(1)) && tags == null) {
+            if (jsonObject.has(pfn.substring(1)) && tags == null) {
                 jsonObject.remove(pfn.substring(1));
                 dirty = true;
             } else if (tags != null) {
                 JSONArray jsaTags = new JSONArray();
-                for(String t : tags) jsaTags.put(t);
+                for (String t : tags) jsaTags.put(t);
 
                 JSONObject pageJsonObject = new JSONObject();
-                pageJsonObject.put("tags",jsaTags);
+                pageJsonObject.put("tags", jsaTags);
                 pageJsonObject.put("title", title);
                 jsonObject.put(pfn.substring(1), pageJsonObject);
                 dirty = true;

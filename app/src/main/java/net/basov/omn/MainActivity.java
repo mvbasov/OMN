@@ -746,9 +746,9 @@ public class MainActivity extends Activity {
               } else  if (line.startsWith("http")) {
                   url = line.trim();
               } else if (line.startsWith("<http")) {
+                  line = line.trim();
                   line = line.replace("<", "");
                   line = line.replace(">", "");
-                  url = line.trim();
               } else if (line.startsWith("#")) {
                   tags = line.substring(1).trim();
               } else if (line.startsWith("//")) {

@@ -635,6 +635,13 @@ public class FileIO {
         }
     }
 
+    /**
+     * Move directory. The directory copied to destination directory
+     *
+     * @param fileFrom source directory
+     * @param fileTo   destination directory
+     * @throws IOException
+     */
     public static void moveDirectory(File fileFrom, File fileTo) throws IOException {
         if(!fileFrom.renameTo(fileTo)){
             copyDirectory(fileFrom, fileTo);
@@ -642,11 +649,22 @@ public class FileIO {
         }
     }
 
+    /**
+     * Delete directory content recursively
+     *
+     * @param rootDir
+     */
     // From https://subversivebytes.wordpress.com/2012/11/05/java-copy-directory-recursive-delete/
     public static void recursiveDelete(File rootDir) {
         recursiveDelete(rootDir, true);
     }
 
+    /**
+     * Delete directory content recursively and delete directory (according to boolean flag provided
+     *
+     * @param rootDir
+     * @param deleteRoot
+     */
     public static void recursiveDelete(File rootDir, boolean deleteRoot) {
         File[] childDirs = rootDir.listFiles();
         for(int i = 0; i < childDirs.length; i++) {
@@ -664,6 +682,13 @@ public class FileIO {
         }
     }
 
+    /**
+     * Copy directory recursively
+     *
+     * @param sourceLocation
+     * @param targetLocation
+     * @throws IOException
+     */
     public static void copyDirectory(File sourceLocation, File targetLocation) throws IOException {
         if(sourceLocation.isDirectory()) {
             if(!targetLocation.exists()) {

@@ -15,6 +15,7 @@ package net.basov.omn;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -244,7 +245,26 @@ public class MainActivity extends Activity {
     private void runAfterUpdate(int oldVersion, int newVersion) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             try {
+                final  ProgressDialog movingSpinner = ProgressDialog.show(
+                        MainActivity.this, "Moving notes to new location.",
+                        "Moving to new location accessible to other application (Android 13+) Please wait...", true
+                );
+                movingSpinner.setCancelable(false);
                 FileIO.moveDirectory(this.getExternalFilesDir(null), FileIO.getFilesDir(this));
+                // Debug delay to demonstrate spinner
+                /*
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(2000);
+                        } catch (Exception e) {
+                        }
+                        movingSpinner.dismiss();
+                    }
+                }).start();
+                */
+                movingSpinner.dismiss();
             } catch (IOException e) {
                 Toast.makeText(this, "Directory move failed: " + e, Toast.LENGTH_LONG).show();
             }

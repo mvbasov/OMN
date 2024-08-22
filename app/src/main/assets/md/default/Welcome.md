@@ -141,6 +141,7 @@ The Telegram channel with news about OMN and examples of pages [created](https:/
 │  ├─ incoming/ (*)
 │  │  └─ Incoming.md (**)
 │  ├─ bookmarks/ (*)
+│  │  ├─ BookmarkTags.md (**)
 │  │  └─ Incoming.md (**)
 │  ├─ QuickNotes.md (*)
 │  ├─ Start.md (**)

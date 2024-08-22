@@ -17,8 +17,20 @@ Tags: Bookmarks
     ]
   },
   {
+    "date": "2024-08-22 22:22:24",
+    "url": "../bookmarks/BookmarkTags.html",
+    "title": "Predefined bookmark tags",
+    "tags": [
+      "OMN",
+      "Local pages"
+    ],
+    "notes": [
+      "One tag on line"
+    ]
+  }
+  {
     "date": "2023-01-22 22:22:22",
-    "url": "/default/BookmarkerHelp.html",
+    "url": "../default/BookmarkerHelp.html",
     "title": "Help about this bookmark page",
     "tags": [
       "OMN",

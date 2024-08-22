@@ -374,6 +374,7 @@ public class FileIO {
         String[] optionalFiles = {
                 Constants.CUSTOM_CSS,
                 Constants.GITIGNORE,
+                "md/" + Constants.URL_INCOMING_TAGS_PAGE + ".md",
                 "md/" + Constants.URL_INCOMING_PAGE + ".md"
         };
         copyFilesFromAssets(c, optionalFiles, false);

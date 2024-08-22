@@ -12,6 +12,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 package net.basov.omn;
 
+import static net.basov.util.FileIO.getStringFromFile;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -32,14 +34,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.view.KeyEvent;
-import android.view.ViewGroup;
 import android.webkit.ConsoleMessage;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebStorage;
 import android.webkit.WebView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,7 +55,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Stack;
@@ -60,6 +62,7 @@ import java.util.Stack;
 import android.support.v4.content.FileProvider;
 import net.basov.util.FileIO;
 import net.basov.util.MyLog;
+import net.basov.util.SemicolonTokenizer;
 import net.basov.util.TextTools;
 
 
@@ -768,7 +771,7 @@ public class MainActivity extends Activity {
               } else if (line.startsWith("<http")) {
                   line = line.trim();
                   line = line.replace("<", "");
-                  line = line.replace(">", "");
+                  url = line.replace(">", "");
               } else if (line.startsWith("#")) {
                   tags = line.substring(1).trim();
               } else if (line.startsWith("//")) {
@@ -829,12 +832,28 @@ public class MainActivity extends Activity {
         layout.addView(urlBox, params);
         if(!url.isEmpty())
             urlBox.setText(url);
-
+        /* TODO: Remove old code
         final EditText tagsBox = new EditText(this);
         tagsBox.setHint("Tags");
         layout.addView(tagsBox, params);
         if(!tags.isEmpty())
             tagsBox.setText(tags);
+         */
+
+        Page tagsPage = new Page("/" + Constants.URL_INCOMING_TAGS_PAGE);
+        UI.setMdContentFromFile(MainActivity.this, tagsPage);
+        String[] bookmarkTags = tagsPage.getMdContent().split("\\n");
+        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1android.R.layout.simple_list_item_1, bookmarkTags);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.autocomplete_tags, bookmarkTags);
+        final MultiAutoCompleteTextView autoTagsBox = new MultiAutoCompleteTextView(this);
+        SemicolonTokenizer tokenizer = new SemicolonTokenizer();
+        autoTagsBox.setHint("Tags (semicolon separated)");
+        autoTagsBox.setAdapter(adapter);
+        autoTagsBox.setTokenizer(tokenizer);
+        autoTagsBox.setThreshold(2);
+        layout.addView(autoTagsBox, params);
+        if(!tags.isEmpty())
+            autoTagsBox.setText(tags);
 
         final EditText notesBox = new EditText(this);
         notesBox.setHint("Notes");
@@ -861,8 +880,8 @@ public class MainActivity extends Activity {
                                                  ""
                                                  );
                     final StringBuilder tags_sb = new StringBuilder();
-                    if (tagsBox.getText().toString().length() > 0) {
-                        String[] tags = tagsBox.getText().toString().split(";");
+                    if (autoTagsBox.getText().toString().length() > 0) {
+                        String[] tags = autoTagsBox.getText().toString().split(";");
                         if (tags.length > 0) {
                             for (int i = 0; i < tags.length; i++) {
                                 if (tags[i].trim().length() == 0) continue;
@@ -972,7 +991,7 @@ public class MainActivity extends Activity {
         }
 
         private void writeJSDebug(Context c,  ConsoleMessage cm) {
-            String[] srcStrings = FileIO.getStringFromFile(cm.sourceId().replace("file://","")).split("\n");
+            String[] srcStrings = getStringFromFile(cm.sourceId().replace("file://","")).split("\n");
             final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String severity = "UNDEFINED";
             switch (cm.messageLevel()) {

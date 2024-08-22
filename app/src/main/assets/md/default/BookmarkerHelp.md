@@ -94,7 +94,7 @@ Tags cloud shows all tags of displayed bookmarks. All tags, except current, are 
 ### Predefined tags
 
 You can define tags to show up in tag auto completion when creating a bookmark.
-These tags are defined on [page name], one tag per line.
+These tags are defined on [Bookmark Tags](../bookmarks/BookmarkTags.html), one tag per line.
 
 ## Advanced 
 ### Bookmark page URI parameters

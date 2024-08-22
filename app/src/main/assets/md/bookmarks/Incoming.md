@@ -27,7 +27,7 @@ Tags: Bookmarks
     "notes": [
       "One tag on line"
     ]
-  }
+  },
   {
     "date": "2023-01-22 22:22:22",
     "url": "../default/BookmarkerHelp.html",

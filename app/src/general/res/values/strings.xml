@@ -3,6 +3,6 @@
 
     <!-- sharedUserId for use with plugins -->
     <string name="shared_user_id">net.basov.omn_id.r</string>
-    <string name="shared_user_label">Open Markdown Notes Software (legacy mode)</string>
+    <string name="shared_user_label">Open Markdown Notes Software</string>
 
 </resources>

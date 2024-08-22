@@ -1,3 +1,6 @@
+/**
+ * Version: 0.16 2024-01-10T22:17:42
+**/
 body {
   background-color: ivory;
 }
@@ -11,7 +14,7 @@ input#searchInput {
   border-radius: 0.5em;
 }
 div#content button.colexp {
-  width: 24%;
+  width: 29%;
   border-radius: 0.5em;
   outline: none;
   margin: 0.1em;
@@ -30,8 +33,11 @@ div#bmlist {
   height: 580px;
 }
 div#content button.tag {
-  border-radius: 0.5em;
+  border-radius: 0.5rem;
   outline: none;
+}
+div#content button.tagSpecial {
+  background: #f002;
 }
 div#content button.details {
   border: none;
@@ -45,15 +51,13 @@ span#counter {
   text-decoration:underline;
 }
 span.spanDate {
-   font-size: 0.6em;
+   font-size: 0.6rem;
 }
 a + span {
    display: none;
 }
-@media not (hover:hover) {
-  a:hover + span {
-    display: inline;
-  }
+a:focus + span, a:hover + span {
+  display: inline;
 }
 span#bVersion {
   font-size: 0.3em;

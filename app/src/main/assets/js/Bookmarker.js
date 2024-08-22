@@ -1,28 +1,56 @@
-var bVersion = '0.15 2023-01-27 21:37:20';
-var config = {};
-var configKey = 'BookmarkerConfig';
-if (typeof PackageName !== 'undefined' && PackageName)
-  configKey = PackageName.replaceAll('\.','-') + '_' + configKey;
-
-function showBookmarks(onlyTag = '', search = '') {
+const bVersion = '0.16 2024-01-10T22:17:42';
+const duplicateTag = '!Duplicates';
+const noTagTag = '!NoTag';
+const config = {};
+const configKey = 'OMNBookmarkerConfig';
+if (typeof packgeName !== 'undefined' && packgeName)
+  configKey = packageName.replace('\.','-') + '_' + configKey;
+let index = {};
+let durls = [];
+function analyzeDuplicates(bm){
+  if(bm.url in index) {
+    index[bm.url].push(bm);
+  } else {
+    index[bm.url] = [bm];
+  }
+}
+function compactDuplicates(){
+  for(const url in index){
+    if(index[url].length < 2)
+      delete index[url];
+  }
+  durls = Object.keys(index);
+}
+function displayDuplicates(){
+  compactDuplicates();
+  let dupCounter = 0;
+  for(const url in index){
+    dupCounter++;
+  }
+  alert("Number of duplicate records sets: " + dupCounter);
+  showBookmarks(duplicateTag, '', duplicates = true);
+}
+function showBookmarks(onlyTag = '', search = '', duplicates = false) {
   // sort bookmarks by date (newest upper)
-  bookmarks = bookmarks.sort((a, b) => { if (a.date > b.date) { return -1; } });
+  bookmarks.sort((a, b) => { if (a.date > b.date) { return -1; } });
   // tag display priority on search
   if (onlyTag !== '' || search === '') {
     search = '';
-    var searchF = document.querySelector('#searchInput');
+    let searchF = document.querySelector('#searchInput');
     searchF.value = '';
   }
-  var counter = 0;
-  var allTags = [];
-  var ul = document.createElement('ul');
+  let counter = 0;
+  let allTags = [];
+  let ul = document.createElement('ul');
   ul.style.height = '100%;';
+  index = {};
   for (const bm of bookmarks) {
     if (bm.url !== '') {
-      if (!display(bm, onlyTag, search)) continue;
+      if (!display(bm, onlyTag, search, duplicates)) continue;
       counter++;
-      var li = document.createElement('li');
-      var a = document.createElement('a');
+      analyzeDuplicates(bm);
+      let li = document.createElement('li');
+      let a = document.createElement('a');
       a.setAttribute('href',bm.url);
       // Set title or url as title if empty
       if (bm.title && bm.title !== '')
@@ -30,12 +58,12 @@ function showBookmarks(onlyTag = '', search = '') {
       else
         a.innerHTML = bm.url;
       li.appendChild(a);
-      var span = document.createElement('span');
+      let span = document.createElement('span');
       span.innerHTML = '<br/>' + bm.url;
       li.appendChild(span);
       if (bm.date && bm.date !== '') {
         li.appendChild(document.createElement('br'));
-        var spanDate = document.createElement('span')
+        let spanDate = document.createElement('span')
         txt = document.createTextNode('');
         txt.textContent =  bm.date;
         spanDate.appendChild(txt);
@@ -43,11 +71,11 @@ function showBookmarks(onlyTag = '', search = '') {
         li.appendChild(spanDate);
       }
       // find tags if exists   
-      var ulin = document.createElement('ul');
-      var liint = document.createElement('li');
-      var divt = document.createElement('div');
+      let ulin = document.createElement('ul');
+      let liint = document.createElement('li');
+      let divt = document.createElement('div');
       txt = document.createTextNode('');
-      var btnt = document.createElement('button');
+      let btnt = document.createElement('button');
       if (bm.tags && bm.tags.length > 0){
         for (_tag of bm.tags) {
           btnt = document.createElement('button');
@@ -67,7 +95,7 @@ function showBookmarks(onlyTag = '', search = '') {
       txt = document.createTextNode('')
       var first = true;
       if (bm.notes && bm.notes.length > 0){
-        var liinn = document.createElement('li');
+        const liinn = document.createElement('li');
         for (note of bm.notes) {
           if (!first) txt.textContent += ', '  
           txt.textContent += '"'+note+'"';
@@ -100,6 +128,8 @@ function showBookmarks(onlyTag = '', search = '') {
       ul.appendChild(li);
     }
   }
+  compactDuplicates();
+  //displayDuplicates();
   // display list of bookmarks
   document.querySelector('#bmlist').replaceChildren(ul);
   // collapse all details
@@ -113,11 +143,19 @@ function showBookmarks(onlyTag = '', search = '') {
   tagsDiv.innerHTML = "";
   if (allTags.length > 0) {
     allTags = allTags.sort();
+    allTags.unshift(duplicateTag);
+    allTags.unshift(noTagTag);
     for (const tagC of allTags) {
       var tagB = document.createElement('button');
       if (tagC == onlyTag)
         tagB.disabled = true;
-      tagB.innerHTML = tagC;
+      if (tagC.startsWith('!')) {
+        tagB.innerHTML = tagC.substring(1);
+        tagB.classList.add('tagSpecial');
+      } else {
+        tagB.innerHTML = tagC;
+      }
+      tagB.classList.add('tag');
       var tagHandler = function(){showBookmarks(tagC);};
       tagB.onclick = tagHandler;
       tagsDiv.appendChild(tagB);
@@ -134,7 +172,7 @@ function toggleTagsCloud(){
 }
 
 // Check bookmark need to be displayed or not
-function display(bm, tag, search) {
+function display(bm, tag, search, duplicates) {
   //serch in notes, url, tags, date and title
   if (search != '') {
     const lsearch = stripAccents(search.trim());
@@ -165,15 +203,23 @@ function display(bm, tag, search) {
     return false;
   }
   // show without tags
-  if (tag == -1 && typeof bm.tags !== 'undefined' && bm.tags.length > 0) {
+  if ((tag == -1 || tag == noTagTag) && typeof bm.tags !== 'undefined' && bm.tags.length > 0) {
     return false;
   }
+ /* Show only duplicates */
+  if (tag == duplicateTag && durls.includes(bm.url)){
+    //alert('dt');
+    return true;
+  }
   // show only with specified tag
-  if (tag != '' && tag != -1) {
+  if (tag != '' && tag != -1 && tag != noTagTag) {
     if (typeof bm.tags === 'undefined' 
         || (typeof bm.tags !== 'undefined' && bm.tags.indexOf(tag) < 0)
     )        
     return false;
+  }
+  if (duplicates && durls.includes(bm.url)){
+    return true;
   }
   return true;
 }
@@ -306,14 +352,24 @@ No tags
   };
   buttonsD.appendChild(buttonsBall);
 
-  var buttonsBnoTags = document.createElement('button');
-  buttonsBnoTags.className = 'colexp';
-  buttonsBnoTags.innerHTML = 'No Tags';
-  buttonsBnoTags.onclick = function(){
-    showBookmarks(-1);
-    colexpall('collapse');
-  };
-  buttonsD.appendChild(buttonsBnoTags);
+//   var buttonsBnoTags = document.createElement('button');
+//   buttonsBnoTags.className = 'colexp';
+//   buttonsBnoTags.innerHTML = 'No Tags';
+//   buttonsBnoTags.onclick = function(){
+//     showBookmarks(-1);
+//     colexpall('collapse');
+//   };
+//   buttonsD.appendChild(buttonsBnoTags);
+// 
+//   var buttonsBduplicates = document.createElement('button');
+//   buttonsBduplicates.className = 'colexp';
+//   buttonsBduplicates.innerHTML = 'DD';
+//   buttonsBduplicates.onclick = function(){
+//     compactDuplicates();
+//     //prompt('Duplicates:',Object.keys(index).join('\n\r'));
+//     displayDuplicates();
+//   };
+//   buttonsD.appendChild(buttonsBduplicates);
 
   searchD.after(buttonsD);
 /*

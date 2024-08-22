@@ -1,10 +1,21 @@
 Title: Betta version change log
-Date: 2023-01-05 19:38:39
-Modified: 2019-05-31 22:56:54
+Date: 2019-05-31 22:56:54
+Modified: 2024-08-22 14:03:45
 Author: Mikhail Basov
 Tags: OMN information
 
-##### v00.33.00b
+##### v00.34.00f, v00.34.00b
+
+* Adopt to Android 14 use
+* Upgrade source to use actual SDK (34) and Android Studio Koala 2024.1.1 Patch 1
+* Use Android/media instead of Android/data for OS > 33 (Android 13)
+* Add predefined tags for incoming bookmarks
+* Fix 12-24 date format for E-Mail import
+* Fix URL format for E-Mail import (<> wrapping)
+* Fix JS url parameter with second question mark
+
+##### v00.33.00f, v00.33.00b
+###### Date:   Sun Feb 19 03:35:42 2023 +0300, commit a815fc5fa712715f5e14ea0d5798a4941ecf9f88
 
 * Import share from E-Mail (URL or Quick Note)
 * Reorganize pages HTML/CSS code and improve layout
@@ -12,7 +23,7 @@ Tags: OMN information
 * Fullscreen UI (configurable)
 * New page dialog order changed from FileName/Title to Title/FileName
 
-##### v00.32.00f, tag: v00.32.00b
+##### v00.32.00f, v00.32.00b
 ###### Date:   Tue Jan 31 04:32:25 2023 +0300, commit 2eeef1f838ddbfdadaa6b616ca834f5fa6aa6e9e 
 
 * Add search on the page
@@ -29,7 +40,7 @@ Tags: OMN information
 ##### v00.30.02f
 ###### Date:   Fri Jan 6 02:12:49 2023 +0300, commit b346e3fd752295c01d3b1f4230819471b7a3a642
 
-- Prepare to F-Droid publish
+* Prepare to F-Droid publish
 
 ##### v00.30.01b
 ###### Date:   Fri Dec 30 02:03:59 2022 +0300, commit 68ef4ffdcc4cb9b98ca5a685a0a86d500164819a

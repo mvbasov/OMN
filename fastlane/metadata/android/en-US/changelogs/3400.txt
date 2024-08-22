@@ -1,0 +1,8 @@
+* Adopt to Android 14 use
+* Upgrade source to use actual SDK (34) and Android Studio Koala 2024.1.1 Patch 1
+* Use Android/media instead of Android/data for OS > 33 (Android 13)
+* Add predefined tags for incoming bookmarks
+* Fix 12-24 date format for E-Mail import
+* Fix URL format for E-Mail import (<> wrapping)
+* Fix JS url parameter with second question mark
+

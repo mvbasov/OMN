@@ -31,8 +31,8 @@ android {
 // End of strings reserved for F-Droid patch
         minSdkVersion 17
         targetSdkVersion 34
-        versionCode 3300
-        versionName "00.33.00"
+        versionCode 3400
+        versionName "00.34.00"
     }
 
     signingConfigs {

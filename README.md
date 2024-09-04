@@ -6,32 +6,11 @@
 This is simple, lightweight and open source application to create and organize everyday notes. Notes stored in Markdown format and shown as html. New html page create if it does not exists or corresponding markdown page has later modification time stamp.
 
 **This program use external editor.** ~~Suitable almost any editor.~~
-At this time only editors with FileProvider support suitable, for example: [QuickEdit Text Editor - Writer, Code Editor](https://play.google.com/store/apps/details?id=com.rhmsoft.edit). (Because Google reqired target API level minimum 26. It require using FileProvider witth content:// data scheme.)
+At this time only editors with FileProvider support suitable, for example: [QuickEdit Text Editor - Writer, Code Editor](https://play.google.com/store/apps/details?id=com.rhmsoft.edit) or [Acode editor - Android code editor](https://f-droid.org/en/packages/com.foxdebug.acode/).  (Because Google reqired target API level minimum 26. It require using FileProvider witth content:// data scheme.)
 
 Pelican CMS meta information support can be enabled in preferences screen.
 
 I design this application to my needs and use it everyday. I will be glad if this application meets anybody needs also.
-
-### Version scheme
-
-v**RR**.**BB**.**FF**[r|b|a]
-
-* **RR** - minor version
-* **BB** - beta version (00 for release)
-* **FF** - fix for minor release
-
-r - release
-b - beta
-a or empty - alpha
-
-#### For versions before v00.21.00b
-
-if application had legacy version:
-
-**FF**=01 mark release legacy release build
-
-**FF**=02,04... mark fix for normal version
-**FF**=03,05... mark fix for legacy version
 
 ### Note about source under android/support directory
 

@@ -1,3 +1,6 @@
+This application is **no longer updated**. It is now replaced by https://github.com/mvbasov/OMN-Go
+
+---
 
 <a href="https://play.google.com/store/apps/details?id=net.basov.omn.b"><img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" height="80" alt="Available on Google Play" /></a>
 <a href="https://f-droid.org/en/packages/net.basov.omn.fdroid/"><img src="https://f-droid.org/badge/get-it-on.png" height="80" alt="Available on F-Droid" /></a>
